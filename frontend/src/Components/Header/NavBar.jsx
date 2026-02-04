@@ -12,6 +12,7 @@ import {
   GraduationCap,
   Layers,
   Recycle,
+  CloudRain,
 } from "lucide-react";
 
 // === RESOURCES MENU DATA ===
@@ -53,6 +54,7 @@ const offeringsMenu = [
         icon: FileText,
       },
       { name: "Environmental Management", path: "/offerings", icon: Leaf },
+      { name: "Climate Risk Intelligence", path: "/offerings", icon: CloudRain },
     ],
   },
   {
@@ -69,7 +71,7 @@ const offeringsMenu = [
   {
     title: "Capacity Building",
     items: [
-      { name: "Training & Workshops", path: "/offerings", icon: GraduationCap },
+      { name: "Training & Capacity Building", path: "/offerings", icon: GraduationCap },
     ],
   },
 ];
@@ -102,58 +104,58 @@ const NavBar = () => {
     setActiveDropdown(null);
   };
 
-    return (
-      <header className="fixed top-0 left-0 w-full z-50 bg-white shadow-md">
-        <nav className="max-w-6xl mx-auto flex items-center justify-between px-6 py-3">
-          {/* Logo */}
-          <Link to="/" onClick={handleNavClick}>
-            <img
-              src="https://startinup.up.gov.in/crm/assets/user/images/Documents/Startup/A_STARTUP_UP_UPLC_00004244/startup_logo/168067577328965.png"
-              alt="EHM Logo"
-              className="h-12"
-            />
-          </Link>
+  return (
+    <header className="fixed top-0 left-0 w-full z-50 bg-white shadow-md">
+      <nav className="max-w-6xl mx-auto flex items-center justify-between px-6 py-3">
+        {/* Logo */}
+        <Link to="/" onClick={handleNavClick}>
+          <img
+            src="https://startinup.up.gov.in/crm/assets/user/images/Documents/Startup/A_STARTUP_UP_UPLC_00004244/startup_logo/168067577328965.png"
+            alt="EHM Logo"
+            className="h-12"
+          />
+        </Link>
 
-          {/* Desktop Menu */}
-          <ul className="hidden lg:flex items-center space-x-6 font-medium">
-            <li>
-              <Link to="/" className="text-green-900 hover:shadow-none hover:text-yellow-400">
-                HOME
-              </Link>
-            </li>
-            <li>
-              <Link to="/about" className="text-green-900  hover:text-yellow-400 group hover:shadow-none focus:shadow-none focus:outline-none">
-                ABOUT
-              </Link>
-            </li>
+        {/* Desktop Menu */}
+        <ul className="hidden lg:flex items-center space-x-6 font-medium">
+          <li>
+            <Link to="/" className="text-green-900 hover:shadow-none hover:text-yellow-400">
+              HOME
+            </Link>
+          </li>
+          <li>
+            <Link to="/about" className="text-green-900  hover:text-yellow-400 group hover:shadow-none focus:shadow-none focus:outline-none">
+              ABOUT
+            </Link>
+          </li>
 
-            {/* Offerings Dropdown */}
-            <li className="relative group">
-              <span
-                ref={buttonRef}
-                onClick={() =>
-                  setActiveDropdown(
-                    activeDropdown === "offerings" ? null : "offerings"
-                  )
-                }
-                className={`cursor-pointer flex items-center transition-colors duration-200 
+          {/* Offerings Dropdown */}
+          <li className="relative group">
+            <span
+              ref={buttonRef}
+              onClick={() =>
+                setActiveDropdown(
+                  activeDropdown === "offerings" ? null : "offerings"
+                )
+              }
+              className={`cursor-pointer flex items-center transition-colors duration-200 
                   ${activeDropdown === "offerings"
-                    ? "text-yellow-400"
-                    : "text-green-900 hover:text-yellow-400"
-                  }`}
-              >
-                OFFERINGS
-                <span
-                  className={`ml-2 inline-block p-1 border-b-2 border-r-2 transition-all -translate-y-0.5 duration-300 ease-in-out 
+                  ? "text-yellow-400"
+                  : "text-green-900 hover:text-yellow-400"
+                }`}
+            >
+              OFFERINGS
+              <span
+                className={`ml-2 inline-block p-1 border-b-2 border-r-2 transition-all -translate-y-0.5 duration-300 ease-in-out 
                     ${activeDropdown === "offerings"
-                      ? "-rotate-180 border-yellow-400"
-                      : "rotate-45 border-green-900 group-hover:-rotate-180 group-hover:border-yellow-400"
-                    }`}
-                ></span>
-              </span>
-            </li>
+                    ? "-rotate-180 border-yellow-400"
+                    : "rotate-45 border-green-900 group-hover:-rotate-180 group-hover:border-yellow-400"
+                  }`}
+              ></span>
+            </span>
+          </li>
 
-           {/* Resources Dropdown */}
+          {/* Resources Dropdown */}
           <li className="relative group">
             <span
               onClick={() =>
@@ -238,10 +240,10 @@ const NavBar = () => {
                     {section.items.map((item) => (
                       <li key={item.path}>
                         <Link
-                            to={item.path}
-                            onClick={handleNavClick}
-                            className="flex items-center space-x-2 text-green-900 hover:text-yellow-400 bg-transparent hover:bg-transparent focus:bg-transparent transition group"
-                          >
+                          to={item.path}
+                          onClick={handleNavClick}
+                          className="flex items-center space-x-2 text-green-900 hover:text-yellow-400 bg-transparent hover:bg-transparent focus:bg-transparent transition group"
+                        >
 
                           <item.icon className="w-4 h-4" />
                           <span>{item.name}</span>
@@ -302,41 +304,41 @@ const NavBar = () => {
       )}
 
       {/* Desktop Dropdown Content */}
-     {activeDropdown && (
-  <div
-    ref={dropdownRef}
-    className="absolute left-0 bg-[#ffffff] animate-fadeIn hidden lg:block shadow-lg rounded-b-lg"
-    style={{ 
-      marginLeft: activeDropdown === 'offerings' ? '280px' : activeDropdown === 'resources' ? '380px' : '0',
-      width: activeDropdown === 'resources' ? '700px' : '900px',
-      maxWidth: '90vw'
-    }}
-  >
-    <div className={`grid gap-12 px-4 pt-8 pb-6 ${activeDropdown === 'resources' ? 'grid-cols-3' : 'grid-cols-4'}`}>
-          {(activeDropdown === "resources" ? resourcesMenu : offeringsMenu).map(
-            (section) => (
-              <div key={section.title} className="col-span-1">
-                <ul className="space-y-4">
-                  {section.items.map((item) => (
-                    <li key={item.path}>
-                      <Link
-                        to={item.path}
-                        onClick={handleNavClick}
-                        className="flex items-center space-x-2 text-green-900 hover:text-yellow-400 transition group"
-                      >
-                        <item.icon className="w-12 text-green-900 group-hover:text-yellow-400" />
-                        <span>{item.name}</span>
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )
-          )}
-        </div>
+      {activeDropdown && (
+        <div
+          ref={dropdownRef}
+          className="absolute left-0 bg-[#ffffff] animate-fadeIn hidden lg:block shadow-lg rounded-b-lg"
+          style={{
+            marginLeft: activeDropdown === 'offerings' ? '280px' : activeDropdown === 'resources' ? '380px' : '0',
+            width: activeDropdown === 'resources' ? '700px' : '900px',
+            maxWidth: '90vw'
+          }}
+        >
+          <div className={`grid gap-12 px-4 pt-8 pb-6 ${activeDropdown === 'resources' ? 'grid-cols-3' : 'grid-cols-4'}`}>
+            {(activeDropdown === "resources" ? resourcesMenu : offeringsMenu).map(
+              (section) => (
+                <div key={section.title} className="col-span-1">
+                  <ul className="space-y-4">
+                    {section.items.map((item) => (
+                      <li key={item.path}>
+                        <Link
+                          to={item.path}
+                          onClick={handleNavClick}
+                          className="flex items-center space-x-2 text-green-900 hover:text-yellow-400 transition group"
+                        >
+                          <item.icon className="w-12 text-green-900 group-hover:text-yellow-400" />
+                          <span>{item.name}</span>
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )
+            )}
+          </div>
 
-    {/* RIGHT SIDE LINKS */}
-    {/* <div className="border-l p-9 pt-20 bg-[#edecec]">
+          {/* RIGHT SIDE LINKS */}
+          {/* <div className="border-l p-9 pt-20 bg-[#edecec]">
       <ul className="space-y-4">
         <li>
           <Link
@@ -356,7 +358,7 @@ const NavBar = () => {
         </li>
       </ul>
     </div> */}
-  </div>
+        </div>
       )}
     </header>
   );

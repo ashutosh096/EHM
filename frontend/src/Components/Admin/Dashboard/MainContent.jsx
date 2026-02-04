@@ -13,7 +13,7 @@ export default function MainContent({ activeTab }) {
       {!activeTab && (
         <div>
           <h2 className="text-2xl font-bold mb-2 text-[#35582a]">
-            Welcome to Dashboard
+            Welcome to Dashboard 
           </h2>
           <p className="text-gray-700">Select an option from the sidebar.</p>
         </div>
