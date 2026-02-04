@@ -54,7 +54,6 @@ const offeringsMenu = [
         icon: FileText,
       },
       { name: "Environmental Management", path: "/offerings", icon: Leaf },
-      { name: "Climate Risk Intelligence", path: "/offerings", icon: CloudRain },
     ],
   },
   {
@@ -72,6 +71,7 @@ const offeringsMenu = [
     title: "Capacity Building",
     items: [
       { name: "Training & Capacity Building", path: "/offerings", icon: GraduationCap },
+      { name: "Climate Risk Intelligence", path: "/offerings", icon: CloudRain },
     ],
   },
 ];
