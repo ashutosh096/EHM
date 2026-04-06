@@ -1,43 +1,35 @@
-import { useEffect } from 'react';
+import { useEffect, Suspense, lazy } from 'react';
 import './App.css'
-import About from './Pages/About.jsx';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import HomePage from './Pages/HomePage.jsx';
-import AdminRoute from "../src/Components/Admin/AdminRoute.jsx";
-import AOS from 'aos';
-import ContactPage from './Pages/ContactPage.jsx';
-import AdminDashboard from "./Pages/AdminDashboard.jsx";
 import Layout from "./Layout.jsx";
-import ScrollToHashElement from './Components/Animations/ScrollToHashElement.jsx';
-
-
-import ProductPage from "./Pages/Products.jsx";
-import ServicePage from "./Pages/Services.jsx";
-// V-- CHANGE MADE HERE --V //
-// We are now importing the new ProjectsPage component.
-import ProjectsPage from "./Pages/ProjectsPage.jsx";
-// ^-- CHANGE MADE HERE --^ //
-
-
+import AOS from 'aos';
 import "aos/dist/aos.css";
-import AdminLoginModal from "../src/Components/Admin/AdminLoginModal.jsx";
-
-
+import ScrollToHashElement from './Components/Animations/ScrollToHashElement.jsx';
 import ScrollToTop from './Components/LandingPage/ScrollToTop.jsx';
-import GalleryPage from './Pages/GalleryPage.jsx';
+import AdminRoute from "../src/Components/Admin/AdminRoute.jsx";
+import InteractiveLoader from './Components/Common/InteractiveLoader.jsx';
 
-import AuthorContentPage from './Common/Content/AuthorContentPage.jsx';
-import SingleContentPage from './Common/Content/SingleContentPage.jsx';
-import BlogsPage from './Pages/BlogsPage.jsx';
-import CaseStudyPage from './Pages/CaseStudyPage.jsx';
+// Eager load critical components
+import HomePage from './Pages/HomePage.jsx';
 
-import WebinarPage from './Pages/WebinarPage.jsx';
-import WebinarDetails from './Components/Webinar/WebinarDetails.jsx';
-import WaterbodyRestoration from './Pages/WaterbodyRestoration.jsx';
-import SustainabilityAssessment from './Pages/SustainabilityAssessment&Reporting.jsx';
-import GeophysicalInvestigation from './Pages/GeophysicalInvestigation.jsx';
-
-
+// Lazy load other pages
+const About = lazy(() => import('./Pages/About.jsx'));
+const ContactPage = lazy(() => import('./Pages/ContactPage.jsx'));
+const ProjectsPage = lazy(() => import('./Pages/ProjectsPage.jsx'));
+const ProductPage = lazy(() => import('./Pages/Products.jsx'));
+const ServicePage = lazy(() => import('./Pages/Services.jsx'));
+const GalleryPage = lazy(() => import('./Pages/GalleryPage.jsx'));
+const WebinarPage = lazy(() => import('./Pages/WebinarPage.jsx'));
+const WebinarDetails = lazy(() => import('./Components/Webinar/WebinarDetails.jsx'));
+const BlogsPage = lazy(() => import('./Pages/BlogsPage.jsx'));
+const CaseStudyPage = lazy(() => import('./Pages/CaseStudyPage.jsx'));
+const WaterbodyRestoration = lazy(() => import('./Pages/WaterbodyRestoration.jsx'));
+const SustainabilityAssessment = lazy(() => import('./Pages/SustainabilityAssessment&Reporting.jsx'));
+const GeophysicalInvestigation = lazy(() => import('./Pages/GeophysicalInvestigation.jsx'));
+const AuthorContentPage = lazy(() => import('./Common/Content/AuthorContentPage.jsx'));
+const SingleContentPage = lazy(() => import('./Common/Content/SingleContentPage.jsx'));
+const AdminLoginModal = lazy(() => import('../src/Components/Admin/AdminLoginModal.jsx'));
+const AdminDashboard = lazy(() => import("./Pages/AdminDashboard.jsx"));
 
 
 function App() {
@@ -48,66 +40,68 @@ function App() {
 
   return (
     <BrowserRouter>
-    <ScrollToHashElement />
+      <ScrollToHashElement />
       <Layout>
         <ScrollToTop />
-        <Routes>
+        <Suspense fallback={<InteractiveLoader />}>
+          <Routes>
 
-          {/* Public Pages */}
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<ContactPage />} />
+            {/* Public Pages */}
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<ContactPage />} />
 
-          {/* V-- CHANGE MADE HERE --V */}
-          {/* This route now renders our new, detailed ProjectsPage component. */}
-          <Route path="/projects" element={<ProjectsPage />} />
-          {/* ^-- CHANGE MADE HERE --^ */}
+            {/* V-- CHANGE MADE HERE --V */}
+            {/* This route now renders our new, detailed ProjectsPage component. */}
+            <Route path="/projects" element={<ProjectsPage />} />
+            {/* ^-- CHANGE MADE HERE --^ */}
 
-          <Route path="/offerings/products" element={<ProductPage />} />
+            <Route path="/offerings/products" element={<ProductPage />} />
 
-          <Route path="/offerings" element={<ServicePage />} />
-          <Route path="resources/gallery" element={<GalleryPage />} />
-          <Route path="/resources/webinar" element={<WebinarPage />} />
-          <Route path="/resources/webinar/:id" element={<WebinarDetails />} />
+            <Route path="/offerings" element={<ServicePage />} />
+            <Route path="resources/gallery" element={<GalleryPage />} />
+            <Route path="/resources/webinar" element={<WebinarPage />} />
+            <Route path="/resources/webinar/:id" element={<WebinarDetails />} />
 
-          <Route path="/resources/blogs" element={<BlogsPage />} />
-          <Route path="/resources/casestudies" element={<CaseStudyPage />} />
-          <Route path="/resources/WaterbodyRestoration" element={<WaterbodyRestoration />} />
-          <Route path="/offerings/sustainability-assessment-reporting" element={<SustainabilityAssessment />} />
-          <Route path="/offerings/geophysical-investigation" element={<GeophysicalInvestigation />} />
+            <Route path="/resources/blogs" element={<BlogsPage />} />
+            <Route path="/resources/casestudies" element={<CaseStudyPage />} />
+            <Route path="/resources/WaterbodyRestoration" element={<WaterbodyRestoration />} />
+            <Route path="/offerings/sustainability-assessment-reporting" element={<SustainabilityAssessment />} />
+            <Route path="/offerings/geophysical-investigation" element={<GeophysicalInvestigation />} />
 
-          <Route
-            path="/blogs/:id"
-            element={<SingleContentPage basePath="blogs" contentName="Blog" />}
-          />
+            <Route
+              path="/blogs/:id"
+              element={<SingleContentPage basePath="blogs" contentName="Blog" />}
+            />
 
-          <Route
-            path="/casestudies/:id"
-            element={<SingleContentPage basePath="casestudies" contentName="Case Study" />}
-          />
-          <Route
-            path="/blogs/author/:authorName"
-            element={<AuthorContentPage basePath="blogs" contentNamePlural="Blogs" />}
-          />
+            <Route
+              path="/casestudies/:id"
+              element={<SingleContentPage basePath="casestudies" contentName="Case Study" />}
+            />
+            <Route
+              path="/blogs/author/:authorName"
+              element={<AuthorContentPage basePath="blogs" contentNamePlural="Blogs" />}
+            />
 
-          <Route
-            path="/casestudies/author/:authorName"
-            element={<AuthorContentPage basePath="casestudies" contentNamePlural="Case Studies" />}
-          />
+            <Route
+              path="/casestudies/author/:authorName"
+              element={<AuthorContentPage basePath="casestudies" contentNamePlural="Case Studies" />}
+            />
 
-          <Route path="*" element={<HomePage />} />
+            <Route path="*" element={<HomePage />} />
 
-          {/* Admin Pages */}
-          <Route path="/admin/login" element={<AdminLoginModal />} />
+            {/* Admin Pages */}
+            <Route path="/admin/login" element={<AdminLoginModal />} />
 
-          <Route
-            path="/admin/dashboard"
-            element={
-              <AdminRoute>
-                <AdminDashboard />
-              </AdminRoute>
-            }
-          />
-        </Routes>
+            <Route
+              path="/admin/dashboard"
+              element={
+                <AdminRoute>
+                  <AdminDashboard />
+                </AdminRoute>
+              }
+            />
+          </Routes>
+        </Suspense>
       </Layout>
     </BrowserRouter>
   );
@@ -115,4 +109,3 @@ function App() {
 }
 
 export default App;
-

@@ -89,7 +89,7 @@ export default function Homepage() {
         </video>
 
         {/* Optional Overlay for Tint (to blend with eco-theme) */}
-        <div className="absolute inset-0 bg-gradient-to-b from-white/60 via-black/40 to-black/50 z-5"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/50 to-black/70 z-5"></div>
 
         {/* Background SVG Pattern */}
         {/* <div className="absolute inset-0 opacity-20 z-5">
@@ -131,39 +131,11 @@ export default function Homepage() {
         </div> */}
 
         {/* Main Content */}
-        <div className="relative z-10 flex flex-col min-h-screen px-6 py-24 md:px-20 lg:px-24 max-w-[1400px] mx-auto">
+        <div className="relative z-10 flex flex-col min-h-screen px-6 pt-24 pb-0 md:px-20 lg:px-24 max-w-[1400px] mx-auto">
           {/* Hero Section */}
-          <div className="flex-1 flex flex-col lg:flex-row items-center justify-between gap-12">
+          <div className="flex-1 flex flex-col justify-end lg:flex-row items-center lg:items-end justify-between gap-12 pb-2">
             {/* Left Side - Text Content */}
-            <div className="flex-1 max-w-3xl">
-              <h1
-                className="text-4xl md:text-5xl lg:text-6xl text-outline drop-shadow-2xl font-semibold leading-tight mb-10"
-                style={{
-                  fontFamily: "Inter",
-                  textShadow: "0px 4px 30px rgba(255,255,255,0.15)"
-                }}
-              >
-                <span
-                  className="bg-clip-text text-transparent"
-                  style={{
-                    backgroundImage:
-                      "linear-gradient(90deg, #6b4f28 0%, #0ea5e9 40%, #38bdf8 65%, #fbbf24 100%)"
-                  }}
-                >
-                  Sustainability
-                </span>
-                <br />
-                Through Eco-Centric
-                <br />
-                Approach
-              </h1>
-
-
-              {/*<h2 className="text-lg md:text-xl lg:text-[20px] drop-shadow-2xl font-semibold leading-tight mb-10">
-                TRANSFORM <span className="text-[#c39b17]">YOUR BUSINESS WITH </span>
-                <span>SUSTAINABLE INNOVATION</span>
-              </h2>*/}
-
+            <div className="flex-1 max-w-3xl mb-24 md:mb-32">
               <Link to="/contact#form">
                 <motion.button
                   whileHover={{ scale: 1.05 }}
@@ -252,7 +224,7 @@ export default function Homepage() {
 
 
           {/* Trusted By Section */}
-          <div className="mt-auto pt-12">
+          <div className="hidden">
 
 
 

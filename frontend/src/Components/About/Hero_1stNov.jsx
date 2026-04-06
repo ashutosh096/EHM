@@ -12,7 +12,7 @@ export default function Hero() {
       number: '',
       title: 'Water Positive Systems',
       description: 'Developing strategies and solutions that optimize water use, promote reuse, and restore natural water balance.',
-      image: '/HeroPage_img/Waterpositive.png',
+      image: '/Pages & Focus area/Pages & Focus area Images/Focus Area - Water positive.png',
       bgPosition: 'center'
     },
     {
@@ -20,7 +20,7 @@ export default function Hero() {
       number: '',
       title: 'Sustainability & ESG',
       description: 'Advising organizations on ESG integration, reporting, and sustainable transformation aligned with global frameworks.',
-      image: '/HeroPage_img/SustainabilityESG.png',
+      image: '/Pages & Focus area/Pages & Focus area Images/Updated - Focus Area - Sustainability & ESG.png',
       bgPosition: 'center'
     },
     {
@@ -28,7 +28,7 @@ export default function Hero() {
       number: '',
       title: 'Geophysical Exploration',
       description: 'Applying advanced geophysical methods to assess subsurface conditions for environmental and infrastructure planning.',
-      image: '/HeroPage_img/Geophysical.png',
+      image: '/Pages & Focus area/Pages & Focus area Images/Updated - Focus Area - Geophysical .png',
       bgPosition: 'center'
     },
     {
@@ -36,7 +36,7 @@ export default function Hero() {
       number: '',
       title: 'Climate Risk',
       description: 'Assessing and mitigating climate-related risks through data analytics, AI, and adaptive resilience planning.',
-      image: '/HeroPage_img/CLIMATERISK.png',
+      image: '/Pages & Focus area/Pages & Focus area Images/Focus Area - CLIMATE RISK.png',
       bgPosition: 'center'
     }
   ];
@@ -111,7 +111,7 @@ export default function Hero() {
 
       <div className="relative w-full h-screen overflow-hidden bg-black">
         {/* Slides Container */}
-        <div 
+        <div
           className="flex h-full transition-transform duration-700 ease-in-out"
           style={{ transform: `translateX(-${currentSlide * 100}%)` }}
         >
@@ -123,18 +123,18 @@ export default function Hero() {
               {/* Background Image */}
               <div
                 className="absolute inset-0 bg-cover"
-                style={{ 
-                  backgroundImage: `url(${slide.image})`,
+                style={{
+                  backgroundImage: `url('${slide.image}')`,
                   backgroundPosition: slide.bgPosition
                 }}
               />
-              
+
               {/* Gradient Overlay */}
               <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent" />
 
               {/* Content */}
               {currentSlide === index && (
-                <div 
+                <div
                   className="slide-content-animated absolute top-1/2 -translate-y-1/2 text-white max-w-[600px] z-10"
                   style={{ left: index <= 1 ? '31%' : '27%' }}
                 >
@@ -196,11 +196,10 @@ export default function Hero() {
             <button
               key={index}
               onClick={() => goToSlide(index)}
-              className={`relative cursor-pointer transition-all duration-300 bg-white/10 backdrop-blur-md rounded-lg overflow-hidden border hover:-translate-y-1 hover:shadow-lg ${
-                currentSlide === index
-                  ? 'shadow-lg'
-                  : 'border border-white/20'
-              }`}
+              className={`relative cursor-pointer transition-all duration-300 bg-white/10 backdrop-blur-md rounded-lg overflow-hidden border hover:-translate-y-1 hover:shadow-lg ${currentSlide === index
+                ? 'shadow-lg'
+                : 'border border-white/20'
+                }`}
               style={currentSlide === index ? { borderColor: '#14b8a6', borderWidth: '2px', boxShadow: '0 10px 25px rgba(20, 184, 166, 0.4)' } : {}}
             >
               <div className="p-2 md:p-3 flex flex-col gap-1 min-w-[90px] md:min-w-[140px]">
@@ -212,7 +211,7 @@ export default function Hero() {
                 </div>
               </div>
               {currentSlide === index && (
-                <div 
+                <div
                   key={`progress-${currentSlide}`}
                   className="progress-bar-animated absolute bottom-0 left-0 h-[3px]"
                   style={{ backgroundColor: '#14b8a6' }}

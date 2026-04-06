@@ -41,10 +41,10 @@ const BlogsPage = () => {
                         className="relative"
                     >
 
-                        <div className="flex items-center justify-center gap-4 mb-6">
+                        <div className="flex items-center justify-center gap-4 mb-2">
 
-                            <SectionHeading>Blogs</SectionHeading>
-                            
+                            <SectionHeading className="my-4">Blogs</SectionHeading>
+
                             {/* <motion.h1
                                 animate={{ backgroundPositionX: ["0%", "100%", "0%"] }}
                                 transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
@@ -52,7 +52,7 @@ const BlogsPage = () => {
                             >
                                 Our Blogs
                             </motion.h1> */}
-                        
+
                         </div>
 
                         <motion.div
@@ -66,7 +66,7 @@ const BlogsPage = () => {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, delay: 0.3 }}
-                        className="text-lg text-green-700 mt-8 max-w-2xl mx-auto"
+                        className="text-lg text-green-700 mt-4 max-w-2xl mx-auto"
                     >
                         Insights, stories, and updates from the world of environmental sustainability.
                     </motion.p>

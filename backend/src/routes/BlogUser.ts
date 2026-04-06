@@ -54,7 +54,7 @@ BlogUserRouter.get(
   "/blogs/author/:authorName",
   async (req: Request, res: Response) => {
     try {
-      const authorName = decodeURIComponent(req.params.authorName); // Decode author name from URL
+      const authorName = decodeURIComponent(req.params.authorName as string); // Decode author name from URL
       const blogs = await BlogModel.find({ author: authorName }).sort({
         createdAt: -1,
       });

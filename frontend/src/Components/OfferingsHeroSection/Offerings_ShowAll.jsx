@@ -122,8 +122,8 @@ const OfferingsSection = () => {
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-emerald-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse"></div>
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse" style={{animationDelay: '1s'}}></div>
-        <div className="absolute top-1/2 left-1/2 w-96 h-96 bg-violet-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse" style={{animationDelay: '2s'}}></div>
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse" style={{ animationDelay: '1s' }}></div>
+        <div className="absolute top-1/2 left-1/2 w-96 h-96 bg-violet-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse" style={{ animationDelay: '2s' }}></div>
       </div>
 
       <div className="max-w-7xl mx-auto relative z-10">
@@ -157,14 +157,14 @@ const OfferingsSection = () => {
               >
                 {/* Card */}
                 <div className={`relative h-full ${offering.defaultBg} ${offering.hoverBg} rounded-2xl p-8 shadow-md hover:shadow-xl transition-all duration-500 border-2 ${offering.borderColor} border-opacity-0 hover:border-opacity-100 overflow-hidden`}>
-                  
+
                   {/* Decorative pattern overlay */}
                   <div className="absolute top-0 right-0 w-32 h-32 opacity-5 group-hover:opacity-10 transition-opacity duration-500">
                     <div className={`w-full h-full bg-gradient-to-br ${offering.color}`} style={{
                       clipPath: 'polygon(100% 0, 100% 100%, 0 0)'
                     }}></div>
                   </div>
-                  
+
                   {/* Icon Container with enhanced design */}
                   <div className="relative mb-6 z-10">
                     <div className={`inline-flex p-4 rounded-xl ${offering.bgAccent} border-2 ${offering.borderColor} group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 shadow-sm`}>
@@ -182,7 +182,7 @@ const OfferingsSection = () => {
                     <p className="text-slate-600 text-sm leading-relaxed mb-5">
                       {offering.description}
                     </p>
-                    
+
                     {/* Points List with better icons */}
                     {offering.points && (
                       <ul className="space-y-2.5 mb-6">
@@ -198,7 +198,7 @@ const OfferingsSection = () => {
 
                   {/* Enhanced Learn More Button */}
                   <div className="relative z-20 mt-6">
-                    <button 
+                    <button
                       onClick={() => {
                         if (offering.title === 'Sustainability Assessment & Reporting') {
                           navigate('/offerings/sustainability-assessment-reporting');
@@ -230,7 +230,7 @@ const OfferingsSection = () => {
               <h3 className="text-2xl font-bold text-white mb-2">Ready to transform your sustainability journey?</h3>
               <p className="text-slate-300">Let's collaborate to create lasting environmental and social impact.</p>
             </div>
-            <button 
+            <button
               onClick={() => navigate('/contact#form')}
               className="whitespace-nowrap px-8 py-4 bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-semibold rounded-xl hover:shadow-xl hover:scale-105 hover:-translate-y-1 transition-all duration-300 flex items-center gap-2"
             >

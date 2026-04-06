@@ -39,7 +39,7 @@ const data = [
     title: "Urban Planning & Management",
     paragraph:
       "Designing data-driven, inclusive, and climate-resilient urban systems through smart planning, water restoration, and sustainable infrastructure",
-    image: "/offering/img3.png",
+    image: "/offering/4.png",
   },
   {
     title: "Training & Capacity Building",
@@ -85,8 +85,8 @@ const ServiceSection = () => {
                   {/* Subtle overlay that only covers bottom part */}
                   <div
                     className={`absolute bottom-0 left-0 right-0 h-1/2 transition-all duration-500 ease-in-out ${isHovered
-                        ? "bg-gradient-to-t from-black/80 via-black/50 to-transparent"
-                        : "bg-gradient-to-t from-black/60 via-black/30 to-transparent"
+                      ? "bg-gradient-to-t from-black/80 via-black/50 to-transparent"
+                      : "bg-gradient-to-t from-black/60 via-black/30 to-transparent"
                       }`}
                     style={{ zIndex: 0 }}
                   ></div>
@@ -108,8 +108,8 @@ const ServiceSection = () => {
                     </h2>
                     <p
                       className={`text-base text-gray-200 mb-4 transition-all duration-500 overflow-hidden ${isHovered
-                          ? "opacity-100 max-h-24"
-                          : "opacity-0 max-h-0"
+                        ? "opacity-100 max-h-24"
+                        : "opacity-0 max-h-0"
                         }`}
                     >
                       {item.paragraph}
@@ -121,8 +121,8 @@ const ServiceSection = () => {
                     }>
                       <button
                         className={`bg-white text-gray-900 px-4 py-2 rounded-full flex items-center gap-2 font-medium hover:bg-gray-100 transition-all duration-300 ${isHovered
-                            ? "opacity-100 translate-y-0"
-                            : "opacity-90 translate-y-1"
+                          ? "opacity-100 translate-y-0"
+                          : "opacity-90 translate-y-1"
                           }`}
                       >
                         Explore

@@ -19,12 +19,12 @@ const labelR = 195;
 
 export default function OfferingsHero() {
   const specialLabelYOffset = -20;
-  
+
   const handleNavigate = (section) => {
     console.log(`Navigating to: ${section}`);
     // Add your navigation logic here
   };
-  
+
   return (
     <section
       className="relative min-h-screen flex items-center justify-center overflow-visible pt-20"
@@ -47,19 +47,19 @@ export default function OfferingsHero() {
           transition={{ duration: 0.8 }}
         >
           <h1
-  className="font-bold text-7xl leading-tight mb-6"
-  style={{
-    fontFamily: "'Inter', 'Segoe UI', sans-serif"
-  }}
->
-  <span className="bg-gradient-to-r from-emerald-400 via-green-400 to-teal-400 bg-clip-text text-transparent">
-    Our Services &{" "}
-  </span>
-  <span className="bg-gradient-to-r from-[#00ff9d] via-[#3498db] to-[#9b59b6] bg-clip-text text-transparent">
-    Offerings
-  </span>
-</h1>
-          
+            className="font-bold text-7xl leading-tight mb-6"
+            style={{
+              fontFamily: "'Inter', 'Segoe UI', sans-serif"
+            }}
+          >
+            <span className="bg-gradient-to-r from-emerald-400 via-green-400 to-teal-400 bg-clip-text text-transparent">
+              Our Services &{" "}
+            </span>
+            <span className="bg-gradient-to-r from-[#00ff9d] via-[#3498db] to-[#9b59b6] bg-clip-text text-transparent">
+              Offerings
+            </span>
+          </h1>
+
           <p
             className="text-white/70 text-xl leading-relaxed max-w-lg mb-8"
             style={{
@@ -144,9 +144,8 @@ export default function OfferingsHero() {
           stroke="url(#warmGradient)"
           strokeWidth="15"
           fill="none"
-          strokeDasharray={`${Math.PI * (circleR - 40) * 0.38} ${
-            Math.PI * (circleR - 40) * 1.62
-          }`}
+          strokeDasharray={`${Math.PI * (circleR - 40) * 0.38} ${Math.PI * (circleR - 40) * 1.62
+            }`}
           filter="url(#glow)"
           strokeLinecap="round"
           animate={{ rotate: 360 }}
@@ -182,7 +181,7 @@ export default function OfferingsHero() {
               </motion.g>
             );
           })}
-          
+
           {/* Center circle design */}
           <motion.circle
             r="28"
