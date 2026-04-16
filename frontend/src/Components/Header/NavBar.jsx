@@ -110,7 +110,7 @@ const NavBar = () => {
         {/* Logo */}
         <Link to="/" onClick={handleNavClick}>
           <img
-            src="https://startinup.up.gov.in/crm/assets/user/images/Documents/Startup/A_STARTUP_UP_UPLC_00004244/startup_logo/168067577328965.png"
+            src="/ehm_logo.png"
             alt="EHM Logo"
             className="h-12"
           />
