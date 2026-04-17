@@ -181,7 +181,7 @@ const StarcHero = () => {
               </div>
 
               {/* Headline */}
-              <h1 className="text-lg lg:text-5xl xl:text-6xl font-bold leading-tight text-white max-w-2xl">
+              <h1 className="text-3xl md:text-3xl lg:text-4xl xl:text-5xl font-bold leading-tight text-white max-w-2xl">
                 Empowering Institutions and Organizations Through Data-Driven Sustainability
               </h1>
 

@@ -1,193 +1,233 @@
-import React, { useRef, useState, useEffect } from 'react';
-import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
-import gsap from 'gsap';
-
-import ScrollRevealElements from '../Animations/ScrollRevealElements';
+import React, { useRef, useEffect, useState } from 'react';
+import HeroVideo from '../../assets/hero/hero_bg.mp4';
+import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
-const IMAGE_ASSETS = {
-  hill1: '/ParallexHeroImages/hill1.png',
-  hill2: '/ParallexHeroImages/hill2.png',
-  hill3: '/ParallexHeroImages/hill3.png',
-  hill4: '/ParallexHeroImages/hill4.png',
-  hill5: '/ParallexHeroImages/hill5.png',
-  leaf: '/ParallexHeroImages/leaf.png',
-  plant: '/ParallexHeroImages/plant.png',
-  tree: '/ParallexHeroImages/tree.png',
-};
-
-// responsive
-const useIsMobile = (breakpoint = 768) => {
-  const [isMobile, setIsMobile] = useState(false);
-  useEffect(() => {
-    const checkScreenSize = () => setIsMobile(window.innerWidth < breakpoint);
-    checkScreenSize();
-    window.addEventListener('resize', checkScreenSize);
-    return () => window.removeEventListener('resize', checkScreenSize);
-  }, [breakpoint]);
-  return isMobile;
-};
-
-const ParallaxImage = ({ src, alt, y, x, zIndex, ...props }) => (
-  <motion.img
-    src={src}
-    alt={alt}
-    style={{ y, x, zIndex, willChange: 'transform' }}
-    className="absolute bottom-0 left-0 w-full object-cover pointer-events-none"
-    {...props}
-  />
-);
-
-const HeroSection = () => {
-  const isMobile = useIsMobile();
+export default function Homepage() {
   const targetRef = useRef(null);
-  const h1Ref = useRef(null);
+  const [showCard, setShowCard] = useState(true);
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      const tl = gsap.timeline({
-        repeat: -1,
-        repeatDelay: 1,
-      });
+    const handleScroll = () => {
+      if (!targetRef.current) return;
 
-      tl.from('.underline-anim', {
-        scaleX: 0,
-        transformOrigin: 'left',
-        duration: 0.7,
-        ease: 'power2.inOut',
-        stagger: 0.2,
-      })
-        .to('.underline-anim', {
-          scaleX: 0,
-          transformOrigin: 'right',
-          duration: 0.7,
-          ease: 'power2.inOut',
-          stagger: 0.2,
-        }, '+=1');
-    }, h1Ref);
+      const rect = targetRef.current.getBoundingClientRect();
 
-    return () => ctx.revert();
+      if (rect.bottom < 0) {
+        setShowCard(false);
+      } else {
+        setShowCard(true);
+      }
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
-  const { scrollYProgress } = useScroll({
-    target: targetRef,
-    offset: ['start start', 'end start'],
-    enabled: !isMobile,
-  });
-
-  const textYTarget = useTransform(scrollYProgress, [0, 0.2, 0.7], ['0%', '50%', '500%']);
-  const textOpacity = useTransform(scrollYProgress, [0, 0.3], [1, 0]);
-  const hill1YTarget = useTransform(scrollYProgress, [0, 1], ['0%', '30%']);
-  const hill2YTarget = useTransform(scrollYProgress, [0, 1], ['0%', '20%']);
-  const hill3YTarget = useTransform(scrollYProgress, [0, 1], ['0%', '10%']);
-  const treeYTarget = useTransform(scrollYProgress, [0, 1], ['0%', '15%']);
-  const hill4YTarget = useTransform(scrollYProgress, [0, 1], ['0%', '5%']);
-  const hill4XTarget = useTransform(scrollYProgress, [0, 1], ['0%', '-10%']);
-  const hill5YTarget = useTransform(scrollYProgress, [0, 1], ['0%', '2%']);
-  const hill5XTarget = useTransform(scrollYProgress, [0, 1], ['0%', '10%']);
-  const leafYTarget = useTransform(scrollYProgress, [0, 1], ['0%', '100%']);
-  const leafXTarget = useTransform(scrollYProgress, [0, 1], ['0%', '100%']);
-
-  const springConfig = { damping: 50, stiffness: 400 };
-  const textY = useSpring(isMobile ? '0%' : textYTarget, springConfig);
-  const hill1Y = useSpring(isMobile ? '0%' : hill1YTarget, springConfig);
-  const hill2Y = useSpring(isMobile ? '0%' : hill2YTarget, springConfig);
-  const hill3Y = useSpring(isMobile ? '0%' : hill3YTarget, springConfig);
-  const treeY = useSpring(isMobile ? '0%' : treeYTarget, springConfig);
-  const hill4Y = useSpring(isMobile ? '0%' : hill4YTarget, springConfig);
-  const hill4X = useSpring(isMobile ? '0%' : hill4XTarget, springConfig);
-  const hill5Y = useSpring(isMobile ? '0%' : hill5YTarget, springConfig);
-  const hill5X = useSpring(isMobile ? '0%' : hill5XTarget, springConfig);
-  const leafY = useSpring(isMobile ? '0%' : leafYTarget, springConfig);
-  const leafX = useSpring(isMobile ? '0%' : leafXTarget, springConfig);
 
   return (
-    <section
-      ref={targetRef}
-      id="home"
-      className="relative h-screen w-full overflow-hidden bg-[#f0f9ff]"
-    >
-      <ParallaxImage src={IMAGE_ASSETS.hill1} alt="Background hill 1" y={hill1Y} zIndex={10} />
-      <ParallaxImage src={IMAGE_ASSETS.hill2} alt="Background hill 2" y={hill2Y} zIndex={11} />
-      <ParallaxImage src={IMAGE_ASSETS.hill3} alt="Background hill 3" y={hill3Y} zIndex={12} />
-      <ParallaxImage src={IMAGE_ASSETS.tree} alt="Tree" y={treeY} zIndex={13} />
+    <div>
+      <style>{`
+        @keyframes bounceHorizontal {
+          0%, 100% { transform: translateX(0); }
+          50% { transform: translateX(10px); }
+        }
+        @keyframes bounceVertical {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(10px); }
+        }
+        .animate-bounce-horizontal { animation: bounceHorizontal 2s infinite; }
+        .animate-bounce-vertical { animation: bounceVertical 2s infinite; }
+        .animate-fade-in { animation: fadeIn 0.5s ease-out forwards; }
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(10px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
 
-      <ParallaxImage src={IMAGE_ASSETS.hill4} alt="Foreground hill 4" y={hill4Y} x={hill4X} zIndex={14} />
-      <div className="absolute top-0 left-0 h-full w-full bg-black/20 z-20"></div>
-      <ParallaxImage
-        src={IMAGE_ASSETS.leaf}
-        alt="Foreground leaf"
-        y={leafY}
-        x={leafX}
-        zIndex={15}
-        className="absolute top-0 left-0 w-[50vw] sm:w-[40vw] lg:w-[30vw] object-contain pointer-events-none"
-      />
+        @keyframes float {
+          0% {
+            transform: translateY(0) translateX(0);
+          }
+          50% {
+            transform: translateY(-50vh) translateX(20px);
+          }
+          100% {
+            transform: translateY(-120vh) translateX(-20px);
+          }
+        }
 
-      <motion.div
-        style={{ y: textY, opacity: isMobile ? 1 : textOpacity, willChange: 'transform, opacity' }}
-        className="relative z-20 flex h-full flex-col items-center justify-center text-center -translate-y-28 md:-translate-y-40"
-      >
-        <ScrollRevealElements
-          yOffset={60}
-          staggerAmount={0.5}
-          className='flex flex-col items-center -translate-y-19'
+        .animate-float {
+          animation: float linear infinite;
+        }
+      `}</style>
+
+      <div className="relative min-h-screen text-white overflow-hidden">
+        {/* Background Video */}
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover z-0"
         >
-          <motion.h1
-            ref={h1Ref}
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-extrabold uppercase leading-tight tracking-wider text-white"
-          >
-            <span className="relative inline-block pb-2">
-              Sustainability
-              <span className="underline-anim absolute bottom-0 left-0 h-1.5 w-full bg-white" />
-            </span>
-            <br />
-            <span className="relative inline-block pb-2">
-              Through Eco-Centric
-              <span className="underline-anim absolute bottom-0 left-0 h-1.5 w-full bg-white" />
-            </span>
-            <br />
-            <span className="relative inline-block pb-2">
-              Approach
-              <span className="underline-anim absolute bottom-0 left-0 h-1.5 w-full bg-white" />
-            </span>
-          </motion.h1>
+          <source src={HeroVideo} type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
 
-          <motion.p
-            className="mt-4 mb-8 text-base sm:text-lg md:text-2xl lg:text-3xl font-semibold text-white max-w-[90%]"
-          >
-            <span className="text-green-200">TRANSFORM</span> YOUR BUSINESS WITH <span className="text-green-200">SUSTAINABLE</span> INNOVATION
-          </motion.p>
-        
-           <motion.div className="flex flex-col gap-4 sm:flex-row">
-            <Link to="/contact#form">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="flex items-center justify-center rounded-lg bg-white px-6 py-2 md:px-8 md:py-3 font-medium text-[#004f3e] shadow-lg transition-colors duration-300 hover:bg-[#004f3e] hover:text-white"
-              >
-                Book a Call
-                <svg className="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                </svg>
-              </motion.button>
-            </Link>
-            <Link to="/about">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="rounded-lg border-2 border-white bg-white/20 px-6 py-2 md:px-8 md:py-3 font-medium text-white shadow-lg backdrop-blur-sm transition-colors duration-300 hover:bg-white/30"
-              >
-                Learn More
-              </motion.button>
-            </Link>
-          </motion.div>
-        </ScrollRevealElements>
-      </motion.div>
+        {/* Optional Overlay for Tint (to blend with eco-theme) */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/50 to-black/70 z-5"></div>
 
-      <ParallaxImage src={IMAGE_ASSETS.hill5} alt="Foreground hill 5" y={hill5Y} x={hill5X} zIndex={16} />
-      <ParallaxImage src={IMAGE_ASSETS.plant} alt="Foreground plants" zIndex={17} />
-    </section>
+        {/* Background SVG Pattern */}
+        {/* <div className="absolute inset-0 opacity-20 z-5">
+          <svg className="w-full h-full" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <linearGradient id="g1" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" style={{ stopColor: '#7dbea8', stopOpacity: 1 }} />
+                <stop offset="50%" style={{ stopColor: '#98d8dc', stopOpacity: 1 }} />
+                <stop offset="100%" style={{ stopColor: '#98d8dc', stopOpacity: 1 }} />
+              </linearGradient>
+            </defs>
+            <rect width="1200" height="800" fill="url(#g1)" />
+            <path d="M0,400 Q300,300 600,350 T1200,400 L1200,800 L0,800 Z" fill="#98d8dc" opacity="0.6" />
+            <path d="M0,500 Q300,450 600,480 T1200,500 L1200,800 L0,800 Z" fill="#98d8dc" opacity="0.5" />
+            <path d="M0,600 Q300,550 600,580 T1200,600 L1200,800 L0,800 Z" fill="#98d8dc" opacity="0.4" />
+          </svg>
+        </div> */}
+
+        {/* Floating Bubbles */}
+        {/* <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-5">
+          {[...Array(20)].map((_, i) => {
+            const size = Math.random() * 80 + 20;
+            const style = {
+              width: `${size}px`,
+              height: `${size}px`,
+              left: `${Math.random() * 100}%`,
+              animationDuration: `${Math.random() * 15 + 10}s`,
+              animationDelay: `-${Math.random() * 25}s`,
+              opacity: Math.random() * 0.4 + 0.1,
+            };
+            return (
+              <div
+                key={i}
+                className="absolute bottom-[-150px] bg-white/30 rounded-full animate-float"
+                style={style}
+              ></div>
+            );
+          })}
+        </div> */}
+
+        {/* Main Content */}
+        <div className="relative z-10 flex flex-col min-h-screen px-6 pt-24 pb-0 md:px-20 lg:px-24 max-w-[1400px] mx-auto">
+          {/* Hero Section */}
+          <div className="flex-1 flex flex-col justify-end lg:flex-row items-center lg:items-end justify-between gap-12 pb-2">
+            {/* Left Side - Text Content */}
+            <div className="flex-1 max-w-3xl mb-24 md:mb-32">
+              <Link to="/contact#form">
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="relative flex items-center justify-center drop-shadow-2xl rounded-xl px-6 py-3 md:px-8 md:py-4 font-medium text-white shadow-xl transition-all duration-300 hover:scale-105 overflow-hidden group"
+                >
+                  {/* Wavy overlay for organic flow - using pseudo-element via Tailwind arbitrary */}
+                  <div className="h-[10em] w-[10em] sm:h-[12em] sm:w-[12em] bg-[#19a289] rounded-full absolute bottom-full -left-[6em] scale-[250%] z-[-1] duration-[400ms] drop-shadow-2xl" />
+                  <div className="h-[8em] w-[8em] sm:h-[10em] sm:w-[10em] bg-[#138c76] rounded-full absolute bottom-full -left-[5em] scale-[200%] z-[-1] duration-[400ms] drop-shadow-2xl" />
+                  <div className="h-[6em] w-[6em] sm:h-[8em] sm:w-[8em] bg-[#0d6d5b] rounded-full absolute bottom-full -left-[4em] scale-[180%] z-[-1] duration-[400ms] drop-shadow-2xl " />
+                  <div className="h-[4em] w-[4em] sm:h-[6em] sm:w-[6em] bg-[#08493e] rounded-full absolute bottom-full -left-[3em] scale-[150%] z-[-1] duration-[400ms] drop-shadow-2xl" />    Book a Call
+                  <svg className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                  </svg>
+                </motion.button>
+              </Link>
+            </div>
+
+            {/* Right Side - Diamond-shaped Cards */}
+            {/* <div className="absolute top-1/2 -translate-y-1/2 right-8 w-[700px] h-[500px] hidden lg:block pointer-events-none"> 
+           <div className="relative w-full h-full"> */}
+            {/* Card 1 - Top Right with overlay */}
+            {/* <div className="absolute top-[90px] right-[-50px] w-[280px] h-[280px] bg-white shadow-2xl transform rotate-[-10deg] transition-all duration-300 hover:rotate-[15deg] hover:scale-105 border-[1px] border-white z-40 pointer-events-auto group"
+                  style={{ clipPath: 'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)' }}>
+                  <img src="/Hero/Hero.jpg"
+                    style={{ clipPath: 'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)' }}
+                    alt="Forest" className="w-full h-full object-cover" /> */}
+
+            {/* Hover Overlay */}
+            {/* <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center"
+                    style={{ clipPath: 'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)' }}>
+                    <span className="text-white font-semibold text-lg text-center px-4">
+                      Climate Risk
+                    </span>
+                  </div>
+                </div> */}
+            {/* Card 2 - Middle with forest image */}
+            {/* <div className="absolute top-[-40px] right-[130px] w-[280px] h-[280px] bg-white shadow-2xl transform rotate-[-10deg] transition-all duration-300 hover:rotate-[-10deg] hover:scale-105 border-[1px] border-white z-30 pointer-events-auto group"
+                   style={{ clipPath: 'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)' }} > 
+                   <img src="/Hero/Hero2.jpg" 
+                   alt="Forest" className="w-full h-full object-cover" />  */}
+
+            {/* Hover Overlay */}
+            {/* <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center"
+                      style={{ clipPath: 'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)' }}>
+                      <span className="text-white font-semibold text-lg text-center px-4">
+                        Water-Positive Systems
+                      </span>
+                    </div>
+                  </div> */}
+            {/* Card 3 - Bottom Right with green gradient */}
+            {/* <div className="absolute top-[270px] right-[80px] w-[280px] h-[280px] bg-white shadow-2xl transform rotate-[-10deg] transition-all duration-300 hover:rotate-[9deg] hover:scale-105 border-[1px] border-white z-20 pointer-events-auto group" 
+                    style={{ clipPath: 'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)' }} >
+                      <img src="/Hero/Hero3.jpg"
+                      alt="Forest" className="w-full h-full object-cover" />  */}
+
+            {/* Hover Overlay */}
+            {/* <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center"
+                      style={{ clipPath: 'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)' }}>
+                      <span className="text-white font-semibold text-lg text-center px-4">
+                        Sustainability & ESG
+                      </span>
+                    </div> */}
+            {/* <div className="w-full h-full bg-gradient-to-br from-[#a8d16f] via-[#8bc34a] to-[#7ab536]">
+                      </div> 
+                      </div> */}
+            {/* Card 4 - Far left with green gradient */}
+            {/* <div className="absolute top-[140px] right-[260px] w-[280px] h-[280px] bg-white shadow-2xl transform rotate-[-10deg] transition-all duration-300 hover:rotate-[9deg] hover:scale-105 border-[1px] border-white z-10 pointer-events-auto group" 
+                       style={{ clipPath: 'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)' }} >
+                        <img src="/Hero/Hero4.jpg"
+                          alt="Forest" className="w-full h-full object-cover" />   */}
+            {/* Hover Overlay */}
+            {/* <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center"
+                          style={{ clipPath: 'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)' }}>
+                          <span className="text-white font-semibold text-lg text-center px-4">
+                            Geophysical Exploration
+                          </span>
+                        </div>
+                       <div className="w-full h-full bg-gradient-to-br from-[#a8d16f] via-[#8bc34a] to-[#7ab536]">
+
+                       </div> */}
+            {/* </div>
+                </div>
+              </div> */}
+          </div>
+
+
+          {/* Trusted By Section */}
+          <div className="hidden">
+
+
+
+            {/* <div className="flex flex-wrap items-center gap-8 md:gap-16">
+              <div className="text-2xl font-medium tracking-wide opacity-85 hover:opacity-100 transition-opacity">
+                IIT Kanpur<sup className="text-sm">©</sup>
+              </div>
+              <div className="text-2xl font-medium tracking-wide opacity-85 hover:opacity-100 transition-opacity">
+                CSJMIF
+              </div>
+            </div> */}
+          </div>
+        </div>
+
+      </div>
+    </div>
+
   );
-};
-
-export default HeroSection;
+}
