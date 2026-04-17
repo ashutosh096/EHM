@@ -57,11 +57,11 @@ export default function Hero() {
         {/* Text Content - Added from HeroSection2 */}
         <div className="absolute inset-0 z-10 flex items-center">
           <div className="container mx-auto px-6 md:px-12 lg:px-24">
-            <h1
+            <h1 
               className="font-semibold leading-tight mb-6 md:mb-10"
               style={{ fontFamily: 'Inter' }}
             >
-              <span
+              <span 
                 className="block font-extrabold"
                 style={{
                   fontSize: 'clamp(2.5rem, 8vw, 3.75rem)',
@@ -71,10 +71,10 @@ export default function Hero() {
                   lineHeight: '1.1'
                 }}
               >
-
+                
               </span>
 
-              <span
+              <span 
                 className="block font-semibold mt-2 md:mt-4"
                 style={{
                   fontSize: 'clamp(2rem, 7vw, 3.125rem)',
@@ -84,7 +84,7 @@ export default function Hero() {
                   lineHeight: '1.1'
                 }}
               >
-
+                
               </span>
             </h1>
 
@@ -100,12 +100,12 @@ export default function Hero() {
 
             </h2>
 
-
+            
           </div>
         </div>
 
         {/* Slides */}
-        <div
+        <div 
           className="flex h-full transition-transform duration-700 ease-in-out"
           style={{ transform: `translateX(-${currentSlide * 100}%)` }}
         >
@@ -122,7 +122,7 @@ export default function Hero() {
                   backgroundPosition: slide.bgPosition
                 }}
               />
-
+              
               {/* Gradient Overlay */}
               <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent" />
             </div>
@@ -152,13 +152,14 @@ export default function Hero() {
             <button
               key={index}
               onClick={() => goToSlide(index)}
-              className={`relative cursor-pointer transition-all duration-300 bg-white/10 backdrop-blur-md rounded-lg overflow-hidden border hover:-translate-y-1 hover:shadow-lg ${currentSlide === index
-                ? 'shadow-lg'
-                : 'border border-white/20'
-                }`}
-              style={currentSlide === index ? {
-                borderColor: '#14b8a6',
-                borderWidth: '2px',
+              className={`relative cursor-pointer transition-all duration-300 bg-white/10 backdrop-blur-md rounded-lg overflow-hidden border hover:-translate-y-1 hover:shadow-lg ${
+                currentSlide === index
+                  ? 'shadow-lg'
+                  : 'border border-white/20'
+              }`}
+              style={currentSlide === index ? { 
+                borderColor: '#14b8a6', 
+                borderWidth: '2px', 
                 boxShadow: '0 10px 25px rgba(20, 184, 166, 0.4)'
               } : {}}
             >
@@ -168,7 +169,7 @@ export default function Hero() {
                 </div>
               </div>
               {currentSlide === index && (
-                <div
+                <div 
                   key={`progress-${currentSlide}`}
                   className="progress-bar-animated absolute bottom-0 left-0 h-[3px]"
                   style={{ backgroundColor: '#14b8a6' }}
