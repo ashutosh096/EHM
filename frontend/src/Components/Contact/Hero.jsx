@@ -66,7 +66,7 @@ const Hero = () => {
         <div className="animate-bounce w-8 h-8 border-r-2 border-b-2 border-emerald-500/80 rotate-45"></div>
       </div>
 
-      <style jsx global>{`
+      <style>{`
         @keyframes float {
           0%,
           100% {

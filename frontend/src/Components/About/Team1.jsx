@@ -110,7 +110,7 @@ const Team = ({ title, members, limit }) => {
         )}
       </motion.div>
 
-      <style jsx>{`
+      <style>{`
         @keyframes float-1 {
           0%, 100% { transform: translateY(0) rotate(0); }
           50% { transform: translateY(-15px) rotate(12deg); }

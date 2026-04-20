@@ -220,7 +220,7 @@ export default function GeophysicalMethodsSection() {
         </div>
       </div>
 
-      <style jsx>{`
+      <style>{`
         @keyframes float {
           0%, 100% {
             transform: translate(0, 0);

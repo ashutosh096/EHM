@@ -243,7 +243,7 @@ export default function Product() {
         ))}
       </div>
 
-      <style jsx>{`
+      <style>{`
         @keyframes float {
           0%,
           100% {

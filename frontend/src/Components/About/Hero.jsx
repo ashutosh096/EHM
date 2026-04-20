@@ -43,7 +43,7 @@ export default function Hero() {
 
   return (
     <>
-      <style jsx global>{`
+      <style>{`
         @keyframes progress {
           from { width: 0%; }
           to { width: 100%; }

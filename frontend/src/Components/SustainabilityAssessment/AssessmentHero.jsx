@@ -361,7 +361,7 @@ const StarcHero = () => {
         </div>
       </div>
 
-      <style jsx>{`
+      <style>{`
 
         @keyframes fadeInLeft {
           from { opacity: 0; transform: translateX(-40px); }

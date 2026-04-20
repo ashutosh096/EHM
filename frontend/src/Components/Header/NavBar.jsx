@@ -237,7 +237,7 @@ const NavBar = () => {
                   <h4 className="text-green-800 font-semibold">{section.title}</h4>
                   <ul className="space-y-2">
                     {section.items.map((item) => (
-                      <li key={item.path}>
+                      <li key={item.name}>
                         <Link
                           to={item.path}
                           onClick={handleNavClick}
@@ -266,7 +266,7 @@ const NavBar = () => {
                   <h4 className="text-green-800 font-semibold">{section.title}</h4>
                   <ul className="space-y-2">
                     {section.items.map((item) => (
-                      <li key={item.path}>
+                      <li key={item.name}>
                         <Link
                           to={item.path}
                           onClick={handleNavClick}
@@ -319,7 +319,7 @@ const NavBar = () => {
                 <div key={section.title} className="col-span-1">
                   <ul className="space-y-4">
                     {section.items.map((item) => (
-                      <li key={item.path}>
+                      <li key={item.name}>
                         <Link
                           to={item.path}
                           onClick={handleNavClick}
