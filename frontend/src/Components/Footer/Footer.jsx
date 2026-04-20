@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { MapPin, Mail, Phone, Linkedin, Twitter, Instagram, Youtube, Facebook, Send } from 'lucide-react';
+// import { MapPin, Mail, Phone, Linkedin, Twitter, Instagram, Youtube, Facebook, Send } from 'lucide-react';
+import { MapPin, Mail, Phone, Send, Linkedin } from 'lucide-react';
+import { SiX, SiInstagram, SiFacebook, SiYoutube, } from "react-icons/si";
 import API from "../../api/axios";
 
 // Import your logo - update this path to match your actual logo location
@@ -26,12 +28,20 @@ const Footer = () => {
     }
   };
 
+  // const socialLinks = [
+  //   { icon: Linkedin, url: 'https://www.linkedin.com/company/ehm-consultancy-pvt-ltd/', label: 'LinkedIn' },
+  //   { icon: Twitter, url: 'https://x.com/EHMOfficial1', label: 'Twitter' },
+  //   { icon: Instagram, url: 'https://www.instagram.com/ehmofficial1/', label: 'Instagram' },
+  //   { icon: Facebook, url: 'https://www.facebook.com/profile.php?id=100063877967113', label: 'Facebook' },
+  //   { icon: Youtube, url: 'https://www.youtube.com/@EHMOfficial1', label: 'YouTube' },
+  // ];
+
   const socialLinks = [
     { icon: Linkedin, url: 'https://www.linkedin.com/company/ehm-consultancy-pvt-ltd/', label: 'LinkedIn' },
-    { icon: Twitter, url: 'https://x.com/EHMOfficial1', label: 'Twitter' },
-    { icon: Instagram, url: 'https://www.instagram.com/ehmofficial1/', label: 'Instagram' },
-    { icon: Facebook, url: 'https://www.facebook.com/profile.php?id=100063877967113', label: 'Facebook' },
-    { icon: Youtube, url: 'https://www.youtube.com/@EHMOfficial1', label: 'YouTube' },
+    { icon: SiX, url: 'https://x.com/EHMOfficial1', label: 'Twitter' },
+    { icon: SiInstagram, url: 'https://www.instagram.com/ehmofficial1/', label: 'Instagram' },
+    { icon: SiFacebook, url: 'https://www.facebook.com/profile.php?id=100063877967113', label: 'Facebook' },
+    { icon: SiYoutube, url: 'https://www.youtube.com/@EHMOfficial1', label: 'YouTube' },
   ];
 
   const navLinks = [
