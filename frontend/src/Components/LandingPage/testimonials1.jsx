@@ -105,8 +105,7 @@ const TestimonialsColumn = ({
             >
               <p className="text-gray-700">{testimonial.text}</p>
               <div className="flex items-center gap-2 mt-5">
-                <img
-                  src={testimonial.imageSrc}
+                <img loading="lazy" src={testimonial.imageSrc}
                   width={40}
                   height={40}
                   alt={`Avatar of ${testimonial.name}`}

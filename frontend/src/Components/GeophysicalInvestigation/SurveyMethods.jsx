@@ -186,8 +186,7 @@ export default function GeophysicalMethodsSection() {
                       />
                       
                       {/* Image per method */}
-                      <img
-                        src={method.image}
+                      <img loading="lazy" src={method.image}
                         alt={method.title}
                         className="w-56 h-56 object-contain transition-all duration-500"
                         style={{

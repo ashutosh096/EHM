@@ -296,8 +296,7 @@ const WaterbodyRestoration = () => {
                           : "ring-1 ring-gray-200"
                       }`}
                     >
-                      <img
-                        src={factor.image}
+                      <img loading="lazy" src={factor.image}
                         alt={factor.name}
                         className="rounded-full w-full h-full object-cover"
                       />
@@ -334,8 +333,7 @@ const WaterbodyRestoration = () => {
                     : "ring-1 ring-gray-200"
                 }`}
               >
-                <img
-                  src="https://res.cloudinary.com/dlpluej6w/image/upload/v1759494835/g_polluten_rzolfa.webp"
+                <img loading="lazy" src="https://res.cloudinary.com/dlpluej6w/image/upload/v1759494835/g_polluten_rzolfa.webp"
                   alt="Polluted Waterbody"
                   className="rounded-xl w-64 h-48 md:w-80 md:h-60 object-cover"
                   onError={(e) =>
@@ -449,8 +447,7 @@ const WaterbodyRestoration = () => {
                       </div>
                     ) : (
                       <div className="relative w-full h-full bg-red-800 p-6 md:p-8">
-                        <img
-                          src={caseStudy.beforeImages[0]}
+                        <img loading="lazy" src={caseStudy.beforeImages[0]}
                           alt="Polluted water"
                           className="absolute inset-0 w-full h-full object-cover opacity-20"
                         />
@@ -505,8 +502,7 @@ const WaterbodyRestoration = () => {
                       </div>
                     ) : (
                       <div className="relative w-full h-full bg-green-800 p-6 md:p-8 flex justify-end items-start">
-                        <img
-                          src={caseStudy.afterImages[0]}
+                        <img loading="lazy" src={caseStudy.afterImages[0]}
                           alt="Restored water"
                           className="absolute inset-0 w-full h-full object-cover opacity-20"
                         />
@@ -689,8 +685,7 @@ const WaterbodyRestoration = () => {
                       hoveredProject === key ? "md:w-2/3" : "md:w-1/3"
                     }`}
                   >
-                    <img
-                      src={projectsData[key].image}
+                    <img loading="lazy" src={projectsData[key].image}
                       alt={projectsData[key].title}
                       className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110"
                     />
@@ -772,8 +767,7 @@ const WaterbodyRestoration = () => {
                             isOdd ? "mt-28" : ""
                           }`}
                         >
-                          <img
-                            src={item.image}
+                          <img loading="lazy" src={item.image}
                             alt={item.title}
                             className="w-20 h-20 rounded-full object-cover"
                           />
@@ -809,8 +803,7 @@ const WaterbodyRestoration = () => {
                   {approachData.map((item, index) => (
                     <motion.div key={index} className="relative pl-28 group">
                       <div className="absolute left-12 top-1/2 -translate-y-1/2 -translate-x-1/2 transition-transform duration-300 group-hover:scale-110">
-                        <img
-                          src={item.image}
+                        <img loading="lazy" src={item.image}
                           alt={item.title}
                           className="w-20 h-20 rounded-full object-cover border-4 border-white shadow-md"
                         />

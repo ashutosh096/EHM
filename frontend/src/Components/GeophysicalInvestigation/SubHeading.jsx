@@ -194,8 +194,7 @@ const ServicesSection = () => {
                       
                       {/* Image container with better sizing */}
                       <div className="relative z-10 w-[85%] h-[85%] flex items-center justify-center">
-                        <img 
-                          src={service.imagePlaceholder} 
+                        <img loading="lazy" src={service.imagePlaceholder} 
                           alt={service.title}
                           className="max-w-full max-h-full object-contain drop-shadow-2xl"
                         />

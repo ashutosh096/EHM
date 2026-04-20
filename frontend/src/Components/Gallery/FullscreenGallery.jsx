@@ -52,8 +52,7 @@ import Marquee from "react-fast-marquee";
 //       </h1>
 
 //       <div className="relative flex-grow w-full mx-auto max-h-[80vh] h-[80vh]">
-//         <img
-//           src={THUMBNAILS[heroIndex].src}
+//         <img loading="lazy" //           src={THUMBNAILS[heroIndex].src}
 //           alt={THUMBNAILS[heroIndex].alt}
 //           className="w-full h-full object-cover shadow-2xl rounded-lg"
 //         />

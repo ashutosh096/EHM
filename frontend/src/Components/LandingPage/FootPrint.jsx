@@ -159,8 +159,7 @@ const FootPrint = () => {
                 role="button"
                 aria-label={`View project image ${index + 1}`}
               >
-                <img
-                  src={item.image}
+                <img loading="lazy" src={item.image}
                   alt={`EHM project ${index + 1}`}
                   className="project-image w-full h-full object-cover transition-all duration-500 hover:scale-105"
                 />
@@ -218,8 +217,7 @@ const FootPrint = () => {
             >
               &times;
             </button>
-            <img
-              src={modalImage}
+            <img loading="lazy" src={modalImage}
               alt="Large preview"
               className="w-full h-auto max-h-[75vh] rounded-lg shadow-2xl border-4 border-white"
             />

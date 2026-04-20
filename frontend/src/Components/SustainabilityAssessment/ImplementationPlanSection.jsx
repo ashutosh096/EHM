@@ -124,7 +124,7 @@ export default function ImplementationPlanSection() {
                 return (
                   <motion.div key={index} className="relative flex flex-col items-center z-10 group">
                     <div className={`relative p-2 bg-white rounded-full border-4 border-white shadow-md transition-transform duration-300 group-hover:scale-110 group-hover:shadow-xl ${isOdd ? 'mt-28' : ''}`}>
-                      <img src={item.image} alt={item.title} className="w-20 h-20 rounded-full object-cover" />
+                      <img src={item.image} alt={item.title} className="w-20 h-20 rounded-full object-cover" loading="lazy" />
                     </div>
                     <div className={`mt-6 w-64 bg-white p-6 rounded-2xl shadow-lg border border-slate-200 text-center transition-transform duration-300 group-hover:-translate-y-2 group-hover:shadow-2xl`}>
                       <h4 className="font-bold text-lg text-slate-700">{item.title}</h4>
@@ -153,7 +153,7 @@ export default function ImplementationPlanSection() {
               {steps.map((item, index) => (
                 <motion.div key={index} className="relative pl-28 group">
                   <div className="absolute left-12 top-1/2 -translate-y-1/2 -translate-x-1/2 transition-transform duration-300 group-hover:scale-110">
-                    <img src={item.image} alt={item.title} className="w-20 h-20 rounded-full object-cover border-4 border-white shadow-md" />
+                    <img src={item.image} alt={item.title} className="w-20 h-20 rounded-full object-cover border-4 border-white shadow-md" loading="lazy" />
                   </div>
                   <div className="bg-white p-4 rounded-xl shadow-lg border border-slate-200 transition-transform duration-300 group-hover:-translate-y-2 group-hover:shadow-2xl">
                     <h4 className="font-bold text-lg text-slate-700">{item.title}</h4>

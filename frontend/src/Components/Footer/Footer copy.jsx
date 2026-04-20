@@ -23,8 +23,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
           <div className="lg:col-span-2 space-y-4">
             <div className="flex items-center space-x-3">
-              <img
-                src= {image}
+              <img loading="lazy" src= {image}
                 alt="EHM Logo"
                 className="h-10 w-12 sm:h-12 sm:w-16 rounded-lg shadow-lg bg-white p-1"
               />

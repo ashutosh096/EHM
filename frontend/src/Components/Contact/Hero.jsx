@@ -7,8 +7,7 @@ const Hero = () => {
     <section className="h-screen w-full relative pt-20 flex items-center justify-center overflow-hidden">
       {/* Background video & overlay */}
       <div className="absolute inset-0 top-0">
-        <img
-          src="/im.webp"
+        <img loading="lazy" src="/im.webp"
           alt="Office workspace"
           className="w-full h-full object-cover"
         />

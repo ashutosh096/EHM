@@ -35,8 +35,7 @@ const Team = ({ title, members, limit }) => {
               transition={{ duration: 0.4, delay: index * 0.1 }}
             >
               {/* FIX: Fill area like before but avoid head cropping */}
-              <img
-                src={member.img}
+              <img loading="lazy" src={member.img}
                 alt={member.name}
                 className="w-full h-44 object-cover object-top"
               />

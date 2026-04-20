@@ -60,8 +60,7 @@ const Footer = () => {
             {/* Brand Section */}
             <div className="lg:col-span-4 space-y-4">
               <div className="flex items-center space-x-3">
-                <img
-                  src={logoImage}
+                <img loading="lazy" src={logoImage}
                   alt="EHM Logo"
                   className="h-12 w-12 rounded-lg shadow-lg bg-white p-1"
                 />

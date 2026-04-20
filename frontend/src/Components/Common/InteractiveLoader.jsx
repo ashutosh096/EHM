@@ -73,8 +73,7 @@ const InteractiveLoader = () => {
                         transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
                         className="bg-white p-4 rounded-full shadow-lg"
                     >
-                        <img
-                            src="https://startinup.up.gov.in/crm/assets/user/images/Documents/Startup/A_STARTUP_UP_UPLC_00004244/startup_logo/168067577328965.webp"
+                        <img loading="lazy" src="https://startinup.up.gov.in/crm/assets/user/images/Documents/Startup/A_STARTUP_UP_UPLC_00004244/startup_logo/168067577328965.webp"
                             alt="EHM Logo"
                             className="h-12 w-auto object-contain"
                         />

@@ -149,8 +149,7 @@ const PartnersLogo = () => {
                   className="partner-card relative group flex-shrink-0 flex items-center justify-center"
                 >
                   <div className="partner-logo-container">
-                    <img
-                      src={`/Partners/${partner}.webp`}
+                    <img loading="lazy" src={`/Partners/${partner}.webp`}
                       alt={partner}
                       draggable={false}
                       className={`partner-logo ${
@@ -171,8 +170,7 @@ const PartnersLogo = () => {
                   className="partner-card relative group flex-shrink-0 flex items-center justify-center"
                 >
                   <div className="partner-logo-container">
-                    <img
-                      src={`/Partners/${partner}.webp`}
+                    <img loading="lazy" src={`/Partners/${partner}.webp`}
                       alt={partner}
                       draggable={false}
                       className={`partner-logo ${

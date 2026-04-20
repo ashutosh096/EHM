@@ -157,7 +157,7 @@ export default function Homepage() {
             {/* Card 1 - Top Right with overlay */}
             {/* <div className="absolute top-[90px] right-[-50px] w-[280px] h-[280px] bg-white shadow-2xl transform rotate-[-10deg] transition-all duration-300 hover:rotate-[15deg] hover:scale-105 border-[1px] border-white z-40 pointer-events-auto group"
                   style={{ clipPath: 'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)' }}>
-                  <img src="/Hero/Hero.webp"
+                  <img loading="lazy" src="/Hero/Hero.webp"
                     style={{ clipPath: 'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)' }}
                     alt="Forest" className="w-full h-full object-cover" /> */}
 
@@ -172,7 +172,7 @@ export default function Homepage() {
             {/* Card 2 - Middle with forest image */}
             {/* <div className="absolute top-[-40px] right-[130px] w-[280px] h-[280px] bg-white shadow-2xl transform rotate-[-10deg] transition-all duration-300 hover:rotate-[-10deg] hover:scale-105 border-[1px] border-white z-30 pointer-events-auto group"
                    style={{ clipPath: 'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)' }} > 
-                   <img src="/Hero/Hero2.webp" 
+                   <img loading="lazy" src="/Hero/Hero2.webp" 
                    alt="Forest" className="w-full h-full object-cover" />  */}
 
             {/* Hover Overlay */}
@@ -186,7 +186,7 @@ export default function Homepage() {
             {/* Card 3 - Bottom Right with green gradient */}
             {/* <div className="absolute top-[270px] right-[80px] w-[280px] h-[280px] bg-white shadow-2xl transform rotate-[-10deg] transition-all duration-300 hover:rotate-[9deg] hover:scale-105 border-[1px] border-white z-20 pointer-events-auto group" 
                     style={{ clipPath: 'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)' }} >
-                      <img src="/Hero/Hero3.webp"
+                      <img loading="lazy" src="/Hero/Hero3.webp"
                       alt="Forest" className="w-full h-full object-cover" />  */}
 
             {/* Hover Overlay */}
@@ -202,7 +202,7 @@ export default function Homepage() {
             {/* Card 4 - Far left with green gradient */}
             {/* <div className="absolute top-[140px] right-[260px] w-[280px] h-[280px] bg-white shadow-2xl transform rotate-[-10deg] transition-all duration-300 hover:rotate-[9deg] hover:scale-105 border-[1px] border-white z-10 pointer-events-auto group" 
                        style={{ clipPath: 'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)' }} >
-                        <img src="/Hero/Hero4.webp"
+                        <img loading="lazy" src="/Hero/Hero4.webp"
                           alt="Forest" className="w-full h-full object-cover" />   */}
             {/* Hover Overlay */}
             {/* <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center"

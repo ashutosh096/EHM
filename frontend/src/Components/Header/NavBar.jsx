@@ -109,8 +109,7 @@ const NavBar = () => {
       <nav className="max-w-6xl mx-auto flex items-center justify-between px-6 py-3">
         {/* Logo */}
         <Link to="/" onClick={handleNavClick}>
-          <img
-            src="/ehm_logo.webp"
+          <img loading="lazy" src="/ehm_logo.webp"
             alt="EHM Logo"
             className="h-12"
           />

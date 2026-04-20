@@ -15,8 +15,7 @@ export default function Hero() {
           className="w-full h-full object-cover"
         >
           <source src="/nature.mp4" type="video/mp4" />
-          <img
-            src="/about-fallback.webp"
+          <img loading="lazy" src="/about-fallback.webp"
             alt="About us background"
             className="w-full h-full object-cover"
           />

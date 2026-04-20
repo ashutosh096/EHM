@@ -87,8 +87,7 @@ const EhmBrief = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.7, ease: "easeOut" }}
             >
-              <img
-                className="w-full h-full object-cover rounded-2xl shadow-lg"
+              <img loading="lazy" className="w-full h-full object-cover rounded-2xl shadow-lg"
                 src="https://res.cloudinary.com/dlpluej6w/image/upload/v1756388167/Screenshot_1st_u2ghdl.webp"
                 alt="Aerial view of green terrace farms"
               />

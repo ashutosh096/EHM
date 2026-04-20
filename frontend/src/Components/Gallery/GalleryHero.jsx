@@ -79,8 +79,7 @@ const GalleryHero = () => {
       <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
         {visibleData.map((item, i) => (
           <div key={i} className="rounded-xl overflow-hidden aspect-square">
-            <img
-              src={item.image}
+            <img loading="lazy" src={item.image}
               alt={`Gallery ${i}`}
               className="w-full h-full object-cover"
             />

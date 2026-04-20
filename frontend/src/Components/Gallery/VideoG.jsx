@@ -139,8 +139,7 @@ const VideoG = () => {
             </button>
 
             {/* Video Player */}
-            <video
-              src={videos[playingIndex].video}
+            <video preload="none" src={videos[playingIndex].video}
               controls
               autoPlay
               className="w-full rounded-xl shadow-2xl"

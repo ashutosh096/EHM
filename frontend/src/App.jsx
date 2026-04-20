@@ -9,10 +9,8 @@ import ScrollToTop from './Components/LandingPage/ScrollToTop.jsx';
 import AdminRoute from "../src/Components/Admin/AdminRoute.jsx";
 import InteractiveLoader from './Components/Common/InteractiveLoader.jsx';
 
-// Eager load critical components
-import HomePage from './Pages/HomePage.jsx';
-
-// Lazy load other pages
+// Lazy load pages
+const HomePage = lazy(() => import('./Pages/HomePage.jsx'));
 const About = lazy(() => import('./Pages/About.jsx'));
 const ContactPage = lazy(() => import('./Pages/ContactPage.jsx'));
 const ProjectsPage = lazy(() => import('./Pages/ProjectsPage.jsx'));

@@ -314,8 +314,7 @@ export default function Product() {
                     : "translate(0, 0)",
               }}
             >
-              <img
-                src={product.image}
+              <img loading="lazy" src={product.image}
                 alt={product.title}
                 className="w-full h-full object-cover"
               />
@@ -458,8 +457,7 @@ export default function Product() {
                   : ""
               }`}
             >
-              <img
-                src={product.image}
+              <img loading="lazy" src={product.image}
                 alt={product.title}
                 className="w-full h-full object-cover"
               />

@@ -154,8 +154,7 @@ const WhyChooseUsSection = () => {
     >
       {/* Background */}
       <div className="absolute top-0 left-0 w-full h-full z-0">
-        <img
-          src="https://res.cloudinary.com/dlpluej6w/image/upload/v1757114594/forest-wallpaper-3840x2160-trees-vibrant-3326_wp7uji.webp"
+        <img loading="lazy" src="https://res.cloudinary.com/dlpluej6w/image/upload/v1757114594/forest-wallpaper-3840x2160-trees-vibrant-3326_wp7uji.webp"
           alt="Background"
           className="w-full h-full object-cover"
         />
