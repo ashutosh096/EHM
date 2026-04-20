@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FaMapMarkerAlt, FaEnvelope, FaLinkedin, FaTwitter, FaInstagram, FaYoutube, FaFacebook } from 'react-icons/fa';
 
-import image from '../../../favicon.png'
+import image from '../../../favicon.webp'
 const Footer = () => {
   const [email, setEmail] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);

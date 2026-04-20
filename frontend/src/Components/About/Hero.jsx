@@ -8,10 +8,10 @@ export default function Hero() {
   const totalSlides = 4;
 
   const slides = [
-    { id: 1, image: '/HeroPage_img/Waterpositive.png', bgPosition: 'center' },
-    { id: 2, image: '/HeroPage_img/SustainabilityESG.png', bgPosition: 'center' },
-    { id: 3, image: '/HeroPage_img/Geophysical.png', bgPosition: 'center' },
-    { id: 4, image: '/HeroPage_img/CLIMATERISK.png', bgPosition: 'center' }
+    { id: 1, image: '/HeroPage_img/Waterpositive.webp', bgPosition: 'center' },
+    { id: 2, image: '/HeroPage_img/SustainabilityESG.webp', bgPosition: 'center' },
+    { id: 3, image: '/HeroPage_img/Geophysical.webp', bgPosition: 'center' },
+    { id: 4, image: '/HeroPage_img/CLIMATERISK.webp', bgPosition: 'center' }
   ];
 
   const navItems = [

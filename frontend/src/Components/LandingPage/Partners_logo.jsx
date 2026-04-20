@@ -150,7 +150,7 @@ const PartnersLogo = () => {
                 >
                   <div className="partner-logo-container">
                     <img
-                      src={`/Partners/${partner}.png`}
+                      src={`/Partners/${partner}.webp`}
                       alt={partner}
                       draggable={false}
                       className={`partner-logo ${
@@ -172,7 +172,7 @@ const PartnersLogo = () => {
                 >
                   <div className="partner-logo-container">
                     <img
-                      src={`/Partners/${partner}.png`}
+                      src={`/Partners/${partner}.webp`}
                       alt={partner}
                       draggable={false}
                       className={`partner-logo ${

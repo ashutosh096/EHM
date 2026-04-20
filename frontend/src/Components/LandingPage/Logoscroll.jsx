@@ -126,7 +126,7 @@ const LogoScroll = () => {
                   aria-label={`Visit ${company.name} website`}
                 >
                   <img
-                    src={`/Client/${company.name}.png`}
+                    src={`/Client/${company.name}.webp`}
                     alt={company.name}
                     draggable={false}
                     className="company-logo"
@@ -145,7 +145,7 @@ const LogoScroll = () => {
                   aria-label={`Visit ${company.name} website`}
                 >
                   <img
-                    src={`/Client/${company.name}.png`}
+                    src={`/Client/${company.name}.webp`}
                     alt={company.name}
                     draggable={false}
                     className="company-logo"

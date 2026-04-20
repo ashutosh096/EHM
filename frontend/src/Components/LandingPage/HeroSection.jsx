@@ -1,7 +1,7 @@
-import React, { useRef, useEffect, useState } from 'react';
-import HeroVideo from '../../assets/hero/hero_bg.mp4';
-import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import React, { useRef, useEffect, useState } from "react";
+import HeroVideo from "../../assets/hero/hero_bg.mp4";
+import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 export default function Homepage() {
   const targetRef = useRef(null);
@@ -24,7 +24,6 @@ export default function Homepage() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-
 
   return (
     <div>
@@ -133,9 +132,20 @@ export default function Homepage() {
                   <div className="h-[10em] w-[10em] sm:h-[12em] sm:w-[12em] bg-[#19a289] rounded-full absolute bottom-full -left-[6em] scale-[250%] z-[-1] duration-[400ms] drop-shadow-2xl" />
                   <div className="h-[8em] w-[8em] sm:h-[10em] sm:w-[10em] bg-[#138c76] rounded-full absolute bottom-full -left-[5em] scale-[200%] z-[-1] duration-[400ms] drop-shadow-2xl" />
                   <div className="h-[6em] w-[6em] sm:h-[8em] sm:w-[8em] bg-[#0d6d5b] rounded-full absolute bottom-full -left-[4em] scale-[180%] z-[-1] duration-[400ms] drop-shadow-2xl " />
-                  <div className="h-[4em] w-[4em] sm:h-[6em] sm:w-[6em] bg-[#08493e] rounded-full absolute bottom-full -left-[3em] scale-[150%] z-[-1] duration-[400ms] drop-shadow-2xl" />    Book a Call
-                  <svg className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                  <div className="h-[4em] w-[4em] sm:h-[6em] sm:w-[6em] bg-[#08493e] rounded-full absolute bottom-full -left-[3em] scale-[150%] z-[-1] duration-[400ms] drop-shadow-2xl" />{" "}
+                  Book a Call
+                  <svg
+                    className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M14 5l7 7m0 0l-7 7m7-7H3"
+                    />
                   </svg>
                 </motion.button>
               </Link>
@@ -147,7 +157,7 @@ export default function Homepage() {
             {/* Card 1 - Top Right with overlay */}
             {/* <div className="absolute top-[90px] right-[-50px] w-[280px] h-[280px] bg-white shadow-2xl transform rotate-[-10deg] transition-all duration-300 hover:rotate-[15deg] hover:scale-105 border-[1px] border-white z-40 pointer-events-auto group"
                   style={{ clipPath: 'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)' }}>
-                  <img src="/Hero/Hero.jpg"
+                  <img src="/Hero/Hero.webp"
                     style={{ clipPath: 'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)' }}
                     alt="Forest" className="w-full h-full object-cover" /> */}
 
@@ -162,7 +172,7 @@ export default function Homepage() {
             {/* Card 2 - Middle with forest image */}
             {/* <div className="absolute top-[-40px] right-[130px] w-[280px] h-[280px] bg-white shadow-2xl transform rotate-[-10deg] transition-all duration-300 hover:rotate-[-10deg] hover:scale-105 border-[1px] border-white z-30 pointer-events-auto group"
                    style={{ clipPath: 'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)' }} > 
-                   <img src="/Hero/Hero2.jpg" 
+                   <img src="/Hero/Hero2.webp" 
                    alt="Forest" className="w-full h-full object-cover" />  */}
 
             {/* Hover Overlay */}
@@ -176,7 +186,7 @@ export default function Homepage() {
             {/* Card 3 - Bottom Right with green gradient */}
             {/* <div className="absolute top-[270px] right-[80px] w-[280px] h-[280px] bg-white shadow-2xl transform rotate-[-10deg] transition-all duration-300 hover:rotate-[9deg] hover:scale-105 border-[1px] border-white z-20 pointer-events-auto group" 
                     style={{ clipPath: 'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)' }} >
-                      <img src="/Hero/Hero3.jpg"
+                      <img src="/Hero/Hero3.webp"
                       alt="Forest" className="w-full h-full object-cover" />  */}
 
             {/* Hover Overlay */}
@@ -192,7 +202,7 @@ export default function Homepage() {
             {/* Card 4 - Far left with green gradient */}
             {/* <div className="absolute top-[140px] right-[260px] w-[280px] h-[280px] bg-white shadow-2xl transform rotate-[-10deg] transition-all duration-300 hover:rotate-[9deg] hover:scale-105 border-[1px] border-white z-10 pointer-events-auto group" 
                        style={{ clipPath: 'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)' }} >
-                        <img src="/Hero/Hero4.jpg"
+                        <img src="/Hero/Hero4.webp"
                           alt="Forest" className="w-full h-full object-cover" />   */}
             {/* Hover Overlay */}
             {/* <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center"
@@ -209,12 +219,8 @@ export default function Homepage() {
               </div> */}
           </div>
 
-
           {/* Trusted By Section */}
           <div className="hidden">
-
-
-
             {/* <div className="flex flex-wrap items-center gap-8 md:gap-16">
               <div className="text-2xl font-medium tracking-wide opacity-85 hover:opacity-100 transition-opacity">
                 IIT Kanpur<sup className="text-sm">©</sup>
@@ -225,9 +231,7 @@ export default function Homepage() {
             </div> */}
           </div>
         </div>
-
       </div>
     </div>
-
   );
 }

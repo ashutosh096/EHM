@@ -110,7 +110,7 @@ const NavBar = () => {
         {/* Logo */}
         <Link to="/" onClick={handleNavClick}>
           <img
-            src="/ehm_logo.png"
+            src="/ehm_logo.webp"
             alt="EHM Logo"
             className="h-12"
           />

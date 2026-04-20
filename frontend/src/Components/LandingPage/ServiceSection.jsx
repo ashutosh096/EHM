@@ -5,10 +5,10 @@ import ScrollRevealElements from "../Animations/ScrollRevealElements";
 import SectionHeading from "../../Common/SectionHeading";
 import { Link } from "react-router-dom";
 
-import ClimateRiskImg from "../../assets/offering/Updated - CLIMATE RISK.png";
-import GeophysicalImg from "../../assets/offering/Updated - Geophysical .png";
-import SustainabilityImg from "../../assets/offering/Updated - Sustainability & ESG.png";
-import EnvManagementImg from "../../assets/offering/Updated - Sustainable Environmental Management .png";
+import ClimateRiskImg from "../../assets/offering/Updated - CLIMATE RISK.webp";
+import GeophysicalImg from "../../assets/offering/Updated - Geophysical .webp";
+import SustainabilityImg from "../../assets/offering/Updated - Sustainability & ESG.webp";
+import EnvManagementImg from "../../assets/offering/Updated - Sustainable Environmental Management .webp";
 
 const data = [
   {
@@ -39,13 +39,13 @@ const data = [
     title: "Urban Planning & Management",
     paragraph:
       "Designing data-driven, inclusive, and climate-resilient urban systems through smart planning, water restoration, and sustainable infrastructure",
-    image: "/offering/4.png",
+    image: "/offering/4.webp",
   },
   {
     title: "Training & Capacity Building",
     paragraph:
       "Professional training on ESG, climate, AI, and geophysical applications.",
-    image: "/offering/product5.png",
+    image: "/offering/product5.webp",
   },
 ];
 

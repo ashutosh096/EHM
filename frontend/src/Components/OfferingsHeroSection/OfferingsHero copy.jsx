@@ -201,7 +201,7 @@ const OfferingsHero = () => {
                   transition={cardVariant(1).transition}
                 >
                   <img
-                    src="https://res.cloudinary.com/dlpluej6w/image/upload/v1756386634/EHM-APP/jegdhviut447yjgbcers.png"
+                    src="https://res.cloudinary.com/dlpluej6w/image/upload/v1756386634/EHM-APP/jegdhviut447yjgbcers.webp"
                     alt="External Risk"
                     className="w-full h-36 object-cover"
                     onError={(e) => {
@@ -226,7 +226,7 @@ const OfferingsHero = () => {
                   transition={cardVariant(2).transition}
                 >
                   <img
-                    src="https://res.cloudinary.com/dlpluej6w/image/upload/v1756388167/Screenshot_1st_u2ghdl.png"
+                    src="https://res.cloudinary.com/dlpluej6w/image/upload/v1756388167/Screenshot_1st_u2ghdl.webp"
                     alt="Natural Risk"
                     className="w-full h-36 object-cover"
                     onError={(e) => {
@@ -297,7 +297,7 @@ const OfferingsHero = () => {
           >
             <div className="w-full md:w-1/3 h-44 md:h-36">
               <img
-                src="https://res.cloudinary.com/dlpluej6w/image/upload/v1756388925/EHM-APP/rnifglwnnstvedixsrrb.png"
+                src="https://res.cloudinary.com/dlpluej6w/image/upload/v1756388925/EHM-APP/rnifglwnnstvedixsrrb.webp"
                 alt="Forest"
                 className="w-full h-full object-cover rounded-lg"
                 onError={(e) => {

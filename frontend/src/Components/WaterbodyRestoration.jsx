@@ -8,7 +8,7 @@ import {
   FaTint,
 } from "react-icons/fa";
 
-const   WaterbodyRestoration = () => {
+const WaterbodyRestoration = () => {
   const factors = [
     { icon: <FaIndustry />, label: "Industry Waste" },
     { icon: <FaTrash />, label: "Solid Waste Dumping" },
@@ -74,7 +74,7 @@ const   WaterbodyRestoration = () => {
           <div>
             <h4 className="font-semibold text-gray-700 mb-2">Before</h4>
             <img
-              src="/WaterRestoration/antia-before.jpg"
+              src="/WaterRestoration/antia-before.webp"
               alt="Before Restoration"
               className="rounded-xl shadow-md h-[400px]"
             />
@@ -82,7 +82,7 @@ const   WaterbodyRestoration = () => {
           <div>
             <h4 className="font-semibold text-gray-700 mb-2">After</h4>
             <img
-              src="/WaterRestoration/antia-after.jpg"
+              src="/WaterRestoration/antia-after.webp"
               alt="After Restoration"
               className="rounded-xl shadow-md"
             />
@@ -98,7 +98,7 @@ const   WaterbodyRestoration = () => {
           resilience.
         </p>
         <img
-          src="/WaterRestoration/benefits-wheel.png"
+          src="/WaterRestoration/benefits-wheel.webp"
           alt="Benefits"
           className="mx-auto w-80 md:w-96"
         />
@@ -121,7 +121,7 @@ const   WaterbodyRestoration = () => {
               Area: 33.012 ha
             </p>
             <img
-              src="/WaterRestoration/laxmi.jpg"
+              src="/WaterRestoration/laxmi.webp"
               alt="Laxmi Taal"
               className="rounded-lg w-[550px] h-[300px]"
             />
@@ -137,7 +137,7 @@ const   WaterbodyRestoration = () => {
               developed waterbody within CSJM campus.
             </p>
             <img
-              src="/WaterRestoration/csjm.jpg"
+              src="/WaterRestoration/csjm.webp"
               alt="CSJM Campus"
               className="rounded-lg h-[300px]"
             />
@@ -153,7 +153,7 @@ const   WaterbodyRestoration = () => {
           participation for sustainable waterbody restoration.
         </p>
         <img
-          src="/WaterRestoration/approach.png"
+          src="/WaterRestoration/approach.webp"
           alt="Approach"
           className="mx-auto w-80  md:w-96"
         />

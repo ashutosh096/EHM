@@ -107,28 +107,28 @@ export default function NewsLetter() {
             <img
               alt="Microsoft logo"
               className="h-32 grayscale dark:brightness-200"
-              src="./Partners/CSJMIF.png"
+              src="./Partners/CSJMIF.webp"
             />
           </div>
           <div>
             <img
               alt="FICCI logo"
               className="h-32 grayscale dark:brightness-200"
-              src="./Partners/E&ICT logo.png"
+              src="./Partners/E&ICT logo.webp"
             />
           </div>
           <div>
             <img
               alt="Bursa Carbon Exchange logo"
               className="h-32 w-full grayscale dark:brightness-200"
-              src="./Partners/Technopark logo.png"
+              src="./Partners/Technopark logo.webp"
             />
           </div>
           <div>
             <img
               alt="SEAS logo"
               className="h-32  grayscale dark:brightness-200"
-              src="./Partners/IITR.png"
+              src="./Partners/IITR.webp"
             />
           </div>
         </div>
