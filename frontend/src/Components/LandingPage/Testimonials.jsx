@@ -73,7 +73,7 @@ const Testimonials = () => {
         </ScrollRevealElements>
 
         <motion.div
-          className="relative max-w-[90rem] mx-auto px-4 md:px-6 group"
+          className="relative max-w-[90rem] mx-auto px-4 md:px-6 "
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
