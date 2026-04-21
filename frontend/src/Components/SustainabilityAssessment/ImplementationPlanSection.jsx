@@ -58,8 +58,8 @@ const ScrollRevealElements = ({ children, className, staggerAmount }) => {
 export default function ImplementationPlanSection() {
   return (
     <section className="relative py-20 px-6 overflow-hidden">
-      {/* Gradient background with fade to white */}
-      <div className="absolute inset-0 bg-gradient-to-b from-white via-emerald-50/40 to-white"></div>
+      {/* Clean background */}
+      <div className="absolute inset-0 bg-slate-50 opacity-30"></div>
       
       <div className="max-w-7xl mx-auto relative z-10">
         <div>
@@ -74,7 +74,7 @@ export default function ImplementationPlanSection() {
               <div className="text-center my-12">
                 <h2 className="text-3xl md:text-4xl font-bold text-gray-900 inline-block relative">
                   Implementation{' '}
-                  <span className="bg-gradient-to-r from-emerald-600 via-blue-600 to-violet-600 bg-clip-text text-transparent">
+                  <span className="text-[#4B7635]">
                     Approach
                   </span>
                   <motion.span
@@ -82,14 +82,14 @@ export default function ImplementationPlanSection() {
                     whileInView={{ width: '100%', opacity: 1 }}
                     transition={{ duration: 0.6 }}
                     viewport={{ once: true }}
-                    className="block h-[3px] bg-purple-600 mt-2"
+                    className="block h-1 bg-[#4B7635] mt-2 rounded-full"
                   ></motion.span>
                   <motion.span
                     initial={{ width: 0, opacity: 0 }}
                     whileInView={{ width: '25%', opacity: 1 }}
                     transition={{ duration: 0.6, delay: 0.1 }}
                     viewport={{ once: true }}
-                    className="block h-[2px] bg-purple-300 mx-auto mt-1"
+                    className="block h-[1px] bg-slate-200 mx-auto mt-1"
                   ></motion.span>
                 </h2>
                 <motion.p 
@@ -109,7 +109,7 @@ export default function ImplementationPlanSection() {
             <svg className="absolute top-12 left-0 w-full h-full z-0" preserveAspectRatio="none" viewBox="0 0 900 300">
               <path
                 d="M 50 100 C 200 100, 200 196, 450 196 C 700 196, 700 100, 850 100"
-                stroke="#10b981"
+                stroke="#4B7635"
                 strokeWidth="4"
                 fill="none"
                 strokeDasharray="10,10"
@@ -131,7 +131,7 @@ export default function ImplementationPlanSection() {
                       <ul className="mt-2 text-sm text-left text-slate-500 space-y-1">
                         {item.points.map((point, pIdx) => (
                           <li key={pIdx} className="flex items-start">
-                            <CheckCircle className="h-4 w-4 mr-2 mt-0.5 text-[#10b981] flex-shrink-0" />
+                            <CheckCircle className="h-4 w-4 mr-2 mt-0.5 text-[#4B7635] flex-shrink-0" />
                             <span>{point}</span>
                           </li>
                         ))}
@@ -145,7 +145,7 @@ export default function ImplementationPlanSection() {
 
           {/* Mobile view */}
           <div className="lg:hidden relative max-w-xl mx-auto mt-12">
-            <div className="absolute left-12 top-0 h-full w-0.5 bg-[#10b981]"></div>
+            <div className="absolute left-12 top-0 h-full w-0.5 bg-[#4B7635]"></div>
             <ScrollRevealElements
               className="space-y-16"
               staggerAmount={0.5}
@@ -160,7 +160,7 @@ export default function ImplementationPlanSection() {
                     <ul className="mt-2 text-sm text-left text-slate-500 space-y-1">
                       {item.points.map((point, pIdx) => (
                         <li key={pIdx} className="flex items-start">
-                          <CheckCircle className="h-4 w-4 mr-2 mt-0.5 text-[#10b981] flex-shrink-0" />
+                          <CheckCircle className="h-4 w-4 mr-2 mt-0.5 text-[#4B7635] flex-shrink-0" />
                           <span>{point}</span>
                         </li>
                       ))}

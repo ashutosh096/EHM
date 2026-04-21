@@ -9,7 +9,7 @@ import FeatureProject from '../Components/SustainabilityAssessment/FeatureProjec
 
 const SustainabilityAssessment = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-green-50 to-teal-50 ">
+    <div className="min-h-screen bg-white">
       <AssessmentHero />
       <DashBoardBrief />
       <DashboardFeatures/>

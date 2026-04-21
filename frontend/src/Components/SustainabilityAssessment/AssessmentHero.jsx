@@ -4,12 +4,12 @@ import { useNavigate } from "react-router-dom";
 import Chart from "chart.js/auto";
 
 const FEATURES = [
-  { label: "AI Sustainability BOT", color: "#00c8b4" },
-  { label: "GHG Accounting", color: "#0090ff" },
-  { label: "UNSDG Matrices", color: "#ffc200" },
-  { label: "Centralized Tracking", color: "#8b5cf6" },
-  { label: "API Integration", color: "#f97316" },
-  { label: "MFA Security", color: "#ec4899" },
+  { label: "AI Sustainability BOT", color: "#4B7635" },
+  { label: "GHG Accounting", color: "#3B66BC" },
+  { label: "UNSDG Matrices", color: "#E59518" },
+  { label: "Centralized Tracking", color: "#4B7635" },
+  { label: "API Integration", color: "#3B66BC" },
+  { label: "MFA Security", color: "#E59518" },
 ];
 
 const SDG_PILLS = [
@@ -37,7 +37,7 @@ const StarcHero = () => {
           datasets: [
             {
               data: [66, 20, 8, 6],
-              backgroundColor: ["#00c8b4", "#0090ff", "#ffc200", "#8b5cf6"],
+              backgroundColor: ["#4B7635", "#3B66BC", "#E59518", "#F1B434"],
               borderColor: "rgba(255,255,255,0.08)",
               borderWidth: 2,
               hoverBorderWidth: 3,
@@ -68,19 +68,19 @@ const StarcHero = () => {
             {
               label: "Cost",
               data: [4.5, 0.4, 5.5, 1.2],
-              backgroundColor: "rgba(248,113,113,0.8)",
+              backgroundColor: "rgba(229,149,24,0.7)",
               borderRadius: 4,
             },
             {
               label: "Market Value",
               data: [18, 3.5, 17, 2.8],
-              backgroundColor: "rgba(96,165,250,0.8)",
+              backgroundColor: "rgba(59,102,188,0.7)",
               borderRadius: 4,
             },
             {
               label: "Benefit",
               data: [13.5, 3.2, 11.5, 2],
-              backgroundColor: "rgba(52,211,153,0.8)",
+              backgroundColor: "rgba(75,118,53,0.7)",
               borderRadius: 4,
             },
           ],
@@ -91,18 +91,18 @@ const StarcHero = () => {
           plugins: { legend: { display: false } },
           scales: {
             x: {
-              ticks: { color: "rgba(255,255,255,0.45)", font: { size: 10 } },
-              grid: { color: "rgba(255,255,255,0.04)" },
-              border: { color: "rgba(255,255,255,0.08)" },
+              ticks: { color: "#64748b", font: { size: 10 } },
+              grid: { color: "rgba(0,0,0,0.04)" },
+              border: { color: "rgba(0,0,0,0.08)" },
             },
             y: {
               ticks: {
-                color: "rgba(255,255,255,0.45)",
+                color: "#64748b",
                 font: { size: 10 },
                 callback: (v) => "₹" + v + "L",
               },
-              grid: { color: "rgba(255,255,255,0.06)" },
-              border: { color: "rgba(255,255,255,0.08)" },
+              grid: { color: "rgba(0,0,0,0.06)" },
+              border: { color: "rgba(0,0,0,0.08)" },
             },
           },
         },
@@ -116,35 +116,26 @@ const StarcHero = () => {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden pt-20 py-16"
-      style={{ background: "linear-gradient(135deg, #0a1628 0%, #0d2244 40%, #0f1f3d 70%, #081530 100%)" }}
+    <section className="relative min-h-screen flex items-center overflow-hidden pt-20 py-16 bg-slate-50"
     >
-      {/* Grid background */}
+      {/* Subtle Grid background */}
       <div
-        className="absolute inset-0 pointer-events-none opacity-60"
+        className="absolute inset-0 pointer-events-none opacity-40"
         style={{
           backgroundImage:
-            "linear-gradient(rgba(0,200,180,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(0,200,180,0.04) 1px, transparent 1px)",
-          backgroundSize: "48px 48px",
+            "linear-gradient(rgba(0,0,0,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.03) 1px, transparent 1px)",
+          backgroundSize: "60px 60px",
         }}
       />
 
-      {/* Radial glows */}
+      {/* Very faint Brand glows */}
       <div className="absolute inset-0 pointer-events-none">
         <div
           className="absolute inset-0"
           style={{
             background:
-              "radial-gradient(ellipse at 20% 50%, rgba(0,200,180,0.08) 0%, transparent 55%), radial-gradient(ellipse at 80% 20%, rgba(0,120,255,0.1) 0%, transparent 50%), radial-gradient(ellipse at 60% 80%, rgba(255,180,0,0.05) 0%, transparent 40%)",
+              "radial-gradient(circle at 20% 50%, rgba(75,118,53,0.03) 0%, transparent 60%), radial-gradient(circle at 80% 20%, rgba(59,102,188,0.03) 0%, transparent 60%)",
           }}
-        />
-        <div
-          className="absolute top-[12%] right-[8%] w-72 h-72 rounded-full pointer-events-none"
-          style={{ background: "radial-gradient(circle, rgba(0,200,180,0.08), transparent 70%)" }}
-        />
-        <div
-          className="absolute bottom-[18%] left-[4%] w-48 h-48 rounded-full pointer-events-none"
-          style={{ background: "radial-gradient(circle, rgba(0,144,255,0.08), transparent 70%)" }}
         />
       </div>
 
@@ -157,8 +148,8 @@ const StarcHero = () => {
             <div className="space-y-6 animate-fadeInLeft font-sans">
 
               {/* ESG badge */}
-              <div className="inline-flex items-center gap-2 mt-2 px-4 py-2 rounded-full border bg-[#00c8b4]/10 border-[#00c8b4]/30">
-                <span className="text-[#00c8b4] text-xs font-semibold tracking-wide uppercase">
+              <div className="inline-flex items-center gap-2 mt-2 px-4 py-2 rounded-full border bg-[#4B7635]/10 border-[#4B7635]/30">
+                <span className="text-[#4B7635] text-xs font-semibold tracking-wide uppercase">
                   🌱 ESG Insight and Sustainability Intelligence
                 </span>
               </div>
@@ -166,27 +157,27 @@ const StarcHero = () => {
               {/* Brand wordmark */}
               <div className="mb-2">
                 <div className="flex items-baseline gap-1">
-                  <span className="text-5xl font-extrabold text-white tracking-tight">
+                  <span className="text-5xl font-extrabold text-[#1a1a1a] tracking-tight">
                     S
                   </span>
                   <span
-                    className="text-5xl font-extrabold tracking-tight bg-gradient-to-r from-[#00c8b4] to-[#0090ff] bg-clip-text text-transparent"
+                    className="text-5xl font-extrabold tracking-tight text-[#4B7635]"
                   >
                     TARC
                   </span>
                 </div>
-                <p className="text-[10px] font-semibold tracking-wider text-white/40 uppercase mt-1">
+                <p className="text-[10px] font-semibold tracking-wider text-slate-400 uppercase mt-1">
                   Sustainability Tracking, Assessment & Reporting for Campus
                 </p>
               </div>
 
               {/* Headline */}
-              <h1 className="text-3xl md:text-3xl lg:text-4xl xl:text-5xl font-bold leading-tight text-white max-w-2xl">
+              <h1 className="text-3xl md:text-3xl lg:text-4xl xl:text-5xl font-bold leading-tight text-[#1a1a1a] max-w-2xl">
                 Empowering Institutions and Organizations Through Data-Driven Sustainability
               </h1>
 
               {/* Description */}
-              <p className="text-base text-white/70 leading-relaxed max-w-xl">
+              <p className="text-base text-slate-600 leading-relaxed max-w-xl">
                 STARC empowers higher education institutions and industries to assess, manage, and communicate sustainability performance through data-driven ESG reporting, dashboards, and compliance frameworks.
               </p>
             </div>
@@ -196,8 +187,7 @@ const StarcHero = () => {
               {FEATURES.map((f) => (
                 <div
                   key={f.label}
-                  className="flex items-center gap-2 px-3 py-1.5 rounded-lg border text-xs text-white/70 font-medium"
-                  style={{ background: "rgba(255,255,255,0.06)", borderColor: "rgba(255,255,255,0.12)" }}
+                  className="flex items-center gap-2 px-3 py-1.5 rounded-lg border text-xs text-slate-600 font-medium bg-white border-slate-200"
                 >
                   <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: f.color }} />
                   {f.label}
@@ -209,21 +199,18 @@ const StarcHero = () => {
             <div className="flex flex-wrap gap-4 pt-2">
               <a
                 href="/contact/starc"
-                className="group relative inline-flex items-center gap-3 px-8 py-4 text-white font-bold text-lg rounded-xl overflow-hidden transition-all duration-300 hover:-translate-y-1"
+                className="group relative inline-flex items-center gap-3 px-8 py-4 text-white font-bold text-lg rounded-xl overflow-hidden transition-all duration-300 hover:-translate-y-1 bg-[#4B7635]"
                 style={{
-                  background: "linear-gradient(135deg, #00c8b4, #0090ff)",
-                  boxShadow: "0 10px 30px rgba(0,200,180,0.3)",
+                  boxShadow: "0 6px 20px rgba(75,118,53,0.2)",
                 }}
               >
-                <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
                 <Calendar className="w-5 h-5 relative z-10" />
                 <span className="relative z-10">Book a Demo</span>
               </a>
 
               <button
                 onClick={() => navigate("/resources/casestudies")}
-                className="inline-flex items-center gap-3 px-8 py-4 font-semibold text-lg rounded-xl border text-white transition-all duration-300 hover:bg-white/15 hover:border-white/30 hover:-translate-y-1"
-                style={{ background: "rgba(255,255,255,0.08)", borderColor: "rgba(255,255,255,0.2)" }}
+                className="inline-flex items-center gap-3 px-8 py-4 font-semibold text-lg rounded-xl border text-slate-700 bg-white border-slate-200 transition-all duration-300 hover:bg-slate-50 hover:border-slate-300 hover:-translate-y-1 shadow-sm"
               >
                 📊 View Case Studies
               </button>
@@ -233,30 +220,20 @@ const StarcHero = () => {
           {/* ── RIGHT — ESG DASHBOARD ── */}
           <div className="animate-fadeInRight relative">
             <div
-              className="relative rounded-3xl p-6 border overflow-hidden"
-              style={{
-                background: "rgba(255,255,255,0.05)",
-                borderColor: "rgba(255,255,255,0.12)",
-                backdropFilter: "blur(20px)",
-              }}
+              className="relative rounded-3xl p-6 border overflow-hidden bg-white border-slate-200 shadow-xl"
             >
-              {/* Top shimmer line */}
-              <div
-                className="absolute top-0 left-0 right-0 h-px"
-                style={{ background: "linear-gradient(90deg, transparent, rgba(0,200,180,0.5), transparent)" }}
-              />
+              {/* Top shimmer line removed for professional look */}
 
               {/* Dashboard header */}
               <div className="flex items-start justify-between mb-5">
                 <div>
-                  <p className="font-bold text-white text-base">ESG Performance Dashboard</p>
-                  <p className="text-[11px] text-white/40 mt-0.5">Real-time sustainability metrics — CSJMU Campus</p>
+                  <p className="font-bold text-slate-800 text-base">ESG Performance Dashboard</p>
+                  <p className="text-[11px] text-slate-400 mt-0.5">Real-time sustainability metrics — CSJMU Campus</p>
                 </div>
                 <div
-                  className="flex items-center gap-1.5 px-3 py-1 rounded-full border text-[10px] font-semibold text-[#00c8b4]"
-                  style={{ background: "rgba(0,200,180,0.15)", borderColor: "rgba(0,200,180,0.3)" }}
+                  className="flex items-center gap-1.5 px-3 py-1 rounded-full border text-[10px] font-semibold text-[#4B7635] bg-green-50 border-green-200"
                 >
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#00c8b4] animate-pulse" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#4B7635] animate-pulse" />
                   LIVE
                 </div>
               </div>
@@ -264,19 +241,18 @@ const StarcHero = () => {
               {/* Stat cards */}
               <div className="grid grid-cols-3 gap-3 mb-5">
                 {[
-                  { val: "92%", label: "ESG Compliance", color: "#00c8b4", bg: "rgba(0,200,180,0.12)", border: "rgba(0,200,180,0.25)" },
-                  { val: "34%", label: "Emission Reduction", color: "#4db6ff", bg: "rgba(0,144,255,0.12)", border: "rgba(0,144,255,0.25)" },
-                  { val: "78%", label: "Sustainability Score", color: "#a78bfa", bg: "rgba(139,92,246,0.12)", border: "rgba(139,92,246,0.25)" },
+                  { val: "92%", label: "ESG Compliance", color: "#4B7635", bg: "rgba(75,118,53,0.12)", border: "rgba(75,118,53,0.25)" },
+                  { val: "34%", label: "Emission Reduction", color: "#3B66BC", bg: "rgba(59,102,188,0.12)", border: "rgba(59,102,188,0.25)" },
+                  { val: "78%", label: "Sustainability Score", color: "#E59518", bg: "rgba(229,149,24,0.12)", border: "rgba(229,149,24,0.25)" },
                 ].map((s) => (
                   <div
                     key={s.label}
-                    className="rounded-xl p-3.5 text-center border"
-                    style={{ background: s.bg, borderColor: s.border }}
+                    className="rounded-xl p-3.5 text-center border bg-slate-50 border-slate-100 shadow-sm"
                   >
-                    <div className="text-2xl text-white leading-none" >
+                    <div className="text-2xl text-slate-800 leading-none" >
                       {s.val}
                     </div>
-                    <div className="text-[10px] text-white/50 mt-1 leading-tight">{s.label}</div>
+                    <div className="text-[10px] text-slate-500 mt-1 leading-tight">{s.label}</div>
                   </div>
                 ))}
               </div>
@@ -285,19 +261,19 @@ const StarcHero = () => {
               <div className="grid grid-cols-2 gap-4 mb-5">
 
                 {/* Pie / Doughnut */}
-                <div className="rounded-xl p-3.5" style={{ background: "rgba(0,0,0,0.2)" }}>
-                  <p className="text-[11px] text-white/50 font-medium mb-2.5">Healthcare beneficiaries by facility</p>
+                <div className="rounded-xl p-3.5 bg-slate-50 border border-slate-100">
+                  <p className="text-[11px] text-slate-500 font-medium mb-2.5">Healthcare beneficiaries by facility</p>
                   <div className="relative w-full h-36">
                     <canvas ref={pieRef} aria-label="Doughnut chart of healthcare beneficiaries" role="img" />
                   </div>
                   <div className="flex flex-wrap gap-x-3 gap-y-1 mt-2.5">
                     {[
-                      { label: "Physiotherapy 66%", color: "#00c8b4" },
-                      { label: "Pathology 20%", color: "#0090ff" },
-                      { label: "X-Ray 8%", color: "#ffc200" },
-                      { label: "Other 6%", color: "#8b5cf6" },
+                      { label: "Physiotherapy 66%", color: "#4B7635" },
+                      { label: "Pathology 20%", color: "#3B66BC" },
+                      { label: "X-Ray 8%", color: "#E59518" },
+                      { label: "Other 6%", color: "#f4c26b" },
                     ].map((l) => (
-                      <span key={l.label} className="flex items-center gap-1 text-[10px] text-white/50">
+                      <span key={l.label} className="flex items-center gap-1 text-[10px] text-slate-500">
                         <span className="w-2 h-2 rounded-sm flex-shrink-0" style={{ background: l.color }} />
                         {l.label}
                       </span>
@@ -306,18 +282,18 @@ const StarcHero = () => {
                 </div>
 
                 {/* Bar chart */}
-                <div className="rounded-xl p-3.5" style={{ background: "rgba(0,0,0,0.2)" }}>
-                  <p className="text-[11px] text-white/50 font-medium mb-2.5">University facilities benefit (₹L)</p>
+                <div className="rounded-xl p-3.5 bg-slate-50 border border-slate-100">
+                  <p className="text-[11px] text-slate-500 font-medium mb-2.5">University facilities benefit (₹L)</p>
                   <div className="relative w-full h-36">
                     <canvas ref={barRef} aria-label="Grouped bar chart of university healthcare financials" role="img" />
                   </div>
                   <div className="flex flex-wrap gap-x-3 gap-y-1 mt-2.5">
                     {[
-                      { label: "Cost", color: "rgba(248,113,113,0.8)" },
-                      { label: "Market Value", color: "rgba(96,165,250,0.8)" },
-                      { label: "Benefit", color: "rgba(52,211,153,0.8)" },
+                      { label: "Cost", color: "rgba(229,149,24,0.7)" },
+                      { label: "Market Value", color: "rgba(59,102,188,0.7)" },
+                      { label: "Benefit", color: "rgba(75,118,53,0.7)" },
                     ].map((l) => (
-                      <span key={l.label} className="flex items-center gap-1 text-[10px] text-white/50">
+                      <span key={l.label} className="flex items-center gap-1 text-[10px] text-slate-500">
                         <span className="w-2 h-2 rounded-sm flex-shrink-0" style={{ background: l.color }} />
                         {l.label}
                       </span>
@@ -328,16 +304,15 @@ const StarcHero = () => {
 
               {/* Progress bar */}
               <div className="mb-4">
-                <div className="flex justify-between text-xs text-white/50 mb-1.5">
+                <div className="flex justify-between text-xs text-slate-500 mb-1.5">
                   <span>Overall sustainability progress</span>
-                  <span className="text-[#00c8b4] font-semibold">78%</span>
+                  <span className="text-[#4B7635] font-semibold">78%</span>
                 </div>
-                <div className="h-2 w-full rounded-full overflow-hidden" style={{ background: "rgba(255,255,255,0.08)" }}>
+                <div className="h-2 w-full rounded-full overflow-hidden bg-slate-100">
                   <div
-                    className="h-full rounded-full transition-all duration-1000 ease-out"
+                    className="h-full rounded-full transition-all duration-1000 ease-out bg-[#4B7635]"
                     style={{
                       width: "78%",
-                      background: "linear-gradient(90deg, #00c8b4, #0090ff, #8b5cf6)",
                     }}
                   />
                 </div>
@@ -348,8 +323,7 @@ const StarcHero = () => {
                 {SDG_PILLS.map((pill) => (
                   <span
                     key={pill}
-                    className="text-[10px] text-white/50 px-2.5 py-1 rounded-md border"
-                    style={{ background: "rgba(255,255,255,0.05)", borderColor: "rgba(255,255,255,0.1)" }}
+                    className="text-[10px] text-slate-500 px-2.5 py-1 rounded-md border bg-white border-slate-200"
                   >
                     {pill}
                   </span>

@@ -6,7 +6,7 @@ import SectionHeading from "../../Common/SectionHeading";
 const plans = [
   {
     name: "Standard",
-    color: "from-blue-500 to-cyan-400",
+    color: "bg-[#3B66BC]",
     features: {
       "SDG Mapping": "✅",
       "GHG Accounting": "Scope 1 & Scope 2",
@@ -23,7 +23,7 @@ const plans = [
   },
   {
     name: "Premium",
-    color: "from-violet-500 to-purple-400",
+    color: "bg-[#4B7635]",
     features: {
       "SDG Mapping": "✅",
       "GHG Accounting": "Scope 1, Scope 2 & Scope 3",
@@ -61,11 +61,11 @@ const SubscriptionPlans = () => {
     navigate('/contact', { state: { selectedPlan: planName } });
   };
   return (
-    <section className="relative py-24 px-6 overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-emerald-50/40 via-blue-50/30 via-violet-50/30 via-pink-50/20 to-amber-50/30" />
+    <section className="relative py-24 px-6 overflow-hidden bg-white">
+      <div className="absolute inset-0 bg-white" />
       <SectionHeading>
         <span className="block">Choose a Plan That Fits</span>
-        <span className="bg-gradient-to-r from-emerald-600 via-blue-600 to-violet-600 bg-clip-text text-transparent">
+        <span className="text-[#3B66BC]">
           Your Sustainability Goals
         </span>
       </SectionHeading>
@@ -85,7 +85,7 @@ const SubscriptionPlans = () => {
                   <th key={idx} className={`p-6 border-b border-slate-200 bg-gradient-to-br ${plan.color} text-white font-bold text-xl text-center w-1/3 relative`}>
                     {plan.name}
                     {plan.name === "Standard" && (
-                      <span className="absolute top-4 right-4 bg-yellow-400 text-white text-[10px] uppercase font-bold px-2 py-0.5 rounded-full shadow-lg">
+                      <span className="absolute top-4 right-4 bg-[#E59518] text-white text-[10px] uppercase font-bold px-2 py-0.5 rounded-full shadow-lg">
                         Popular
                       </span>
                     )}
@@ -105,7 +105,7 @@ const SubscriptionPlans = () => {
                       <td key={pIdx} className="p-4 border-b border-slate-100 text-center text-slate-600">
                         <div className="flex justify-center items-center">
                           {value === "✅" ? (
-                            <Check className="w-5 h-5 text-emerald-500" />
+                            <Check className="w-5 h-5 text-[#4B7635]" />
                           ) : value === "-" ? (
                             <X className="w-5 h-5 text-slate-300" />
                           ) : (
@@ -125,7 +125,7 @@ const SubscriptionPlans = () => {
                   <td key={idx} className="p-6 border-t border-slate-200 text-center bg-slate-50/50">
                     <button 
                       onClick={() => handleChoosePlan(plan.name)}
-                      className={`px-8 py-3 w-full max-w-[200px] rounded-full bg-gradient-to-r ${plan.color} text-white font-semibold hover:scale-105 transition-all duration-300 shadow-md`}
+                      className={`w-full py-3 px-6 rounded-xl font-bold text-white transition-all duration-300 transform hover:-translate-y-1 shadow-md ${plan.color}`}
                     >
                       Choose {plan.name}
                     </button>
