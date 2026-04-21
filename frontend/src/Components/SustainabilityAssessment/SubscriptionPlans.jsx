@@ -60,80 +60,103 @@ const SubscriptionPlans = () => {
   const handleChoosePlan = (planName) => {
     navigate('/contact', { state: { selectedPlan: planName } });
   };
+
   return (
-    <section className="relative py-24 px-6 overflow-hidden bg-white">
-      <div className="absolute inset-0 bg-white" />
+    <section className="relative font-sans overflow-hidden bg-white py-16">
       <SectionHeading>
-        <span className="block">Choose a Plan That Fits</span>
-        <span className="text-[#3B66BC]">
-          Your Sustainability Goals
-        </span>
+        <span className="block text-slate-900">Choose a Plan That Fits</span>
+        <span className="text-[#3B66BC]">Your Sustainability Goals</span>
       </SectionHeading>
-      <p className="text-lg text-slate-600 max-w-3xl mx-auto text-center mb-16 relative z-10">
-        Select the plan that matches your organization's sustainability needs and reporting maturity.
+      
+      <p className="text-lg text-slate-500 max-w-2xl mx-auto text-center mb-6 relative z-10">
+        Transparent pricing and features designed to scale with your institution's environmental commitments.
       </p>
 
-      <div className="max-w-5xl mx-auto bg-white rounded-3xl shadow-xl overflow-hidden border border-slate-100 relative z-10">
-        <div className="overflow-x-auto">
-          <table className="w-full text-left border-collapse">
-            <thead>
-              <tr>
-                <th className="p-6 border-b border-slate-200 bg-slate-50 font-semibold text-slate-700 text-lg w-1/3">
-                  Features
-                </th>
-                {plans.map((plan, idx) => (
-                  <th key={idx} className={`p-6 border-b border-slate-200 bg-gradient-to-br ${plan.color} text-white font-bold text-xl text-center w-1/3 relative`}>
-                    {plan.name}
-                    {plan.name === "Standard" && (
-                      <span className="absolute top-4 right-4 bg-[#E59518] text-white text-[10px] uppercase font-bold px-2 py-0.5 rounded-full shadow-lg">
-                        Popular
-                      </span>
-                    )}
+      <div className="max-w-6xl mx-auto relative z-10 px-4 pt-12">
+        {/* Main Comparison Container */}
+        <div className="bg-white rounded-[2.5rem] border border-slate-100 shadow-2xl shadow-slate-200/50">
+          <div className="overflow-x-auto pt-10">
+            <table className="w-full border-separate border-spacing-0">
+              <thead>
+                <tr>
+                  <th className="p-8 pb-10 bg-slate-50/50 border-b border-slate-100 font-extrabold text-slate-800 text-2xl w-1/4 align-bottom">
+                    Capabilities
                   </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {featuresList.map((feature, fIdx) => (
-                <tr key={fIdx} className="hover:bg-slate-50 transition-colors">
-                  <td className="p-4 px-6 border-b border-slate-100 font-medium text-slate-700">
-                    {feature}
-                  </td>
-                  {plans.map((plan, pIdx) => {
-                    const value = plan.features[feature];
-                    return (
-                      <td key={pIdx} className="p-4 border-b border-slate-100 text-center text-slate-600">
-                        <div className="flex justify-center items-center">
-                          {value === "✅" ? (
-                            <Check className="w-5 h-5 text-[#4B7635]" />
-                          ) : value === "-" ? (
-                            <X className="w-5 h-5 text-slate-300" />
-                          ) : (
-                            <span className="text-sm font-medium">{value}</span>
-                          )}
-                        </div>
-                      </td>
-                    );
-                  })}
+                  {plans.map((plan, idx) => (
+                    <th key={idx} className={`p-0 border-b border-slate-100 w-1/3 min-w-[300px] relative z-20`}>
+                      <div className={`p-10 pb-12 flex flex-col items-center relative transition-all duration-500 group group-hover:-translate-y-2 ${idx === 0 ? 'bg-white shadow-[0_20px_50px_rgba(59,102,188,0.1)] border-x-2 border-t-2 border-[#3B66BC] rounded-t-[2.5rem] -mt-6' : 'bg-white shadow-[0_20px_50px_rgba(75,118,53,0.1)] border-x-2 border-t-2 border-[#4B7635] rounded-t-[2.5rem] -mt-6'}`}>
+                        {plan.name === "Standard" ? (
+                          <div className="mb-4 bg-[#3B66BC]/10 text-[#3B66BC] text-[10px] uppercase font-black px-4 py-1.5 rounded-full border border-[#3B66BC]/20 tracking-widest">
+                            Most Popular
+                          </div>
+                        ) : (
+                          <div className="mb-4 bg-[#4B7635]/10 text-[#4B7635] text-[10px] uppercase font-black px-4 py-1.5 rounded-full border border-[#4B7635]/20 tracking-widest">
+                            Enterprise Tier
+                          </div>
+                        )}
+                        <h3 className={`text-4xl font-black mb-1 ${plan.name === 'Premium' ? 'text-[#4B7635]' : 'text-[#3B66BC]'}`}>
+                          {plan.name}
+                        </h3>
+                        <p className="text-slate-400 text-sm font-bold uppercase tracking-tighter">Scalable Solution</p>
+                      </div>
+                    </th>
+                  ))}
                 </tr>
-              ))}
-            </tbody>
-            <tfoot>
-              <tr>
-                <td className="p-6 bg-slate-50 border-t border-slate-200"></td>
-                {plans.map((plan, idx) => (
-                  <td key={idx} className="p-6 border-t border-slate-200 text-center bg-slate-50/50">
-                    <button 
-                      onClick={() => handleChoosePlan(plan.name)}
-                      className={`w-full py-3 px-6 rounded-xl font-bold text-white transition-all duration-300 transform hover:-translate-y-1 shadow-md ${plan.color}`}
-                    >
-                      Choose {plan.name}
-                    </button>
-                  </td>
+              </thead>
+              <tbody>
+                {featuresList.map((feature, fIdx) => (
+                  <tr key={fIdx} className="group">
+                    <td className={`p-5 px-8 border-b border-slate-50 font-semibold text-slate-700 transition-colors group-hover:bg-slate-50 ${fIdx % 2 === 0 ? 'bg-white' : 'bg-slate-50/30'}`}>
+                      {feature}
+                    </td>
+                    {plans.map((plan, pIdx) => {
+                      const value = plan.features[feature];
+                      return (
+                        <td key={pIdx} className={`p-6 border-b border-slate-50 text-center transition-all duration-500 relative z-20 bg-white ${pIdx === 0 ? 'border-x-2 border-[#3B66BC]' : 'border-x-2 border-[#4B7635]'} hover:bg-slate-50/50`}>
+                          <div className="flex justify-center items-center">
+                            {value === "✅" ? (
+                              <div className={`flex items-center justify-center w-8 h-8 rounded-full ${pIdx === 1 ? 'bg-[#4B7635]/10 text-[#4B7635]' : 'bg-[#3B66BC]/10 text-[#3B66BC]'}`}>
+                                <Check className="w-5 h-5 shadow-sm" strokeWidth={3} />
+                              </div>
+                            ) : value === "-" ? (
+                              <X className="w-5 h-5 text-slate-200" />
+                            ) : (
+                              <span className="text-sm font-bold text-slate-600 bg-white px-4 py-1.5 rounded-full border border-slate-100 shadow-sm">
+                                {value}
+                              </span>
+                            )}
+                          </div>
+                        </td>
+                      );
+                    })}
+                  </tr>
                 ))}
-              </tr>
-            </tfoot>
-          </table>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td className="p-10 bg-slate-50/50"></td>
+                  {plans.map((plan, idx) => (
+                    <td key={idx} className={`p-10 text-center relative z-20 bg-white border-x-2 border-b-2 ${idx === 0 ? 'border-[#3B66BC] shadow-[0_20px_50px_rgba(59,102,188,0.1)]' : 'border-[#4B7635] shadow-[0_20px_50px_rgba(75,118,53,0.1)]'} rounded-b-[2.5rem] -mb-6`}>
+                      <button 
+                        onClick={() => handleChoosePlan(plan.name)}
+                        className={`w-full py-5 px-8 rounded-2xl font-black text-xl text-white transition-all duration-300 transform hover:-translate-y-2 hover:shadow-2xl active:scale-95 shadow-xl ${idx === 0 ? 'bg-[#3B66BC] hover:bg-[#2d4d8e]' : 'bg-[#4B7635] hover:bg-[#3a5d28]'}`}
+                      >
+                        Select {plan.name}
+                      </button>
+                      <p className="mt-6 text-xs text-slate-400 font-bold uppercase tracking-wider">Join 100+ Campuses</p>
+                    </td>
+                  ))}
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+
+        {/* Bottom Trust Badge */}
+        <div className="mt-12 flex flex-col md:flex-row items-center justify-center gap-8 opacity-60">
+          <p className="text-slate-400 text-sm font-bold tracking-widest uppercase">Trusted by 20+ Institutions</p>
+          <div className="h-px w-24 bg-slate-200 hidden md:block" />
+          <p className="text-slate-400 text-sm font-bold tracking-widest uppercase">CSJMU Accredited</p>
         </div>
       </div>
     </section>

@@ -57,7 +57,7 @@ const ScrollRevealElements = ({ children, className, staggerAmount }) => {
 
 export default function ImplementationPlanSection() {
   return (
-    <section className="relative py-20 px-6 overflow-hidden">
+    <section className="relative py-12 px-6 overflow-hidden">
       {/* Clean background */}
       <div className="absolute inset-0 bg-slate-50 opacity-30"></div>
       
@@ -71,7 +71,7 @@ export default function ImplementationPlanSection() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
             >
-              <div className="text-center my-12">
+              <div className="text-center my-6">
                 <h2 className="text-3xl md:text-4xl font-bold text-gray-900 inline-block relative">
                   Implementation{' '}
                   <span className="text-[#4B7635]">

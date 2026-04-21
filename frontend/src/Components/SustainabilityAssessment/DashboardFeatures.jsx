@@ -82,7 +82,7 @@ const DashboardFeaturesBento = () => {
   const [hoveredIndex, setHoveredIndex] = useState(null);
 
   return (
-    <section className="relative py-24 px-6 overflow-hidden bg-white">
+    <section className="relative py-12 px-6 overflow-hidden bg-white">
       {/* Subtle background elements only */}
       <div className="absolute inset-0 bg-white" />
       
@@ -99,7 +99,7 @@ const DashboardFeaturesBento = () => {
             Features & Plug-ins
           </span>
         </SectionHeading>
-        <p className="text-lg text-slate-600 max-w-3xl mx-auto text-center mb-16">
+        <p className="text-lg text-slate-600 max-w-3xl mx-auto text-center mb-8">
           Intelligent integrations and insights that transform sustainability data into strategic, measurable outcomes.
         </p>
 

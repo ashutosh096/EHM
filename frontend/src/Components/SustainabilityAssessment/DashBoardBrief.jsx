@@ -5,13 +5,7 @@ import SectionHeading from '../../Common/SectionHeading';
 
 const EhmBrief = () => {
   return (
-    <section className="relative font-sans overflow-hidden bg-white">
-      {/* Remove complex gradients for professional look */}
-      <div className="absolute inset-0 bg-white" />
-      
-      {/* Subtle fade elements if absolutely necessary, but kept minimal */}
-      <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-slate-50 to-transparent z-10 opacity-50" />
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-slate-50 to-transparent z-10 opacity-50" />
+    <section className="relative font-sans overflow-hidden bg-white py-8">
 
       {/* Top Section */}
       <div className="relative text-center w-full h-auto mx-auto py-16 sm:py-16 md:py-16 z-20">

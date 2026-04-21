@@ -116,7 +116,7 @@ const StarcHero = () => {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden pt-20 py-16 bg-slate-50"
+    <section className="relative flex items-center overflow-hidden pt-24 pb-12 bg-slate-50"
     >
       {/* Subtle Grid background */}
       <div
@@ -145,7 +145,7 @@ const StarcHero = () => {
           {/* ── LEFT CONTENT ── */}
           <div className="space-y-6 animate-fadeInLeft">
 
-            <div className="space-y-6 animate-fadeInLeft font-sans">
+            <div className="space-y-4 animate-fadeInLeft font-sans">
 
               {/* ESG badge */}
               <div className="inline-flex items-center gap-2 mt-2 px-4 py-2 rounded-full border bg-[#4B7635]/10 border-[#4B7635]/30">
@@ -196,7 +196,7 @@ const StarcHero = () => {
             </div>
 
             {/* CTAs */}
-            <div className="flex flex-wrap gap-4 pt-2">
+            <div className="flex flex-wrap gap-2 pt-2">
               <a
                 href="/contact/starc"
                 className="group relative inline-flex items-center gap-3 px-8 py-4 text-white font-bold text-lg rounded-xl overflow-hidden transition-all duration-300 hover:-translate-y-1 bg-[#4B7635]"
