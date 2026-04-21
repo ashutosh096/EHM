@@ -66,14 +66,13 @@ export default function StarcContact() {
 
   if (isSubmitted) {
     return (
-      <div className="min-h-screen flex items-center justify-center py-20 px-6"
-        style={{ background: "linear-gradient(135deg, #0a1628 0%, #0d2244 40%, #0f1f3d 70%, #081530 100%)" }}>
-        <div className="bg-white/10 backdrop-blur-xl shadow-2xl rounded-3xl p-10 max-w-md w-full text-center border border-white/20 animate-fadeInUp">
-          <div className="w-20 h-20 bg-gradient-to-r from-[#00c8b4] to-[#0090ff] rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg shadow-[#00c8b4]/20">
-            <CheckCircle className="w-10 h-10 text-white" />
+      <div className="min-h-screen flex items-center justify-center py-20 px-6 bg-slate-50">
+        <div className="bg-white shadow-2xl rounded-[2.5rem] p-12 max-w-md w-full text-center border border-slate-100 animate-fadeInUp">
+          <div className="w-20 h-20 bg-[#4B7635]/10 rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm">
+            <CheckCircle className="w-10 h-10 text-[#4B7635]" />
           </div>
-          <h2 className="text-3xl font-bold text-white mb-4">Request Sent!</h2>
-          <p className="text-white/70 text-lg leading-relaxed">
+          <h2 className="text-3xl font-bold text-slate-900 mb-4">Request Sent!</h2>
+          <p className="text-slate-500 text-lg leading-relaxed">
             Thank you for your interest in STARC. Our team will reach out shortly to schedule your personalized demo.
           </p>
         </div>
@@ -82,46 +81,41 @@ export default function StarcContact() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center py-24 px-6 relative overflow-hidden"
-      style={{ background: "linear-gradient(135deg, #0a1628 0%, #0d2244 40%, #0f1f3d 70%, #081530 100%)" }}>
-
-      {/* Background decorations matching STARC theme */}
-      <div className="absolute inset-0 pointer-events-none opacity-40">
-        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full"
-          style={{ background: "radial-gradient(circle, rgba(0,200,180,0.15), transparent 70%)" }} />
-        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full"
-          style={{ background: "radial-gradient(circle, rgba(0,144,255,0.15), transparent 70%)" }} />
+    <div className="min-h-screen lg:h-screen flex items-center justify-center py-8 px-4 relative overflow-hidden bg-slate-50">
+      
+      {/* Subtle Background Decorations */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute top-0 left-0 w-full h-full opacity-[0.03]" 
+             style={{ backgroundImage: 'radial-gradient(#4B7635 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
+        <div className="absolute top-1/4 right-[-10%] w-[500px] h-[500px] bg-[#4B7635]/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-1/4 left-[-10%] w-[500px] h-[500px] bg-[#3B66BC]/5 rounded-full blur-3xl" />
       </div>
 
-      <div className="w-full max-w-4xl bg-white/5 backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.3)] rounded-[2.5rem] p-8 md:p-12 border border-white/10 relative z-10 animate-fadeInUp">
+      <div className="w-full max-w-4xl bg-white shadow-2xl shadow-slate-200/60 rounded-[2rem] p-6 lg:p-10 border border-slate-100 relative z-10 animate-fadeInUp">
 
-        <div className="text-center mb-12">
-          <div className="inline-flex items-center gap-2 mb-4 px-4 py-2 rounded-full border bg-[#00c8b4]/10 border-[#00c8b4]/30">
-            <span className="text-[#00c8b4] text-xs font-semibold tracking-wide uppercase">
-              🚀 Experience STARC Firsthand
+        <div className="text-center mb-6">
+          <div className="inline-flex items-center gap-2 mb-2 px-3 py-1 rounded-full border bg-[#4B7635]/5 border-[#4B7635]/20">
+            <span className="text-[#4B7635] text-[10px] font-bold tracking-wider uppercase">
+              🚀 Book a STARC Demo
             </span>
           </div>
-          <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-4 tracking-tight">
-            Book a <span className="bg-gradient-to-r from-[#00c8b4] to-[#0090ff] bg-clip-text text-transparent">STARC Demo</span>
+          <h1 className="text-2xl md:text-3xl font-extrabold text-slate-900 mb-2 tracking-tight">
+            Elevate Your <span className="text-[#4B7635]">Sustainability Strategy</span>
           </h1>
-          <p className="text-white/60 text-lg max-w-2xl mx-auto">
-            Discover how our AI-driven sustainability intelligence platform can transform your institution's ESG reporting and compliance.
-          </p>
         </div>
 
         {errorMsg && (
-          <div className="p-4 bg-red-500/20 border border-red-500/50 text-red-200 rounded-xl mb-8 text-center backdrop-blur-md">
+          <div className="p-4 bg-red-50 border border-red-200 text-red-600 rounded-2xl mb-8 text-center font-bold">
             {errorMsg}
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {/* Name */}
-          <div className="space-y-2">
-            <label className="block text-sm font-semibold text-white/80 ml-1">Full Name</label>
+        <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="space-y-1">
+            <label className="block text-[10px] font-bold text-slate-400 ml-1 uppercase tracking-wider">Full Name</label>
             <div className="relative group">
-              <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                <User className="w-5 h-5 text-white/30 group-focus-within:text-[#00c8b4] transition-colors" />
+              <div className="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none">
+                <User className="w-5 h-5 text-slate-300 group-focus-within:text-[#4B7635] transition-colors" />
               </div>
               <input
                 type="text"
@@ -129,18 +123,17 @@ export default function StarcContact() {
                 value={formData.name}
                 onChange={handleChange}
                 required
-                className="w-full pl-12 pr-4 py-4 bg-white/5 border border-white/10 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#00c8b4]/50 focus:border-[#00c8b4]/50 transition-all duration-300 text-white placeholder-white/20 hover:bg-white/10"
+                className="w-full pl-14 pr-4 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#4B7635]/20 focus:border-[#4B7635] transition-all duration-300 text-slate-900 font-medium placeholder-slate-300 hover:bg-white"
                 placeholder="Enter your full name"
               />
             </div>
           </div>
 
-          {/* Email */}
-          <div className="space-y-2">
-            <label className="block text-sm font-semibold text-white/80 ml-1">Work Email Address</label>
+          <div className="space-y-1">
+            <label className="block text-[10px] font-bold text-slate-400 ml-1 uppercase tracking-wider">Work Email Address</label>
             <div className="relative group">
-              <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                <Mail className="w-5 h-5 text-white/30 group-focus-within:text-[#00c8b4] transition-colors" />
+              <div className="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none">
+                <Mail className="w-5 h-5 text-slate-300 group-focus-within:text-[#4B7635] transition-colors" />
               </div>
               <input
                 type="email"
@@ -148,65 +141,64 @@ export default function StarcContact() {
                 value={formData.email}
                 onChange={handleChange}
                 required
-                className="w-full pl-12 pr-4 py-4 bg-white/5 border border-white/10 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#00c8b4]/50 focus:border-[#00c8b4]/50 transition-all duration-300 text-white placeholder-white/20 hover:bg-white/10"
+                className="w-full pl-14 pr-4 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#4B7635]/20 focus:border-[#4B7635] transition-all duration-300 text-slate-900 font-medium placeholder-slate-300 hover:bg-white"
                 placeholder="your.name@organization.com"
               />
             </div>
           </div>
 
-          {/* Mobile */}
-          <div className="space-y-2">
-            <label className="block text-sm font-semibold text-white/80 ml-1">Mobile Number (optional)</label>
+          <div className="space-y-1">
+            <label className="block text-[10px] font-bold text-slate-400 ml-1 uppercase tracking-wider">Mobile Number</label>
             <div className="relative group">
-              <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                <User className="w-5 h-5 text-white/30 group-focus-within:text-[#00c8b4] transition-colors" />
+              <div className="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none">
+                <User className="w-5 h-5 text-slate-300 group-focus-within:text-[#4B7635] transition-colors" />
               </div>
               <input
                 type="tel"
                 name="mobile"
                 value={formData.mobile}
                 onChange={handleChange}
-                className="w-full pl-12 pr-4 py-4 bg-white/5 border border-white/10 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#00c8b4]/50 focus:border-[#00c8b4]/50 transition-all duration-300 text-white placeholder-white/20 hover:bg-white/10"
+                className="w-full pl-14 pr-4 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#4B7635]/20 focus:border-[#4B7635] transition-all duration-300 text-slate-900 font-medium placeholder-slate-300 hover:bg-white"
                 placeholder="Enter your mobile number"
               />
             </div>
           </div>
 
-          {/* Interested In */}
-          <div className="space-y-2">
-            <label className="block text-sm font-semibold text-white/80 ml-1">Solution of Interest</label>
-            <select
-              name="interestedIn"
-              value={formData.interestedIn}
-              onChange={handleChange}
-              required
-              className="w-full px-4 py-4 bg-white/5 border border-white/10 rounded-2xl text-white focus:outline-none focus:ring-2 focus:ring-[#00c8b4]/50 focus:border-[#00c8b4]/50 transition-all duration-300 hover:bg-white/10 appearance-none cursor-pointer"
-              style={{ backgroundImage: 'url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'white\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'%3e%3cpolyline points=\'6 9 12 15 18 9\'%3e%3c/polyline%3e%3c/svg%3e")', backgroundRepeat: 'no-repeat', backgroundPosition: 'right 1rem center', backgroundSize: '1.2em' }}
-            >
-              <option value="Sustainability Reporting / ESG Support" className="bg-[#0d2244]">Sustainability Reporting / ESG Support (STARC)</option>
-              <option value="Wastewater Treatment & Waterbody Restoration" className="bg-[#0d2244]">Wastewater Treatment & Restoration</option>
-              <option value="Geophysical / Subsurface Investigation" className="bg-[#0d2244]">Geophysical Investigation</option>
-              <option value="Urban Planning & City Project Support" className="bg-[#0d2244]">Urban Planning Support</option>
-              <option value="Climate Risk Assessment / Data Advisory" className="bg-[#0d2244]">Climate Risk Assessment</option>
-              <option value="Training, Workshops, or Capacity Building" className="bg-[#0d2244]">Training & Workshops</option>
-              <option value="General Inquiry" className="bg-[#0d2244]">General Inquiry</option>
-            </select>
+          <div className="space-y-1">
+            <label className="block text-[10px] font-bold text-slate-400 ml-1 uppercase tracking-wider">Solution of Interest</label>
+            <div className="relative ring-offset-bg">
+              <select
+                name="interestedIn"
+                value={formData.interestedIn}
+                onChange={handleChange}
+                required
+                className="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-2xl text-slate-900 font-medium focus:outline-none focus:ring-2 focus:ring-[#4B7635]/20 focus:border-[#4B7635] transition-all duration-300 hover:bg-white appearance-none cursor-pointer"
+                style={{ backgroundImage: 'url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'%23a1a1aa\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'%3e%3cpolyline points=\'6 9 12 15 18 9\'%3e%3c/polyline%3e%3c/svg%3e")', backgroundRepeat: 'no-repeat', backgroundPosition: 'right 1.25rem center', backgroundSize: '1.2em' }}
+              >
+                <option value="Sustainability Reporting / ESG Support (STARC)">Sustainability Reporting (STARC)</option>
+                <option value="Wastewater Treatment & Waterbody Restoration">Wastewater Treatment</option>
+                <option value="Geophysical / Subsurface Investigation">Geophysical Investigation</option>
+                <option value="Urban Planning & City Project Support">Urban Planning Support</option>
+                <option value="Climate Risk Assessment / Data Advisory">Climate Risk Assessment</option>
+                <option value="Training, Workshops, or Capacity Building">Training & Workshops</option>
+                <option value="General Inquiry">General Inquiry</option>
+              </select>
+            </div>
           </div>
 
-          {/* Message */}
-          <div className="md:col-span-2 space-y-2">
-            <label className="block text-sm font-semibold text-white/80 ml-1">Tell us about your requirements</label>
+          <div className="md:col-span-2 space-y-1">
+            <label className="block text-[10px] font-bold text-slate-400 ml-1 uppercase tracking-wider">Requirements</label>
             <div className="relative group">
-              <div className="absolute top-4 left-4">
-                <MessageSquare className="w-5 h-5 text-white/30 group-focus-within:text-[#00c8b4] transition-colors" />
+              <div className="absolute top-5 left-5">
+                <MessageSquare className="w-5 h-5 text-slate-300 group-focus-within:text-[#4B7635] transition-colors" />
               </div>
               <textarea
                 name="message"
                 value={formData.message}
                 onChange={handleChange}
                 required
-                rows="4"
-                className="w-full pl-12 pr-4 py-4 bg-white/5 border border-white/10 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#00c8b4]/50 focus:border-[#00c8b4]/50 transition-all duration-300 resize-none text-white placeholder-white/20 hover:bg-white/10"
+                rows="2"
+                className="w-full pl-14 pr-5 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#4B7635]/20 focus:border-[#4B7635] transition-all duration-300 resize-none text-slate-900 font-medium placeholder-slate-300 hover:bg-white"
                 placeholder="What specific sustainability challenges are you looking to address with STARC?"
               ></textarea>
             </div>
@@ -216,9 +208,8 @@ export default function StarcContact() {
             <button
               type="submit"
               disabled={isLoading}
-              className={`w-full group relative overflow-hidden bg-gradient-to-r from-[#00c8b4] to-[#0090ff] text-white py-5 rounded-2xl font-bold text-lg shadow-xl shadow-[#00c8b4]/20 hover:shadow-[#00c8b4]/40 hover:-translate-y-1 transition-all duration-300 ${isLoading ? "opacity-70 cursor-not-allowed" : ""}`}
+              className={`w-full group relative overflow-hidden bg-[#4B7635] text-white py-5 rounded-2xl font-bold text-lg shadow-lg shadow-[#4B7635]/20 hover:shadow-xl hover:shadow-[#4B7635]/30 hover:-translate-y-1 transition-all duration-300 ${isLoading ? "opacity-70 cursor-not-allowed" : ""}`}
             >
-              <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
               <div className="relative flex items-center justify-center space-x-3">
                 {isLoading ? (
                   <span>Wait a moment...</span>
@@ -234,9 +225,9 @@ export default function StarcContact() {
           </div>
         </form>
 
-        <div className="mt-10 pt-8 border-t border-white/5 text-center">
-          <p className="text-white/40 text-sm">
-            Prefer direct contact? Reach us at <a href="mailto:info@ehmconsultancy.co.in" className="text-[#00c8b4] hover:underline">info@ehmconsultancy.co.in</a>
+        <div className="mt-6 pt-4 border-t border-slate-50 text-center">
+          <p className="text-slate-400 text-[10px] font-bold uppercase tracking-widest">
+            Prefer direct contact? Reach us at <a href="mailto:info@ehmconsultancy.co.in" className="text-[#4B7635] hover:underline decoration-2 underline-offset-4">info@ehmconsultancy.co.in</a>
           </p>
         </div>
       </div>
