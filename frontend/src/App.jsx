@@ -28,6 +28,8 @@ const AuthorContentPage = lazy(() => import('./Common/Content/AuthorContentPage.
 const SingleContentPage = lazy(() => import('./Common/Content/SingleContentPage.jsx'));
 const AdminLoginModal = lazy(() => import('../src/Components/Admin/AdminLoginModal.jsx'));
 const AdminDashboard = lazy(() => import("./Pages/AdminDashboard.jsx"));
+const StarcContactPage = lazy(() => import('./Pages/StarcContactPage.jsx'));
+
 
 
 function App() {
@@ -47,6 +49,8 @@ function App() {
             {/* Public Pages */}
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<ContactPage />} />
+            <Route path="/contact/starc" element={<StarcContactPage />} />
+
 
             {/* V-- CHANGE MADE HERE --V */}
             {/* This route now renders our new, detailed ProjectsPage component. */}

@@ -208,7 +208,7 @@ const StarcHero = () => {
             {/* CTAs */}
             <div className="flex flex-wrap gap-4 pt-2">
               <a
-                href="/contact"
+                href="/contact/starc"
                 className="group relative inline-flex items-center gap-3 px-8 py-4 text-white font-bold text-lg rounded-xl overflow-hidden transition-all duration-300 hover:-translate-y-1"
                 style={{
                   background: "linear-gradient(135deg, #00c8b4, #0090ff)",
