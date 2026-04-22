@@ -29,6 +29,7 @@ const SingleContentPage = lazy(() => import('./Common/Content/SingleContentPage.
 const AdminLoginModal = lazy(() => import('../src/Components/Admin/AdminLoginModal.jsx'));
 const AdminDashboard = lazy(() => import("./Pages/AdminDashboard.jsx"));
 const StarcContactPage = lazy(() => import('./Pages/StarcContactPage.jsx'));
+const DNTSPage = lazy(() => import('./Pages/DNTS.jsx'));
 
 
 
@@ -67,6 +68,7 @@ function App() {
             <Route path="/resources/blogs" element={<BlogsPage />} />
             <Route path="/resources/casestudies" element={<CaseStudyPage />} />
             <Route path="/resources/WaterbodyRestoration" element={<WaterbodyRestoration />} />
+            <Route path="/resources/dnts" element={<DNTSPage />} />
             <Route path="/offerings/sustainability-assessment-reporting" element={<SustainabilityAssessment />} />
             <Route path="/offerings/geophysical-investigation" element={<GeophysicalInvestigation />} />
 
