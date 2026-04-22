@@ -26,7 +26,7 @@ const EhmBrief = () => {
           yOffset={40}
         > */}
 
-          {/* <motion.span className="inline-block px-4 py-1.5 mb-4 sm:mb-5 text-lg sm:text-2xl bg-emerald-100 text-emerald-800 rounded-3xl">
+        {/* <motion.span className="inline-block px-4 py-1.5 mb-4 sm:mb-5 text-lg sm:text-2xl bg-emerald-100 text-emerald-800 rounded-3xl">
             About <span className="font-bold">EHM</span>
           </motion.span>
 
@@ -50,7 +50,7 @@ const EhmBrief = () => {
             </p>
           </motion.div> */}
 
-          {/* <motion.div className="hidden lg:flex col-span-2 justify-center items-start pt-8 -translate-x-1/2 translate-y-14">
+        {/* <motion.div className="hidden lg:flex col-span-2 justify-center items-start pt-8 -translate-x-1/2 translate-y-14">
             <span className="text-7xl xl:text-9xl font-light text-gray-300">
               ∫<em className="text-7xl xl:text-9xl not-italic">dx</em>
             </span>
@@ -73,7 +73,7 @@ const EhmBrief = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.7, ease: "easeOut" }}
             >
-              <img loading="lazy" className="w-full h-full object-cover rounded-2xl shadow-lg"
+              <img loading="lazy" className="object-cover rounded-2xl shadow-lg"
                 src='/offering/SR.webp'
                 alt="Aerial view of green terrace farms"
               />
@@ -85,11 +85,11 @@ const EhmBrief = () => {
               yOffset={30}
             >
               <motion.h3 className="text-xl sm:text-2xl md:text-2xl lg:text-3xl font-semibold text-gray-800 mb-3 sm:mb-4">
-                
+
               </motion.h3>
               <motion.p className="text-gray-600 leading-relaxed mb-6 sm:mb-8 text-sm sm:text-base md:text-base lg:text-lg">
                 EHM’s Sustainability Dashboard transforms ESG and operational data into visual insights that empower institutions and industries to monitor sustainability performance in real time.
-From carbon emissions and energy use to SDG alignment and stakeholder engagement, the dashboard enables data-driven sustainability management and transparent reporting.
+                From carbon emissions and energy use to SDG alignment and stakeholder engagement, the dashboard enables data-driven sustainability management and transparent reporting.
 
                 <br />
                 <br />
