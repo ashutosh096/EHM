@@ -82,157 +82,167 @@ const SubscriptionPlans = () => {
       </p>
 
       <div className="max-w-5xl mx-auto px-4 pt-14">
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "240px 1fr 1fr",
-            gridTemplateRows: `160px repeat(${featuresList.length}, 56px) 130px`,
-            columnGap: "16px",
-          }}
-        >
-          {/* ── Plan card border overlays ──
-              Uses `outline` instead of `border` so it renders ABOVE all
-              sibling content without affecting layout or being covered.
-              z-index: 10 ensures it's always on top.
-          */}
-          {plans.map((plan, pIdx) => (
-            <div
-              key={`border-${pIdx}`}
-              style={{
-                gridRow: `1 / ${TOTAL_ROWS + 1}`,
-                gridColumn: pIdx + 2,
-                outline: `2px solid ${plan.borderColor}`,
-                borderRadius: "1.75rem",
-                marginTop: "-24px",
-                boxShadow: `0 4px 40px ${plan.borderColor}22`,
-                pointerEvents: "none",
-                zIndex: 10,
-                backgroundColor: "transparent",
-              }}
-            />
-          ))}
-
-          {/* ── COLUMN 1: Feature Labels ── */}
+        {/* Horizontal scroll container for mobile */}
+        <div className="overflow-x-auto pb-8 -mx-4 px-4 scrollbar-hide select-none">
           <div
-            style={{ gridRow: 1, gridColumn: 1, zIndex: 2 }}
-            className="flex items-end pb-5 px-4"
+            style={{
+              display: "grid",
+              gridTemplateColumns: "200px 1fr 1fr",
+              gridTemplateRows: `160px repeat(${featuresList.length}, 56px) 130px`,
+              columnGap: "16px",
+              minWidth: "800px", // Ensures columns don't compress too much on mobile
+            }}
           >
-            <span className="font-extrabold text-slate-800 text-xl">
-              Capabilities
-            </span>
-          </div>
+            {/* ── Plan card border overlays ── */}
+            {plans.map((plan, pIdx) => (
+              <div
+                key={`border-${pIdx}`}
+                style={{
+                  gridRow: `1 / ${TOTAL_ROWS + 1}`,
+                  gridColumn: pIdx + 2,
+                  outline: `2px solid ${plan.borderColor}`,
+                  borderRadius: "1.75rem",
+                  marginTop: "-24px",
+                  boxShadow: `0 4px 40px ${plan.borderColor}22`,
+                  pointerEvents: "none",
+                  zIndex: 10,
+                  backgroundColor: "transparent",
+                }}
+              />
+            ))}
 
-          {featuresList.map((feature, i) => (
+            {/* ── COLUMN 1: Feature Labels ── */}
             <div
-              key={`label-${i}`}
-              style={{ gridRow: i + 2, gridColumn: 1, zIndex: 2 }}
-              className={`flex items-center px-4 border-b border-slate-100 font-semibold text-slate-600 text-sm ${i % 2 === 0 ? "bg-white" : "bg-slate-50"
-                }`}
+              style={{ gridRow: 1, gridColumn: 1, zIndex: 2 }}
+              className="flex items-end pb-5 px-4"
             >
-              {feature}
+              <span className="font-extrabold text-slate-800 text-xl">
+                Capabilities
+              </span>
             </div>
-          ))}
 
-          <div style={{ gridRow: TOTAL_ROWS, gridColumn: 1, zIndex: 2 }} />
+            {featuresList.map((feature, i) => (
+              <div
+                key={`label-${i}`}
+                style={{ gridRow: i + 2, gridColumn: 1, zIndex: 2 }}
+                className={`flex items-center px-4 border-b border-slate-100 font-semibold text-slate-600 text-sm ${
+                  i % 2 === 0 ? "bg-white" : "bg-slate-50"
+                }`}
+              >
+                {feature}
+              </div>
+            ))}
 
-          {/* ── COLUMNS 2 & 3: Plan content ── */}
-          {plans.map((plan, pIdx) => {
-            const col = pIdx + 2;
-            return (
-              <React.Fragment key={`plan-${pIdx}`}>
-                {/* Header */}
-                <div
-                  style={{
-                    gridRow: 1,
-                    gridColumn: col,
-                    zIndex: 2,
-                    marginTop: "-24px",
-                    backgroundColor: "#ffffff",
-                  }}
-                  className="flex flex-col items-center justify-center gap-2 px-4"
-                >
-                  <span
+            <div style={{ gridRow: TOTAL_ROWS, gridColumn: 1, zIndex: 2 }} />
+
+            {/* ── COLUMNS 2 & 3: Plan content ── */}
+            {plans.map((plan, pIdx) => {
+              const col = pIdx + 2;
+              return (
+                <React.Fragment key={`plan-${pIdx}`}>
+                  {/* Header */}
+                  <div
                     style={{
-                      color: plan.accentColor,
-                      border: `1px solid ${plan.borderColor}33`,
-                      backgroundColor: `${plan.borderColor}18`,
+                      gridRow: 1,
+                      gridColumn: col,
+                      zIndex: 2,
+                      marginTop: "-24px",
+                      backgroundColor: "#ffffff",
                     }}
-                    className="text-[10px] uppercase font-black px-4 py-1.5 rounded-full tracking-widest"
+                    className="flex flex-col items-center justify-center gap-2 px-4"
                   >
-                    {plan.badgeLabel}
-                  </span>
-                  <h3
-                    style={{ color: plan.accentColor }}
-                    className="text-4xl font-black leading-none"
-                  >
-                    {plan.name}
-                  </h3>
-                  <p className="text-slate-400 text-[11px] font-bold uppercase tracking-tighter">
-                    Scalable Solution
-                  </p>
-                </div>
-
-                {/* Feature value cells */}
-                {featuresList.map((feature, fIdx) => {
-                  const value = plan.features[feature];
-                  return (
-                    <div
-                      key={`val-${pIdx}-${fIdx}`}
-                      style={{ gridRow: fIdx + 2, gridColumn: col, zIndex: 2 }}
-                      className={`flex items-center justify-center border-b border-slate-100 ${fIdx % 2 === 0 ? "bg-white" : "bg-slate-50"
-                        }`}
+                    <span
+                      style={{
+                        color: plan.accentColor,
+                        border: `1px solid ${plan.borderColor}33`,
+                        backgroundColor: `${plan.borderColor}18`,
+                      }}
+                      className="text-[10px] uppercase font-black px-4 py-1.5 rounded-full tracking-widest"
                     >
-                      {value === "✅" ? (
-                        <div
-                          style={{
-                            backgroundColor: `${plan.borderColor}18`,
-                            color: plan.accentColor,
-                          }}
-                          className="flex items-center justify-center w-8 h-8 rounded-full"
-                        >
-                          <Check className="w-4 h-4" strokeWidth={3} />
-                        </div>
-                      ) : value === "-" ? (
-                        <X className="w-4 h-4 text-slate-300" />
-                      ) : (
-                        <span className="text-xs font-bold text-slate-600 bg-white px-3 py-1.5 rounded-full border border-slate-100 shadow-sm text-center leading-snug">
-                          {value}
-                        </span>
-                      )}
-                    </div>
-                  );
-                })}
+                      {plan.badgeLabel}
+                    </span>
+                    <h3
+                      style={{ color: plan.accentColor }}
+                      className="text-4xl font-black leading-none"
+                    >
+                      {plan.name}
+                    </h3>
+                    <p className="text-slate-400 text-[11px] font-bold uppercase tracking-tighter">
+                      Scalable Solution
+                    </p>
+                  </div>
 
-                {/* Footer CTA */}
-                <div
-                  style={{
-                    gridRow: TOTAL_ROWS,
-                    gridColumn: col,
-                    zIndex: 2,
-                    backgroundColor: "#ffffff",
-                  }}
-                  className="flex flex-col items-center justify-center px-5 gap-2"
-                >
-                  <button
-                    onClick={() => handleChoosePlan(plan.name)}
-                    style={{ backgroundColor: plan.btnBg }}
-                    onMouseEnter={(e) =>
-                      (e.currentTarget.style.backgroundColor = plan.btnHoverBg)
-                    }
-                    onMouseLeave={(e) =>
-                      (e.currentTarget.style.backgroundColor = plan.btnBg)
-                    }
-                    className="w-full py-4 px-6 rounded-2xl font-black text-base text-white transition-all duration-300 hover:-translate-y-1 hover:shadow-xl active:scale-95 shadow-md"
+                  {/* Feature value cells */}
+                  {featuresList.map((feature, fIdx) => {
+                    const value = plan.features[feature];
+                    return (
+                      <div
+                        key={`val-${pIdx}-${fIdx}`}
+                        style={{ gridRow: fIdx + 2, gridColumn: col, zIndex: 2 }}
+                        className={`flex items-center justify-center border-b border-slate-100 ${
+                          fIdx % 2 === 0 ? "bg-white" : "bg-slate-50"
+                        }`}
+                      >
+                        {value === "✅" ? (
+                          <div
+                            style={{
+                              backgroundColor: `${plan.borderColor}18`,
+                              color: plan.accentColor,
+                            }}
+                            className="flex items-center justify-center w-8 h-8 rounded-full"
+                          >
+                            <Check className="w-4 h-4" strokeWidth={3} />
+                          </div>
+                        ) : value === "-" ? (
+                          <X className="w-4 h-4 text-slate-300" />
+                        ) : (
+                          <span className="text-xs font-bold text-slate-600 bg-white px-3 py-1.5 rounded-full border border-slate-100 shadow-sm text-center leading-snug">
+                            {value}
+                          </span>
+                        )}
+                      </div>
+                    );
+                  })}
+
+                  {/* Footer CTA */}
+                  <div
+                    style={{
+                      gridRow: TOTAL_ROWS,
+                      gridColumn: col,
+                      zIndex: 2,
+                      backgroundColor: "#ffffff",
+                    }}
+                    className="flex flex-col items-center justify-center px-5 gap-2"
                   >
-                    Select {plan.name}
-                  </button>
-                  <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">
-                    Join 100+ Campuses
-                  </p>
-                </div>
-              </React.Fragment>
-            );
-          })}
+                    <button
+                      onClick={() => handleChoosePlan(plan.name)}
+                      style={{ backgroundColor: plan.btnBg }}
+                      onMouseEnter={(e) =>
+                        (e.currentTarget.style.backgroundColor =
+                          plan.btnHoverBg)
+                      }
+                      onMouseLeave={(e) =>
+                        (e.currentTarget.style.backgroundColor = plan.btnBg)
+                      }
+                      className="w-full py-4 px-6 rounded-2xl font-black text-base text-white transition-all duration-300 hover:-translate-y-1 hover:shadow-xl active:scale-95 shadow-md"
+                    >
+                      Select {plan.name}
+                    </button>
+                    <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">
+                      Join 100+ Campuses
+                    </p>
+                  </div>
+                </React.Fragment>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Mobile Swipe Hint */}
+        <div className="md:hidden flex items-center justify-center gap-2 text-slate-400 text-xs font-bold uppercase tracking-widest mt-2 animate-pulse">
+          <span className="text-lg">←</span>
+          Swipe to compare
+          <span className="text-lg">→</span>
         </div>
 
         {/* Trust badges */}

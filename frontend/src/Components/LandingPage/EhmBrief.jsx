@@ -74,11 +74,8 @@ const EhmBrief = () => {
 
       {/* Bottom Section */}
       <div className="w-full relative z-20">
-        <div className="col-span-12 lg:col-span-10 pb-16 sm:pb-20 px-4 sm:px-8 md:px-12 lg:px-32">
-
-          {/* Main descriptive area - heading intentionally omitted here to keep page flow concise */}
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-10 md:gap-12 lg:gap-16 xl:gap-20 items-center">
+        <div className="pb-16 sm:pb-20 px-4 sm:px-8 md:px-12 lg:px-32 max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-20 items-center">
 
             <motion.div
               className="w-full h-full"

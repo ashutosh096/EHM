@@ -304,18 +304,21 @@ const NavBar = () => {
         </div>
       )}
 
-      {/* Desktop Dropdown Content */}
-      {activeDropdown && (
-        <div
-          ref={dropdownRef}
-          className="absolute left-0 bg-[#ffffff] animate-fadeIn hidden lg:block shadow-lg rounded-b-lg"
-          style={{
-            marginLeft: activeDropdown === 'offerings' ? '280px' : activeDropdown === 'resources' ? '380px' : '0',
-            width: activeDropdown === 'resources' ? '700px' : '900px',
-            maxWidth: '90vw'
-          }}
-        >
-          <div className={`grid gap-12 px-4 pt-8 pb-6 ${activeDropdown === 'resources' ? 'grid-cols-3' : 'grid-cols-4'}`}>
+        {/* Desktop Dropdown Content */}
+        {activeDropdown && (
+          <div
+            ref={dropdownRef}
+            className="absolute left-1/2 -translate-x-1/2 top-full bg-white animate-fadeIn hidden lg:block shadow-2xl rounded-b-3xl border-t border-slate-100 overflow-hidden"
+            style={{
+              width: activeDropdown === "resources" ? "800px" : "1000px",
+              maxWidth: "94vw",
+            }}
+          >
+            <div
+              className={`grid gap-10 p-10 ${
+                activeDropdown === "resources" ? "grid-cols-3" : "grid-cols-4"
+              }`}
+            >
             {(activeDropdown === "resources" ? resourcesMenu : offeringsMenu).map(
               (section) => (
                 <div key={section.title} className="col-span-1">

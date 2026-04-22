@@ -65,21 +65,19 @@ const ServiceSection = () => {
       </ScrollRevealElements>
 
       <ScrollRevealElements
-        className="flex flex-col justify-center items-center gap-8 w-full max-w-[1600px] mx-auto"
+        className="flex flex-col justify-center items-center gap-8 w-full max-w-[1600px] mx-auto px-4"
         staggerAmount={0.3}
       >
-        {[0, 1].map((row) => (
-          <div key={row} className="grid grid-cols-3 gap-6 w-full">
-            {data.slice(row * 3, row * 3 + 3).map((item, index) => {
-              const actualIndex = row * 3 + index;
-              const isHovered = hoveredIndex === actualIndex;
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
+          {data.map((item, index) => {
+            const isHovered = hoveredIndex === index;
 
               return (
                 <motion.div
-                  key={actualIndex}
+                  key={index}
                   className="relative bg-cover bg-center rounded-2xl shadow-2xl overflow-hidden cursor-pointer h-80 transition-all duration-500 ease-in-out hover:shadow-3xl w-full"
                   style={{ backgroundImage: `url(${item.image})` }}
-                  onMouseEnter={() => setHoveredIndex(actualIndex)}
+                  onMouseEnter={() => setHoveredIndex(index)}
                   onMouseLeave={() => setHoveredIndex(null)}
                 >
                   {/* Subtle overlay that only covers bottom part */}
@@ -144,7 +142,7 @@ const ServiceSection = () => {
                   </div>
 
                   {/* Top-right icon */}
-                  <button className="absolute top-4 right-4 bg-white/20 backdrop-blur-sm text-white rounded-full p-2 hover:bg-white/30 transition-all duration-300 z-20">
+                  <div className="absolute top-4 right-4 bg-white/20 backdrop-blur-sm text-white rounded-full p-2 hover:bg-white/30 transition-all duration-300 z-20">
                     <svg
                       className={`w-4 h-4 transition-transform duration-300 ${isHovered ? "rotate-[-90deg]" : ""
                         }`}
@@ -159,12 +157,11 @@ const ServiceSection = () => {
                         d="M9 5l7 7-7 7"
                       />
                     </svg>
-                  </button>
+                  </div>
                 </motion.div>
               );
             })}
-          </div>
-        ))}
+        </div>
       </ScrollRevealElements>
     </div>
   );

@@ -484,94 +484,98 @@ const DNTSPage = () => {
 
           {/* Before / Middle / After panel */}
           <motion.div
-            className="flex flex-col lg:flex-row rounded-2xl overflow-hidden shadow-2xl bg-gray-50 min-h-[450px]"
+            className="flex flex-col lg:flex-row rounded-3xl overflow-hidden shadow-2xl bg-white min-h-[500px] border border-slate-200"
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            {/* Before */}
+            {/* Before Section */}
             <div
-              className={`relative transition-all duration-500 ease-in-out ${hoveredStage === "before" ? "lg:w-[50%]" : "lg:w-[25%]"
-                } ${hoveredStage === "after" ? "lg:w-[25%]" : ""} flex-grow`}
+              className={`relative transition-all duration-500 ease-in-out border-b lg:border-b-0 lg:border-r border-slate-100 ${
+                hoveredStage === "before" ? "lg:w-[50%] flex-grow" : "lg:w-[25%]"
+              } ${hoveredStage === "after" ? "lg:w-[20%]" : ""}`}
               onMouseEnter={() => setHoveredStage("before")}
               onMouseLeave={() => setHoveredStage(null)}
             >
-              {hoveredStage === "before" ? (
-                <div className="grid grid-cols-1 md:grid-cols-2 h-full w-full">
-                  {caseStudy.beforeImages.map((src, idx) => (
-                    <div
-                      key={idx}
-                      className="h-full min-h-[200px] lg:min-h-0 w-full bg-cover bg-center"
-                      style={{ backgroundImage: `url(${src})` }}
-                    />
-                  ))}
+              <div className="h-full min-h-[250px] lg:min-h-0 relative overflow-hidden group">
+                <img
+                  loading="lazy"
+                  src={caseStudy.beforeImages[0]}
+                  alt="Before"
+                  className={`absolute inset-0 w-full h-full object-cover transition-transform duration-700 ${
+                    hoveredStage === "before" ? "scale-110" : "scale-100"
+                  }`}
+                />
+                <div className={`absolute inset-0 bg-red-900/60 transition-opacity duration-500 ${
+                  hoveredStage === "before" ? "opacity-30" : "opacity-80"
+                }`} />
+                <div className="absolute inset-0 flex items-center justify-center p-6 text-center">
+                  <div className={`transition-all duration-500 ${hoveredStage === "before" ? "scale-110" : "scale-100"}`}>
+                    <h3 className="text-3xl font-black text-white uppercase tracking-tighter drop-shadow-lg">Before</h3>
+                    {hoveredStage === "before" && (
+                       <p className="text-white/90 text-xs font-bold mt-2 uppercase tracking-widest animate-fade-in">Initial Contamination</p>
+                    )}
+                  </div>
                 </div>
-              ) : (
-                <div className="relative w-full h-full bg-red-800 p-6 md:p-8">
-                  <img
-                    loading="lazy"
-                    src={caseStudy.beforeImages[0]}
-                    alt="Before"
-                    className="absolute inset-0 w-full h-full object-cover opacity-20"
-                  />
-                  <h3 className="relative z-10 text-2xl md:text-3xl font-bold text-white">
-                    Before
-                  </h3>
-                </div>
-              )}
+              </div>
             </div>
 
-            {/* Middle */}
+            {/* Middle Section (Content) */}
             <div
-              className={`relative flex flex-col p-6 md:p-8 transition-all duration-500 ease-in-out ${hoveredStage === null ? "lg:w-[50%]" : "lg:w-[25%]"
-                } flex-grow bg-slate-100 text-slate-800 justify-center items-start`}
+              className={`relative flex flex-col p-8 lg:p-12 transition-all duration-500 ease-in-out ${
+                hoveredStage === null ? "lg:w-[50%]" : "lg:w-[30%]"
+              } flex-grow bg-slate-50 justify-center items-start overflow-hidden`}
             >
-              <div className="w-full text-center">
-                <h3 className="text-2xl md:text-3xl font-bold mb-6 text-[#10b981]">
-                  Treatment Journey
-                </h3>
-                <ul className="space-y-4 max-w-md mx-auto text-left">
+              <div className="w-full">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-10 h-10 rounded-full bg-[#10b981]/10 flex items-center justify-center">
+                    <Droplets className="h-6 w-6 text-[#10b981]" strokeWidth={2.5} />
+                  </div>
+                  <h3 className="text-2xl lg:text-3xl font-black text-slate-800 uppercase tracking-tight">
+                    The Journey
+                  </h3>
+                </div>
+                <ul className="space-y-6">
                   {caseStudy.restorationPoints.map((point, index) => (
-                    <li key={index} className="flex items-start">
-                      <Droplets className="h-5 w-5 text-[#10b981] mr-3 mt-1 flex-shrink-0" />
-                      <span className="text-slate-600">{point}</span>
+                    <li key={index} className="flex items-start group">
+                      <div className="mt-1.5 h-2 w-2 rounded-full bg-[#10b981] mr-4 flex-shrink-0 shadow-[0_0_10px_rgba(16,185,129,0.5)] group-hover:scale-150 transition-transform" />
+                      <span className="text-slate-600 font-medium leading-relaxed">{point}</span>
                     </li>
                   ))}
                 </ul>
               </div>
             </div>
 
-            {/* After */}
+            {/* After Section */}
             <div
-              className={`relative transition-all duration-500 ease-in-out ${hoveredStage === "after" ? "lg:w-[50%]" : "lg:w-[25%]"
-                } ${hoveredStage === "before" ? "lg:w-[25%]" : ""} flex-grow`}
+              className={`relative transition-all duration-500 ease-in-out border-t lg:border-t-0 lg:border-l border-slate-100 ${
+                hoveredStage === "after" ? "lg:w-[50%] flex-grow" : "lg:w-[25%]"
+              } ${hoveredStage === "before" ? "lg:w-[20%]" : ""}`}
               onMouseEnter={() => setHoveredStage("after")}
               onMouseLeave={() => setHoveredStage(null)}
             >
-              {hoveredStage === "after" ? (
-                <div className="grid grid-cols-1 md:grid-cols-2 h-full w-full">
-                  {caseStudy.afterImages.map((src, idx) => (
-                    <div
-                      key={idx}
-                      className="h-full min-h-[200px] lg:min-h-0 w-full bg-cover bg-center"
-                      style={{ backgroundImage: `url(${src})` }}
-                    />
-                  ))}
+              <div className="h-full min-h-[250px] lg:min-h-0 relative overflow-hidden group">
+                <img
+                  loading="lazy"
+                  src={caseStudy.afterImages[0]}
+                  alt="After"
+                  className={`absolute inset-0 w-full h-full object-cover transition-transform duration-700 ${
+                    hoveredStage === "after" ? "scale-110" : "scale-100"
+                  }`}
+                />
+                <div className={`absolute inset-0 bg-emerald-900/60 transition-opacity duration-500 ${
+                  hoveredStage === "after" ? "opacity-30" : "opacity-80"
+                }`} />
+                <div className="absolute inset-0 flex items-center justify-center p-6 text-center">
+                  <div className={`transition-all duration-500 ${hoveredStage === "after" ? "scale-110" : "scale-100"}`}>
+                    <h3 className="text-3xl font-black text-white uppercase tracking-tighter drop-shadow-lg">After</h3>
+                    {hoveredStage === "after" && (
+                       <p className="text-white/90 text-xs font-bold mt-2 uppercase tracking-widest animate-fade-in">System Success</p>
+                    )}
+                  </div>
                 </div>
-              ) : (
-                <div className="relative w-full h-full bg-green-800 p-6 md:p-8 flex justify-end items-start">
-                  <img
-                    loading="lazy"
-                    src={caseStudy.afterImages[0]}
-                    alt="After"
-                    className="absolute inset-0 w-full h-full object-cover opacity-20"
-                  />
-                  <h3 className="relative z-10 text-2xl md:text-3xl font-bold text-white">
-                    After
-                  </h3>
-                </div>
-              )}
+              </div>
             </div>
           </motion.div>
 

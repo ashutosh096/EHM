@@ -117,121 +117,52 @@ export default function Homepage() {
         </div> */}
 
         {/* Main Content */}
-        <div className="relative z-10 flex flex-col min-h-screen px-6 pt-24 pb-0 md:px-20 lg:px-24 max-w-[1400px] mx-auto">
+        <div className="relative z-10 flex flex-col min-h-screen px-6 pt-24 pb-12 md:px-20 lg:pl-10 lg:pr-24 max-w-[1600px] mx-auto justify-center lg:justify-end">
           {/* Hero Section */}
-          <div className="flex-1 flex flex-col justify-end lg:flex-row items-center lg:items-end justify-between gap-12 pb-2">
+          <div className="flex flex-col lg:flex-row items-center lg:items-end justify-between gap-12">
             {/* Left Side - Text Content */}
-            <div className="flex-1 max-w-3xl mb-24 md:mb-32">
-              <Link to="/contact#form">
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="relative flex items-center justify-center drop-shadow-2xl rounded-xl px-6 py-3 md:px-8 md:py-4 font-medium text-white shadow-xl transition-all duration-300 hover:scale-105 overflow-hidden group"
-                >
-                  {/* Wavy overlay for organic flow - using pseudo-element via Tailwind arbitrary */}
-                  <div className="h-[10em] w-[10em] sm:h-[12em] sm:w-[12em] bg-[#19a289] rounded-full absolute bottom-full -left-[6em] scale-[250%] z-[-1] duration-[400ms] drop-shadow-2xl" />
-                  <div className="h-[8em] w-[8em] sm:h-[10em] sm:w-[10em] bg-[#138c76] rounded-full absolute bottom-full -left-[5em] scale-[200%] z-[-1] duration-[400ms] drop-shadow-2xl" />
-                  <div className="h-[6em] w-[6em] sm:h-[8em] sm:w-[8em] bg-[#0d6d5b] rounded-full absolute bottom-full -left-[4em] scale-[180%] z-[-1] duration-[400ms] drop-shadow-2xl " />
-                  <div className="h-[4em] w-[4em] sm:h-[6em] sm:w-[6em] bg-[#08493e] rounded-full absolute bottom-full -left-[3em] scale-[150%] z-[-1] duration-[400ms] drop-shadow-2xl" />{" "}
-                  Book a Call
-                  <svg
-                    className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
+            <div className="flex-1 max-w-3xl mb-12 lg:mb-32 text-center lg:text-left transition-all duration-700">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
+              >
+                <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-5xl font-black text-white mb-6 uppercase tracking-tighter leading-tight">
+                  Earth Hydro <br className="hidden md:block" />
+                  <span className="text-emerald-400">Management</span>
+                </h1>
+                <p className="text-lg sm:text-xl text-white/80 mb-10 max-w-2xl mx-auto lg:mx-0 font-medium">
+                  Deep-tech environmental solutions for climate risk intelligence,<br />
+                  sustainable water management, and institutional ESG reporting.
+                </p>
+
+                <Link to="/contact#form">
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="relative flex items-center justify-center mx-auto lg:mx-0 drop-shadow-2xl rounded-xl px-10 py-4 font-bold text-white shadow-xl transition-all duration-300 hover:scale-105 overflow-hidden group bg-emerald-600"
                   >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M14 5l7 7m0 0l-7 7m7-7H3"
-                    />
-                  </svg>
-                </motion.button>
-              </Link>
+                    Book a Call
+                    <svg
+                      className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M14 5l7 7m0 0l-7 7m7-7H3"
+                      />
+                    </svg>
+                  </motion.button>
+                </Link>
+              </motion.div>
             </div>
-
-            {/* Right Side - Diamond-shaped Cards */}
-            {/* <div className="absolute top-1/2 -translate-y-1/2 right-8 w-[700px] h-[500px] hidden lg:block pointer-events-none"> 
-           <div className="relative w-full h-full"> */}
-            {/* Card 1 - Top Right with overlay */}
-            {/* <div className="absolute top-[90px] right-[-50px] w-[280px] h-[280px] bg-white shadow-2xl transform rotate-[-10deg] transition-all duration-300 hover:rotate-[15deg] hover:scale-105 border-[1px] border-white z-40 pointer-events-auto group"
-                  style={{ clipPath: 'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)' }}>
-                  <img loading="lazy" src="/Hero/Hero.webp"
-                    style={{ clipPath: 'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)' }}
-                    alt="Forest" className="w-full h-full object-cover" /> */}
-
-            {/* Hover Overlay */}
-            {/* <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center"
-                    style={{ clipPath: 'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)' }}>
-                    <span className="text-white font-semibold text-lg text-center px-4">
-                      Climate Risk
-                    </span>
-                  </div>
-                </div> */}
-            {/* Card 2 - Middle with forest image */}
-            {/* <div className="absolute top-[-40px] right-[130px] w-[280px] h-[280px] bg-white shadow-2xl transform rotate-[-10deg] transition-all duration-300 hover:rotate-[-10deg] hover:scale-105 border-[1px] border-white z-30 pointer-events-auto group"
-                   style={{ clipPath: 'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)' }} > 
-                   <img loading="lazy" src="/Hero/Hero2.webp" 
-                   alt="Forest" className="w-full h-full object-cover" />  */}
-
-            {/* Hover Overlay */}
-            {/* <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center"
-                      style={{ clipPath: 'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)' }}>
-                      <span className="text-white font-semibold text-lg text-center px-4">
-                        Water-Positive Systems
-                      </span>
-                    </div>
-                  </div> */}
-            {/* Card 3 - Bottom Right with green gradient */}
-            {/* <div className="absolute top-[270px] right-[80px] w-[280px] h-[280px] bg-white shadow-2xl transform rotate-[-10deg] transition-all duration-300 hover:rotate-[9deg] hover:scale-105 border-[1px] border-white z-20 pointer-events-auto group" 
-                    style={{ clipPath: 'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)' }} >
-                      <img loading="lazy" src="/Hero/Hero3.webp"
-                      alt="Forest" className="w-full h-full object-cover" />  */}
-
-            {/* Hover Overlay */}
-            {/* <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center"
-                      style={{ clipPath: 'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)' }}>
-                      <span className="text-white font-semibold text-lg text-center px-4">
-                        Sustainability & ESG
-                      </span>
-                    </div> */}
-            {/* <div className="w-full h-full bg-gradient-to-br from-[#a8d16f] via-[#8bc34a] to-[#7ab536]">
-                      </div> 
-                      </div> */}
-            {/* Card 4 - Far left with green gradient */}
-            {/* <div className="absolute top-[140px] right-[260px] w-[280px] h-[280px] bg-white shadow-2xl transform rotate-[-10deg] transition-all duration-300 hover:rotate-[9deg] hover:scale-105 border-[1px] border-white z-10 pointer-events-auto group" 
-                       style={{ clipPath: 'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)' }} >
-                        <img loading="lazy" src="/Hero/Hero4.webp"
-                          alt="Forest" className="w-full h-full object-cover" />   */}
-            {/* Hover Overlay */}
-            {/* <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center"
-                          style={{ clipPath: 'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)' }}>
-                          <span className="text-white font-semibold text-lg text-center px-4">
-                            Geophysical Exploration
-                          </span>
-                        </div>
-                       <div className="w-full h-full bg-gradient-to-br from-[#a8d16f] via-[#8bc34a] to-[#7ab536]">
-
-                       </div> */}
-            {/* </div>
-                </div>
-              </div> */}
-          </div>
-
-          {/* Trusted By Section */}
-          <div className="hidden">
-            {/* <div className="flex flex-wrap items-center gap-8 md:gap-16">
-              <div className="text-2xl font-medium tracking-wide opacity-85 hover:opacity-100 transition-opacity">
-                IIT Kanpur<sup className="text-sm">©</sup>
-              </div>
-              <div className="text-2xl font-medium tracking-wide opacity-85 hover:opacity-100 transition-opacity">
-                CSJMIF
-              </div>
-            </div> */}
           </div>
         </div>
       </div>
-    </div>
+    </div >
   );
 }
