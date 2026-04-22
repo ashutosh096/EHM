@@ -21,7 +21,7 @@ ContactUserRouter.post("/contact", contactRateLimiter, async (req: Request, res:
   const requireBody = z.object({
     name: z.string().min(1, "Name is required"),
     email: z.string().email("Invalid email format"),
-    mobile: z.string().regex(/^[0-9]{10}$/, "Invalid mobile number (must be 10 digits)").optional().or(z.literal("")),
+    mobile: z.string().regex(/^\+?[0-9]{10,15}$/, "Invalid mobile number format").optional().or(z.literal("")),
     interestedIn: z.string().min(1, "Please select an option"),
     message: z.string().min(1, "Message is required"),
   });

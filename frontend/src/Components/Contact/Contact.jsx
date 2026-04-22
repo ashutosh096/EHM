@@ -27,7 +27,7 @@ export default function Contact() {
     setIsLoading(true);
     setErrorMsg("");
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const mobileRegex = /^[0-9]{10}$/;
+    const mobileRegex = /^\+?[0-9]{10,15}$/;
 
     if (!emailRegex.test(formData.email.trim())) {
       setErrorMsg("Please enter a valid email address.");
@@ -36,7 +36,7 @@ export default function Contact() {
     }
 
     if (formData.mobile.trim() && !mobileRegex.test(formData.mobile.trim())) {
-      setErrorMsg("Please enter a valid 10-digit mobile number.");
+      setErrorMsg("Please enter a valid mobile number (e.g., +911234567890).");
       setIsLoading(false);
       return;
     }
