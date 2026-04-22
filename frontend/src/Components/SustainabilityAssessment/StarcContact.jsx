@@ -53,7 +53,7 @@ export default function StarcContact() {
     try {
       const res = await API.post("/contact", cleanedData);
 
-      if (res?.data?.success) {
+      if (res?.data?.success || res?.data?.sucess) {
         setIsSubmitted(true);
 
         setTimeout(() => {
