@@ -26,6 +26,20 @@ export default function StarcContact() {
     e.preventDefault();
     setIsLoading(true);
     setErrorMsg("");
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const mobileRegex = /^[0-9]{10}$/;
+
+    if (!emailRegex.test(formData.email.trim())) {
+      setErrorMsg("Please enter a valid email address.");
+      setIsLoading(false);
+      return;
+    }
+
+    if (formData.mobile.trim() && !mobileRegex.test(formData.mobile.trim())) {
+      setErrorMsg("Please enter a valid 10-digit mobile number.");
+      setIsLoading(false);
+      return;
+    }
 
     const cleanedData = {
       ...formData,

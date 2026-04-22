@@ -1,5 +1,5 @@
-// src/Pages/HomePage.jsx
 import { lazy, Suspense } from "react";
+import SEO from "../Components/Common/SEO";
 import HeroSection from "../Components/LandingPage/HeroSection";
 const FootPrint = lazy(() => import("../Components/LandingPage/FootPrint"));
 const Testimonials = lazy(() => import("../Components/LandingPage/Testimonials"));
@@ -11,6 +11,11 @@ const Resource = lazy(() => import("../Components/LandingPage/Resource"));
 const HomePage = () => {
   return (
     <div className="min-h-screen bg-[#ededed]">
+      <SEO 
+        title="EHM Consultancy | Environmental & Sustainability Solutions"
+        description="EHM offers expert environmental solutions including waterbody restoration, sustainability assessment, geophysical investigation, and climate risk intelligence in India."
+        canonical="/"
+      />
       <HeroSection />
       <Suspense fallback={<div className="h-20" />}>
         <EhmBrief />

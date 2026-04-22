@@ -26,6 +26,20 @@ export default function Contact() {
     e.preventDefault();
     setIsLoading(true);
     setErrorMsg("");
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const mobileRegex = /^[0-9]{10}$/;
+
+    if (!emailRegex.test(formData.email.trim())) {
+      setErrorMsg("Please enter a valid email address.");
+      setIsLoading(false);
+      return;
+    }
+
+    if (formData.mobile.trim() && !mobileRegex.test(formData.mobile.trim())) {
+      setErrorMsg("Please enter a valid 10-digit mobile number.");
+      setIsLoading(false);
+      return;
+    }
 
     const cleanedData = {
       ...formData,
@@ -51,14 +65,14 @@ export default function Contact() {
             interestedIn: "",
             message: "",
           });
-        }, 3000);
+        }, 5000);
       }
     } catch (err) {
       const firstError = err.response?.data?.error
         ? Object.values(err.response.data.error)[0]?.[0]
         : null;
 
-      setErrorMsg(firstError || "Something went wrong. Please try again.");
+      setErrorMsg(err.response?.data?.message || firstError || "Something went wrong. Please try again.");
     } finally {
       setIsLoading(false);
     }
