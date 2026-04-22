@@ -13,6 +13,7 @@ import {
   Layers,
   Recycle,
   CloudRain,
+  Droplets,
 } from "lucide-react";
 
 // === RESOURCES MENU DATA ===
@@ -35,6 +36,7 @@ const resourcesMenu = [
     title: "Solutions",
     items: [
       { name: "Waterbody Restoration", path: "/resources/WaterbodyRestoration", icon: Recycle },
+      { name: "DNTS", path: "/resources/dnts", icon: Droplets },
     ],
   },
 ];
