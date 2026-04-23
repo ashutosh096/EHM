@@ -53,7 +53,7 @@ export default function Hero() {
         }
       `}</style>
 
-      <div className="relative w-full h-screen overflow-hidden bg-black">
+      <div className="relative w-full h-[100dvh] min-h-[600px] overflow-hidden bg-black">
         {/* Text Content - Added from HeroSection2 */}
         <div className="absolute inset-0 z-10 flex items-center">
           <div className="container mx-auto px-6 md:px-12 lg:px-24">
@@ -64,40 +64,39 @@ export default function Hero() {
               <span
                 className="block font-extrabold"
                 style={{
-                  fontSize: 'clamp(2.5rem, 8vw, 3.75rem)',
+                  fontSize: 'clamp(2.2rem, 7vw, 3.5rem)',
                   background: 'linear-gradient(90deg,#d4f806,#79ffdc,#ffdd00,#3effb9)',
                   WebkitBackgroundClip: 'text',
                   color: 'transparent',
-                  lineHeight: '1.1'
+                  lineHeight: '1.2'
                 }}
               >
-
+                Sustainability &
               </span>
 
               <span
                 className="block font-semibold mt-2 md:mt-4"
                 style={{
-                  fontSize: 'clamp(2rem, 7vw, 3.125rem)',
+                  fontSize: 'clamp(1.8rem, 6vw, 2.8rem)',
                   background: 'linear-gradient(90deg,#ffffff,#c39b17,#ffffff)',
                   WebkitBackgroundClip: 'text',
                   color: 'transparent',
-                  lineHeight: '1.1'
+                  lineHeight: '1.2'
                 }}
               >
-
+                Deep Tech Innovation
               </span>
             </h1>
 
             <h2
-              className="font-semibold leading-tight mb-8 md:mb-10"
+              className="font-medium leading-relaxed mb-8 md:mb-10 text-white/90"
               style={{
-                fontSize: 'clamp(1.25rem, 4vw, 1.875rem)',
+                fontSize: 'clamp(1rem, 3vw, 1.25rem)',
                 letterSpacing: '0.5px',
-                color: 'white',
-                maxWidth: '800px'
+                maxWidth: '700px'
               }}
             >
-
+              Assisting industries, government organizations, and HEIs in enhancing ESG practices and managing climate risks.
             </h2>
 
 
@@ -147,7 +146,7 @@ export default function Hero() {
         </button>
 
         {/* Bottom Navigation */}
-        <div className="absolute bottom-8 md:bottom-12 left-[8%] flex flex-wrap gap-4 md:gap-6 z-20 max-w-[90%] md:max-w-[85%]">
+        <div className="absolute bottom-6 md:bottom-12 left-0 sm:left-[8%] px-6 sm:px-0 flex flex-wrap justify-center sm:justify-start gap-3 md:gap-6 z-20 w-full sm:max-w-[85%]">
           {navItems.map((item, index) => (
             <button
               key={index}

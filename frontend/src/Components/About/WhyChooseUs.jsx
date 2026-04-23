@@ -1,6 +1,7 @@
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
 
 const DiversifiedExpertiseIcon = () => (
   <div className="flex h-14 w-14 sm:h-16 sm:w-16 items-center justify-center rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20">
@@ -57,7 +58,7 @@ const ApproachIcon = () => (
 const WhyChooseUsSection = () => {
   const container = useRef(null);
 
-  useEffect(() => {
+  useGSAP(() => {
     gsap.registerPlugin(ScrollTrigger);
 
     if (window.innerWidth < 768) {
@@ -145,7 +146,7 @@ const WhyChooseUsSection = () => {
         .to(cards[3], { opacity: 1, y: 0, scale: 1, duration: 0.5 }, "swap4")
         .to({}, { duration: 0.5 });
     }
-  }, []);
+  }, { scope: container });
 
   return (
     <section
