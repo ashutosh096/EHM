@@ -4,12 +4,12 @@ import { useNavigate } from "react-router-dom";
 import Chart from "chart.js/auto";
 
 const FEATURES = [
-  { label: "AI Sustainability BOT", color: "#4B7635" },
-  { label: "GHG Accounting", color: "#3B66BC" },
-  { label: "UNSDG Matrices", color: "#E59518" },
-  { label: "Centralized Tracking", color: "#4B7635" },
-  { label: "API Integration", color: "#3B66BC" },
-  { label: "MFA Security", color: "#E59518" },
+  { label: "AI Sustainability BOT", color: "#088f8f" },
+  { label: "GHG Accounting", color: "#0047ab" },
+  { label: "UNSDG Matrices", color: "#e4d00a" },
+  { label: "Centralized Tracking", color: "#088f8f" },
+  { label: "API Integration", color: "#0047ab" },
+  { label: "MFA Security", color: "#e4d00a" },
 ];
 
 const SDG_PILLS = [
@@ -33,11 +33,11 @@ const StarcHero = () => {
       pieChart.current = new Chart(pieRef.current, {
         type: "doughnut",
         data: {
-          labels: ["Physiotherapy", "Pathology", "X-Ray", "Other"],
+          labels: ["Rooftop Solar On-grid", "Solar Street Lights", "Biogas Generation", "Non-Renewable"],
           datasets: [
             {
-              data: [66, 20, 8, 6],
-              backgroundColor: ["#4B7635", "#3B66BC", "#E59518", "#F1B434"],
+              data: [40, 36, 24, 60], // Energy Mix: 40% renewable (split by source), 60% non-renewable
+              backgroundColor: ["#088f8f", "#e4d00a", "#0047ab", "#8ccbbd"],
               borderColor: "rgba(255,255,255,0.08)",
               borderWidth: 2,
               hoverBorderWidth: 3,
@@ -63,24 +63,26 @@ const StarcHero = () => {
       barChart.current = new Chart(barRef.current, {
         type: "bar",
         data: {
-          labels: ["Physio", "Health Ctr", "Pathology", "X-Ray"],
+          labels: ["2022-23", "2023-24", "2024-25"],
           datasets: [
             {
-              label: "Cost",
-              data: [4.5, 0.4, 5.5, 1.2],
-              backgroundColor: "rgba(229,149,24,0.7)",
+              label: "Scope 1",
+              // Scope 1 = 4.52% of 1346.41 total tCO₂e ≈ 60.86; baseline year was higher
+              data: [180, 120, 60.86],
+              backgroundColor: "rgba(0,71,171,0.75)",
               borderRadius: 4,
             },
             {
-              label: "Market Value",
-              data: [18, 3.5, 17, 2.8],
-              backgroundColor: "rgba(59,102,188,0.7)",
+              label: "Scope 2",
+              // Scope 2 = 95.48% of 1346.41 ≈ 1285.55; trend shows reduction from ~3400 baseline
+              data: [3400, 1800, 1285.55],
+              backgroundColor: "rgba(228,208,10,0.75)",
               borderRadius: 4,
             },
             {
-              label: "Benefit",
-              data: [13.5, 3.2, 11.5, 2],
-              backgroundColor: "rgba(75,118,53,0.7)",
+              label: "Total tCO₂e",
+              data: [3580, 1920, 1346.41],
+              backgroundColor: "rgba(8,143,143,0.75)",
               borderRadius: 4,
             },
           ],
@@ -99,7 +101,7 @@ const StarcHero = () => {
               ticks: {
                 color: "#64748b",
                 font: { size: 10 },
-                callback: (v) => "₹" + v + "L",
+                callback: (v) => v + " t",  // tCO₂e unit
               },
               grid: { color: "rgba(0,0,0,0.06)" },
               border: { color: "rgba(0,0,0,0.08)" },
@@ -114,27 +116,26 @@ const StarcHero = () => {
       barChart.current?.destroy();
     };
   }, []);
-
   return (
-    <section className="relative flex items-center overflow-hidden pt-24 pb-12 bg-slate-50"
+    <section
+      className="relative flex items-center overflow-hidden pt-24 pb-12"
     >
-      {/* Subtle Grid background */}
-      <div
-        className="absolute inset-0 pointer-events-none opacity-40"
-        style={{
-          backgroundImage:
-            "linear-gradient(rgba(0,0,0,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.03) 1px, transparent 1px)",
-          backgroundSize: "60px 60px",
-        }}
-      />
+      <div className="absolute inset-0 bg-gradient-to-b from-white via-teal-100 to-white" />
+      <div className="absolute inset-0 bg-gradient-to-b from-white/95 via-teal-200/70 to-white/95" />
+      <div className="absolute inset-0 bg-gradient-to-b from-white/90 via-transparent to-white/90" />
+      <div className="absolute inset-0 bg-gradient-to-br from-teal-100/60 via-teal-200/40 to-teal-100/60" />
+      <div className="absolute inset-0 bg-gradient-to-tr from-teal-50/50 via-teal-100/30 to-teal-50/50" />
+      {/* Top & bottom white fades */}
+      <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-white via-white/80 to-transparent z-10" />
+      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-white via-white/80 to-transparent z-10" />
 
-      {/* Very faint Brand glows */}
+      {/* Brand glows */}
       <div className="absolute inset-0 pointer-events-none">
         <div
           className="absolute inset-0"
           style={{
             background:
-              "radial-gradient(circle at 20% 50%, rgba(75,118,53,0.03) 0%, transparent 60%), radial-gradient(circle at 80% 20%, rgba(59,102,188,0.03) 0%, transparent 60%)",
+              "radial-gradient(circle at 20% 50%, rgba(8,143,143,0.05) 0%, transparent 60%), radial-gradient(circle at 80% 20%, rgba(0,71,171,0.05) 0%, transparent 60%)",
           }}
         />
       </div>
@@ -144,12 +145,14 @@ const StarcHero = () => {
 
           {/* ── LEFT CONTENT ── */}
           <div className="space-y-6 animate-fadeInLeft">
-
-            <div className="space-y-4 animate-fadeInLeft font-sans">
+            <div className="space-y-4 font-sans">
 
               {/* ESG badge */}
-              <div className="inline-flex items-center gap-2 mt-2 px-4 py-2 rounded-full border bg-[#4B7635]/10 border-[#4B7635]/30">
-                <span className="text-[#4B7635] text-xs font-semibold tracking-wide uppercase">
+              <div
+                className="inline-flex items-center gap-2 mt-2 px-4 py-2 rounded-full border"
+                style={{ backgroundColor: "rgba(8,143,143,0.1)", borderColor: "rgba(8,143,143,0.3)" }}
+              >
+                <span className="text-xs font-semibold tracking-wide uppercase" style={{ color: "#088f8f" }}>
                   🌱 ESG Insight and Sustainability Intelligence
                 </span>
               </div>
@@ -157,14 +160,8 @@ const StarcHero = () => {
               {/* Brand wordmark */}
               <div className="mb-2">
                 <div className="flex items-baseline gap-1">
-                  <span className="text-5xl font-extrabold text-[#1a1a1a] tracking-tight">
-                    S
-                  </span>
-                  <span
-                    className="text-5xl font-extrabold tracking-tight text-[#4B7635]"
-                  >
-                    TARC
-                  </span>
+                  <span className="text-5xl font-extrabold text-[#1a1a1a] tracking-tight">S</span>
+                  <span className="text-5xl font-extrabold tracking-tight" style={{ color: "#088f8f" }}>TARC</span>
                 </div>
                 <p className="text-[10px] font-semibold tracking-wider text-slate-400 uppercase mt-1">
                   Sustainability Tracking, Assessment & Reporting for Campus
@@ -197,16 +194,17 @@ const StarcHero = () => {
 
             {/* CTAs */}
             <div className="flex flex-wrap gap-2 pt-2">
-              <a
-                href="/contact/starc"
-                className="group relative inline-flex items-center gap-3 px-8 py-4 text-white font-bold text-lg rounded-xl overflow-hidden transition-all duration-300 hover:-translate-y-1 bg-[#4B7635]"
+              <button
+                onClick={() => window.location.href = "/contact/starc"}
+                className="group relative inline-flex items-center gap-3 px-8 py-4 text-white font-bold text-lg rounded-xl overflow-hidden transition-all duration-300 hover:-translate-y-1"
                 style={{
-                  boxShadow: "0 6px 20px rgba(75,118,53,0.2)",
+                  backgroundColor: "#088f8f",
+                  boxShadow: "0 6px 20px rgba(8,143,143,0.25)",
                 }}
               >
                 <Calendar className="w-5 h-5 relative z-10" />
                 <span className="relative z-10">Book a Demo</span>
-              </a>
+              </button>
 
               <button
                 onClick={() => navigate("/resources/casestudies")}
@@ -216,13 +214,11 @@ const StarcHero = () => {
               </button>
             </div>
           </div>
+          {/* ── END LEFT CONTENT ── */}
 
-          {/* ── RIGHT — ESG DASHBOARD ── */}
+          {/* ✅ Fixed: RIGHT column is now a proper sibling of LEFT column */}
           <div className="animate-fadeInRight relative">
-            <div
-              className="relative rounded-3xl p-6 border overflow-hidden bg-white border-slate-200 shadow-xl"
-            >
-              {/* Top shimmer line removed for professional look */}
+            <div className="relative rounded-3xl p-6 border overflow-hidden bg-white border-slate-200 shadow-xl">
 
               {/* Dashboard header */}
               <div className="flex items-start justify-between mb-5">
@@ -231,9 +227,10 @@ const StarcHero = () => {
                   <p className="text-[11px] text-slate-400 mt-0.5">Real-time sustainability metrics — CSJMU Campus</p>
                 </div>
                 <div
-                  className="flex items-center gap-1.5 px-3 py-1 rounded-full border text-[10px] font-semibold text-[#4B7635] bg-green-50 border-green-200"
+                  className="flex items-center gap-1.5 px-3 py-1 rounded-full border text-[10px] font-semibold"
+                  style={{ color: "#088f8f", backgroundColor: "rgba(8,143,143,0.08)", borderColor: "rgba(8,143,143,0.25)" }}
                 >
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#4B7635] animate-pulse" />
+                  <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ backgroundColor: "#088f8f" }} />
                   LIVE
                 </div>
               </div>
@@ -241,17 +238,12 @@ const StarcHero = () => {
               {/* Stat cards */}
               <div className="grid grid-cols-3 gap-3 mb-5">
                 {[
-                  { val: "92%", label: "ESG Compliance", color: "#4B7635", bg: "rgba(75,118,53,0.12)", border: "rgba(75,118,53,0.25)" },
-                  { val: "34%", label: "Emission Reduction", color: "#3B66BC", bg: "rgba(59,102,188,0.12)", border: "rgba(59,102,188,0.25)" },
-                  { val: "78%", label: "Sustainability Score", color: "#E59518", bg: "rgba(229,149,24,0.12)", border: "rgba(229,149,24,0.25)" },
+                  { val: "92%", label: "ESG Compliance", color: "#088f8f" },
+                  { val: "62%", label: "Emission Reduction", color: "#0047ab" },
+                  { val: "78%", label: "Sustainability Score", color: "#e4d00a" },
                 ].map((s) => (
-                  <div
-                    key={s.label}
-                    className="rounded-xl p-3.5 text-center border bg-slate-50 border-slate-100 shadow-sm"
-                  >
-                    <div className="text-2xl text-slate-800 leading-none" >
-                      {s.val}
-                    </div>
+                  <div key={s.label} className="rounded-xl p-3.5 text-center border bg-slate-50 border-slate-100 shadow-sm">
+                    <div className="text-2xl text-slate-800 leading-none">{s.val}</div>
                     <div className="text-[10px] text-slate-500 mt-1 leading-tight">{s.label}</div>
                   </div>
                 ))}
@@ -259,39 +251,38 @@ const StarcHero = () => {
 
               {/* Charts row */}
               <div className="grid grid-cols-2 gap-4 mb-5">
-
-                {/* Pie / Doughnut */}
                 <div className="rounded-xl p-3.5 bg-slate-50 border border-slate-100">
-                  <p className="text-[11px] text-slate-500 font-medium mb-2.5">Healthcare beneficiaries by facility</p>
+                  <p className="text-[11px] text-slate-500 font-medium mb-2.5">Energy Mix Distribution</p>
                   <div className="relative w-full h-36">
-                    <canvas ref={pieRef} aria-label="Doughnut chart of healthcare beneficiaries" role="img" />
+                    <canvas ref={pieRef} aria-label="Doughnut chart" role="img" />
                   </div>
                   <div className="flex flex-wrap gap-x-3 gap-y-1 mt-2.5">
-                    {[
-                      { label: "Physiotherapy 66%", color: "#4B7635" },
-                      { label: "Pathology 20%", color: "#3B66BC" },
-                      { label: "X-Ray 8%", color: "#E59518" },
-                      { label: "Other 6%", color: "#f4c26b" },
-                    ].map((l) => (
-                      <span key={l.label} className="flex items-center gap-1 text-[10px] text-slate-500">
-                        <span className="w-2 h-2 rounded-sm flex-shrink-0" style={{ background: l.color }} />
-                        {l.label}
-                      </span>
-                    ))}
+                    {
+                      [
+                        { label: "Rooftop Solar 40%", color: "#088f8f" },
+                        { label: "Street Lights 36%", color: "#e4d00a" },
+                        { label: "Biogas 24%", color: "#0047ab" },
+                        { label: "Non-Renewable 60%", color: "#8ccbbd" },
+                      ].map((l) => (
+                        <span key={l.label} className="flex items-center gap-1 text-[10px] text-slate-500">
+                          <span className="w-2 h-2 rounded-sm flex-shrink-0" style={{ background: l.color }} />
+                          {l.label}
+                        </span>
+                      ))
+                    }
                   </div>
                 </div>
 
-                {/* Bar chart */}
                 <div className="rounded-xl p-3.5 bg-slate-50 border border-slate-100">
-                  <p className="text-[11px] text-slate-500 font-medium mb-2.5">University facilities benefit (₹L)</p>
+                  <p className="text-[11px] text-slate-500 font-medium mb-2.5">GHG Emissions Trend (tCO₂e)</p>
                   <div className="relative w-full h-36">
-                    <canvas ref={barRef} aria-label="Grouped bar chart of university healthcare financials" role="img" />
+                    <canvas ref={barRef} aria-label="Grouped bar chart" role="img" />
                   </div>
                   <div className="flex flex-wrap gap-x-3 gap-y-1 mt-2.5">
                     {[
-                      { label: "Cost", color: "rgba(229,149,24,0.7)" },
-                      { label: "Market Value", color: "rgba(59,102,188,0.7)" },
-                      { label: "Benefit", color: "rgba(75,118,53,0.7)" },
+                      { label: "Scope 1", color: "rgba(0,71,171,0.75)" },
+                      { label: "Scope 2", color: "rgba(228,208,10,0.75)" },
+                      { label: "Total tCO₂e", color: "rgba(8,143,143,0.75)" },
                     ].map((l) => (
                       <span key={l.label} className="flex items-center gap-1 text-[10px] text-slate-500">
                         <span className="w-2 h-2 rounded-sm flex-shrink-0" style={{ background: l.color }} />
@@ -306,14 +297,12 @@ const StarcHero = () => {
               <div className="mb-4">
                 <div className="flex justify-between text-xs text-slate-500 mb-1.5">
                   <span>Overall sustainability progress</span>
-                  <span className="text-[#4B7635] font-semibold">78%</span>
+                  <span className="font-semibold" style={{ color: "#088f8f" }}>78%</span>
                 </div>
                 <div className="h-2 w-full rounded-full overflow-hidden bg-slate-100">
                   <div
-                    className="h-full rounded-full transition-all duration-1000 ease-out bg-[#4B7635]"
-                    style={{
-                      width: "78%",
-                    }}
+                    className="h-full rounded-full transition-all duration-1000 ease-out"
+                    style={{ width: "78%", backgroundColor: "#088f8f" }}
                   />
                 </div>
               </div>
@@ -321,22 +310,19 @@ const StarcHero = () => {
               {/* SDG pills */}
               <div className="flex flex-wrap gap-2">
                 {SDG_PILLS.map((pill) => (
-                  <span
-                    key={pill}
-                    className="text-[10px] text-slate-500 px-2.5 py-1 rounded-md border bg-white border-slate-200"
-                  >
+                  <span key={pill} className="text-[10px] text-slate-500 px-2.5 py-1 rounded-md border bg-white border-slate-200">
                     {pill}
                   </span>
                 ))}
               </div>
             </div>
           </div>
+          {/* ── END RIGHT CONTENT ── */}
 
         </div>
       </div>
 
       <style>{`
-
         @keyframes fadeInLeft {
           from { opacity: 0; transform: translateX(-40px); }
           to   { opacity: 1; transform: translateX(0); }
