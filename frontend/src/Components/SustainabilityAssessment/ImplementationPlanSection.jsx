@@ -58,8 +58,15 @@ const ScrollRevealElements = ({ children, className, staggerAmount }) => {
 export default function ImplementationPlanSection() {
   return (
     <section className="relative py-12 px-6 overflow-hidden">
-      {/* Clean background */}
-      <div className="absolute inset-0 bg-slate-50 opacity-30"></div>
+      {/* Layered teal gradient — brand bg */}
+      <div className="absolute inset-0 bg-gradient-to-b from-white via-teal-100 to-white" />
+      <div className="absolute inset-0 bg-gradient-to-b from-white/95 via-teal-200/70 to-white/95" />
+      <div className="absolute inset-0 bg-gradient-to-b from-white/90 via-transparent to-white/90" />
+      <div className="absolute inset-0 bg-gradient-to-br from-teal-100/60 via-teal-200/40 to-teal-100/60" />
+      <div className="absolute inset-0 bg-gradient-to-tr from-teal-50/50 via-teal-100/30 to-teal-50/50" />
+      {/* Top & bottom white fades */}
+      <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-white via-white/80 to-transparent z-10" />
+      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-white via-white/80 to-transparent z-10" />
       
       <div className="max-w-7xl mx-auto relative z-10">
         <div>
