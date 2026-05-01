@@ -128,8 +128,8 @@ export default function Homepage() {
                 transition={{ duration: 0.8 }}
               >
                 <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-5xl font-black text-white mb-6 uppercase tracking-tighter leading-tight">
-                  Earth Hydro <br className="hidden md:block" />
-                  <span className="text-emerald-400">Management</span>
+                  EHM<br className="hidden md:block" />
+                  {/* <span className="text-emerald-400">Management</span> */}
                 </h1>
                 <p className="text-lg sm:text-xl text-white/80 mb-10 max-w-2xl mx-auto lg:mx-0 font-medium">
                   Deep-tech environmental solutions for climate risk intelligence,<br />
