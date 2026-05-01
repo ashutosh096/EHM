@@ -88,7 +88,7 @@ const TABS = [
     color: "#1d4e89",          // Navy blue (on-brand)
     accent: "rgba(29,78,137,0.10)",
     tag: "Environment",
-    title: "GHG Emissions & Carbon Management",
+    title: "GHG Emissions & CO₂ Management",
     description:
       "Scope-wise emissions performance, reduction targets and national alignment for net-zero pathways. View year-on-year emission trends, carbon intensity per person and per sq. metre.",
     stats: [
@@ -139,153 +139,166 @@ const EhmBrief = () => {
             <button
               key={t.id}
               onClick={() => handleTabChange(i)}
-              className="relative flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-medium transition-all duration-300 outline-none focus:outline-none"
+              className="relative flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-medium transition-all duration-500 outline-none focus:outline-none overflow-hidden"
               style={{
-                background: active === i ? TABS[i].color : "rgba(255,255,255,0.7)",
                 color: active === i ? "#fff" : "#6b7280",
                 border: active === i ? `2px solid ${TABS[i].color}` : "2px solid #e5e7eb",
-                boxShadow: active === i ? `0 4px 20px ${TABS[i].color}40` : "none",
                 transform: active === i ? "scale(1.05)" : "scale(1)",
                 backdropFilter: "blur(8px)",
+                background: active === i ? "transparent" : "rgba(255,255,255,0.7)",
               }}
             >
-              <span style={{ color: active === i ? "#fff" : TABS[i].color }}>{t.icon}</span>
-              {t.label}
+              {active === i && (
+                <motion.div
+                  layoutId="activeTab"
+                  className="absolute inset-0 z-0"
+                  style={{ background: TABS[i].color }}
+                  transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                />
+              )}
+              <span className="relative z-10" style={{ color: active === i ? "#fff" : TABS[i].color }}>{t.icon}</span>
+              <span className="relative z-10">{t.label}</span>
             </button>
           ))}
         </div>
 
         {/* ── Main Showcase ── */}
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 xl:gap-10 items-stretch">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 xl:gap-10 items-center">
 
           {/* Screenshot panel — 3/5 */}
-          <div
+          <motion.div
+            layout
+            transition={{
+              layout: { duration: 0.8, ease: [0.4, 0, 0.2, 1] }
+            }}
             className="lg:col-span-3 relative overflow-hidden rounded-2xl shadow-2xl group"
-            style={{ background: "#0a0f0d", minHeight: "340px" }}
-          >            <AnimatePresence mode="wait" initial={false}>
+          >
+            <AnimatePresence mode="popLayout" initial={false}>
               <motion.div
                 key={tab.id}
                 className="w-full"
-                initial={{ opacity: 0, x: direction * 40 }}
+                initial={{ opacity: 0, x: direction * 50 }}
                 animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: direction * -40 }}
-                transition={{ duration: 0.38, ease: "easeOut" }}
+                exit={{ opacity: 0, x: direction * -50 }}
+                transition={{
+                  duration: 0.8,
+                  ease: [0.4, 0, 0.2, 1]
+                }}
+                style={{ willChange: "transform, opacity" }}
               >
                 <img
                   src={tab.image}
                   alt={tab.title}
                   loading="lazy"
-                  className="w-full object-cover object-top"
-                  style={{ maxHeight: "480px" }}
+                  className="w-full h-auto block shadow-sm"
                 />
               </motion.div>
             </AnimatePresence>
 
             {/* Inner glow tint */}
             <div
-              className="absolute inset-0 pointer-events-none rounded-2xl"
-              style={{ boxShadow: `inset 0 0 60px ${tab.color}20` }}
+              className="absolute inset-0 pointer-events-none rounded-2xl z-10"
+              style={{ boxShadow: `inset 0 0 40px ${tab.color}10` }}
             />
-          </div>
+          </motion.div>
 
           {/* Info panel — 2/5 */}
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={tab.id + "_info"}
-              className="lg:col-span-2 flex flex-col justify-between"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.38, ease: "easeOut" }}
-            >
-              {/* Tag + heading + description */}
-              <div>
-                <span
-                  className="inline-block text-xs font-semibold px-3 py-1 rounded-full mb-4"
-                  style={{
-                    background: tab.accent,
-                    color: tab.color,
-                    border: `1px solid ${tab.color}30`,
-                  }}
-                >
-                  {tab.tag}
-                </span>
-                <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3 leading-snug">
-                  {tab.title}
-                </h3>
-                <p className="text-gray-500 text-sm sm:text-base leading-relaxed">
-                  {tab.description}
-                </p>
-              </div>
-
-              {/* Stats */}
-              <div className="mt-6 grid grid-cols-1 gap-3">
-                {tab.stats.map((s, i) => (
-                  <motion.div
-                    key={s.label}
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: i * 0.08, duration: 0.3 }}
-                    className="flex items-center justify-between rounded-xl px-4 py-3"
+          <div className="lg:col-span-2 relative">
+            <AnimatePresence mode="popLayout" initial={false}>
+              <motion.div
+                key={tab.id + "_info"}
+                className="flex flex-col justify-between"
+                initial={{ opacity: 0, x: direction * 30 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: direction * -30 }}
+                transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
+              >
+                {/* Tag + heading + description */}
+                <div>
+                  <span
+                    className="inline-block text-xs font-semibold px-3 py-1 rounded-full mb-4"
                     style={{
-                      background: "rgba(255,255,255,0.7)",
-                      border: `1px solid ${tab.color}25`,
-                      backdropFilter: "blur(8px)",
+                      background: tab.accent,
+                      color: tab.color,
+                      border: `1px solid ${tab.color}30`,
                     }}
                   >
-                    <span className="text-xs text-gray-500 font-medium">{s.label}</span>
-                    <span className="text-sm font-bold" style={{ color: tab.color }}>{s.value}</span>
-                  </motion.div>
+                    {tab.tag}
+                  </span>
+                  <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3 leading-snug">
+                    {tab.title}
+                  </h3>
+                  <p className="text-gray-500 text-sm sm:text-base leading-relaxed">
+                    {tab.description}
+                  </p>
+                </div>
+
+                {/* Stats */}
+                <div className="mt-6 grid grid-cols-1 gap-3">
+                  {tab.stats.map((s, i) => (
+                    <motion.div
+                      key={s.label}
+                      className="flex items-center justify-between rounded-xl px-4 py-3"
+                      style={{
+                        background: "rgba(255,255,255,0.7)",
+                        border: `1px solid ${tab.color}25`,
+                        backdropFilter: "blur(8px)",
+                      }}
+                    >
+                      <span className="text-xs text-gray-500 font-medium">{s.label}</span>
+                      <span className="text-sm font-bold" style={{ color: tab.color }}>{s.value}</span>
+                    </motion.div>
+                  ))}
+                </div>
+              </motion.div>
+            </AnimatePresence>
+
+            {/* Prev / dots / next — Moved outside AnimatePresence */}
+            <div className="flex items-center gap-3 mt-8">
+              <button
+                onClick={() => handleTabChange((active - 1 + TABS.length) % TABS.length)}
+                className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 hover:bg-white"
+                style={{
+                  border: "1.5px solid #d1d5db",
+                  color: "#9ca3af",
+                  background: "rgba(255,255,255,0.6)",
+                }}
+              >
+                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <polyline points="15 18 9 12 15 6" />
+                </svg>
+              </button>
+
+              <div className="flex gap-1.5 items-center">
+                {TABS.map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => handleTabChange(i)}
+                    className="rounded-full transition-all duration-300"
+                    style={{
+                      width: i === active ? "24px" : "8px",
+                      height: "8px",
+                      background: i === active ? tab.color : "#d1d5db",
+                    }}
+                  />
                 ))}
               </div>
 
-              {/* Prev / dots / next */}
-              <div className="flex items-center gap-3 mt-6">
-                <button
-                  onClick={() => handleTabChange((active - 1 + TABS.length) % TABS.length)}
-                  className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200"
-                  style={{
-                    border: "1.5px solid #d1d5db",
-                    color: "#9ca3af",
-                    background: "rgba(255,255,255,0.6)",
-                  }}
-                >
-                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <polyline points="15 18 9 12 15 6" />
-                  </svg>
-                </button>
-
-                <div className="flex gap-1.5 items-center">
-                  {TABS.map((_, i) => (
-                    <button
-                      key={i}
-                      onClick={() => handleTabChange(i)}
-                      className="rounded-full transition-all duration-300"
-                      style={{
-                        width: i === active ? "24px" : "8px",
-                        height: "8px",
-                        background: i === active ? tab.color : "#d1d5db",
-                      }}
-                    />
-                  ))}
-                </div>
-
-                <button
-                  onClick={() => handleTabChange((active + 1) % TABS.length)}
-                  className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200"
-                  style={{
-                    border: "1.5px solid #d1d5db",
-                    color: "#9ca3af",
-                    background: "rgba(255,255,255,0.6)",
-                  }}
-                >
-                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <polyline points="9 18 15 12 9 6" />
-                  </svg>
-                </button>
-              </div>
-            </motion.div>
-          </AnimatePresence>
+              <button
+                onClick={() => handleTabChange((active + 1) % TABS.length)}
+                className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 hover:bg-white"
+                style={{
+                  border: "1.5px solid #d1d5db",
+                  color: "#9ca3af",
+                  background: "rgba(255,255,255,0.6)",
+                }}
+              >
+                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <polyline points="9 18 15 12 9 6" />
+                </svg>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </section>
