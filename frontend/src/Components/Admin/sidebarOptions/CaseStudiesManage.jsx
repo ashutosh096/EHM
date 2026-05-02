@@ -166,7 +166,7 @@ export default function CaseStudiesManage() {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 overflow-y-auto" style={{ maxHeight: "70vh" }}>
                     {caseStudies.map((study) => (
                         <div key={study._id} className="bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden group">
-                            {study.image ? (<img src={study.image} alt={study.title} className="w-full h-40 object-cover group-hover:scale-105 transition-transform" />) : (<div className="w-full h-40 flex items-center justify-center bg-gray-100"><span className="text-gray-400 text-lg">No Image</span></div>)}
+                            {study.image ? (<img loading="lazy" src={study.image} alt={study.title} className="w-full h-40 object-cover group-hover:scale-105 transition-transform" />) : (<div className="w-full h-40 flex items-center justify-center bg-gray-100"><span className="text-gray-400 text-lg">No Image</span></div>)}
                             <div className="p-4">
                                 <p className="text-sm text-gray-500 mb-1">{formatDate(study.createdAt)}</p>
                                 <h3 className="text-lg font-semibold text-green-900 cursor-pointer hover:underline" onClick={() => { setSelectedCaseStudy(study); setIsFullViewOpen(true); }}>{study.title}</h3>
@@ -190,7 +190,7 @@ export default function CaseStudiesManage() {
                     <div className="max-h-[70vh] overflow-y-auto pr-4">
                         <p className="text-sm text-gray-500 mb-2">{formatDate(selectedCaseStudy.createdAt)}</p>
                         <span className="inline-block bg-green-100 text-green-700 text-xs px-2 py-1 rounded mb-4">{selectedCaseStudy.author}</span>
-                        {selectedCaseStudy.image && <img src={selectedCaseStudy.image} alt={selectedCaseStudy.title} className="w-full h-60 object-cover mb-4 rounded-lg shadow-md" />}
+                        {selectedCaseStudy.image && <img loading="lazy" src={selectedCaseStudy.image} alt={selectedCaseStudy.title} className="w-full h-60 object-cover mb-4 rounded-lg shadow-md" />}
                         <div className="prose lg:prose-xl max-w-none" dangerouslySetInnerHTML={{ __html: selectedCaseStudy.content }} />
                     </div>
                 </Modal>

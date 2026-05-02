@@ -104,31 +104,27 @@ export default function NewsLetter() {
         </h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 items-center justify-items-center">
           <div>
-            <img
-              alt="Microsoft logo"
+            <img loading="lazy" alt="Microsoft logo"
               className="h-32 grayscale dark:brightness-200"
-              src="./Partners/CSJMIF.png"
+              src="./Partners/CSJMIF.webp"
             />
           </div>
           <div>
-            <img
-              alt="FICCI logo"
+            <img loading="lazy" alt="FICCI logo"
               className="h-32 grayscale dark:brightness-200"
-              src="./Partners/E&ICT logo.png"
+              src="./Partners/E&ICT logo.webp"
             />
           </div>
           <div>
-            <img
-              alt="Bursa Carbon Exchange logo"
+            <img loading="lazy" alt="Bursa Carbon Exchange logo"
               className="h-32 w-full grayscale dark:brightness-200"
-              src="./Partners/Technopark logo.png"
+              src="./Partners/Technopark logo.webp"
             />
           </div>
           <div>
-            <img
-              alt="SEAS logo"
+            <img loading="lazy" alt="SEAS logo"
               className="h-32  grayscale dark:brightness-200"
-              src="./Partners/IITR.png"
+              src="./Partners/IITR.webp"
             />
           </div>
         </div>
