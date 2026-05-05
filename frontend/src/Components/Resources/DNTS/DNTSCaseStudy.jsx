@@ -27,9 +27,8 @@ const DNTSCaseStudy = ({ caseStudy, hoveredStage, setHoveredStage }) => {
         >
           {/* Before Section */}
           <div
-            className={`relative transition-all duration-500 ease-in-out border-b lg:border-b-0 lg:border-r border-slate-100 ${
-              hoveredStage === "before" ? "lg:w-[50%] flex-grow" : "lg:w-[25%]"
-            } ${hoveredStage === "after" ? "lg:w-[20%]" : ""}`}
+            className={`relative transition-all duration-500 ease-in-out border-b lg:border-b-0 lg:border-r border-slate-100 ${hoveredStage === "before" ? "lg:w-[50%] flex-grow" : "lg:w-[25%]"
+              } ${hoveredStage === "after" ? "lg:w-[20%]" : ""}`}
             onMouseEnter={() => setHoveredStage("before")}
             onMouseLeave={() => setHoveredStage(null)}
           >
@@ -38,18 +37,16 @@ const DNTSCaseStudy = ({ caseStudy, hoveredStage, setHoveredStage }) => {
                 loading="lazy"
                 src={caseStudy.beforeImages[0]}
                 alt="Before"
-                className={`absolute inset-0 w-full h-full object-cover transition-transform duration-700 ${
-                  hoveredStage === "before" ? "scale-110" : "scale-100"
-                }`}
+                className={`absolute inset-0 w-full h-full object-cover transition-transform duration-700 ${hoveredStage === "before" ? "scale-110" : "scale-100"
+                  }`}
               />
-              <div className={`absolute inset-0 bg-red-900/60 transition-opacity duration-500 ${
-                hoveredStage === "before" ? "opacity-30" : "opacity-80"
-              }`} />
+              <div className={`absolute inset-0 bg-red-900/60 transition-opacity duration-500 ${hoveredStage === "before" ? "opacity-30" : "opacity-80"
+                }`} />
               <div className="absolute inset-0 flex items-center justify-center p-6 text-center">
                 <div className={`transition-all duration-500 ${hoveredStage === "before" ? "scale-110" : "scale-100"}`}>
                   <h3 className="text-3xl font-black text-white uppercase tracking-tighter drop-shadow-lg">Before</h3>
                   {hoveredStage === "before" && (
-                     <p className="text-white/90 text-xs font-bold mt-2 uppercase tracking-widest animate-fade-in">Initial Contamination</p>
+                    <p className="text-white/90 text-xs font-bold mt-2 uppercase tracking-widest animate-fade-in">Initial Contamination</p>
                   )}
                 </div>
               </div>
@@ -58,9 +55,8 @@ const DNTSCaseStudy = ({ caseStudy, hoveredStage, setHoveredStage }) => {
 
           {/* Middle Section (Content) */}
           <div
-            className={`relative flex flex-col p-8 lg:p-12 transition-all duration-500 ease-in-out ${
-              hoveredStage === null ? "lg:w-[50%]" : "lg:w-[30%]"
-            } flex-grow bg-slate-50 justify-center items-start overflow-hidden`}
+            className={`relative flex flex-col p-8 lg:p-12 transition-all duration-500 ease-in-out ${hoveredStage === null ? "lg:w-[50%]" : "lg:w-[30%]"
+              } flex-grow bg-slate-50 justify-center items-start overflow-hidden`}
           >
             <div className="w-full">
               <div className="flex items-center gap-3 mb-6">
@@ -84,9 +80,8 @@ const DNTSCaseStudy = ({ caseStudy, hoveredStage, setHoveredStage }) => {
 
           {/* After Section */}
           <div
-            className={`relative transition-all duration-500 ease-in-out border-t lg:border-t-0 lg:border-l border-slate-100 ${
-              hoveredStage === "after" ? "lg:w-[50%] flex-grow" : "lg:w-[25%]"
-            } ${hoveredStage === "before" ? "lg:w-[20%]" : ""}`}
+            className={`relative transition-all duration-500 ease-in-out border-t lg:border-t-0 lg:border-l border-slate-100 ${hoveredStage === "after" ? "lg:w-[50%] flex-grow" : "lg:w-[25%]"
+              } ${hoveredStage === "before" ? "lg:w-[20%]" : ""}`}
             onMouseEnter={() => setHoveredStage("after")}
             onMouseLeave={() => setHoveredStage(null)}
           >
@@ -95,25 +90,23 @@ const DNTSCaseStudy = ({ caseStudy, hoveredStage, setHoveredStage }) => {
                 loading="lazy"
                 src={caseStudy.afterImages[0]}
                 alt="After"
-                className={`absolute inset-0 w-full h-full object-cover transition-transform duration-700 ${
-                  hoveredStage === "after" ? "scale-110" : "scale-100"
-                }`}
+                className={`absolute inset-0 w-full h-full object-cover transition-transform duration-700 ${hoveredStage === "after" ? "scale-110" : "scale-100"
+                  }`}
               />
-              <div className={`absolute inset-0 bg-emerald-900/60 transition-opacity duration-500 ${
-                hoveredStage === "after" ? "opacity-30" : "opacity-80"
-              }`} />
+              <div className={`absolute inset-0 bg-emerald-900/60 transition-opacity duration-500 ${hoveredStage === "after" ? "opacity-30" : "opacity-80"
+                }`} />
               <div className="absolute inset-0 flex items-center justify-center p-6 text-center">
                 <div className={`transition-all duration-500 ${hoveredStage === "after" ? "scale-110" : "scale-100"}`}>
                   <h3 className="text-3xl font-black text-white uppercase tracking-tighter drop-shadow-lg">After</h3>
                   {hoveredStage === "after" && (
-                     <p className="text-white/90 text-xs font-bold mt-2 uppercase tracking-widest animate-fade-in">System Success</p>
+                    <p className="text-white/90 text-xs font-bold mt-2 uppercase tracking-widest animate-fade-in">System Success</p>
                   )}
                 </div>
               </div>
             </div>
           </div>
         </motion.div>
-        
+
         {/* CTA */}
         <motion.div
           className="text-center mt-16"

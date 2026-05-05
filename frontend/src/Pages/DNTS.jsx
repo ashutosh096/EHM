@@ -10,6 +10,10 @@ import {
   Zap,
   Wind,
   Filter,
+  Waves,
+  FlaskConical,
+  Sprout,
+  Droplets,
 } from "lucide-react";
 import SEO from "../Components/Common/SEO";
 import DNTSHero from "../Components/Resources/DNTS/DNTSHero";
@@ -29,74 +33,70 @@ const DNTSPage = () => {
     {
       id: "inlet",
       label: "Inlet Water",
-      bg: "bg-blue-100",
-      svgContent: (
-        <svg viewBox="0 0 40 40" className="w-10 h-10">
-          <rect x="4" y="18" width="8" height="20" fill="#4a90c4" rx="1" />
-          <rect x="14" y="10" width="10" height="28" fill="#3a7ab4" rx="1" />
-          <rect x="26" y="14" width="8" height="24" fill="#4a90c4" rx="1" />
-          <rect x="6" y="20" width="3" height="4" fill="white" opacity="0.6" rx="0.5" />
-          <rect x="17" y="12" width="3" height="4" fill="white" opacity="0.6" rx="0.5" />
-        </svg>
-      ),
+      sublabel: "Raw sewage / wastewater enters the system",
+      bg: "bg-blue-50 border-2 border-blue-200",
+      iconBg: "bg-blue-100",
+      iconColor: "text-blue-500",
+      IconComponent: Waves,
+      image: "/DNTS/flow-inlet.webp",
     },
     {
       id: "aabr",
-      label: "Accelerated Anaerobic Baffle Reactor (AABR)",
-      bg: "bg-blue-50 border border-blue-200",
-      svgContent: (
-        <div className="flex items-center gap-1 px-2">
-          {[20, 28, 24, 30, 22].map((h, i) => (
-            <div
-              key={i}
-              className="w-1.5 rounded-sm bg-blue-400"
-              style={{ height: `${h}px`, opacity: 0.55 + i * 0.09 }}
-            />
-          ))}
-        </div>
-      ),
+      label: "AABR",
+      sublabel: "Accelerated Anaerobic Baffle Reactor — removes organic load",
+      bg: "bg-indigo-50 border-2 border-indigo-200",
+      iconBg: "bg-indigo-100",
+      iconColor: "text-indigo-500",
+      IconComponent: FlaskConical,
+      image: "/DNTS/flow-aabr.webp",
     },
     {
       id: "wetland",
       label: "Constructed Wetland",
-      bg: "bg-green-50 border border-green-200",
-      svgContent: (
-        <div className="flex items-end gap-1 px-2 pb-1 h-full">
-          {[28, 34, 26, 32].map((h, i) => (
-            <div key={i} className="flex flex-col items-center">
-              <div className="w-3 h-3 rounded-full bg-red-400 -mb-1 z-10" />
-              <div
-                className="w-1.5 rounded-t-full bg-green-600"
-                style={{ height: `${h}px` }}
-              />
-            </div>
-          ))}
-        </div>
-      ),
+      sublabel: "Root-zone phytoremediation by hormonal plants",
+      bg: "bg-green-50 border-2 border-green-200",
+      iconBg: "bg-green-100",
+      iconColor: "text-green-600",
+      IconComponent: Sprout,
+      image: "/DNTS/flow-wetland.webp",
     },
     {
       id: "treated",
       label: "Treated Water",
-      bg: "bg-teal-100",
-      svgContent: (
-        <svg viewBox="0 0 40 40" className="w-9 h-9">
-          <path
-            d="M20 6 C20 6 10 18 10 25 a10 10 0 0 0 20 0 C30 18 20 6 20 6z"
-            fill="#2a9d8f"
-            opacity="0.85"
-          />
-        </svg>
-      ),
+      sublabel: "Compliant clean water ready for reuse",
+      bg: "bg-teal-50 border-2 border-teal-200",
+      iconBg: "bg-teal-100",
+      iconColor: "text-teal-500",
+      IconComponent: Droplets,
+      image: "/DNTS/flow-treated.webp",
     },
   ];
 
   const features = [
-    { id: "feat1", name: "Nature-based treatment", IconComponent: Leaf },
-    { id: "feat2", name: "Treatment at the source", IconComponent: Filter },
-    { id: "feat3", name: "No foul odor", IconComponent: Wind },
-    { id: "feat4", name: "Low O & M expenses", IconComponent: Zap },
-    { id: "feat5", name: "No skilled manpower required during O&M", IconComponent: CheckCircle },
-    { id: "feat6", name: "Smaller carbon footprint", IconComponent: Leaf },
+    {
+      id: "feat1", name: "Nature-based treatment", IconComponent: Leaf,
+      image: "/DNTS/feat-nature.webp",
+    },
+    {
+      id: "feat2", name: "Treatment at the source", IconComponent: Filter,
+      image: "/DNTS/feat-source.webp",
+    },
+    {
+      id: "feat3", name: "No foul odor", IconComponent: Wind,
+      image: "/DNTS/feat-odor.webp",
+    },
+    {
+      id: "feat4", name: "Low O & M expenses", IconComponent: Zap,
+      image: "/DNTS/feat-cost.webp",
+    },
+    {
+      id: "feat5", name: "No skilled manpower required during O&M", IconComponent: CheckCircle,
+      image: "/DNTS/feat-manpower.webp",
+    },
+    {
+      id: "feat6", name: "Smaller carbon footprint", IconComponent: Leaf,
+      image: "/DNTS/feat-carbon.webp",
+    },
   ];
 
   const suitedFor = [
@@ -115,8 +115,8 @@ const DNTSPage = () => {
       "A DNTS unit combining AABR and constructed wetland technology was designed and commissioned on-site.",
       "The system achieved treated water output at the outlet, meeting compliance standards with no skilled O&M required.",
     ],
-    beforeImages: ["/DNTS/prachi-before.webp", "/DNTS/prachi-before2.webp"],
-    afterImages: ["/DNTS/prachi-after.webp", "/DNTS/prachi-after2.webp"],
+    beforeImages: ["/DNTS/prachi-before.webp", "/DNTS/treat-water-ec.webp"],
+    afterImages: ["/DNTS/prachi-after.webp", "/DNTS/odor-system-main.webp"],
   };
 
   const dntsInfoData = [
@@ -219,13 +219,15 @@ const DNTSPage = () => {
 
       <section className="bg-gradient-to-b from-[#dbf1f2] to-[#ededed] py-20 px-4">
         <div className="container mx-auto">
-          <DNTSFlowchart flowStages={flowStages} headingStyle={headingStyle} />
+          {/* <DNTSFlowchart flowStages={flowStages} headingStyle={headingStyle} /> */}
+          {/* the above section is incomplete from my side so im not using it */}
           <DNTSFeatures
             features={features}
             suitedFor={suitedFor}
             activeNode={activeNode}
             setActiveNode={setActiveNode}
             headingStyle={headingStyle}
+            centerImage="/DNTS/7.webp"
           />
         </div>
       </section>

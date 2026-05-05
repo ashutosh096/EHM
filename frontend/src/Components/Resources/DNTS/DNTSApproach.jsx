@@ -54,9 +54,9 @@ const DNTSApproach = ({ approachData }) => {
                       loading="lazy"
                       src={item.image}
                       alt={item.title}
-                      className="w-20 h-20 rounded-full object-cover"
+                      className="w-28 h-28 rounded-full object-cover"
                       onError={(e) =>
-                        (e.target.src = `https://placehold.co/80x80/4a9e8a/ffffff?text=${item.title[0]}`)
+                        (e.target.src = `https://placehold.co/112x112/4a9e8a/ffffff?text=${item.title[0]}`)
                       }
                     />
                   </div>
@@ -88,9 +88,9 @@ const DNTSApproach = ({ approachData }) => {
                     loading="lazy"
                     src={item.image}
                     alt={item.title}
-                    className="w-20 h-20 rounded-full object-cover border-4 border-white shadow-md"
+                    className="w-28 h-28 rounded-full object-cover border-4 border-white shadow-md"
                     onError={(e) =>
-                      (e.target.src = `https://placehold.co/80x80/4a9e8a/ffffff?text=${item.title[0]}`)
+                      (e.target.src = `https://placehold.co/112x112/4a9e8a/ffffff?text=${item.title[0]}`)
                     }
                   />
                 </div>
