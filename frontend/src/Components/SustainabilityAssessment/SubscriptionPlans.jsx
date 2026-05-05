@@ -67,7 +67,7 @@ const TOTAL_ROWS = 1 + featuresList.length + 1;
 const SubscriptionPlans = () => {
   const navigate = useNavigate();
   const handleChoosePlan = (planName) =>
-    navigate("/contact", { state: { selectedPlan: planName } });
+    navigate("/contact/starc", { state: { selectedPlan: planName } });
 
   return (
     <section className="relative font-sans py-16 overflow-hidden">
@@ -80,7 +80,7 @@ const SubscriptionPlans = () => {
       {/* Top & bottom white fades */}
       <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-white via-white/80 to-transparent z-10" />
       <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-white via-white/80 to-transparent z-10" />
-      
+
       <div className="relative z-20">
         <SectionHeading>
           <span className="block text-slate-900">Choose a Plan That Fits</span>
@@ -139,9 +139,8 @@ const SubscriptionPlans = () => {
               <div
                 key={`label-${i}`}
                 style={{ gridRow: i + 2, gridColumn: 1, zIndex: 2 }}
-                className={`flex items-center px-4 border-b border-slate-100 font-semibold text-slate-600 text-sm ${
-                  i % 2 === 0 ? "bg-white/60 backdrop-blur-sm" : "bg-slate-50/60 backdrop-blur-sm"
-                }`}
+                className={`flex items-center px-4 border-b border-slate-100 font-semibold text-slate-600 text-sm ${i % 2 === 0 ? "bg-white/60 backdrop-blur-sm" : "bg-slate-50/60 backdrop-blur-sm"
+                  }`}
               >
                 {feature}
               </div>
@@ -196,9 +195,8 @@ const SubscriptionPlans = () => {
                       <div
                         key={`val-${pIdx}-${fIdx}`}
                         style={{ gridRow: fIdx + 2, gridColumn: col, zIndex: 2 }}
-                        className={`flex items-center justify-center border-b border-slate-100 ${
-                          fIdx % 2 === 0 ? "bg-white/90 backdrop-blur-sm" : "bg-slate-50/90 backdrop-blur-sm"
-                        }`}
+                        className={`flex items-center justify-center border-b border-slate-100 ${fIdx % 2 === 0 ? "bg-white/90 backdrop-blur-sm" : "bg-slate-50/90 backdrop-blur-sm"
+                          }`}
                       >
                         {value === "✅" ? (
                           <div
