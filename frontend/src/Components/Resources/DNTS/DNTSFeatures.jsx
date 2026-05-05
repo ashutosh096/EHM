@@ -9,13 +9,14 @@ const DNTSFeatures = ({
   activeNode,
   setActiveNode,
   headingStyle,
+  centerImage,
 }) => {
   return (
     <ScrollRevealElements
       className="container mx-auto flex flex-col lg:flex-row items-center justify-around gap-10"
       staggerAmount={0.5}
     >
-      {/* Features */}
+      {/* Features — image thumbnails like WaterRestoration factors */}
       <motion.div className="flex flex-col items-center lg:w-[450px]">
         <h3 className={headingStyle}>Features</h3>
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-x-6 gap-y-8">
@@ -27,11 +28,28 @@ const DNTSFeatures = ({
               className="flex flex-col items-center text-center cursor-pointer group"
             >
               <div
-                className={`relative w-24 h-24 rounded-full bg-[#0f101071] shadow-lg flex items-center justify-center transition-all duration-300 ease-in-out group-hover:-translate-y-1 group-hover:shadow-xl ${
+                className={`relative w-28 h-28 p-1 rounded-full bg-[#0f101071] shadow-lg transition-all duration-300 ease-in-out group-hover:-translate-y-1 group-hover:shadow-xl ${
                   activeNode === feat.id ? "ring-2 ring-[#10b981]" : "ring-1 ring-gray-200"
                 }`}
               >
-                <feat.IconComponent className="w-8 h-8 text-[#10b981]" />
+                <img
+                  loading="lazy"
+                  src={feat.image}
+                  alt={feat.name}
+                  className="rounded-full w-full h-full object-cover"
+                  onError={(e) => {
+                    // fallback: hide img and show icon
+                    e.target.style.display = "none";
+                    e.target.nextSibling.style.display = "flex";
+                  }}
+                />
+                {/* icon fallback, hidden by default */}
+                <div
+                  className="absolute inset-0 rounded-full items-center justify-center bg-[#0f101071]"
+                  style={{ display: "none" }}
+                >
+                  <feat.IconComponent className="w-8 h-8 text-[#10b981]" />
+                </div>
               </div>
               <p className="mt-3 font-semibold text-gray-700 text-sm w-28">
                 {feat.name}
@@ -59,7 +77,7 @@ const DNTSFeatures = ({
         >
           <img
             loading="lazy"
-            src="/DNTS/dnts-system.webp"
+            src={centerImage || "/DNTS/dnts-system.webp"}
             alt="DNTS System"
             className="rounded-xl w-64 h-48 md:w-80 md:h-60 object-cover"
             onError={(e) =>
