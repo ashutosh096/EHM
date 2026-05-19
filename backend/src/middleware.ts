@@ -46,7 +46,7 @@ cloudinary.config({
 const cloudinaryStorage: StorageEngine = {
   _handleFile(req: any, file: any, cb: any) {
     const uploadStream = cloudinary.uploader.upload_stream(
-      { folder: "EHM-APP", allowed_formats: ["jpg", "png", "jpeg", "gif"] },
+      { folder: "EHM-APP", allowed_formats: ["jpg", "png", "jpeg", "gif", "webp"] },
       (error: any, result: any) => {
         if (error) return cb(error);
         // path = secure_url, filename = public_id — matches existing route handlers
@@ -66,7 +66,7 @@ const cloudinaryStorage: StorageEngine = {
 
 const upload = multer({
   storage: cloudinaryStorage,
-  limits: { fileSize: 5 * 1024 * 1024 },
+  limits: { fileSize: 10 * 1024 * 1024 }, // 10MB (increased from 5MB)
 });
 
 export { AdminMiddleware, upload };
