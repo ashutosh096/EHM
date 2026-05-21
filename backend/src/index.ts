@@ -21,6 +21,9 @@ import VidUser from "./routes/VidUser";
 
 const app = express();
 
+// Trust reverse proxy (e.g. Render) to get the correct client IP for rate limiting
+app.set("trust proxy", 1);
+
 // CORS
 app.use(
   cors({

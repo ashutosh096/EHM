@@ -1,3 +1,4 @@
+import { fileURLToPath } from "url";
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import path from "path";
@@ -8,7 +9,8 @@ export default defineConfig({
   assetsInclude: ["**/*.lottie"],
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "src"), // Example alias for source files
+      "@": fileURLToPath(new URL("./src", import.meta.url)),
     },
   },
 });
+

@@ -151,8 +151,7 @@ const StarcHero = () => {
             {/* Brand wordmark */}
             <div className="mb-2">
               <div className="flex items-baseline gap-1">
-                <span className="text-5xl font-extrabold text-white tracking-tight">S</span>
-                <span className="text-5xl font-extrabold tracking-tight bg-gradient-to-r from-[#00ff9d] via-[#3498db] to-[#9b59b6] bg-clip-text text-transparent">TARC</span>
+                <span className="text-5xl font-extrabold tracking-tight bg-gradient-to-r from-[#00ff9d] via-[#3498db] to-[#9b59b6] bg-clip-text text-transparent">STARC</span>
               </div>
               <p className="text-[10px] font-semibold tracking-wider text-white/40 uppercase mt-1">
                 Sustainability Tracking, Assessment & Reporting for Campus
