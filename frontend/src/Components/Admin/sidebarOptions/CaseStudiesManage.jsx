@@ -76,10 +76,10 @@ export default function CaseStudiesManage() {
                     e.target.value = "";
                     return;
                 }
-                // Check size (max 5MB)
-                const maxSize = 5 * 1024 * 1024;
+                // Check size (max 10MB)
+                const maxSize = 10 * 1024 * 1024;
                 if (file.size > maxSize) {
-                    alert("Image size should not exceed 5MB.");
+                    alert("Image size should not exceed 10MB.");
                     e.target.value = "";
                     return;
                 }
@@ -258,7 +258,7 @@ function ContentForm({ formData, handleChange, contentType }) {
             <div><label className="block text-sm font-medium text-gray-700 mb-1">Author</label><input type="text" name="author" placeholder="Author's name" value={formData.author} onChange={handleChange} className="text-black bg-gray-200 w-full border-gray-300 px-4 py-2.5 rounded-lg focus:ring-2 focus:ring-green-500" /></div>
             <div><label className="block text-sm font-medium text-gray-700 mb-1">Content</label><ReactQuill value={formData.content} onChange={(content) => handleChange({ target: { name: 'content', value: content } })} modules={quillModules} formats={quillFormats} theme="snow" placeholder={`Write your ${contentType} content...`} style={{ height: '300px', marginBottom: '40px' }} /></div>
             <div><label className="block text-sm font-medium text-gray-700 mb-1">Upload Date & Time (Optional)</label><input type="datetime-local" name="customDate" value={formData.customDate || ""} onChange={handleChange} className="text-black bg-gray-200 w-full border-gray-300 px-4 py-2.5 rounded-lg focus:ring-2 focus:ring-green-500" title="Leave blank to use current time" /></div>
-            <div><label className="block text-sm font-medium text-gray-700 mb-1">{contentType} Image (JPEG, PNG, WEBP, Max 5MB)</label>{formData.image ? (<div className="flex items-center gap-3 mt-2"><p className="text-sm text-gray-700 bg-green-100 px-3 py-1 rounded-full">{typeof formData.image === "string" ? formData.image.split("/").pop() : formData.image.name}</p><button type="button" onClick={removeImage} className="text-red-500 font-bold hover:text-red-700 text-xl" title="Remove image">&times;</button></div>) : (<input type="file" name="image" accept="image/jpeg, image/png, image/webp" onChange={handleChange} className="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-green-100 file:text-green-700 hover:file:bg-green-200" />)}</div>
+            <div><label className="block text-sm font-medium text-gray-700 mb-1">{contentType} Image (JPEG, PNG, WEBP, Max 10MB)</label>{formData.image ? (<div className="flex items-center gap-3 mt-2"><p className="text-sm text-gray-700 bg-green-100 px-3 py-1 rounded-full">{typeof formData.image === "string" ? formData.image.split("/").pop() : formData.image.name}</p><button type="button" onClick={removeImage} className="text-red-500 font-bold hover:text-red-700 text-xl" title="Remove image">&times;</button></div>) : (<input type="file" name="image" accept="image/jpeg, image/png, image/webp" onChange={handleChange} className="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-green-100 file:text-green-700 hover:file:bg-green-200" />)}</div>
         </form>
     );
 }
