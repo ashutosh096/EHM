@@ -11,7 +11,7 @@ declare module "multer-storage-cloudinary" {
     };
   }
 
-  export class CloudinaryStorage implements StorageEngine {
+  class CloudinaryStorage implements StorageEngine {
     constructor(options: Options);
     _handleFile(req: any, file: any, cb: any): void;
     _removeFile(req: any, file: any, cb: any): void;

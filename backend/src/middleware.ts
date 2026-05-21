@@ -1,9 +1,8 @@
 import jwt from "jsonwebtoken";
 import { Request, Response, NextFunction } from "express";
 import dotenv from "dotenv";
-import multer from "multer";
+import multer, { StorageEngine } from "multer";
 import { v2 as cloudinary } from "cloudinary";
-const CloudinaryStorage = require("multer-storage-cloudinary");
 
 dotenv.config();
 
@@ -41,18 +40,33 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-// ✅ Multer with Cloudinary Storage
-const storage = new CloudinaryStorage({
-  cloudinary,
-  params: {
-    folder: "EHM-APP",
-    allowed_formats: ["jpg", "png", "jpeg", "gif"],
+// ✅ Custom Multer StorageEngine using cloudinary v2 upload_stream directly.
+// multer-storage-cloudinary (all versions) requires cloudinary v1 as a peer dep
+// and is incompatible with cloudinary v2. This inline engine replaces it.
+const cloudinaryStorage: StorageEngine = {
+  _handleFile(req: any, file: any, cb: any) {
+    const uploadStream = cloudinary.uploader.upload_stream(
+      { folder: "EHM-APP", allowed_formats: ["jpg", "png", "jpeg", "gif", "webp"] },
+      (error: any, result: any) => {
+        if (error) return cb(error);
+        // path = secure_url, filename = public_id — matches existing route handlers
+        cb(null, {
+          path: result.secure_url,
+          filename: result.public_id,
+          size: result.bytes,
+        });
+      }
+    );
+    file.stream.pipe(uploadStream);
   },
-});
+  _removeFile(req: any, file: any, cb: any) {
+    cloudinary.uploader.destroy(file.filename, cb);
+  },
+};
 
 const upload = multer({
-  storage,
-  limits: { fileSize: 5 * 1024 * 1024 },
+  storage: cloudinaryStorage,
+  limits: { fileSize: 10 * 1024 * 1024 }, // 10MB (increased from 5MB)
 });
 
 export { AdminMiddleware, upload };
