@@ -138,10 +138,7 @@ const CaseStudyPage = () => {
                         const textOnly = study.content ? study.content.replace(/<[^>]*>?/gm, "") : "";
                         const snippet = textOnly.split(" ").slice(0, 15).join(" ") + "...";
 
-                        // Keep custom route for Antia Talab if it exists
-                        const link = study.title.toLowerCase().includes("antia talab")
-                            ? "/waterbody-restoration"
-                            : `/casestudies/${study._id}`;
+                        const link = `/casestudies/${study._id}`;
 
                         return (
                             <div key={study._id} className="w-full sm:w-80 md:w-[380px]">
