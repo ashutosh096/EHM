@@ -39,7 +39,7 @@ const TABS = [
         <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
       </svg>
     ),
-    image: "/dashboard/energy.webp",
+    image: "/dashboard/social.webp",
     color: "#4B7635",          // EHM Green
     accent: "rgba(75,118,53,0.10)",
     tag: "Environment",
