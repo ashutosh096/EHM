@@ -254,16 +254,6 @@ const SubscriptionPlans = () => {
           </div>
         </div>
 
-        {/* Trust badges */}
-        <div className="mt-6 flex flex-col md:flex-row items-center justify-center gap-8 opacity-60">
-          <p className="text-slate-400 text-sm font-bold tracking-widest uppercase">
-            Trusted by 20+ Institutions
-          </p>
-          <div className="h-px w-24 bg-slate-200 hidden md:block" />
-          <p className="text-slate-400 text-sm font-bold tracking-widest uppercase">
-            CSJMU Accredited
-          </p>
-        </div>
       </div>
     </section>
   );
