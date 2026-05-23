@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import SectionHeading from "../../Common/SectionHeading";
 
@@ -103,11 +103,25 @@ const TABS = [
 const EhmBrief = () => {
   const [active, setActive] = useState(0);
   const [direction, setDirection] = useState(1);
+  const [isHovering, setIsHovering] = useState(false);
+  const activeRef = useRef(active);
+  activeRef.current = active;
 
   const handleTabChange = (idx) => {
-    setDirection(idx > active ? 1 : -1);
+    setDirection(idx > activeRef.current ? 1 : -1);
     setActive(idx);
   };
+
+  // Auto-scroll: advance every 3 s when not hovering
+  useEffect(() => {
+    if (isHovering) return;
+    const id = setInterval(() => {
+      const next = (activeRef.current + 1) % TABS.length;
+      setDirection(1);
+      setActive(next);
+    }, 3000);
+    return () => clearInterval(id);
+  }, [isHovering]);
 
   const tab = TABS[active];
 
@@ -135,7 +149,12 @@ const EhmBrief = () => {
 
       {/* ── Tab Bar ── */}
       <div className="relative z-20 w-full px-4 sm:px-8 md:px-12 lg:px-24 xl:px-32 pb-4">
-        <div className="flex flex-wrap gap-2 sm:gap-3 justify-center mb-8">
+        {/* Pause auto-scroll when hovering the tab pills */}
+        <div
+          className="flex flex-wrap gap-2 sm:gap-3 justify-center mb-8"
+          onMouseEnter={() => setIsHovering(true)}
+          onMouseLeave={() => setIsHovering(false)}
+        >
           {TABS.map((t, i) => (
             <button
               key={t.id}
@@ -167,12 +186,15 @@ const EhmBrief = () => {
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 xl:gap-10 items-center">
 
           {/* Screenshot panel — 3/5 */}
+          {/* Pause auto-scroll when hovering the screenshot */}
           <motion.div
             layout
             transition={{
               layout: { duration: 0.8, ease: [0.4, 0, 0.2, 1] }
             }}
             className="lg:col-span-3 relative overflow-hidden rounded-2xl shadow-2xl group"
+            onMouseEnter={() => setIsHovering(true)}
+            onMouseLeave={() => setIsHovering(false)}
           >
             <AnimatePresence mode="popLayout" initial={false}>
               <motion.div
@@ -254,50 +276,20 @@ const EhmBrief = () => {
               </motion.div>
             </AnimatePresence>
 
-            {/* Prev / dots / next — Moved outside AnimatePresence */}
-            <div className="flex items-center gap-3 mt-8">
-              <button
-                onClick={() => handleTabChange((active - 1 + TABS.length) % TABS.length)}
-                className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 hover:bg-white"
-                style={{
-                  border: "1.5px solid #d1d5db",
-                  color: "#9ca3af",
-                  background: "rgba(255,255,255,0.6)",
-                }}
-              >
-                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <polyline points="15 18 9 12 15 6" />
-                </svg>
-              </button>
-
-              <div className="flex gap-1.5 items-center">
-                {TABS.map((_, i) => (
-                  <button
-                    key={i}
-                    onClick={() => handleTabChange(i)}
-                    className="rounded-full transition-all duration-300"
-                    style={{
-                      width: i === active ? "24px" : "8px",
-                      height: "8px",
-                      background: i === active ? tab.color : "#d1d5db",
-                    }}
-                  />
-                ))}
-              </div>
-
-              <button
-                onClick={() => handleTabChange((active + 1) % TABS.length)}
-                className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 hover:bg-white"
-                style={{
-                  border: "1.5px solid #d1d5db",
-                  color: "#9ca3af",
-                  background: "rgba(255,255,255,0.6)",
-                }}
-              >
-                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <polyline points="9 18 15 12 9 6" />
-                </svg>
-              </button>
+            {/* Dots navigation only — arrows hidden */}
+            <div className="flex items-center justify-start gap-1.5 mt-8">
+              {TABS.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => handleTabChange(i)}
+                  className="rounded-full transition-all duration-300"
+                  style={{
+                    width: i === active ? "24px" : "8px",
+                    height: "8px",
+                    background: i === active ? tab.color : "#d1d5db",
+                  }}
+                />
+              ))}
             </div>
           </div>
         </div>
