@@ -9,30 +9,10 @@ import SectionHeading from "../../Common/SectionHeading";
 // Teal accent    : #7dbea8 / teal-100 #ccfbf1 / teal-200 #99f6e4
 
 const TABS = [
-  {
-    id: "energy",
-    label: "Energy Management",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
-        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
-      </svg>
-    ),
-    image: "/dashboard/energy.webp",
-    color: "#4B7635",          // EHM Green
-    accent: "rgba(75,118,53,0.10)",
-    tag: "Environment",
-    title: "Energy Consumption Trend",
-    description:
-      "Track monthly electricity vs. solar generation across campus. Monitor your energy mix — renewable vs. non-renewable — with real-time breakdowns and historical trends to drive efficiency.",
-    stats: [
-      { label: "Total Solar Generated", value: "935k kWh" },
-      { label: "Avg Non-Renewable", value: "224k kWh" },
-      { label: "Avg Renewable", value: "85k kWh" },
-    ],
-  },
+
   {
     id: "water",
-    label: "Water Management",
+    label: "Environment",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
         <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" />
@@ -49,6 +29,27 @@ const TABS = [
       { label: "Total Water Consumed", value: "511M L" },
       { label: "Water Usage Intensity", value: "472.91 L/m²" },
       { label: "Per Capita Consumption", value: "93.33 L/day" },
+    ],
+  },
+  {
+    id: "energy",
+    label: "Social",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
+        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+      </svg>
+    ),
+    image: "/dashboard/energy.webp",
+    color: "#4B7635",          // EHM Green
+    accent: "rgba(75,118,53,0.10)",
+    tag: "Environment",
+    title: "Energy Consumption Trend",
+    description:
+      "Track monthly electricity vs. solar generation across campus. Monitor your energy mix — renewable vs. non-renewable — with real-time breakdowns and historical trends to drive efficiency.",
+    stats: [
+      { label: "Total Solar Generated", value: "935k kWh" },
+      { label: "Avg Non-Renewable", value: "224k kWh" },
+      { label: "Avg Renewable", value: "85k kWh" },
     ],
   },
   {
