@@ -18,7 +18,7 @@ const TABS = [
         <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" />
       </svg>
     ),
-    image: "/dashboard/water.webp",
+    image: "/dashboard/dashboard.webp",
     color: "#3B66BC",          // EHM Blue
     accent: "rgba(59,102,188,0.10)",
     tag: "Environment",
@@ -39,7 +39,7 @@ const TABS = [
         <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
       </svg>
     ),
-    image: "/dashboard/social.webp",
+    image: "/dashboard/dashboard.webp",
     color: "#4B7635",          // EHM Green
     accent: "rgba(75,118,53,0.10)",
     tag: "Environment",
@@ -62,7 +62,7 @@ const TABS = [
         <line x1="12" y1="17" x2="12" y2="21" />
       </svg>
     ),
-    image: "/dashboard/governance.webp",
+    image: "/dashboard/dashboard.webp",
     color: "#2d6a4f",          // Deep forest green (complementary)
     accent: "rgba(45,106,79,0.10)",
     tag: "Governance",
@@ -85,7 +85,7 @@ const TABS = [
         <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
       </svg>
     ),
-    image: "/dashboard/ghg.webp",
+    image: "/dashboard/dashboard.webp",
     color: "#1d4e89",          // Navy blue (on-brand)
     accent: "rgba(29,78,137,0.10)",
     tag: "Environment",
@@ -185,45 +185,14 @@ const EhmBrief = () => {
         {/* ── Main Showcase ── */}
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 xl:gap-10 items-center">
 
-          {/* Screenshot panel — 3/5 */}
-          {/* Pause auto-scroll when hovering the screenshot */}
-          <motion.div
-            layout
-            transition={{
-              layout: { duration: 0.8, ease: [0.4, 0, 0.2, 1] }
-            }}
-            className="lg:col-span-3 relative overflow-hidden rounded-2xl shadow-2xl group"
-            onMouseEnter={() => setIsHovering(true)}
-            onMouseLeave={() => setIsHovering(false)}
-          >
-            <AnimatePresence mode="popLayout" initial={false}>
-              <motion.div
-                key={tab.id}
-                className="w-full"
-                initial={{ opacity: 0, x: direction * 50 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: direction * -50 }}
-                transition={{
-                  duration: 0.8,
-                  ease: [0.4, 0, 0.2, 1]
-                }}
-                style={{ willChange: "transform, opacity" }}
-              >
-                <img
-                  src={tab.image}
-                  alt={tab.title}
-                  loading="lazy"
-                  className="w-full h-auto block shadow-sm"
-                />
-              </motion.div>
-            </AnimatePresence>
-
-            {/* Inner glow tint */}
-            <div
-              className="absolute inset-0 pointer-events-none rounded-2xl z-10"
-              style={{ boxShadow: `inset 0 0 40px ${tab.color}10` }}
+          {/* Screenshot panel — 3/5 — single static image, no animation */}
+          <div className="lg:col-span-3 relative overflow-hidden rounded-2xl shadow-2xl">
+            <img
+              src="/dashboard/dashboard.webp"
+              alt="EHM Sustainability Dashboard"
+              className="w-full h-auto block shadow-sm"
             />
-          </motion.div>
+          </div>
 
           {/* Info panel — 2/5 */}
           <div className="lg:col-span-2 relative">
