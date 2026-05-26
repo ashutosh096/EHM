@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
  * Animated, centered section heading with two underline bars.
  * Usage: <SectionHeading>Title</SectionHeading>
  */
-const SectionHeading = ({ children, className = "my-12" }) => (
+const SectionHeading = ({ children, className = "my-6" }) => (
   <div className={`text-center ${className}`}>
     <h2 className="text-3xl md:text-4xl font-bold text-gray-900 inline-block relative">
       {children}

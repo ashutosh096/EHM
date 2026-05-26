@@ -10,15 +10,15 @@ const PartnersLogo = () => {
   };
 
   return (
-    <section className="relative w-full py-16 overflow-hidden">
+    <section className="relative w-full py-8 overflow-hidden">
       {/* Layered gradients in background */}
       <div className="absolute inset-0 bg-gradient-to-b from-white via-teal-50 to-white pointer-events-none" />
       <div className="absolute inset-0 bg-gradient-to-b from-white/95 via-teal-100/70 to-white/95 pointer-events-none" />
       <div className="absolute inset-0 bg-gradient-to-br from-teal-50/60 via-teal-100/40 to-teal-50/60 pointer-events-none" />
 
       {/* Top & bottom fade overlays */}
-      <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-white via-white/95 to-transparent z-10 pointer-events-none" />
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white via-white/95 to-transparent z-10 pointer-events-none" />
+      <div className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-b from-white via-white/95 to-transparent z-10 pointer-events-none" />
+      <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white via-white/95 to-transparent z-10 pointer-events-none" />
 
       <div className="max-w-6xl mx-auto px-4 md:px-6 relative z-20">
         <ScrollRevealElements staggerAmount={0.1} className="relative z-10 text-center md:text-left">

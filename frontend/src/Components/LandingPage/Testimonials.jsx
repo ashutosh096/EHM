@@ -66,9 +66,9 @@ const Testimonials = () => {
   };
 
   return (
-    <div className="py-16 bg-white overflow-hidden">
+    <div className="py-8 bg-white overflow-hidden">
       <div className="container mx-auto">
-        <ScrollRevealElements className="text-center mb-12" staggerAmount={0.5}>
+        <ScrollRevealElements className="text-center mb-6" staggerAmount={0.5}>
           <SectionHeading>Completed Projects</SectionHeading>
         </ScrollRevealElements>
 

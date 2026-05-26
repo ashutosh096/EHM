@@ -63,11 +63,11 @@ const awardsData = [
 
 const AwardsSection = () => {
   return (
-    <section id="awards" className="py-28 bg-gradient-to-br from-emerald-50 via-green-50 to-teal-100 relative overflow-hidden">
+    <section id="awards" className="py-10 bg-gradient-to-br from-emerald-50 via-green-50 to-teal-100 relative overflow-hidden">
       <div className="absolute inset-0 opacity-20 bg-[url('https://www.toptal.com/designers/subtlepatterns/uploads/moroccan-flower.webp')]" />
 
       <div className="relative max-w-6xl mx-auto px-6 md:px-16 lg:px-20">
-        <div className="text-center my-12">
+        <div className="text-center my-6">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 inline-block relative">
             Awards, Recognitions & Strategic Engagements
             <motion.span

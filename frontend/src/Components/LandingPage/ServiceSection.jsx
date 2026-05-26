@@ -54,11 +54,11 @@ const ServiceSection = () => {
 
   return (
     <div
-      className="min-h-screen w-full flex flex-col items-center justify-center p-8 
+      className="w-full flex flex-col items-center justify-center p-8 
                  bg-gradient-to-b from-teal-50 via-teal-100/40 to-teal-50"
     >
       <ScrollRevealElements
-        className="text-center mb-12 py-8"
+        className="text-center mb-8 py-2"
         staggerAmount={0.6}
       >
         <SectionHeading>Offerings</SectionHeading>
