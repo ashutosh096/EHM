@@ -34,11 +34,14 @@ const Team = ({ title, members, limit }) => {
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: index * 0.1 }}
             >
-              {/* FIX: Fill area like before but avoid head cropping */}
-              <img loading="lazy" src={member.img}
-                alt={member.name}
-                className="w-full h-44 object-cover object-top"
-              />
+              <div className="w-full h-56 bg-gray-100 flex items-center justify-center overflow-hidden">
+                <img
+                  loading="lazy"
+                  src={member.img}
+                  alt={member.name}
+                  className="w-full h-full object-cover object-top"
+                />
+              </div>
 
               <div className="flex flex-col items-center p-4 text-center w-full">
                 <div className="flex items-center justify-center gap-2 mb-1">
