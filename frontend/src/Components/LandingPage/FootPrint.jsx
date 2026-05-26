@@ -90,12 +90,12 @@ const FootPrint = () => {
   };
 
   return (
-    <div className="w-full flex flex-col items-center justify-center overflow-visible py-10 bg-white relative">
+    <div className="w-full flex flex-col items-center justify-center overflow-visible py-6 bg-white relative">
       <ScrollRevealElements
-        className="flex flex-col gap-3 mb-8 items-center"
+        className="flex flex-col gap-3 mb-4 items-center"
         staggerAmount={0.5}
       >
-        <motion.div className="text-center mb-12 py-8">
+        <motion.div className="text-center mb-4 py-2">
           <SectionHeading>EHM FootPrint</SectionHeading>
         </motion.div>
       </ScrollRevealElements>

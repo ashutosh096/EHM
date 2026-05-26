@@ -124,11 +124,11 @@ export default function WhoWeAre() {
   return (
     <section
       ref={container}
-      className="about-section py-12 md:py-16 lg:py-20 bg-gradient-to-b from-white to-slate-100 text-slate-800 overflow-hidden"
+      className="about-section py-8 md:py-10 lg:py-12 bg-gradient-to-b from-white to-slate-100 text-slate-800 overflow-hidden"
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
         {/* Header */}
-        <div className="text-center mb-8 sm:mb-12 lg:mb-16 -translate-y-8 sm:-translate-y-12 md:-translate-y-16">
+        <div className="text-center mb-6 sm:mb-8 lg:mb-10">
           {/* <div className="intro-title">
             <SectionHeader title="Who We Are" subtitle="" />
           </div> */}
@@ -164,7 +164,7 @@ export default function WhoWeAre() {
         </div>
 
         {/* Cards - Now using mapped data and reusable component */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 lg:gap-12 -translate-y-8 sm:-translate-y-12 md:-translate-y-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 lg:gap-12">
           {purposeData.map((card) => (
             <PurposeCard
               key={card.id}

@@ -15,10 +15,10 @@ const Team = ({ title, members, limit }) => {
       <div className="absolute inset-0 bg-gradient-to-b from-white/90 via-transparent to-white/90" />
       <div className="absolute inset-0 bg-gradient-to-br from-teal-100/60 via-teal-200/40 to-teal-100/60" />
       <div className="absolute inset-0 bg-gradient-to-tr from-teal-50/50 via-teal-150/30 to-teal-50/50" />
-      <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-white via-white/80 to-transparent z-10" />
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white via-white/80 to-transparent z-10" />
+      <div className="absolute top-0 left-0 right-0 h-8 bg-gradient-to-b from-white via-white/80 to-transparent z-10" />
+      <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-white via-white/80 to-transparent z-10" />
 
-      <div className="relative py-12 flex flex-col items-center justify-center z-20">
+      <div className="relative py-8 flex flex-col items-center justify-center z-20">
         <SectionHeading>{title}</SectionHeading>
 
         <ScrollRevealElements
@@ -68,7 +68,7 @@ const Team = ({ title, members, limit }) => {
         </ScrollRevealElements>
 
         <motion.div
-          className="mt-16 text-center"
+          className="mt-6 text-center"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}

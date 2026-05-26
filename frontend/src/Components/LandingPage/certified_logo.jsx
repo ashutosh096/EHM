@@ -8,7 +8,7 @@ const CertifiedLogo = () => {
   const [hoveredIndex, setHoveredIndex] = useState(null);
 
   return (
-    <section className="relative py-20 bg-gradient-to-br from-slate-50 via-white to-slate-50 overflow-hidden">
+    <section className="relative py-8 bg-gradient-to-br from-slate-50 via-white to-slate-50 overflow-hidden">
       
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
@@ -51,7 +51,7 @@ const CertifiedLogo = () => {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-8"
         >
           <SectionHeading>
             <span>Certified </span>
@@ -172,7 +172,7 @@ const CertifiedLogo = () => {
 
         {/* Bottom Accent Line */}
         <motion.div
-          className="mt-16 flex justify-center"
+          className="mt-8 flex justify-center"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8 }}
