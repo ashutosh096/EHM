@@ -1,5 +1,5 @@
 import { Router, Request, Response } from "express";
-import { AdminMiddleware, upload } from "../middleware";
+import { AdminMiddleware, upload, handleUploadError } from "../middleware";
 import { CaseStudyModel } from "../db";
 import { v2 as cloudinary } from "cloudinary";
 
@@ -14,6 +14,7 @@ CaseStudyAdminRouter.post(
   "/casestudies",
   AdminMiddleware,
   upload.single("image"),
+  handleUploadError,
   async (req: CustomRequest, res: Response) => {
     try {
       const { title, author, content, customDate } = req.body;
@@ -49,6 +50,7 @@ CaseStudyAdminRouter.put(
   "/casestudies/:id",
   AdminMiddleware,
   upload.single("image"),
+  handleUploadError,
   async (req: CustomRequest, res: Response) => {
     try {
       const { title, author, content, customDate } = req.body;

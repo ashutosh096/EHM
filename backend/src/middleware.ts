@@ -45,8 +45,14 @@ cloudinary.config({
 // and is incompatible with cloudinary v2. This inline engine replaces it.
 const cloudinaryStorage: StorageEngine = {
   _handleFile(req: any, file: any, cb: any) {
+    // Validate MIME type before uploading to Cloudinary
+    const allowed = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
+    if (!allowed.includes(file.mimetype)) {
+      return cb(new Error("INVALID_FORMAT: Only JPG, PNG, and WEBP images are allowed."));
+    }
+
     const uploadStream = cloudinary.uploader.upload_stream(
-      { folder: "EHM-APP", allowed_formats: ["jpg", "png", "jpeg", "gif", "webp"] },
+      { folder: "EHM-APP", allowed_formats: ["jpg", "png", "jpeg", "webp"] },
       (error: any, result: any) => {
         if (error) return cb(error);
         // path = secure_url, filename = public_id — matches existing route handlers
@@ -66,7 +72,22 @@ const cloudinaryStorage: StorageEngine = {
 
 const upload = multer({
   storage: cloudinaryStorage,
-  limits: { fileSize: 10 * 1024 * 1024 }, // 10MB (increased from 5MB)
+  limits: { fileSize: 5 * 1024 * 1024 }, // 5 MB max
 });
 
-export { AdminMiddleware, upload };
+// ✅ Multer error handler — call this in routes after upload middleware
+// Converts multer/format errors to clean JSON responses (prevents server crash).
+function handleUploadError(err: any, req: any, res: Response, next: NextFunction) {
+  if (err) {
+    if (err.code === "LIMIT_FILE_SIZE") {
+      return res.status(400).json({ success: false, message: "File too large. Maximum size is 5 MB." });
+    }
+    if (err.message?.startsWith("INVALID_FORMAT")) {
+      return res.status(400).json({ success: false, message: "Invalid file type. Only JPG, PNG, and WEBP are allowed." });
+    }
+    return res.status(400).json({ success: false, message: err.message || "File upload error." });
+  }
+  next();
+}
+
+export { AdminMiddleware, upload, handleUploadError };
