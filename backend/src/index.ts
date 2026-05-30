@@ -31,6 +31,7 @@ app.use(
       "http://localhost:5173",
       "https://ehmconsultancy.co.in",
       "https://www.ehmconsultancy.co.in",
+      "https://ehm.vercel.app",
       "https://ehm-ft.onrender.com",
       "http://localhost:5000",
     ],
