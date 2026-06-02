@@ -162,16 +162,37 @@ export default function CaseStudiesManage() {
         }
     };
 
-    const openEditModal = (study) => {
-        setSelectedCaseStudy(study);
-        setFormData({
-            title: study.title,
-            author: study.author,
-            content: study.content, // Already HTML from Quill
-            image: study.image,
-            customDate: study.createdAt ? new Date(study.createdAt).toISOString().slice(0, 16) : ""
-        });
-        setIsEditModalOpen(true);
+    const openEditModal = async (study) => {
+        setFeedback({ show: true, type: 'loading', message: 'Loading case study details...' });
+        try {
+            const res = await API.get(`/casestudies/${study._id}`);
+            const fullStudy = res.data.data;
+            setSelectedCaseStudy(fullStudy);
+            setFormData({
+                title: fullStudy.title,
+                author: fullStudy.author,
+                content: fullStudy.content || "", // Already HTML from Quill
+                image: fullStudy.image,
+                customDate: fullStudy.createdAt ? new Date(fullStudy.createdAt).toISOString().slice(0, 16) : ""
+            });
+            setIsEditModalOpen(true);
+            setFeedback({ show: false, type: '', message: '' });
+        } catch (err) {
+            setFeedback({ show: true, type: 'error', message: 'Failed to load case study.' });
+        }
+    };
+
+    const openFullView = async (study) => {
+        setFeedback({ show: true, type: 'loading', message: 'Loading case study details...' });
+        try {
+            const res = await API.get(`/casestudies/${study._id}`);
+            const fullStudy = res.data.data;
+            setSelectedCaseStudy(fullStudy);
+            setIsFullViewOpen(true);
+            setFeedback({ show: false, type: '', message: '' });
+        } catch (err) {
+            setFeedback({ show: true, type: 'error', message: 'Failed to load case study.' });
+        }
     };
 
     const createSnippet = (html, len = 100) => html?.replace(/<[^>]*>?/gm, " ").slice(0, len).trim() + "...";
@@ -195,7 +216,7 @@ export default function CaseStudiesManage() {
                             {study.image ? (<img loading="lazy" src={study.image} alt={study.title} className="w-full h-40 object-cover group-hover:scale-105 transition-transform" />) : (<div className="w-full h-40 flex items-center justify-center bg-gray-100"><span className="text-gray-400 text-lg">No Image</span></div>)}
                             <div className="p-4">
                                 <p className="text-sm text-gray-500 mb-1">{formatDate(study.createdAt)}</p>
-                                <h3 className="text-lg font-semibold text-green-900 cursor-pointer hover:underline" onClick={() => { setSelectedCaseStudy(study); setIsFullViewOpen(true); }}>{study.title}</h3>
+                                <h3 className="text-lg font-semibold text-green-900 cursor-pointer hover:underline" onClick={() => openFullView(study)}>{study.title}</h3>
                                 <span className="inline-block bg-green-100 text-green-700 text-xs px-2 py-1 rounded mt-1">{study.author}</span>
                                 <p className="text-gray-700 mt-2">{createSnippet(study.content)}</p>
                                 <div className="flex gap-4 mt-4 border-t pt-3">
