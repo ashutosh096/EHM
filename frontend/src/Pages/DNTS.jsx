@@ -14,6 +14,10 @@ import {
   FlaskConical,
   Sprout,
   Droplets,
+  MapPin,
+  DollarSign,
+  UserCheck,
+  Footprints,
 } from "lucide-react";
 import SEO from "../Components/Common/SEO";
 import DNTSHero from "../Components/Resources/DNTS/DNTSHero";
@@ -78,7 +82,7 @@ const DNTSPage = () => {
       image: "/DNTS/feat-nature.webp",
     },
     {
-      id: "feat2", name: "Treatment at the source", IconComponent: Filter,
+      id: "feat2", name: "Treatment at the source", IconComponent: MapPin,
       image: "/DNTS/feat-source.webp",
     },
     {
@@ -86,25 +90,25 @@ const DNTSPage = () => {
       image: "/DNTS/feat-odor.webp",
     },
     {
-      id: "feat4", name: "Low O & M expenses", IconComponent: Zap,
+      id: "feat4", name: "Low O & M expenses", IconComponent: DollarSign,
       image: "/DNTS/feat-cost.webp",
     },
     {
-      id: "feat5", name: "No skilled manpower required during O&M", IconComponent: CheckCircle,
+      id: "feat5", name: "No skilled manpower required during O&M", IconComponent: UserCheck,
       image: "/DNTS/feat-manpower.webp",
     },
     {
-      id: "feat6", name: "Smaller carbon footprint", IconComponent: Leaf,
+      id: "feat6", name: "Smaller carbon footprint", IconComponent: Footprints,
       image: "/DNTS/feat-carbon.webp",
     },
   ];
 
   const suitedFor = [
-    { id: "s1", name: "Universities/Colleges/Schools", IconComponent: School },
+    { id: "s1", name: "Universities & Schools", IconComponent: School },
     { id: "s2", name: "Office buildings", IconComponent: Building2 },
-    { id: "s3", name: "Housing/Residential societies", IconComponent: Home },
+    { id: "s3", name: "Residential societies", IconComponent: Home },
     { id: "s4", name: "Industries", IconComponent: Factory },
-    { id: "s5", name: "Commercial establishment", IconComponent: ShoppingBag },
+    { id: "s5", name: "Commercial establishments", IconComponent: ShoppingBag },
   ];
 
   const caseStudy = {
@@ -153,13 +157,15 @@ const DNTSPage = () => {
       title: "Tirupathur Municipal Corporation",
       description: "DNTS installation for Tirupathur Municipal Corporation, Tamilnadu.",
       details: "Capacity: 227 KLD",
-      image: "/DNTS/tirupathur.webp",
+      image: "/DNTS/tirupathur-updated.jpg",
+      imagePosition: "center",
     },
     gajwel: {
       title: "Gajwel City, Hyderabad",
       description: "Multiple DNTS units at Gajwel, Telangana in collaboration with Nav Enviro Consultants, Hyderabad.",
       details: "0.5 MLD, 1.25 MLD, 1.50 MLD & 3.50 MLD",
-      image: "/DNTS/gajwel.webp",
+      image: "/DNTS/gajwel-updated.jpg",
+      imagePosition: "left center",
     },
   };
 
@@ -186,7 +192,7 @@ const DNTSPage = () => {
     },
   ];
 
-  const headingStyle = "text-2xl font-bold text-slate-700 mb-8 tracking-wide";
+  const headingStyle = "text-2xl font-bold text-slate-700 mb-6 tracking-wide";
 
   return (
     <div>
@@ -217,7 +223,7 @@ const DNTSPage = () => {
 
       <DNTSHero />
 
-      <section className="bg-gradient-to-b from-[#dbf1f2] to-[#ededed] py-20 px-4">
+      <section className="bg-[#e2f0ed] pt-10 pb-4 md:pt-12 md:pb-6 px-4">
         <div className="container mx-auto">
           {/* <DNTSFlowchart flowStages={flowStages} headingStyle={headingStyle} /> */}
           {/* the above section is incomplete from my side so im not using it */}
@@ -227,20 +233,20 @@ const DNTSPage = () => {
             activeNode={activeNode}
             setActiveNode={setActiveNode}
             headingStyle={headingStyle}
-            centerImage="/DNTS/7.webp"
+            centerImage="/DNTS/dnts-system-updated.webp"
           />
         </div>
       </section>
+
+      <DNTSInfo dntsInfoData={dntsInfoData} />
+
+      <DNTSApproach approachData={approachData} />
 
       <DNTSCaseStudy
         caseStudy={caseStudy}
         hoveredStage={hoveredStage}
         setHoveredStage={setHoveredStage}
       />
-
-      <DNTSInfo dntsInfoData={dntsInfoData} />
-
-      <DNTSApproach approachData={approachData} />
 
       <DNTSProjects
         projectsData={projectsData}
