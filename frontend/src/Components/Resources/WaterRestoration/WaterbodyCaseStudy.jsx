@@ -5,7 +5,7 @@ import ScrollRevealElements from "../../Animations/ScrollRevealElements";
 
 const WaterbodyCaseStudy = ({ caseStudy, hoveredStage, setHoveredStage }) => {
   return (
-    <section className="bg-[#e2e9e4] pt-16 pb-20 px-4">
+    <section className="bg-[#e2e9e4] pt-10 pb-10 px-4">
       <div className="container mx-auto">
         <div className="w-full max-w-7xl mx-auto ">
           <ScrollRevealElements className="text-center mb-12 md:mb-16" staggerAmount={0.5}>
@@ -113,14 +113,14 @@ const WaterbodyCaseStudy = ({ caseStudy, hoveredStage, setHoveredStage }) => {
         
         {/* CTA */}
         <motion.div
-          className="text-center mt-16"
+          className="text-center mt-8"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, ease: "easeOut", delay: 0.5 }}
         >
           <a
-            href="/resources/casestudies"
+            href="/casestudies/68c34685c07e11de0b519c84"
             className="inline-block bg-[#10b981] text-white font-bold py-3 px-8 rounded-lg text-lg hover:bg-[#0a7c56] transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
           >
             View Full Case Study

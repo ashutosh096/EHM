@@ -182,15 +182,16 @@ const WaterbodyRestoration = () => {
         headingStyle={headingStyle}
       />
 
+      <WaterbodyBenefits benefitsData={benefitsData} />
+
+      <WaterbodyApproach approachData={approachData} />
+
       <WaterbodyCaseStudy
         caseStudy={caseStudy}
         hoveredStage={hoveredStage}
         setHoveredStage={setHoveredStage}
       />
 
-      <WaterbodyBenefits benefitsData={benefitsData} />
-
-      <WaterbodyApproach approachData={approachData} />
       <WaterbodyProjects
         projectsData={projectsData}
         hoveredProject={hoveredProject}

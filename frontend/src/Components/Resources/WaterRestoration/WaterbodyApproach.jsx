@@ -5,10 +5,10 @@ import ScrollRevealElements from "../../Animations/ScrollRevealElements";
 
 const WaterbodyApproach = ({ approachData }) => {
   return (
-    <section className="bg-[#f6f6f6] pb-20 px-4">
+    <section className="bg-[#f6f6f6] pb-10 px-4">
       <div className="container mx-auto">
         <motion.div
-          className="text-center mt-28 mb-16"
+          className="text-center mt-10 mb-16"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -102,7 +102,7 @@ const WaterbodyApproach = ({ approachData }) => {
 
         {/* button */}
         <motion.div
-          className="text-center mt-20"
+          className="text-center mt-10"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}

@@ -14,7 +14,7 @@ const WaterbodyBenefits = ({ benefitsData }) => {
   };
 
   return (
-    <section className="bg-[#e2e9e4] pb-20 px-4">
+    <section className="bg-[#e2e9e4] pb-10 px-4">
       <div className="container mx-auto">
         <motion.div
           className="text-center mb-16"
@@ -29,7 +29,7 @@ const WaterbodyBenefits = ({ benefitsData }) => {
         </motion.div>
 
         <ScrollRevealElements
-          className="hidden lg:flex justify-center items-start gap-12 relative py-12"
+          className="hidden lg:flex justify-center items-start gap-12 relative py-4"
           staggerAmount={0.5}
         >
           {benefitsData.map((item, index) => {
@@ -41,9 +41,9 @@ const WaterbodyBenefits = ({ benefitsData }) => {
                 <div className="relative p-4 bg-white rounded-full border-4 border-[#10b981] z-10 shadow-md transition-transform duration-300 group-hover:scale-110 group-hover:shadow-xl">
                   <Icon className="w-8 h-8 text-[#10b981]" />
                 </div>
-                <div className="mt-6 w-64 bg-white p-6 rounded-2xl shadow-lg border border-slate-200 text-center transition-transform duration-300 group-hover:translate-y-[-4px] group-hover:shadow-2xl">
-                  <h4 className="font-bold text-lg text-slate-700">{item.title}</h4>
-                  <ul className="mt-2 text-sm text-left text-slate-500 space-y-1">
+                <div className="mt-6 w-64 h-[220px] bg-white p-6 rounded-2xl shadow-lg border border-slate-200 text-center transition-transform duration-300 group-hover:translate-y-[-4px] group-hover:shadow-2xl flex flex-col justify-start">
+                  <h4 className="font-bold text-lg text-slate-700 mb-3">{item.title}</h4>
+                  <ul className="text-sm text-left text-slate-500 space-y-1 flex-grow">
                     {item.items.map((point, pIdx) => (
                       <li key={pIdx} className="flex items-start">
                         <CheckCircle className="h-4 w-4 mr-2 mt-0.5 text-[#10b981] flex-shrink-0" />

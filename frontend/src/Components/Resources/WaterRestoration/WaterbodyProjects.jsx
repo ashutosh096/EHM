@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 const WaterbodyProjects = ({ projectsData, hoveredProject, setHoveredProject }) => {
   return (
-    <section className="bg-[#f6f6f6] pt-20 pb-20 px-4">
+    <section className="bg-[#f6f6f6] pt-10 pb-20 px-4">
       <div className="container mx-auto">
         <motion.div
           className="text-center mb-8 md:mb-12"
