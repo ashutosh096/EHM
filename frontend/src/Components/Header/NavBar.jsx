@@ -36,7 +36,7 @@ const resourcesMenu = [
     title: "Solutions",
     items: [
       { name: "Waterbody Restoration", path: "/resources/WaterbodyRestoration", icon: Recycle },
-      { name: "DNTS", path: "/resources/dnts", icon: Droplets },
+      { name: "Decentralized Natural\nTreatment System", path: "/resources/dnts", icon: Droplets },
     ],
   },
 ];
@@ -116,7 +116,7 @@ const NavBar = () => {
             className="h-12"
           />
         </Link>
-        
+
         {/* Desktop Menu */}
         <ul className="hidden lg:flex items-center space-x-6 font-medium">
           {/* ... (existing links) ... */}
@@ -220,9 +220,8 @@ const NavBar = () => {
             }}
           >
             <div
-              className={`grid gap-10 p-10 ${
-                activeDropdown === "resources" ? "grid-cols-3" : "grid-cols-4"
-              }`}
+              className={`grid gap-10 p-10 ${activeDropdown === "resources" ? "grid-cols-3" : "grid-cols-4"
+                }`}
             >
               {(activeDropdown === "resources" ? resourcesMenu : offeringsMenu).map(
                 (section) => (
@@ -236,7 +235,7 @@ const NavBar = () => {
                             className="flex items-center space-x-2 text-green-900 hover:text-yellow-400 transition group"
                           >
                             <item.icon className="w-12 text-green-900 group-hover:text-yellow-400" />
-                            <span>{item.name}</span>
+                            <span className="whitespace-pre-line text-left leading-tight">{item.name}</span>
                           </Link>
                         </li>
                       ))}
@@ -285,7 +284,7 @@ const NavBar = () => {
                           className="flex items-center space-x-2 text-green-900 hover:text-yellow-400 bg-transparent hover:bg-transparent focus:bg-transparent transition group"
                         >
                           <item.icon className="w-4 h-4" />
-                          <span>{item.name}</span>
+                          <span className="whitespace-pre-line text-left leading-tight">{item.name}</span>
                         </Link>
                       </li>
                     ))}
@@ -313,7 +312,7 @@ const NavBar = () => {
                           className="flex items-center space-x-2 text-green-900 hover:text-yellow-400 transition group hover:shadow-none focus:shadow-none focus:outline-none"
                         >
                           <item.icon className="w-4 h-4" />
-                          <span>{item.name}</span>
+                          <span className="whitespace-pre-line text-left leading-tight">{item.name}</span>
                         </Link>
                       </li>
                     ))}
