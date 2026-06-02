@@ -346,7 +346,6 @@ export default function StarcContact() {
             </div>
 
             {/* Cal.com button */}
-
             <a href="https://cal.com/your-username/demo"
               target="_blank"
               rel="noopener noreferrer"
