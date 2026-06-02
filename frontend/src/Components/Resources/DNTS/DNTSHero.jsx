@@ -1,11 +1,18 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Player } from "@lottiefiles/react-lottie-player";
+import { Leaf, Recycle, ZapOff } from "lucide-react";
 import ScrollRevealElements from "../../Animations/ScrollRevealElements";
 
 const DNTSHero = () => {
+  const highlights = [
+    { label: "Nature-Based", Icon: Leaf },
+    { label: "Zero Odour", Icon: ZapOff },
+    { label: "Self-Sustainable", Icon: Recycle },
+  ];
+
   return (
-    <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-b from-[#4a9e8a] to-[#7dcfcf] p-4 md:p-8 overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-b from-[#4a9e8a] to-[#7dcfcf] px-4 py-20 md:px-8 md:py-24 overflow-hidden">
       {/* floating bubbles */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0">
         {[...Array(20)].map((_, i) => {
@@ -28,7 +35,7 @@ const DNTSHero = () => {
       </div>
 
       <ScrollRevealElements
-        className="relative z-10 text-center mb-20 md:mb-40"
+        className="relative z-10 text-center mb-16 md:mb-28"
         staggerAmount={0.5}
       >
         <motion.div className="flex justify-center mb-4">
@@ -48,6 +55,17 @@ const DNTSHero = () => {
           Gravity-based, self-sustainable, root-based technology to treat and
           reuse sewage and wastewater — at the source.
         </motion.p>
+        <motion.div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-5 lg:gap-6">
+          {highlights.map(({ label, Icon }) => (
+            <div
+              key={label}
+              className="flex h-11 w-full max-w-[240px] sm:w-auto sm:min-w-[204px] items-center justify-center gap-3 rounded-full border border-white/30 bg-white/15 px-7 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.24)] backdrop-blur-sm"
+            >
+              <Icon className="h-5 w-5 flex-shrink-0" strokeWidth={2.5} />
+              <span className="text-base font-bold md:text-lg">{label}</span>
+            </div>
+          ))}
+        </motion.div>
       </ScrollRevealElements>
 
       {/* wave */}

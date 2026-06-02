@@ -7,10 +7,10 @@ const DNTSInfo = ({ dntsInfoData }) => {
   const iconMap = [Leaf, Filter, Zap];
 
   return (
-    <section className="bg-[#e2e9e4] pb-20 px-4">
+    <section className="bg-[#e2e9e4] pt-4 pb-6 md:pt-6 md:pb-8 px-4">
       <div className="container mx-auto">
         <motion.div
-          className="text-center mb-16"
+          className="text-center mb-8 md:mb-10"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -23,7 +23,7 @@ const DNTSInfo = ({ dntsInfoData }) => {
 
         {/* Desktop */}
         <ScrollRevealElements
-          className="hidden lg:flex justify-center items-start gap-12 relative py-12"
+          className="hidden lg:flex justify-center items-start gap-12 relative py-4"
           staggerAmount={0.5}
         >
           {dntsInfoData.map((item, index) => {
@@ -40,9 +40,9 @@ const DNTSInfo = ({ dntsInfoData }) => {
                 <div className="relative p-4 bg-white rounded-full border-4 border-[#10b981] z-10 shadow-md transition-transform duration-300 group-hover:scale-110 group-hover:shadow-xl">
                   <Icon className="w-8 h-8 text-[#10b981]" />
                 </div>
-                <div className="mt-6 w-64 bg-white p-6 rounded-2xl shadow-lg border border-slate-200 text-center transition-transform duration-300 group-hover:-translate-y-1 group-hover:shadow-2xl">
-                  <h4 className="font-bold text-lg text-slate-700">{item.title}</h4>
-                  <ul className="mt-2 text-sm text-left text-slate-500 space-y-1">
+                <div className="mt-6 w-64 h-[250px] bg-white pt-5 pb-4 px-5 rounded-2xl shadow-lg border border-slate-200 text-center transition-transform duration-300 group-hover:-translate-y-1 group-hover:shadow-2xl flex flex-col justify-start">
+                  <h4 className="font-bold text-lg text-slate-700 mb-2">{item.title}</h4>
+                  <ul className="text-xs sm:text-sm text-left text-slate-500 space-y-1 flex-grow">
                     {item.items.map((point, pIdx) => (
                       <li key={pIdx} className="flex items-start">
                         <CheckCircle className="h-4 w-4 mr-2 mt-0.5 text-[#10b981] flex-shrink-0" />
@@ -57,7 +57,7 @@ const DNTSInfo = ({ dntsInfoData }) => {
         </ScrollRevealElements>
 
         {/* Mobile */}
-        <div className="lg:hidden relative max-w-xl mx-auto mt-12">
+        <div className="lg:hidden relative max-w-xl mx-auto mt-6">
           <div className="absolute left-8 top-0 h-full w-0.5 bg-[#10b981]" />
           <ScrollRevealElements className="space-y-16" staggerAmount={0.5}>
             {dntsInfoData.map((item, index) => {

@@ -5,10 +5,10 @@ import ScrollRevealElements from "../../Animations/ScrollRevealElements";
 
 const DNTSApproach = ({ approachData }) => {
   return (
-    <section className="bg-[#f6f6f6] pb-20 px-4">
+    <section className="bg-[#f6f6f6] pt-4 pb-6 md:pt-6 md:pb-8 px-4">
       <div className="container mx-auto">
         <motion.div
-          className="text-center mt-28 mb-16"
+          className="text-center mb-8 md:mb-10"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -60,13 +60,14 @@ const DNTSApproach = ({ approachData }) => {
                       }
                     />
                   </div>
-                  <div className="mt-6 w-64 bg-white p-6 rounded-2xl shadow-lg border border-slate-200 text-center transition-transform duration-300 group-hover:-translate-y-2 group-hover:shadow-2xl">
-                    <h4 className="font-bold text-lg text-slate-700">{item.title}</h4>
-                    <ul className="mt-2 text-sm text-left text-slate-500 space-y-1">
+                  <div className="mt-6 w-64 bg-white px-5 py-6 rounded-[18px] border border-[#d6ebe5] shadow-[0_18px_40px_rgba(15,118,110,0.08)] text-left transition-transform duration-300 group-hover:-translate-y-2 group-hover:shadow-[0_22px_46px_rgba(15,118,110,0.13)]">
+                    <h4 className="font-extrabold text-lg text-slate-950">{item.title}</h4>
+                    <div className="mt-3 mb-4 h-px w-full bg-[#d8f1ec]" />
+                    <ul className="text-sm text-slate-700 space-y-2.5">
                       {item.points.map((point, pIdx) => (
                         <li key={pIdx} className="flex items-start">
-                          <CheckCircle className="h-4 w-4 mr-2 mt-0.5 text-[#10b981] flex-shrink-0" />
-                          <span>{point}</span>
+                          <CheckCircle className="h-4 w-4 mr-3 mt-1 text-[#10b981] flex-shrink-0" />
+                          <span className="leading-relaxed">{point}</span>
                         </li>
                       ))}
                     </ul>
@@ -78,7 +79,7 @@ const DNTSApproach = ({ approachData }) => {
         </div>
 
         {/* Mobile */}
-        <div className="lg:hidden relative max-w-xl mx-auto mt-12">
+        <div className="lg:hidden relative max-w-xl mx-auto mt-6">
           <div className="absolute left-12 top-0 h-full w-0.5 bg-[#10b981]" />
           <ScrollRevealElements className="space-y-16" staggerAmount={0.5}>
             {approachData.map((item, index) => (
@@ -94,13 +95,14 @@ const DNTSApproach = ({ approachData }) => {
                     }
                   />
                 </div>
-                <div className="bg-white p-4 rounded-xl shadow-lg border border-slate-200">
-                  <h4 className="font-bold text-lg text-slate-700">{item.title}</h4>
-                  <ul className="mt-2 text-sm text-left text-slate-500 space-y-1">
+                <div className="bg-white px-4 py-5 rounded-[18px] border border-[#d6ebe5] shadow-[0_18px_40px_rgba(15,118,110,0.08)]">
+                  <h4 className="font-extrabold text-lg text-slate-950">{item.title}</h4>
+                  <div className="mt-3 mb-4 h-px w-full bg-[#d8f1ec]" />
+                  <ul className="text-sm text-left text-slate-700 space-y-2.5">
                     {item.points.map((point, pIdx) => (
                       <li key={pIdx} className="flex items-start">
-                        <CheckCircle className="h-4 w-4 mr-2 mt-0.5 text-[#10b981] flex-shrink-0" />
-                        <span>{point}</span>
+                        <CheckCircle className="h-4 w-4 mr-3 mt-1 text-[#10b981] flex-shrink-0" />
+                        <span className="leading-relaxed">{point}</span>
                       </li>
                     ))}
                   </ul>
@@ -112,7 +114,7 @@ const DNTSApproach = ({ approachData }) => {
 
         {/* CTA */}
         <motion.div
-          className="text-center mt-20"
+          className="text-center mt-10"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}

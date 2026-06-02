@@ -5,9 +5,9 @@ import ScrollRevealElements from "../../Animations/ScrollRevealElements";
 
 const DNTSCaseStudy = ({ caseStudy, hoveredStage, setHoveredStage }) => {
   return (
-    <section className="bg-[#e2e9e4] pt-16 pb-20 px-4">
+    <section className="bg-[#e2e9e4] pt-4 pb-6 md:pt-6 md:pb-8 px-4">
       <div className="container mx-auto">
-        <ScrollRevealElements className="text-center mb-12 md:mb-16" staggerAmount={0.5}>
+        <ScrollRevealElements className="text-center mb-8 md:mb-10" staggerAmount={0.5}>
           <motion.h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-800">
             Case Study:{" "}
             <span className="text-[#10b981]">{caseStudy.title}</span>
@@ -109,7 +109,7 @@ const DNTSCaseStudy = ({ caseStudy, hoveredStage, setHoveredStage }) => {
 
         {/* CTA */}
         <motion.div
-          className="text-center mt-16"
+          className="text-center mt-8"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}

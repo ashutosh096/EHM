@@ -3,10 +3,10 @@ import { motion } from "framer-motion";
 
 const DNTSProjects = ({ projectsData, hoveredProject, setHoveredProject }) => {
   return (
-    <section className="bg-[#f6f6f6] pt-20 pb-20 px-4">
+    <section className="bg-[#f6f6f6] pt-4 pb-10 md:pt-6 md:pb-12 px-4">
       <div className="container mx-auto">
         <motion.div
-          className="text-center mb-8 md:mb-12"
+          className="text-center mb-8 md:mb-10"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -38,6 +38,7 @@ const DNTSProjects = ({ projectsData, hoveredProject, setHoveredProject }) => {
                 src={projectsData[key].image}
                 alt={projectsData[key].title}
                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110"
+                style={{ objectPosition: projectsData[key].imagePosition || "center" }}
                 onError={(e) =>
                   (e.target.src = `https://placehold.co/800x500/4a9e8a/ffffff?text=${projectsData[key].title}`)
                 }
