@@ -6,7 +6,7 @@ const CaseStudyUserRouter = Router();
 // GET all case studies
 CaseStudyUserRouter.get("/casestudies", async (req: Request, res: Response) => {
   try {
-    const caseStudies = await CaseStudyModel.find().sort({ createdAt: -1 });
+    const caseStudies = await CaseStudyModel.find({}, { content: 0 }).sort({ createdAt: -1 });
 
     res.json({
       success: true,
@@ -56,7 +56,7 @@ CaseStudyUserRouter.get(
       const authorName = decodeURIComponent(req.params.authorName as string);
       const caseStudies = await CaseStudyModel.find({
         author: authorName,
-      }).sort({
+      }, { content: 0 }).sort({
         createdAt: -1,
       });
 
