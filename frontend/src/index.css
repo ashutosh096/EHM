@@ -83,3 +83,35 @@
 .animate-fadeIn {
   animation: fadeIn 0.25s ease-out forwards;
 }
+
+/* Custom styling for Rich Text/Quill content rendered inside .prose container */
+.prose ul {
+  list-style-type: disc !important;
+  list-style-position: outside !important;
+  padding-left: 2rem !important;
+  margin-top: 1rem !important;
+  margin-bottom: 1rem !important;
+}
+
+.prose ol {
+  list-style-type: decimal !important;
+  list-style-position: outside !important;
+  padding-left: 2rem !important;
+  margin-top: 1rem !important;
+  margin-bottom: 1rem !important;
+}
+
+.prose li {
+  margin-bottom: 0.5rem !important;
+  line-height: 1.75 !important;
+}
+
+.prose strong {
+  font-weight: 700 !important;
+  color: inherit !important;
+}
+
+.prose p {
+  margin-bottom: 1.25rem !important;
+  line-height: 1.75 !important;
+}
