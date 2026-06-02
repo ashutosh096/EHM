@@ -72,7 +72,10 @@ const cloudinaryStorage: StorageEngine = {
 
 const upload = multer({
   storage: cloudinaryStorage,
-  limits: { fileSize: 5 * 1024 * 1024 }, // 5 MB max
+  limits: {
+    fileSize: 5 * 1024 * 1024, // 5 MB max for file upload field
+    fieldSize: 25 * 1024 * 1024, // 25 MB max to accommodate base64-encoded images embedded in the text content
+  },
 });
 
 // ✅ Multer error handler — call this in routes after upload middleware
@@ -81,6 +84,9 @@ function handleUploadError(err: any, req: any, res: Response, next: NextFunction
   if (err) {
     if (err.code === "LIMIT_FILE_SIZE") {
       return res.status(400).json({ success: false, message: "File too large. Maximum size is 5 MB." });
+    }
+    if (err.code === "LIMIT_FIELD_VALUE") {
+      return res.status(400).json({ success: false, message: "Content field is too large. Embedded images must be smaller." });
     }
     if (err.message?.startsWith("INVALID_FORMAT")) {
       return res.status(400).json({ success: false, message: "Invalid file type. Only JPG, PNG, and WEBP are allowed." });
