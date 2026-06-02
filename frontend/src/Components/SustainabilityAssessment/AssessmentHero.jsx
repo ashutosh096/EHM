@@ -197,11 +197,11 @@ const StarcHero = () => {
               </button>
 
               <button
-                onClick={() => navigate("/resources/casestudies")}
+                onClick={() => navigate("/casestudies/6a1583515e65c37505ce64be")}
                 className="inline-flex items-center gap-3 px-8 py-4 font-semibold text-lg rounded-xl border text-white transition-all duration-300 hover:-translate-y-1"
                 style={{ backgroundColor: "rgba(255,255,255,0.08)", borderColor: "rgba(255,255,255,0.15)" }}
               >
-                📊 View Case Studies
+                📊 View Case Study
               </button>
             </div>
           </div>
