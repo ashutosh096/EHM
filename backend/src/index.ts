@@ -32,7 +32,7 @@ app.use(
       "https://ehmconsultancy.co.in",
       "https://www.ehmconsultancy.co.in",
       "https://ehm.vercel.app",
-      "https://ehm-ft.onrender.com",
+      "https://ehm-backend.onrender.com",
       "http://localhost:5000",
     ],
     methods: ["GET", "POST", "OPTIONS", "DELETE", "PUT"],

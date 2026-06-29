@@ -1,8 +1,9 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: import.meta.env.DEV ? "http://localhost:5000" : "/api",
-  // baseURL: "/api/",
+  baseURL: import.meta.env.DEV 
+    ? "http://localhost:5000" 
+    : (import.meta.env.VITE_API_URL || "https://ehm-backend.onrender.com"),
 });
 
 // Attach token(if availabe) from localStorage to every request
