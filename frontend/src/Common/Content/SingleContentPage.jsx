@@ -564,27 +564,15 @@ const SingleContentPage = ({ basePath, contentName }) => {
                 /* Uniform style for inline images in the article body */
                 .prose img {
                     width: 100% !important;
-                    height: 250px !important;
-                    object-fit: contain !important;
-                    background-color: #ffffff !important;
-                    padding: 8px !important;
+                    height: auto !important;
                     border: 4px solid #025b5f !important;
                     border-radius: 16px !important;
-                    margin-top: 1.5rem !important;
-                    margin-bottom: 1.5rem !important;
+                    margin-top: 2rem !important;
+                    margin-bottom: 2rem !important;
                     margin-left: auto !important;
                     margin-right: auto !important;
                     display: block !important;
                     box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1) !important;
-                }
-
-                @media (min-width: 640px) {
-                    .prose img {
-                        height: 450px !important;
-                        padding: 12px !important;
-                        margin-top: 2rem !important;
-                        margin-bottom: 2rem !important;
-                    }
                 }
             `}</style>
 
