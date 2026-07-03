@@ -20,9 +20,10 @@ const cleanContent = (html) => {
         paragraphs.forEach((p) => {
             const trimmedText = p.textContent.trim();
             const strongText = Array.from(p.querySelectorAll("strong, b")).map(el => el.textContent).join("").trim();
+            const hasImg = p.querySelector("img") !== null;
 
-            // Only treat as heading if the entire text is bold and length is reasonable
-            const isHeadingNode = strongText.length > 0 && strongText.length === trimmedText.length && trimmedText.length < 120;
+            // Only treat as heading if the entire text is bold, length is reasonable, and it has no images
+            const isHeadingNode = !hasImg && strongText.length > 0 && strongText.length === trimmedText.length && trimmedText.length < 120;
 
             if (isHeadingNode) {
                 // If it starts with a number (like "1. ", "2. "), it's a sub-heading (h3)
