@@ -15,6 +15,18 @@ const cleanContent = (html) => {
         const parser = new DOMParser();
         const doc = parser.parseFromString(html, "text/html");
 
+        // 0. Extract any nested images inside headings (h1-h6) and place them as sibling paragraphs before the heading
+        const headingTags = doc.querySelectorAll("h1, h2, h3, h4, h5, h6");
+        headingTags.forEach((heading) => {
+            const img = heading.querySelector("img");
+            if (img) {
+                const imgPara = doc.createElement("p");
+                imgPara.appendChild(img.cloneNode(true));
+                heading.parentNode.insertBefore(imgPara, heading);
+                img.parentNode.removeChild(img);
+            }
+        });
+
         // 1. Convert bold-only short paragraphs like <p><strong>Heading</strong></p> into <h2>Heading</h2> or <h3>Heading</h3>
         const paragraphs = doc.querySelectorAll("p");
         paragraphs.forEach((p) => {
@@ -552,8 +564,10 @@ const SingleContentPage = ({ basePath, contentName }) => {
                 /* Uniform style for inline images in the article body */
                 .prose img {
                     max-height: 480px !important;
-                    width: 100% !important;
-                    object-fit: cover !important;
+                    max-width: 100% !important;
+                    width: auto !important;
+                    height: auto !important;
+                    object-fit: contain !important;
                     border: 4px solid #025b5f !important;
                     border-radius: 16px !important;
                     margin-top: 2rem !important;
