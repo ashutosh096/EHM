@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { Mail, User, MessageSquare, Send, CheckCircle, Calendar, ChevronDown, Check } from "lucide-react";
+import { Mail, User, MessageSquare, Send, CheckCircle, Calendar, ChevronDown, Check, Phone } from "lucide-react";
 import API from "../../api/axios";
 
 const SOLUTIONS = [
@@ -115,6 +115,50 @@ export default function StarcContact() {
   const [selectedSolutions, setSelectedSolutions] = useState([]);
   const formRef = useRef(null);
 
+  useEffect(() => {
+    (function (C, A, L) {
+      let p = function (a, ar) { a.q.push(ar); };
+      let d = C.document;
+      C.Cal = C.Cal || function () {
+        let cal = C.Cal;
+        let ar = arguments;
+        if (!cal.loaded) {
+          cal.ns = {};
+          cal.q = cal.q || [];
+          d.head.appendChild(d.createElement("script")).src = A;
+          cal.loaded = true;
+        }
+        if (ar[0] === L) {
+          const api = function () { p(api, arguments); };
+          const namespace = ar[1];
+          api.q = api.q || [];
+          typeof namespace === "string" ? (cal.ns[namespace] = api) && p(api, ar) : p(cal, ar);
+          return;
+        }
+        p(cal, ar);
+      };
+    })(window, "https://app.cal.com/embed/embed.js", "init");
+
+    window.Cal?.("init", { origin: "https://cal.com" });
+    window.Cal?.("ui", {
+      styles: { branding: { brandColor: "#4B7635" } },
+      hideEventTypeDetails: false,
+      layout: "month_view"
+    });
+  }, []);
+
+  const handleScheduleClick = (e) => {
+    e.preventDefault();
+    if (window.Cal) {
+      window.Cal("modal", {
+        calLink: "dr.-utsav-mishra/discovery-call",
+        config: { layout: "month_view" }
+      });
+    } else {
+      window.open("https://cal.com/dr.-utsav-mishra/discovery-call?overlayCalendar=true", "_blank");
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -126,7 +170,7 @@ export default function StarcContact() {
     const mobile = formData.get("mobile") || "";
     const message = formData.get("message") || "NULL";
     const interestedIn =
-      "STARC: " +
+      "[STARC Demo] STARC: " +
       (selectedSolutions.length > 0
         ? selectedSolutions.join(", ")
         : "No Specific Selection"
@@ -276,7 +320,7 @@ export default function StarcContact() {
             </label>
             <div className="relative group">
               <div className="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none">
-                <User className="w-5 h-5 text-slate-300 group-focus-within:text-[#4B7635] transition-colors" />
+                <Phone className="w-5 h-5 text-slate-300 group-focus-within:text-[#4B7635] transition-colors" />
               </div>
               <input
                 id="mobile"
@@ -292,7 +336,7 @@ export default function StarcContact() {
           {/* Solution of Interest — checklist dropdown */}
           <div className="space-y-1">
             <label className="block text-[10px] font-bold text-slate-400 ml-1 uppercase tracking-wider">
-              Solution of Interest
+              Solution of Interest <span className="text-red-500">*</span>
             </label>
             <SolutionDropdown selected={selectedSolutions} onChange={setSelectedSolutions} />
           </div>
@@ -346,14 +390,14 @@ export default function StarcContact() {
             </div>
 
             {/* Cal.com button */}
-            <a href="https://cal.com/your-username/demo"
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
+              onClick={handleScheduleClick}
+              type="button"
               className="flex-1 flex items-center justify-center gap-3 py-5 rounded-2xl font-bold text-lg border-2 border-[#4B7635] text-[#4B7635] hover:bg-[#4B7635]/5 hover:-translate-y-1 transition-all duration-300"
             >
               <Calendar className="w-6 h-6" />
               <span>Schedule a Meet</span>
-            </a>
+            </button>
           </div>
         </form>
 

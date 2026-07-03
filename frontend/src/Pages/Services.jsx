@@ -3,7 +3,6 @@ import ServicesSection from "../Components/LandingPage/ServiceSection";
 import RiskAssessment from "../Components/Risk Assessment/RiskAssessment";
 import RiskQuestionnaire from "../Components/Risk Assessment/RiskQuestionnaire";
 import HelpSection from "../Components/HelpSection";
-import WaterbodyRestoration from "../Components/WaterbodyRestoration";
 import EhmOffering from "../Components/OfferingsHeroSection/Offerings_writeup";
 import Offerings_ShowAll from "../Components/OfferingsHeroSection/Offerings_ShowAll";
 

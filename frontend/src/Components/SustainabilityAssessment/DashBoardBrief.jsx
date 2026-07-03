@@ -42,7 +42,7 @@ const TABS = [
     image: "/dashboard/dashboard.webp",
     color: "#4B7635",          // EHM Green
     accent: "rgba(75,118,53,0.10)",
-    tag: "Environment",
+    tag: "Social",
     title: "Energy Consumption Trend",
     description:
       "Track monthly electricity vs. solar generation across campus. Monitor your energy mix — renewable vs. non-renewable — with real-time breakdowns and historical trends to drive efficiency.",
@@ -88,7 +88,7 @@ const TABS = [
     image: "/dashboard/dashboard.webp",
     color: "#1d4e89",          // Navy blue (on-brand)
     accent: "rgba(29,78,137,0.10)",
-    tag: "Environment",
+    tag: "GHG Emissions",
     title: "GHG Emissions & CO₂ Management",
     description:
       "Scope-wise emissions performance, reduction targets and national alignment for net-zero pathways. View year-on-year emission trends, carbon intensity per person and per sq. metre.",

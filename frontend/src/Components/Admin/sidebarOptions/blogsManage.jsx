@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 import API from "../../../api/axios";
 
 //feedback Banner component
@@ -65,20 +67,32 @@ export default function BlogsManage() {
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
-    setFormData(prev => ({ ...prev, [name]: files ? files[0] : value }));
+    if (files) {
+      const file = files[0];
+      if (file) {
+        // Check format
+        const validFormats = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
+        if (!validFormats.includes(file.type)) {
+          setFeedback({ show: true, type: "error", message: "Only JPEG, JPG, PNG, and WEBP formats are allowed." });
+          e.target.value = "";
+          return;
+        }
+        // Check size (max 5MB)
+        const maxSize = 5 * 1024 * 1024;
+        if (file.size > maxSize) {
+          setFeedback({ show: true, type: "error", message: "Image size should not exceed 5MB." });
+          e.target.value = "";
+          return;
+        }
+      }
+      setFormData(prev => ({ ...prev, [name]: file }));
+    } else {
+      setFormData(prev => ({ ...prev, [name]: value }));
+    }
   };
 
-  const processContent = (text) => {
-    if (!text) return "";
-    const imageUrlRegex = /(https?:\/\/[^\s]+?\.(?:jpg|jpeg|png|gif|svg|webp))/gi;
-    return text.split('\n').map(line => {
-      if (line.trim().match(imageUrlRegex)?.[0] === line.trim()) {
-        return `<img src="${line.trim()}" alt="Blog content image" style="max-width: 100%; height: auto; border-radius: 8px; margin: 1em 0;" loading="lazy" />`;
-      } else if (line.trim() !== "") {
-        return `<p>${line.trim()}</p>`;
-      }
-      return '';
-    }).join('');
+  const processContent = (html) => {
+    return html || "";
   };
 
   const handleUpload = async () => {
@@ -99,7 +113,8 @@ export default function BlogsManage() {
       setFeedback({ show: true, type: 'success', message: 'Blog uploaded successfully!' });
       fetchBlogs();
     } catch (err) {
-      setFeedback({ show: true, type: 'error', message: 'Upload failed. Please try again.' });
+      const errorMsg = err.response?.data?.message || err.message || 'Upload failed. Please try again.';
+      setFeedback({ show: true, type: 'error', message: errorMsg });
     } finally {
       setFormData({ title: "", author: "", content: "", image: null });
     }
@@ -123,7 +138,8 @@ export default function BlogsManage() {
       setFeedback({ show: true, type: 'success', message: 'Blog updated successfully!' });
       fetchBlogs();
     } catch (err) {
-      setFeedback({ show: true, type: 'error', message: 'Update failed. Please try again.' });
+      const errorMsg = err.response?.data?.message || err.message || 'Update failed. Please try again.';
+      setFeedback({ show: true, type: 'error', message: errorMsg });
     } finally {
       setSelectedBlog(null);
       setFormData({ title: "", author: "", content: "", image: null });
@@ -138,7 +154,8 @@ export default function BlogsManage() {
       setFeedback({ show: true, type: 'success', message: 'Blog deleted successfully!' });
       fetchBlogs();
     } catch (err) {
-      setFeedback({ show: true, type: 'error', message: 'Deletion failed. Please try again.' });
+      const errorMsg = err.response?.data?.message || err.message || 'Deletion failed. Please try again.';
+      setFeedback({ show: true, type: 'error', message: errorMsg });
     } finally {
       setSelectedBlog(null);
     }
@@ -146,12 +163,7 @@ export default function BlogsManage() {
 
   const openEditModal = (blog) => {
     setSelectedBlog(blog);
-    const plainTextContent = blog.content
-      .replace(/<img[^>]*>/g, match => `\n${match.match(/src="([^"]*)"/)?.[1] || ''}\n`)
-      .replace(/<\/p>/g, "\n")
-      .replace(/<[^>]*>/g, "")
-      .trim();
-    setFormData({ title: blog.title, author: blog.author, content: plainTextContent, image: blog.image });
+    setFormData({ title: blog.title, author: blog.author, content: blog.content || "", image: blog.image });
     setIsEditModalOpen(true);
   };
 
@@ -214,12 +226,34 @@ function Modal({ title, children, onClose, onSubmit, hideSubmit }) {
 
 function ContentForm({ formData, handleChange, contentType }) {
   const removeImage = () => handleChange({ target: { name: "image", value: null, files: null } });
+
+  const quillModules = {
+    toolbar: [
+      [{ 'header': [1, 2, 3, false] }],
+      ['bold', 'italic', 'underline', 'strike'],
+      ['blockquote', 'code-block'],
+      [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+      ['link', 'image'],
+      [{ 'color': [] }, { 'background': [] }],
+      ['clean']
+    ],
+  };
+
+  const quillFormats = [
+    'header',
+    'bold', 'italic', 'underline', 'strike',
+    'blockquote', 'code-block',
+    'list',
+    'link', 'image',
+    'color', 'background'
+  ];
+
   return (
     <form className="space-y-6">
       <div><label className="block text-sm font-medium text-gray-700 mb-1">Title</label><input type="text" name="title" placeholder={`Enter ${contentType} title`} value={formData.title} onChange={handleChange} className="text-black bg-gray-200 w-full border-gray-300 px-4 py-2.5 rounded-lg focus:ring-2 focus:ring-green-500" /></div>
       <div><label className="block text-sm font-medium text-gray-700 mb-1">Author</label><input type="text" name="author" placeholder="Author's name" value={formData.author} onChange={handleChange} className="text-black bg-gray-200 w-full border-gray-300 px-4 py-2.5 rounded-lg focus:ring-2 focus:ring-green-500" /></div>
-      <div><label className="block text-sm font-medium text-gray-700 mb-1">Content</label><textarea name="content" placeholder={`Write your ${contentType} content...`} value={formData.content} onChange={handleChange} rows="8" className="text-black bg-gray-200 w-full border-gray-300 px-4 py-2.5 rounded-lg focus:ring-2 focus:ring-green-500"></textarea></div>
-      <div><label className="block text-sm font-medium text-gray-700 mb-1">{contentType} Image</label>{formData.image ? (<div className="flex items-center gap-3 mt-2"><p className="text-sm text-gray-700 bg-green-100 px-3 py-1 rounded-full">{typeof formData.image === "string" ? formData.image.split("/").pop() : formData.image.name}</p><button type="button" onClick={removeImage} className="text-red-500 font-bold hover:text-red-700 text-xl" title="Remove image">&times;</button></div>) : (<input type="file" name="image" accept="image/*" onChange={handleChange} className="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-green-100 file:text-green-700 hover:file:bg-green-200" />)}</div>
+      <div><label className="block text-sm font-medium text-gray-700 mb-1">Content</label><ReactQuill value={formData.content} onChange={(content) => handleChange({ target: { name: 'content', value: content } })} modules={quillModules} formats={quillFormats} theme="snow" placeholder={`Write your ${contentType} content...`} style={{ height: '300px', marginBottom: '40px' }} /></div>
+      <div><label className="block text-sm font-medium text-gray-700 mb-1">{contentType} Image (JPEG, JPG, PNG, WEBP, Max 5MB)</label>{formData.image ? (<div className="flex items-center gap-3 mt-2"><p className="text-sm text-gray-700 bg-green-100 px-3 py-1 rounded-full">{typeof formData.image === "string" ? formData.image.split("/").pop() : formData.image.name}</p><button type="button" onClick={removeImage} className="text-red-500 font-bold hover:text-red-700 text-xl" title="Remove image">&times;</button></div>) : (<input type="file" name="image" accept="image/jpeg, image/jpg, image/png, image/webp" onChange={handleChange} className="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-green-100 file:text-green-700 hover:file:bg-green-200" />)}</div>
     </form>
   );
 }

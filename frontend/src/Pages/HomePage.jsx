@@ -13,8 +13,9 @@ const HomePage = () => {
     <div className="min-h-screen bg-[#ededed]">
       <SEO 
         title="EHM Consultancy | Environmental & Sustainability Solutions"
-        description="EHM offers expert environmental solutions including waterbody restoration, sustainability assessment, geophysical investigation, and climate risk intelligence in India."
+        description="EHM Consultancy offers expert environmental solutions including waterbody restoration, sustainability assessment, geophysical investigation, and climate risk intelligence in India."
         canonical="/"
+        ogImage="https://www.ehmconsultancy.co.in/ehm-homepage-meta.jpg"
       />
       <HeroSection />
       <Suspense fallback={<div className="h-20" />}>

@@ -204,12 +204,16 @@ const OfferingsSection = () => {
                           navigate('/offerings/sustainability-assessment-reporting');
                         } else if (offering.title === 'Geophysical Investigation') {
                           navigate('/offerings/geophysical-investigation');
+                        } else {
+                          navigate('/contact#form');
                         }
                       }}
                       className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-lg ${offering.iconColor} bg-transparent border-2 ${offering.borderColor} font-semibold text-sm transition-all duration-300 hover:shadow-md hover:-translate-y-0.5 group/btn`}
                     >
                       <span className="group-hover/btn:mr-1 transition-all duration-300">
-                        Explore Service
+                        {offering.title === 'Sustainability Assessment & Reporting' || offering.title === 'Geophysical Investigation'
+                          ? 'Explore Service'
+                          : 'Book a Call'}
                       </span>
                       <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-300" />
                     </button>

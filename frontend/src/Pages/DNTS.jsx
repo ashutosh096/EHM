@@ -119,8 +119,8 @@ const DNTSPage = () => {
       "A DNTS unit combining AABR and constructed wetland technology was designed and commissioned on-site.",
       "The system achieved treated water output at the outlet, meeting compliance standards with no skilled O&M required.",
     ],
-    beforeImages: ["/DNTS/prachi-before.webp", "/DNTS/treat-water-ec.webp"],
-    afterImages: ["/DNTS/prachi-after.webp", "/DNTS/odor-system-main.webp"],
+    beforeImages: ["/DNTS/prachi-before-updated.webp", "/DNTS/treat-water-ec.webp"],
+    afterImages: ["/DNTS/prachi-after-updated.webp", "/DNTS/odor-system-main.webp"],
   };
 
   const dntsInfoData = [
@@ -199,8 +199,9 @@ const DNTSPage = () => {
       <SEO
         title="DNTS - Decentralized Natural Treatment System"
         description="EHM's Decentralized Natural Treatment System (DNTS) is a gravity-based, self-sustainable, nature-based wastewater treatment solution at the source."
-        keywords="DNTS, nature based wastewater treatment, sewage treatment, decentralized treatment system, EHM, water management"
+        keywords="DNTS, nature based wastewater treatment, sewage treatment, decentralized treatment system, EHM, water management, EHM Consultancy"
         canonical="/resources/dnts"
+        ogImage="https://www.ehmconsultancy.co.in/DNTS/dnts-meta.jpg"
       />
       <style>{`
         @keyframes bounceHorizontal {

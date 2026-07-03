@@ -1,6 +1,7 @@
 import dotenv from "dotenv";
 dotenv.config();
 
+import https from "https";
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
@@ -103,4 +104,29 @@ app.use("/", FootprintUserRouter);
 app.use("/videos", VidUser);
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+
+  // Self-ping keep-alive to prevent sleeping on Render free tier
+  if (process.env.RENDER === "true") {
+    const PING_URL = "https://ehm-backend.onrender.com/hello";
+    
+    // Initial ping after 5 seconds to wake up/confirm active status
+    setTimeout(() => {
+      https.get(PING_URL, (res) => {
+        console.log(`[Keep-Alive] Startup ping response: ${res.statusCode}`);
+      }).on("error", (err) => {
+        console.error("[Keep-Alive] Startup ping failed:", err.message);
+      });
+    }, 5000);
+
+    // Periodic ping every 10 minutes (600000ms) to keep it awake
+    setInterval(() => {
+      https.get(PING_URL, (res) => {
+        console.log(`[Keep-Alive] Periodic ping response: ${res.statusCode}`);
+      }).on("error", (err) => {
+        console.error("[Keep-Alive] Periodic ping failed:", err.message);
+      });
+    }, 10 * 60 * 1000);
+  }
+});

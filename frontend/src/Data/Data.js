@@ -12,6 +12,7 @@ export const companies = [
   { name: "Government of TamilNadu", url: "https://www.tn.gov.in" },
   { name: "Thriveni Sainik", url: "https://thriveni.com" },
   { name: "UPSIC, Kanpur", url: "https://upsic.in" },
+  { name: "IIT Kanpur", url: "https://www.iitk.ac.in" },
 ];
 
 export const partners = [

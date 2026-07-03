@@ -49,7 +49,7 @@ const DNTSHero = () => {
         <motion.h1 className="relative z-10 text-4xl sm:text-5xl md:text-7xl font-extrabold text-white uppercase tracking-wider">
           <span className="text-[#02ffe6]">Decentralized </span>Natural
           <br />
-          <span className="text-[#02ffe6]">Treatment </span>System
+          Treatment <span className="text-[#02ffe6]">System</span>
         </motion.h1>
         <motion.p className="mt-6 text-white/80 text-lg md:text-xl max-w-2xl mx-auto">
           Gravity-based, self-sustainable, root-based technology to treat and
@@ -59,9 +59,9 @@ const DNTSHero = () => {
           {highlights.map(({ label, Icon }) => (
             <div
               key={label}
-              className="flex h-11 w-full max-w-[240px] sm:w-auto sm:min-w-[204px] items-center justify-center gap-3 rounded-full border border-white/30 bg-white/15 px-7 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.24)] backdrop-blur-sm"
+              className="flex h-11 w-full max-w-[240px] sm:w-auto sm:min-w-[204px] items-center justify-center gap-3 rounded-full border border-teal-900/50 bg-teal-950/70 px-7 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.1)] backdrop-blur-sm transition-all duration-300 hover:bg-teal-950/90 hover:scale-105"
             >
-              <Icon className="h-5 w-5 flex-shrink-0" strokeWidth={2.5} />
+              <Icon className="h-5 w-5 flex-shrink-0 text-[#02ffe6]" strokeWidth={2.5} />
               <span className="text-base font-bold md:text-lg">{label}</span>
             </div>
           ))}

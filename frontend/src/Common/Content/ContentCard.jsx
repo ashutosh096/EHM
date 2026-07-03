@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Image as ImageIcon, ArrowRight, User } from "lucide-react";
+import { optimizeCloudinaryUrl } from "../utils";
 
 /**
  * A reusable card for displaying any content preview 
@@ -24,7 +25,7 @@ const ContentCard = ({ item, basePath, delay }) => {
         day: "numeric",
     });
 
-    const imageUrl = item.image ? item.image : null;
+    const imageUrl = item.image ? optimizeCloudinaryUrl(item.image, 600) : null;
 
     return (
         <div

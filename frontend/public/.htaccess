@@ -8,7 +8,16 @@
 
   # Serve route-specific social preview metadata to crawlers that do not run React.
   RewriteCond %{HTTP_USER_AGENT} (WhatsApp|facebookexternalhit|Facebot|Twitterbot|LinkedInBot|Slackbot|TelegramBot|Discordbot) [NC]
-  RewriteRule ^offerings/sustainability-assessment-reporting/?$ /starc-preview.html [L]
+  RewriteRule ^offerings/sustainability-assessment-reporting/?$ /starc-preview.html [NC,L]
+
+  RewriteCond %{HTTP_USER_AGENT} (WhatsApp|facebookexternalhit|Facebot|Twitterbot|LinkedInBot|Slackbot|TelegramBot|Discordbot) [NC]
+  RewriteRule ^resources/dnts/?$ /dnts-preview.html [NC,L]
+
+  RewriteCond %{HTTP_USER_AGENT} (WhatsApp|facebookexternalhit|Facebot|Twitterbot|LinkedInBot|Slackbot|TelegramBot|Discordbot) [NC]
+  RewriteRule ^resources/netzero-campus/?$ /netzero-preview.html [NC,L]
+
+  RewriteCond %{HTTP_USER_AGENT} (WhatsApp|facebookexternalhit|Facebot|Twitterbot|LinkedInBot|Slackbot|TelegramBot|Discordbot) [NC]
+  RewriteRule ^resources/WaterbodyRestoration/?$ /waterbody-preview.html [NC,L]
 
   # If the request is for a real file or directory, serve it as is
   RewriteCond %{REQUEST_FILENAME} !-f

@@ -3,6 +3,7 @@ import API from "../api/axios";
 import { motion } from "framer-motion";
 import ContentCard from "../Common/Content/ContentCard";
 import SectionHeading from "../Common/SectionHeading";
+import SEO from "../Components/Common/SEO";
 
 const BlogsPage = () => {
   const [blogs, setBlogs] = useState([]);
@@ -30,6 +31,13 @@ const BlogsPage = () => {
 
   return (
     <section className="bg-gradient-to-br from-emerald-50 via-green-50 to-teal-50 pt-24 pb-12 min-h-screen">
+      <SEO
+        title="EHM Sustainability Blog | Insights, News & Trends"
+        description="Stay updated with EHM Consultancy's expert articles on wastewater treatment, ESG compliance, hydrology, climate changes, and green initiatives."
+        keywords="EHM blog, sustainability articles, environmental engineering blog, green initiatives news, ESG trends India, EHM Consultancy"
+        canonical="/resources/blogs"
+        ogImage="https://www.ehmconsultancy.co.in/ehm-homepage-meta.jpg"
+      />
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-3xl mx-auto text-center">

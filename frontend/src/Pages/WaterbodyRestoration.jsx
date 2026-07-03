@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   CloudHail,
   Plane,
@@ -10,11 +10,34 @@ import WaterbodyCaseStudy from "../Components/Resources/WaterRestoration/Waterbo
 import WaterbodyBenefits from "../Components/Resources/WaterRestoration/WaterbodyBenefits";
 import WaterbodyProjects from "../Components/Resources/WaterRestoration/WaterbodyProjects";
 import WaterbodyApproach from "../Components/Resources/WaterRestoration/WaterbodyApproach";
+import SEO from "../Components/Common/SEO";
+import API from "../api/axios";
 
 const WaterbodyRestoration = () => {
   const [activeNode, setActiveNode] = useState(null);
   const [hoveredStage, setHoveredStage] = useState(null);
   const [hoveredProject, setHoveredProject] = useState("laxmi");
+  const [caseStudyId, setCaseStudyId] = useState(null);
+
+  useEffect(() => {
+    const fetchCaseStudies = async () => {
+      try {
+        const response = await API.get("/casestudies");
+        if (response.data.success) {
+          const matchingStudy = (response.data.data || []).find(s => {
+            const tLower = (s.title || "").toLowerCase();
+            return tLower.includes("antia");
+          });
+          if (matchingStudy) {
+            setCaseStudyId(matchingStudy._id);
+          }
+        }
+      } catch (err) {
+        console.error("Error fetching case studies for restoration page:", err);
+      }
+    };
+    fetchCaseStudies();
+  }, []);
 
   const factors = [
     {
@@ -148,6 +171,13 @@ const WaterbodyRestoration = () => {
 
   return (
     <div>
+      <SEO
+        title="Waterbody Restoration & Lake Rejuvenation Services | EHM"
+        description="EHM Consultancy restores degraded lakes, ponds, and wetlands using bio-remediation, floating treatment wetlands, desilting, and sustainable management plans."
+        keywords="waterbody restoration, lake rejuvenation, wetland restoration, bioremediation, floating treatment wetlands, EHM, Antia Talab restoration, EHM Consultancy"
+        canonical="/resources/WaterbodyRestoration"
+        ogImage="https://www.ehmconsultancy.co.in/WaterRestoration/waterbody-meta.jpg"
+      />
       <style>{`
         @keyframes bounceHorizontal {
             0%, 100% { transform: translateX(0); }
@@ -190,6 +220,7 @@ const WaterbodyRestoration = () => {
         caseStudy={caseStudy}
         hoveredStage={hoveredStage}
         setHoveredStage={setHoveredStage}
+        caseStudyId={caseStudyId}
       />
 
       <WaterbodyProjects

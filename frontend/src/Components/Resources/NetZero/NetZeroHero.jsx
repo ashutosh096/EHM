@@ -63,7 +63,7 @@ const NetZeroHero = () => {
           {highlights.map(({ label, Icon }) => (
             <div
               key={label}
-              className="flex h-12 w-full max-w-[260px] sm:w-auto sm:min-w-[220px] items-center justify-center gap-3 rounded-full border border-white/40 bg-white/20 px-6 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.24)] backdrop-blur-sm transition-all duration-300 hover:bg-white/30 hover:scale-105"
+              className="flex h-12 w-full max-w-[260px] sm:w-auto sm:min-w-[220px] items-center justify-center gap-3 rounded-full border border-teal-900/50 bg-teal-950/70 px-6 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.1)] backdrop-blur-sm transition-all duration-300 hover:bg-teal-950/90 hover:scale-105"
             >
               <Icon className="h-5 w-5 flex-shrink-0 text-[#02ffe6]" strokeWidth={2.5} />
               <span className="text-sm sm:text-base font-bold tracking-wide">{label}</span>

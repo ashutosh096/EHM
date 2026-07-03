@@ -1,5 +1,5 @@
 import { Router, Request, Response } from "express";
-import { AdminMiddleware, upload } from "../middleware";
+import { AdminMiddleware, upload, handleUploadError } from "../middleware";
 import { BlogModel } from "../db";
 import fs from "fs";
 import path from "path";
@@ -19,6 +19,7 @@ BlogAdminRouter.post(
   "/blogs",
   AdminMiddleware,
   upload.single("image"), // handle file
+  handleUploadError,
   async (req: CustomRequest, res: Response) => {
     try {
       const { title, author, content } = req.body;
@@ -55,6 +56,7 @@ BlogAdminRouter.put(
   "/blogs/:id",
   AdminMiddleware,
   upload.single("image"),
+  handleUploadError,
   async (req: CustomRequest, res: Response) => {
     try {
       const { title, author, content } = req.body;

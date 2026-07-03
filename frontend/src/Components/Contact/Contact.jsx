@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Mail, User, MessageSquare, Send, CheckCircle } from "lucide-react";
+import { Mail, User, MessageSquare, Send, CheckCircle, Phone } from "lucide-react";
 import API from "../../api/axios";
 
 export default function Contact() {
@@ -47,7 +47,7 @@ export default function Contact() {
       name: formData.name.trim(),
       email: formData.email.trim(),
       mobile: formData.mobile.trim(),
-      interestedIn: formData.interestedIn.trim(),
+      interestedIn: "[Contact Us] " + formData.interestedIn.trim(),
       message: formData.message.trim(),
     };
 
@@ -186,7 +186,7 @@ export default function Contact() {
             </label>
             <div className="relative group">
               <div className="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none">
-                <User className="w-5 h-5 text-slate-300 group-focus-within:text-[#4B7635] transition-colors" />
+                <Phone className="w-5 h-5 text-slate-300 group-focus-within:text-[#4B7635] transition-colors" />
               </div>
               <input
                 id="mobile"

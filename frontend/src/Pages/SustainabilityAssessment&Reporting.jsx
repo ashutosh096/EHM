@@ -6,6 +6,7 @@ import DashboardFeatures from '../Components/SustainabilityAssessment/DashboardF
 import ImplementationPlanSection from '../Components/SustainabilityAssessment/ImplementationPlanSection'
 import SubscriptionPlans from '../Components/SustainabilityAssessment/SubscriptionPlans'
 import FeatureProject from '../Components/SustainabilityAssessment/FeatureProject'
+import StarcFloatingBrochure from '../Components/SustainabilityAssessment/StarcFloatingBrochure'
 
 
 const SustainabilityAssessment = () => {
@@ -26,8 +27,10 @@ const SustainabilityAssessment = () => {
       <ImplementationPlanSection/>  
       <SubscriptionPlans/>  
       <FeatureProject/>
+      <StarcFloatingBrochure />
     </div>
   )
 }
 
 export default SustainabilityAssessment
+

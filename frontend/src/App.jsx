@@ -30,6 +30,8 @@ const AdminLoginModal = lazy(() => import('../src/Components/Admin/AdminLoginMod
 const AdminDashboard = lazy(() => import("./Pages/AdminDashboard.jsx"));
 const StarcContactPage = lazy(() => import('./Pages/StarcContactPage.jsx'));
 const DNTSPage = lazy(() => import('./Pages/DNTS.jsx'));
+const NetZeroCampus = lazy(() => import('./Pages/NetZeroCampus.jsx'));
+const VideosPage = lazy(() => import('./Pages/VideosPage.jsx'));
 
 
 
@@ -61,7 +63,8 @@ function App() {
             <Route path="/offerings/products" element={<ProductPage />} />
 
             <Route path="/offerings" element={<ServicePage />} />
-            <Route path="resources/gallery" element={<GalleryPage />} />
+            <Route path="/resources/gallery" element={<GalleryPage />} />
+            <Route path="/resources/videos" element={<VideosPage />} />
             <Route path="/resources/webinar" element={<WebinarPage />} />
             <Route path="/resources/webinar/:id" element={<WebinarDetails />} />
 
@@ -69,6 +72,7 @@ function App() {
             <Route path="/resources/casestudies" element={<CaseStudyPage />} />
             <Route path="/resources/WaterbodyRestoration" element={<WaterbodyRestoration />} />
             <Route path="/resources/dnts" element={<DNTSPage />} />
+            <Route path="/resources/netzero-campus" element={<NetZeroCampus />} />
             <Route path="/offerings/sustainability-assessment-reporting" element={<SustainabilityAssessment />} />
             <Route path="/offerings/geophysical-investigation" element={<GeophysicalInvestigation />} />
 

@@ -30,6 +30,7 @@ const resourcesMenu = [
     items: [
       { name: "Webinars", path: "/resources/webinar", icon: Video },
       { name: "Gallery", path: "/resources/gallery", icon: Image },
+      { name: "Videos", path: "/resources/videos", icon: Video },
     ],
   },
   {
@@ -37,6 +38,7 @@ const resourcesMenu = [
     items: [
       { name: "Waterbody Restoration", path: "/resources/WaterbodyRestoration", icon: Recycle },
       { name: "Decentralized Natural\nTreatment System", path: "/resources/dnts", icon: Droplets },
+      { name: "Net-Zero & Water\nPositive Campus", path: "/resources/netzero-campus", icon: Leaf },
     ],
   },
 ];

@@ -16,6 +16,8 @@ import {
 import Logo from "../Components/LandingPage/Logo";
 import Logoscroll from "../Components/LandingPage/Logoscroll";
 import { useLocation, Link } from "react-router-dom";
+import API from "../api/axios";
+import { optimizeCloudinaryUrl } from "../Common/utils";
 
 // ProjectsPage.jsx - Complete Implementation
 // All data, components, and logic consolidated in this file
@@ -98,6 +100,9 @@ const projectImages = {
     "https://res.cloudinary.com/dlpluej6w/image/upload/v1756901211/Environmental_Audit_oeafkp.webp",
   aiDevelopment:
     "https://res.cloudinary.com/dlpluej6w/image/upload/v1756901263/ESG_Course_Modules_TOT_for_MSME_fcduho.webp",
+  ecologyBiodiversity: "ProjectsImage/Ecology and Biodiversity Assessment.webp",
+  geophysicalDataProcessing: "ProjectsImage/Geophysical Data Processing and Interpretation.webp",
+  groundMagneticSurvey: "ProjectsImage/Ground Magnetic Survey.webp",
 };
 const sampleProjects = [
   {
@@ -136,6 +141,42 @@ const sampleProjects = [
     projectType: "Sustainability Assessment & Reporting",
     description:
       "Ongoing project to prepare the Social Impact Report for Jhansi Smart City Limited, assessing community outcomes of 11 Smart City projects across water, health, education, parks, and surveillance. Implemented by EHM with IFACET–IIT Kanpur as the technical partner.",
+  },
+  {
+    id: "p30",
+    image: projectImages.ecologyBiodiversity,
+    title: "Ecology & Biodiversity Assessment",
+    agency: "IIT Kanpur",
+    location: "Kanpur, Uttar Pradesh",
+    duration: "Completed",
+    status: "Completed",
+    projectType: "Sustainable Environmental Management",
+    description:
+      "Conducted a comprehensive assessment of biodiversity across the IIT Kanpur campus, including the creation of baseline data on flora and fauna, carbon sequestration potential, and identification of ecological hotspots. The study provides actionable insights to strengthen campus-level environmental sustainability and green cover management.",
+  },
+  {
+    id: "p31",
+    image: projectImages.geophysicalDataProcessing,
+    title: "Geophysical Data Processing and Interpretation",
+    agency: "ADPL",
+    location: "India",
+    duration: "Completed",
+    status: "Completed",
+    projectType: "Geophysical Investigation",
+    description:
+      "Performed advanced geophysical data processing and interpretation including ERT, SRT (Seismic Refraction Tomography), and Ground Magnetics data. Created detailed 3D subsurface volumes for a tunnel project, delivering critical insights for underground infrastructure planning and geological risk assessment.",
+  },
+  {
+    id: "p32",
+    image: projectImages.groundMagneticSurvey,
+    title: "Ground Magnetic Survey",
+    agency: "UEIPL",
+    location: "Chhattisgarh",
+    duration: "Completed",
+    status: "Completed",
+    projectType: "Geophysical Investigation",
+    description:
+      "Conducted a ground magnetic survey across three potential mineral exploration blocks in Chhattisgarh. The survey mapped subsurface magnetic anomalies to identify mineralisation zones and support resource estimation, providing a reliable geophysical foundation for further exploration drilling and mining feasibility studies.",
   },
   {
     id: "p4",
@@ -247,6 +288,8 @@ const sampleProjects = [
     projectType: "Sustainable Environmental Management",
     description:
       "Conducted a third-party audit of Jhansi’s city-wide Water ATM Network providing 24/7 safe, affordable drinking water through solar-powered, IoT-enabled kiosks. The audit ensured quality implementation, cost accuracy, and compliance with Smart City Mission objectives for sustainable urban water access.",
+    objectPosition: "center",
+    imageStyle: { transform: "rotate(90deg) scale(1.8)" },
   },
   {
     id: "p13",
@@ -320,7 +363,7 @@ const sampleProjects = [
     location: "Jhansi, Uttar Pradesh",
     duration: "Completed",
     status: "Completed",
-    projectType: "Climate Impact & Sustainability Assessment",
+    projectType: "Climate Risk Intelligence",
     description:
       "Assessed Jhansi’s exposure to heatwaves, flooding, and water stress using climate and socio-economic data. The study supports city-level resilience planning and adaptation strategies under the Smart City Mission.",
   },
@@ -551,6 +594,9 @@ const ProjectCard = ({
   className = "",
   style = {},
   onClick,
+  objectPosition = "center",
+  imageStyle = {},
+  caseStudyUrl = null,
 }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [isBookmarked, setIsBookmarked] = useState(false);
@@ -597,7 +643,8 @@ const ProjectCard = ({
       <div className="relative overflow-hidden h-56">
         <img
           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-          src={image}
+          style={{ objectPosition, ...imageStyle }}
+          src={image ? (image.startsWith('http') ? optimizeCloudinaryUrl(image, 800) : `${image}?v=4`) : image}
           alt={title}
           loading="lazy"
           onError={(e) => {
@@ -742,10 +789,7 @@ const ProjectCard = ({
             )}
           </div>
         )}
-        {/* <div className="flex items-center justify-between pt-3 border-t border-gray-100">
-          <div className="opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-2 group-hover:translate-y-0"><span className="text-teal-600 font-bold text-sm flex items-center gap-2 hover:gap-3 transition-all duration-300"><Eye className="w-4 h-4" />View Details</span></div>
-          <button onClick={(e) => { e.stopPropagation(); onClick(); }} className="opacity-0 group-hover:opacity-100 px-3 py-2 bg-teal-600 text-white rounded-md hover:bg-teal-700 transition-all duration-500 transform translate-y-2 group-hover:translate-y-0 flex items-center gap-1.5 font-medium text-sm">Open<ExternalLink className="w-4 h-4" /></button>
-        </div> */}
+
       </div>
       <div className="absolute inset-0 border-2 border-transparent group-hover:border-teal-400 rounded-3xl transition-all duration-500 pointer-events-none"></div>
       <div className="absolute inset-0 -z-10 bg-teal-400/10 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 scale-95 group-hover:scale-105"></div>
@@ -759,6 +803,21 @@ const ProjectCard = ({
 const ProjectsPage = () => {
   const [message, setMessage] = useState(null);
   const [activeFilter, setActiveFilter] = useState("All Projects");
+  const [caseStudies, setCaseStudies] = useState([]);
+
+  useEffect(() => {
+    const fetchCaseStudies = async () => {
+      try {
+        const response = await API.get("/casestudies");
+        if (response.data.success) {
+          setCaseStudies(response.data.data || []);
+        }
+      } catch (err) {
+        console.error("Error fetching case studies:", err);
+      }
+    };
+    fetchCaseStudies();
+  }, []);
 
   const filteredProjects = useMemo(() => {
     if (activeFilter === "All Projects") {
@@ -769,13 +828,48 @@ const ProjectsPage = () => {
     );
   }, [activeFilter]);
 
+  const projectsWithCaseStudies = useMemo(() => {
+    return filteredProjects.map((project) => {
+      const titleLower = (project.title || "").toLowerCase();
+      const agencyLower = (project.agency || "").toLowerCase();
+      
+      let matchingStudy = null;
+      if (titleLower.includes("sustainability report") && agencyLower.includes("csjm")) {
+        matchingStudy = caseStudies.find(s => {
+          const tLower = (s.title || "").toLowerCase();
+          return tLower.includes("csjmu") && (tLower.includes("annual") || tLower.includes("report") || tLower.includes("sustainability"));
+        });
+      } else if (titleLower.includes("biodiversity") || titleLower.includes("ecology")) {
+        matchingStudy = caseStudies.find(s => {
+          const tLower = (s.title || "").toLowerCase();
+          return tLower.includes("biodiversity") || tLower.includes("iitk");
+        });
+      } else if (titleLower.includes("antia talab") || titleLower.includes("antia waterbody") || titleLower.includes("antia water")) {
+        matchingStudy = caseStudies.find(s => {
+          const tLower = (s.title || "").toLowerCase();
+          return tLower.includes("antia");
+        });
+      } else if (titleLower.includes("environmental audit") || titleLower.includes("neeri")) {
+        matchingStudy = caseStudies.find(s => {
+          const tLower = (s.title || "").toLowerCase();
+          return tLower.includes("environmental audit") || tLower.includes("neeri");
+        });
+      }
+
+      return {
+        ...project,
+        caseStudyUrl: matchingStudy ? `/casestudies/${matchingStudy._id}` : null
+      };
+    });
+  }, [filteredProjects, caseStudies]);
+
   const showMessage = (msg) => {
     setMessage(msg);
     setTimeout(() => setMessage(null), 3000);
   };
 
   const stats = [
-    { number: "25", suffix: "+", label: "Projects Completed", icon: Award },
+    { number: "30", suffix: "+", label: "Projects Completed", icon: Award },
     { number: "15", suffix: "+", label: "Happy Clients", icon: Users },
     { number: "6", suffix: "+", label: "Years Experience", icon: Calendar },
     { number: "99", suffix: "%", label: "Success Rate", icon: Target },
@@ -823,9 +917,25 @@ const ProjectsPage = () => {
 
       <main className="relative z-10 py-16">
         <section className="max-w-7xl mx-auto px-4 mb-12 mt-12">
-          {/* Filter Buttons at Top */}
-          <div className="flex flex-wrap justify-center gap-3 mb-12">
-            {filterOptions.map((filter) => (
+          {/* Filter Buttons at Top - Row 1: 4 tags */}
+          <div className="flex justify-center gap-3 mb-3">
+            {filterOptions.slice(0, 4).map((filter) => (
+              <button
+                key={filter}
+                onClick={() => setActiveFilter(filter)}
+                className={`px-5 py-2.5 rounded-full font-semibold transition-all duration-300 hover:scale-105 shadow-lg backdrop-blur-sm text-sm ${
+                  activeFilter === filter
+                    ? "bg-teal-600 text-white hover:bg-teal-700"
+                    : "bg-white/90 text-gray-700 hover:bg-teal-50 hover:text-teal-700 border border-gray-200"
+                }`}
+              >
+                {filter}
+              </button>
+            ))}
+          </div>
+          {/* Filter Buttons - Row 2: remaining 2 tags */}
+          <div className="flex justify-center gap-3 mb-12">
+            {filterOptions.slice(4).map((filter) => (
               <button
                 key={filter}
                 onClick={() => setActiveFilter(filter)}
@@ -872,7 +982,7 @@ const ProjectsPage = () => {
         {/* Projects Grid */}
         <section className="max-w-7xl mx-auto px-4 mb-20">
           <div className="projects-grid">
-            {filteredProjects.map((project, index) => (
+            {projectsWithCaseStudies.map((project, index) => (
               <div
                 key={project.id}
                 id={project.id}

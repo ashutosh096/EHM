@@ -1,7 +1,101 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import API from "../../api/axios"; // Adjust this import path if needed
-import { ArrowLeft, Image as ImageIcon, BookOpen, ChevronRight, X } from "lucide-react";
+import { ArrowLeft, Image as ImageIcon, BookOpen, ChevronRight, X, Download } from "lucide-react";
+import SEO from "../../Components/Common/SEO";
+import { optimizeCloudinaryUrl } from "../utils";
+
+/**
+ * Helper function to clean copy-paste anomalies in rich text content
+ * (e.g. merging line-broken paragraphs and elevating inline bold headers)
+ */
+const cleanContent = (html) => {
+    if (!html) return "";
+    try {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, "text/html");
+
+        // 1. Convert bold-only short paragraphs like <p><strong>Heading</strong></p> into <h2>Heading</h2> or <h3>Heading</h3>
+        const paragraphs = doc.querySelectorAll("p");
+        paragraphs.forEach((p) => {
+            const trimmedText = p.textContent.trim();
+            const strongText = Array.from(p.querySelectorAll("strong, b")).map(el => el.textContent).join("").trim();
+
+            // Only treat as heading if the entire text is bold and length is reasonable
+            const isHeadingNode = strongText.length > 0 && strongText.length === trimmedText.length && trimmedText.length < 120;
+
+            if (isHeadingNode) {
+                // If it starts with a number (like "1. ", "2. "), it's a sub-heading (h3)
+                const isSubHeading = /^\d+\.\s/.test(trimmedText);
+                const tag = isSubHeading ? "h3" : "h2";
+                
+                const heading = doc.createElement(tag);
+                heading.innerHTML = p.innerHTML;
+                p.parentNode.replaceChild(heading, p);
+            }
+        });
+
+        // 2. Merge adjacent text paragraphs that were split by line-breaks (without sentence ending punctuation)
+        const bodyChildren = Array.from(doc.body.childNodes);
+        let currentParagraph = null;
+
+        bodyChildren.forEach((node) => {
+            if (node.nodeName === "P") {
+                // Remove empty paragraphs that contain only line-breaks or whitespace
+                const cleanedText = node.textContent.replace(/[\u200B-\u200D\uFEFF]/g, "").trim();
+                const hasImg = node.querySelector("img") !== null;
+                if (cleanedText.length === 0 && !hasImg) {
+                    node.parentNode.removeChild(node);
+                    return;
+                }
+
+                const text = node.textContent.trim();
+
+                // Skip if this paragraph contains an image, but first clean empty strong/span elements with zero-width spaces
+                if (node.querySelector("img")) {
+                    const emptyElements = node.querySelectorAll("strong, b, span, em, i");
+                    emptyElements.forEach((el) => {
+                        const trimmedText = el.textContent.replace(/[\u200B-\u200D\uFEFF]/g, "").trim();
+                        if (trimmedText.length === 0) {
+                            el.parentNode.removeChild(el);
+                        }
+                    });
+                    currentParagraph = null;
+                    return;
+                }
+
+                if (currentParagraph) {
+                    // Merge content
+                    currentParagraph.innerHTML += " " + node.innerHTML;
+                    node.parentNode.removeChild(node);
+
+                    // Check if the merged paragraph now ends with punctuation
+                    const currentText = currentParagraph.textContent.trim();
+                    const lastChar = currentText.slice(-1);
+                    if (/[.!?]/.test(lastChar)) {
+                        currentParagraph = null; // Stop merging
+                    }
+                } else {
+                    const lastChar = text.slice(-1);
+                    const isSentenceEnd = /[.!?]/.test(lastChar);
+
+                    if (!isSentenceEnd && text.length > 0) {
+                        currentParagraph = node;
+                    } else {
+                        currentParagraph = null;
+                    }
+                }
+            } else {
+                currentParagraph = null;
+            }
+        });
+
+        return doc.body.innerHTML;
+    } catch (e) {
+        console.error("Error cleaning HTML content:", e);
+        return html;
+    }
+};
 
 /**
  * A reusable page for displaying a single content item 
@@ -18,6 +112,68 @@ const SingleContentPage = ({ basePath, contentName }) => {
     const [itemList, setItemList] = useState([]);
     const [currentSlide, setCurrentSlide] = useState(0);
     const [width, setWidth] = useState(window.innerWidth);
+    const [showDownloadModal, setShowDownloadModal] = useState(false);
+    const [formData, setFormData] = useState({ name: "", email: "", phone: "", role: "", org: "" });
+    const [pdfUrl, setPdfUrl] = useState(null);
+
+    useEffect(() => {
+        const checkPdf = async () => {
+            if (basePath === "casestudies" && item) {
+                const pathsToCheck = [];
+                const titleLower = (item.title || "").toLowerCase();
+
+                if (titleLower.includes("csjmu") && (titleLower.includes("annual") || titleLower.includes("report"))) {
+                    pathsToCheck.push("/pdfs/ANNUAL SUSTAINABILITY REPORT CSJMU KANPUR 2026_compressed (1)_11zon.pdf");
+                    pathsToCheck.push("/pdfs/csjmu_case_study.pdf");
+                } else if (titleLower.includes("csjmu")) {
+                    pathsToCheck.push("/pdfs/csjmu_case_study.pdf");
+                }
+
+                if (titleLower.includes("biodiversity") || titleLower.includes("iitk")) {
+                    pathsToCheck.push("/pdfs/IITK Biodiversity case study.pdf");
+                }
+
+                if (titleLower.includes("antia")) {
+                    pathsToCheck.push("/pdfs/ANTIA TALAB Case Study 2_compressed (1)_11zon.pdf");
+                }
+
+                if (titleLower.includes("environmental audit") || titleLower.includes("neeri")) {
+                    pathsToCheck.push("/pdfs/ENVIRONMENTAL AUDIT Case Study_compressed (1)_11zon.pdf");
+                }
+
+                pathsToCheck.push(`/pdfs/${item._id}.pdf`);
+
+                for (const path of pathsToCheck) {
+                    try {
+                        const response = await fetch(path, { method: "HEAD" });
+                        if (response.ok) {
+                            setPdfUrl(path);
+                            return;
+                        }
+                    } catch (e) {
+                        console.warn("Could not head check PDF path:", path, e);
+                    }
+                }
+
+                if (titleLower.includes("csjmu") && (titleLower.includes("annual") || titleLower.includes("report"))) {
+                    setPdfUrl("/pdfs/ANNUAL SUSTAINABILITY REPORT CSJMU KANPUR 2026_compressed (1)_11zon.pdf");
+                } else if (titleLower.includes("csjmu")) {
+                    setPdfUrl("/pdfs/csjmu_case_study.pdf");
+                } else if (titleLower.includes("biodiversity") || titleLower.includes("iitk")) {
+                    setPdfUrl("/pdfs/IITK Biodiversity case study.pdf");
+                } else if (titleLower.includes("antia")) {
+                    setPdfUrl("/pdfs/ANTIA TALAB Case Study 2_compressed (1)_11zon.pdf");
+                } else if (titleLower.includes("environmental audit") || titleLower.includes("neeri")) {
+                    setPdfUrl("/pdfs/ENVIRONMENTAL AUDIT Case Study_compressed (1)_11zon.pdf");
+                } else {
+                    setPdfUrl(null);
+                }
+            } else {
+                setPdfUrl(null);
+            }
+        };
+        checkPdf();
+    }, [item, basePath]);
 
     useEffect(() => {
         const handleResize = () => setWidth(window.innerWidth);
@@ -84,21 +240,109 @@ const SingleContentPage = ({ basePath, contentName }) => {
     if (!item) return null;
 
     const formattedDate = new Date(item.createdAt).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
-    const imageUrl = item.image ? item.image : null;
+    const imageUrl = item.image ? optimizeCloudinaryUrl(item.image, 1200) : null;
+
+    const handleDownloadSubmit = (e) => {
+        e.preventDefault();
+
+        // Strip any spaces from mobile number before sending to pass backend validation regex
+        const cleanMobile = (formData.phone || "").replace(/\s+/g, "");
+        API.post("/contact", {
+            name: formData.name,
+            email: formData.email,
+            mobile: cleanMobile,
+            interestedIn: `[Case Study] Case Study Download: ${item.title}`,
+            message: `Downloaded Case Study: "${item.title}". Support Type: ${formData.role}. Organization: ${formData.org || "N/A"}`
+        }).catch((err) => {
+            console.error("Error submitting lead to contact database:", err);
+        });
+
+        if (pdfUrl) {
+            // Open PDF in a new tab (full page)
+            window.open(pdfUrl, "_blank");
+
+            const a = document.createElement('a');
+            a.href = pdfUrl;
+            a.download = `${item.title.replace(/[^a-z0-9]/gi, '_').toLowerCase()}_case_study.pdf`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        } else {
+            // Fallback to generating word doc if somehow pdfUrl is not set (so we don't break fallback behavior)
+            const cleanContent = item.content || "";
+            const htmlDoc = `
+              <html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
+              <head>
+                <title>${item.title}</title>
+                <style>
+                  body { font-family: 'Segoe UI', Arial, sans-serif; line-height: 1.6; color: #333333; padding: 20px; }
+                  h1 { color: #047857; font-size: 26px; margin-bottom: 5px; }
+                  .meta { color: #666666; font-size: 13px; margin-bottom: 25px; border-bottom: 1px solid #eeeeee; padding-bottom: 10px; }
+                  .meta-item { margin-right: 15px; }
+                  .footer { margin-top: 50px; font-size: 11px; color: #999999; text-align: center; border-top: 1px solid #eeeeee; padding-top: 15px; }
+                </style>
+              </head>
+              <body>
+                <h1>${item.title}</h1>
+                <div class="meta">
+                  <span class="meta-item"><strong>Author:</strong> ${item.author}</span>
+                  <span class="meta-item"><strong>Date:</strong> ${formattedDate}</span>
+                </div>
+                <div class="content">
+                  ${cleanContent}
+                </div>
+                <div class="footer">
+                  Generated by EHM Case Study Download Portal. Prepared for ${formData.name} (${formData.email}) - ${formData.org || 'Individual'}.
+                </div>
+              </body>
+              </html>
+            `;
+
+            const blob = new Blob(['\ufeff' + htmlDoc], { type: 'application/msword' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${item.title.replace(/[^a-z0-9]/gi, '_').toLowerCase()}_case_study.doc`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
+
+        setShowDownloadModal(false);
+        setFormData({ name: "", email: "", phone: "", role: "", org: "" });
+    };
+
+    const textOnly = item.content ? item.content.replace(/<[^>]*>?/gm, "").trim() : "";
+    const snippet = textOnly.length > 0
+        ? textOnly.split(/\s+/).slice(0, 24).join(" ") + "..."
+        : `Read the full ${contentName.toLowerCase()} on EHM Consultancy.`;
 
     return (
         <section className="bg-gradient-to-br from-emerald-50 via-green-50 to-teal-50 pt-24 pb-20 min-h-screen">
-            <div className="max-w-4xl mx-auto px-6 lg:px-8">
+            <SEO
+                title={`${item.title}`}
+                description={snippet}
+                keywords={`${item.author}, ${contentName}, EHM, EHM Consultancy`}
+                canonical={`/${basePath}/${item._id}`}
+                ogImage={imageUrl || "https://www.ehmconsultancy.co.in/ehm-homepage-meta.jpg"}
+            />
+            <div className="max-w-5xl mx-auto px-6 lg:px-8">
                 <article>
-                    <div className="text-center mb-8">
-                        <Link
-                            to={`/${basePath}/author/${encodeURIComponent(item.author)}`}
-                            className="inline-block bg-green-100 text-green-800 font-semibold px-4 py-1 rounded-full text-sm hover:bg-green-200 transition-colors mb-4"
-                        >
-                            {item.author}
-                        </Link>
-                        <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-gray-900">{item.title}</h1>
-                        <p className="mt-4 text-md text-gray-500">{formattedDate}</p>
+                    <div className="text-center mb-8 max-w-4xl mx-auto">
+                        <div className="flex flex-wrap items-center justify-center gap-3 mb-6">
+                            <Link
+                                to={`/${basePath}/author/${encodeURIComponent(item.author)}`}
+                                className="bg-green-100 text-green-800 font-semibold px-4 py-1 rounded-full text-sm hover:bg-green-200 transition-colors"
+                            >
+                                {item.author}
+                            </Link>
+                            <span className="bg-slate-100 text-slate-600 font-semibold px-4 py-1 rounded-full text-sm">
+                                {formattedDate}
+                            </span>
+                        </div>
+                        <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-[40px] font-extrabold tracking-tight text-gray-900 leading-tight md:leading-tight uppercase">
+                            {item.title}
+                        </h1>
                     </div>
                     <div className="w-full aspect-video rounded-2xl shadow-xl my-8 bg-gray-100 flex items-center justify-center overflow-hidden">
                         {imageUrl && !imageError ? (
@@ -110,33 +354,49 @@ const SingleContentPage = ({ basePath, contentName }) => {
                             </div>
                         )}
                     </div>
-                    <div
-                        className="prose prose-lg lg:prose-xl max-w-none mx-auto mt-8 text-gray-700"
-                        dangerouslySetInnerHTML={{ __html: item.content }}
-                    />
-                    <div className="mt-12 flex flex-wrap items-center gap-4">
-                        <button
-                            onClick={() => navigate(-1)}
-                            className="flex items-center gap-2 text-green-600 font-semibold hover:text-green-800 transition-colors"
-                        >
-                            <ArrowLeft size={20} />
-                            Back
-                        </button>
-
+                    <div className="max-w-3xl mx-auto">
+                        {(() => {
+                            const cleanedHtml = cleanContent(item.content);
+                            const hasSubheadings = cleanedHtml.includes("<h3");
+                            return (
+                                <div
+                                    className={`prose prose-lg lg:prose-xl max-w-none mt-8 text-gray-700 ${hasSubheadings ? "has-subheadings" : ""}`}
+                                    dangerouslySetInnerHTML={{ __html: cleanedHtml }}
+                                />
+                            );
+                        })()}
+                        <div className="mt-12 flex flex-wrap items-center justify-between gap-4">
+                            <button
+                                onClick={() => navigate(-1)}
+                                className="flex items-center gap-2 text-green-600 font-semibold hover:text-green-800 transition-colors"
+                            >
+                                <ArrowLeft size={20} />
+                                Back
+                            </button>
+                            {basePath === "casestudies" && (
+                                <button
+                                    onClick={() => setShowDownloadModal(true)}
+                                    className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 text-white font-semibold rounded-xl shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5"
+                                >
+                                    <Download size={20} />
+                                    Download Case Study
+                                </button>
+                            )}
+                        </div>
                     </div>
                 </article>
             </div>
 
             {/* Divider Line */}
             {otherItems.length > 0 && (
-                <div className="max-w-4xl mx-auto px-6 lg:px-8">
+                <div className="max-w-5xl mx-auto px-6 lg:px-8">
                     <hr className="my-8 border-slate-200" />
                 </div>
             )}
 
             {/* Explore More Carousel Section */}
             {otherItems.length > 0 && (
-                <div className="max-w-4xl mx-auto px-6 lg:px-8 mb-8">
+                <div className="max-w-5xl mx-auto px-6 lg:px-8 mb-8">
                     <div className="text-center mb-10">
                         <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-800">
                             Explore More {basePath === "casestudies" ? "Case Studies" : "Blogs"}
@@ -165,7 +425,7 @@ const SingleContentPage = ({ basePath, contentName }) => {
                                                 <div className="relative w-24 h-20 rounded-lg overflow-hidden bg-slate-100 flex-shrink-0 shadow-inner">
                                                     {item.image ? (
                                                         <img
-                                                            src={item.image}
+                                                            src={optimizeCloudinaryUrl(item.image, 200)}
                                                             alt={item.title}
                                                             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                                                             onError={(e) => {
@@ -176,12 +436,6 @@ const SingleContentPage = ({ basePath, contentName }) => {
                                                     ) : (
                                                         <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-emerald-50 to-teal-100 text-emerald-500">
                                                             <BookOpen className="w-6 h-6" />
-                                                        </div>
-                                                    )}
-                                                    {/* Number Badge */}
-                                                    {basePath !== "casestudies" && (
-                                                        <div className="absolute top-1.5 left-1.5 w-6 h-6 rounded-full flex items-center justify-center font-bold text-[10px] shadow-sm bg-white/90 text-green-700 backdrop-blur-xs">
-                                                            {itemList.findIndex((x) => x._id === item._id) + 1}
                                                         </div>
                                                     )}
                                                 </div>
@@ -205,6 +459,203 @@ const SingleContentPage = ({ basePath, contentName }) => {
                                 </div>
                             ))}
                         </div>
+                    </div>
+
+                </div>
+            )}
+
+            <style>{`
+                @keyframes modalFadeIn { from { opacity: 0; } to { opacity: 1; } }
+                @keyframes modalScaleUp { from { transform: scale(0.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+                @keyframes bounceSubtle {
+                    0%, 100% { transform: translateY(0); }
+                    50% { transform: translateY(-6px); }
+                }
+                .animate-fadeIn { animation: modalFadeIn 0.25s ease-out forwards; }
+                .animate-scaleUp { animation: modalScaleUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+                .animate-bounce-subtle { animation: bounceSubtle 3s ease-in-out infinite; }
+
+                /* Common Heading starting bar styles */
+                .prose h2, .prose h2 strong, .prose h3, .prose h3 strong {
+                    border-left: 4px solid #059669 !important; /* Restored starting bar */
+                    padding-left: 0.75rem !important;
+                    line-height: 1.35 !important;
+                }
+
+                /* Default typography styling (single-level heading structure) */
+                .prose h2, .prose h2 strong {
+                    font-weight: 800 !important;
+                    color: #025b5f !important; /* Theme green for default headings */
+                    margin-top: 3.5rem !important;
+                    margin-bottom: 1.5rem !important;
+                    font-size: 1.65rem !important;
+                }
+
+                /* Dual-heading hierarchy styling (when both h2 and h3 are present) */
+                .prose.has-subheadings h2, .prose.has-subheadings h2 strong {
+                    color: #0f172a !important; /* Main headings become bold black */
+                }
+                .prose.has-subheadings h3, .prose.has-subheadings h3 strong {
+                    font-weight: 700 !important;
+                    color: #025b5f !important; /* Sub-headings stay theme green */
+                    margin-top: 2.5rem !important;
+                    margin-bottom: 1rem !important;
+                    font-size: 1.35rem !important;
+                }
+                .prose p {
+                    margin-top: 1.25rem !important;
+                    margin-bottom: 1.25rem !important;
+                    line-height: 1.8 !important;
+                    color: #334155 !important;
+                    text-align: justify !important;
+                    text-justify: inter-word !important;
+                }
+                .prose ul {
+                    list-style-type: disc !important;
+                    padding-left: 1.5rem !important;
+                    margin-top: 1rem !important;
+                    margin-bottom: 1rem !important;
+                }
+                .prose li {
+                    margin-top: 0.5rem !important;
+                    margin-bottom: 0.5rem !important;
+                    line-height: 1.7 !important;
+                    color: #334155 !important;
+                }
+                .prose strong {
+                    color: #0f172a !important;
+                    font-weight: 700 !important;
+                }
+                .prose a {
+                    color: #047857 !important;
+                    font-weight: 600 !important;
+                    text-decoration: underline !important;
+                    text-underline-offset: 4px !important;
+                    transition: color 0.2s ease-in-out !important;
+                }
+                .prose a:hover {
+                    color: #025b5f !important;
+                }
+                .prose blockquote {
+                    font-style: italic !important;
+                    border-left: 4px solid #025b5f !important;
+                    padding-left: 1.5rem !important;
+                    color: #475569 !important;
+                    margin: 2rem 0 !important;
+                    background-color: #f8fafc !important;
+                    padding-top: 1rem !important;
+                    padding-bottom: 1rem !important;
+                    border-radius: 0 12px 12px 0 !important;
+                }
+
+                /* Uniform style for inline images in the article body */
+                .prose img {
+                    max-height: 480px !important;
+                    width: 100% !important;
+                    object-fit: cover !important;
+                    border: 4px solid #025b5f !important;
+                    border-radius: 16px !important;
+                    margin-top: 2rem !important;
+                    margin-bottom: 2rem !important;
+                    margin-left: auto !important;
+                    margin-right: auto !important;
+                    display: block !important;
+                    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1) !important;
+                }
+            `}</style>
+
+            {showDownloadModal && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/55 backdrop-blur-xs animate-fadeIn">
+                    <div className="bg-white rounded-3xl max-w-lg w-full mx-4 p-6 sm:p-8 shadow-2xl relative border border-emerald-50 animate-scaleUp">
+                        <button
+                            onClick={() => setShowDownloadModal(false)}
+                            className="absolute top-5 right-5 text-gray-400 hover:text-gray-600 transition-colors"
+                        >
+                            <X size={20} />
+                        </button>
+                        <h3 className="text-xl font-extrabold text-gray-900 mb-2">Download Case Study</h3>
+                        <p className="text-sm text-gray-500 mb-6">
+                            Enter your details to download the document for <strong>{item.title}</strong>.
+                        </p>
+                        <form onSubmit={handleDownloadSubmit} className="space-y-4">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label className="block text-sm font-semibold text-slate-700 mb-1.5">
+                                        Your name <span className="text-red-500 font-bold">*</span>
+                                    </label>
+                                    <input
+                                        type="text"
+                                        required
+                                        value={formData.name}
+                                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                                        className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-250 focus:outline-none transition-all text-sm"
+                                    />
+                                </div>
+                                <div>
+                                    <label className="block text-sm font-semibold text-slate-700 mb-1.5">
+                                        Phone number (optional)
+                                    </label>
+                                    <input
+                                        type="tel"
+                                        value={formData.phone}
+                                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                                        pattern="^\+?[0-9\s]{10,20}$"
+                                        title="Please enter a valid phone number (10-15 digits)"
+                                        className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-250 focus:outline-none transition-all text-sm"
+                                    />
+                                </div>
+                            </div>
+                            <div>
+                                <label className="block text-sm font-semibold text-slate-700 mb-1.5">
+                                    Email address <span className="text-red-500 font-bold">*</span>
+                                </label>
+                                <input
+                                    type="email"
+                                    required
+                                    value={formData.email}
+                                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                                    className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-250 focus:outline-none transition-all text-sm"
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-sm font-semibold text-slate-700 mb-1.5">
+                                    I am a <span className="text-red-500 font-bold">*</span>
+                                </label>
+                                <select
+                                    required
+                                    value={formData.role}
+                                    onChange={(e) => setFormData({ ...formData, role: e.target.value })}
+                                    className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-250 focus:outline-none bg-white transition-all text-sm"
+                                >
+                                    <option value="" disabled>Select an option</option>
+                                    <option value="Sustainability Reporting / ESG Support">Sustainability Reporting / ESG Support</option>
+                                    <option value="Wastewater Treatment & Waterbody Restoration">Wastewater Treatment & Waterbody Restoration</option>
+                                    <option value="Geophysical / Subsurface Investigation">Geophysical / Subsurface Investigation</option>
+                                    <option value="Urban Planning & City Project Support">Urban Planning & City Project Support</option>
+                                    <option value="Climate Risk Assessment / Climate Data Advisory">Climate Risk Assessment / Climate Data Advisory</option>
+                                    <option value="Training, Workshops, or Capacity Building">Training, Workshops, or Capacity Building</option>
+                                    <option value="General Inquiry">General Inquiry</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label className="block text-sm font-semibold text-slate-700 mb-1.5">
+                                    Organization / Company (optional)
+                                </label>
+                                <input
+                                    type="text"
+                                    value={formData.org}
+                                    onChange={(e) => setFormData({ ...formData, org: e.target.value })}
+                                    className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-250 focus:outline-none transition-all text-sm"
+                                />
+                            </div>
+                            <button
+                                type="submit"
+                                className="w-full mt-2 py-3 bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 text-white font-semibold rounded-xl shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5 flex items-center justify-center gap-2"
+                            >
+                                <Download size={18} />
+                                Download Document
+                            </button>
+                        </form>
                     </div>
                 </div>
             )}

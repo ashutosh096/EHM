@@ -1,10 +1,10 @@
 import { Helmet } from 'react-helmet-async';
 
 const SEO = ({ title, description, keywords, canonical, ogTitle, ogDescription, ogImage, twitterCard, twitterSite, twitterCreator }) => {
-  const siteName = "EHM - Earth Hydro Management";
+  const siteName = "EHM Consultancy";
   const fullTitle = title ? `${title} | ${siteName}` : siteName;
   const defaultDescription = "EHM offers comprehensive environmental solutions including waterbody restoration, sustainability assessment, geophysical investigation, and expert consulting services.";
-  const defaultKeywords = "Solution for HEIs,environmental solutions, waterbody restoration, sustainability assessment, geophysical investigation, hydrology, water management, environmental consulting, green solutions, EHM, Earth Hydro Management";
+  const defaultKeywords = "Solution for HEIs,environmental solutions, waterbody restoration, sustainability assessment, geophysical investigation, hydrology, water management, environmental consulting, green solutions, EHM, EHM Consultancy";
   const baseUrl = "https://www.ehmconsultancy.co.in";
 
   return (
@@ -26,7 +26,9 @@ const SEO = ({ title, description, keywords, canonical, ogTitle, ogDescription, 
       <meta property="og:url" content={`${baseUrl}${canonical || ''}`} />
       <meta property="og:title" content={ogTitle || fullTitle} />
       <meta property="og:description" content={ogDescription || description || defaultDescription} />
-      <meta property="og:image" content={ogImage || `${baseUrl}/favicon.png`} />
+      <meta property="og:image" content={ogImage || `${baseUrl}/ehm-homepage-meta.jpg`} />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
       <meta property="og:site_name" content={siteName} />
 
       {/* Twitter */}
@@ -34,7 +36,7 @@ const SEO = ({ title, description, keywords, canonical, ogTitle, ogDescription, 
       <meta name="twitter:url" content={`${baseUrl}${canonical || ''}`} />
       <meta name="twitter:title" content={ogTitle || fullTitle} />
       <meta name="twitter:description" content={ogDescription || description || defaultDescription} />
-      <meta name="twitter:image" content={ogImage || `${baseUrl}/favicon.png`} />
+      <meta name="twitter:image" content={ogImage || `${baseUrl}/ehm-homepage-meta.jpg`} />
       {twitterSite && <meta name="twitter:site" content={twitterSite} />}
       {twitterCreator && <meta name="twitter:creator" content={twitterCreator} />}
 

@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 const SECTIONS = [
   ["Sustainability Assessment", "& Reporting"],
@@ -18,11 +19,11 @@ const circleR = 170;
 const labelR = 195;
 
 export default function OfferingsHero() {
+  const navigate = useNavigate();
   const specialLabelYOffset = -20;
 
   const handleNavigate = (section) => {
-    console.log(`Navigating to: ${section}`);
-    // Add your navigation logic here
+    navigate(section);
   };
 
   return (

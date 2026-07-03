@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import SectionHeading from "../Common/SectionHeading";
 import { ArrowRight, User, Image as ImageIcon } from "lucide-react";
 import { Link } from "react-router-dom";
+import SEO from "../Components/Common/SEO";
 
 // ── Skeleton card shown while loading ───────────────────────────────────────
 const SkeletonCard = () => (
@@ -101,6 +102,13 @@ const CaseStudyPage = () => {
 
     return (
         <section className="bg-gradient-to-br from-emerald-50 via-green-50 to-teal-50 pt-24 pb-16 min-h-screen">
+            <SEO
+                title="Environmental Case Studies & Technical Reports | EHM"
+                description="Read EHM Consultancy's technical case studies and reports documenting proven solutions in campus sustainability, lake cleanup, and industrial waste treatment."
+                keywords="EHM case studies, technical reports, waterbody restoration case study, sustainability reporting case study, industrial wastewater treatment, EHM Consultancy"
+                canonical="/resources/casestudies"
+                ogImage="https://www.ehmconsultancy.co.in/ehm-homepage-meta.jpg"
+            />
 
             {/* ── Page heading ──────────────────────────────────────────── */}
             <div className="container mx-auto px-4">

@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import SEO from "../Components/Common/SEO";
 import NetZeroHero from "../Components/Resources/NetZero/NetZeroHero";
 import NetZeroDetails from "../Components/Resources/NetZero/NetZeroDetails";
 import NetZeroOfferings from "../Components/Resources/NetZero/NetZeroOfferings";
+import API from "../api/axios";
 import NetZeroApproach from "../Components/Resources/NetZero/NetZeroApproach";
 import NetZeroBenefits from "../Components/Resources/NetZero/NetZeroBenefits";
 import NetZeroCaseStudy from "../Components/Resources/NetZero/NetZeroCaseStudy";
@@ -10,6 +11,7 @@ import NetZeroProjects from "../Components/Resources/NetZero/NetZeroProjects";
 
 const NetZeroCampus = () => {
   const [hoveredProject, setHoveredProject] = useState("csjmu");
+  const [hoveredStage, setHoveredStage] = useState(null);
 
   const benefitsData = [
     {
@@ -61,6 +63,29 @@ const NetZeroCampus = () => {
     }
   ];
 
+  const [csjmuCaseStudyId, setCsjmuCaseStudyId] = useState(null);
+
+  useEffect(() => {
+    const fetchCaseStudies = async () => {
+      try {
+        const response = await API.get("/casestudies");
+        if (response.data.success) {
+          const studies = response.data.data || [];
+          const csjmuStudy = studies.find(s => {
+            const titleLower = (s.title || "").toLowerCase();
+            return titleLower.includes("csjmu") && (titleLower.includes("annual") || titleLower.includes("report") || titleLower.includes("sustainability"));
+          });
+          if (csjmuStudy) {
+            setCsjmuCaseStudyId(csjmuStudy._id);
+          }
+        }
+      } catch (err) {
+        console.error("Error fetching case studies in NetZeroCampus:", err);
+      }
+    };
+    fetchCaseStudies();
+  }, []);
+
   const caseStudy = {
     title: "CSJMU Campus, Kanpur",
     intro:
@@ -81,7 +106,7 @@ const NetZeroCampus = () => {
       "https://res.cloudinary.com/dlpluej6w/image/upload/v1756901253/Restoration_of_Waterbody_hrs3eq.webp",
       "https://res.cloudinary.com/dlpluej6w/image/upload/v1756901213/Grey_Water_Management_orkst3.webp",
     ],
-    ctaLink: "/casestudies/p1",
+    ctaLink: csjmuCaseStudyId ? `/casestudies/${csjmuCaseStudyId}` : "/resources/casestudies",
   };
 
   const projectsData = {
@@ -114,6 +139,7 @@ const NetZeroCampus = () => {
         description="EHM's Net-Zero & Water Positive Campus transition solutions integrate decentralized natural wastewater treatments (DNTS), smart IoT management, and rainwater harvest recharging."
         keywords="Net-Zero Campus, Water Positive Campus, DNTS, smart water system, rainwater harvesting, resource efficiency, EHM, CSJMU Kanpur"
         canonical="/resources/netzero-campus"
+        ogImage="https://www.ehmconsultancy.co.in/NetZero/netzero-meta.jpg"
       />
 
       <style>{`
@@ -147,7 +173,7 @@ const NetZeroCampus = () => {
       <NetZeroApproach approachData={approachData} />
 
       {/* 6. Case Study Section */}
-      <NetZeroCaseStudy caseStudy={caseStudy} />
+      <NetZeroCaseStudy caseStudy={caseStudy} hoveredStage={hoveredStage} setHoveredStage={setHoveredStage} />
 
       {/* 6. Other Projects */}
       <NetZeroProjects

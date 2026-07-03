@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 // import { MapPin, Mail, Phone, Linkedin, Twitter, Instagram, Youtube, Facebook, Send } from 'lucide-react';
 import { MapPin, Mail, Phone, Send, Linkedin } from 'lucide-react';
 import { SiX, SiInstagram, SiFacebook, SiYoutube, } from "react-icons/si";
@@ -111,13 +112,13 @@ const Footer = () => {
               <h4 className="text-white font-semibold text-sm uppercase tracking-wider mb-4">Quick Links</h4>
               <nav className="space-y-2">
                 {navLinks.map((link) => (
-                  <a
+                  <Link
                     key={link.name}
-                    href={link.url}
+                    to={link.url}
                     className="block text-sm text-gray-200 hover:text-emerald-300 hover:translate-x-1 transition-all duration-200"
                   >
                     {link.name}
-                  </a>
+                  </Link>
                 ))}
               </nav>
             </div>
@@ -186,7 +187,7 @@ const Footer = () => {
               <div className="flex flex-wrap gap-6 justify-center">
                 <a href="#" className="hover:text-emerald-300 transition-colors">Privacy Policy</a>
                 <a href="#" className="hover:text-emerald-300 transition-colors">Terms of Service</a>
-                <a href="/contact" className="hover:text-emerald-300 transition-colors">Contact Us</a>
+                <Link to="/contact" className="hover:text-emerald-300 transition-colors">Contact Us</Link>
               </div>
             </div>
           </div>
