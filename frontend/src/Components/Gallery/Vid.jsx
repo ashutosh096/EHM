@@ -2,16 +2,24 @@ import React, { useState, useRef, useEffect } from 'react';
 
 const VideoHeroSection = () => {
   const [isMuted, setIsMuted] = useState(true);
+  const [loadVideo, setLoadVideo] = useState(false);
   const videoRef = useRef(null);
 
-  
   useEffect(() => {
-    if (videoRef.current) {
+    // Delay loading the background video to give page layout/content load priority
+    const timer = setTimeout(() => {
+      setLoadVideo(true);
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    if (loadVideo && videoRef.current) {
       videoRef.current.play().catch(error => {
         console.log("Auto-play prevented:", error);
       });
     }
-  }, []);
+  }, [loadVideo]);
 
   const toggleMute = () => {
     if (videoRef.current) {
@@ -25,16 +33,18 @@ const VideoHeroSection = () => {
       <div className='relative z-10 flex justify-center items-center text-7xl'>
         <h1>Videos</h1>
       </div>
-      <video preload="none" ref={videoRef}
-        autoPlay
-        muted={isMuted}
-        loop
-        playsInline
-        className="absolute inset-0 w-full h-full object-cover"
-      >
-        <source src="/y.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
+      {loadVideo && (
+        <video preload="none" ref={videoRef}
+          autoPlay
+          muted={isMuted}
+          loop
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+        >
+          <source src="/y.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+      )}
 
      
      

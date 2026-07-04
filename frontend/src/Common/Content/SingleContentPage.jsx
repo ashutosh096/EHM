@@ -27,6 +27,35 @@ const cleanContent = (html) => {
             }
         });
 
+        // 0b. Split paragraphs that contain both an image and caption text inside the same <p> tag
+        const allParagraphs = doc.querySelectorAll("p");
+        allParagraphs.forEach((p) => {
+            const img = p.querySelector("img");
+            if (img) {
+                // Get the text content inside the paragraph excluding the image tag itself
+                const pClone = p.cloneNode(true);
+                const cloneImg = pClone.querySelector("img");
+                if (cloneImg) {
+                    cloneImg.parentNode.removeChild(cloneImg);
+                }
+                const captionText = pClone.textContent.trim();
+
+                if (captionText.length > 0) {
+                    // Create a new paragraph for the caption
+                    const captionPara = doc.createElement("p");
+                    captionPara.classList.add("image-caption");
+                    captionPara.textContent = captionText; // Strips all bold tags automatically!
+
+                    // Insert the caption paragraph immediately after the image paragraph
+                    p.parentNode.insertBefore(captionPara, p.nextSibling);
+
+                    // Clean the original paragraph so it only contains the image tag
+                    p.innerHTML = "";
+                    p.appendChild(img);
+                }
+            }
+        });
+
         // 1. Convert bold-only short paragraphs like <p><strong>Heading</strong></p> into <h2>Heading</h2> or <h3>Heading</h3>
         const paragraphs = doc.querySelectorAll("p");
         paragraphs.forEach((p) => {
@@ -34,8 +63,50 @@ const cleanContent = (html) => {
             const strongText = Array.from(p.querySelectorAll("strong, b")).map(el => el.textContent).join("").trim();
             const hasImg = p.querySelector("img") !== null;
 
+            // Determine if it is a quote author or image caption (below a pure image container)
+            let isQuoteAuthor = false;
+            let isImageCaption = false;
+            let startsWithDash = false;
+
+            if (!hasImg && trimmedText.length > 0) {
+                startsWithDash = /^[—\-\–]/.test(trimmedText);
+
+                // Find previous non-empty sibling to check if it's an image
+                let prevSibling = p.previousElementSibling;
+                while (prevSibling && prevSibling.textContent.trim() === "" && !prevSibling.querySelector("img") && prevSibling.tagName !== "IMG") {
+                    prevSibling = prevSibling.previousElementSibling;
+                }
+                if (prevSibling) {
+                    const prevText = prevSibling.textContent.trim();
+                    const endsWithQuote = prevText.endsWith('"') || prevText.endsWith('”') || prevText.endsWith('’') || prevText.endsWith("'") || prevText.endsWith("’");
+                    if (endsWithQuote || prevSibling.tagName === "BLOCKQUOTE") {
+                        isQuoteAuthor = true;
+                    }
+                    
+                    // It is an image caption ONLY if:
+                    // (a) it already has the class 'image-caption' (assigned during split step 0b), OR
+                    // (b) the previous sibling is an image container AND the paragraph text contains caption keywords (source/credit/photo/attribution)
+                    const hasCaptionKeyword = /source:|credit:|photo:|attribution:/i.test(trimmedText);
+                    const isPrevImage = prevSibling.tagName === "IMG" || (prevSibling.querySelector("img") && prevText === "");
+                    
+                    if (p.classList.contains("image-caption") || (isPrevImage && hasCaptionKeyword)) {
+                        isImageCaption = true;
+                    }
+                }
+            }
+
+            if (isImageCaption) {
+                p.classList.add("image-caption");
+            }
+
             // Only treat as heading if the entire text is bold, length is reasonable, and it has no images
-            const isHeadingNode = !hasImg && strongText.length > 0 && strongText.length === trimmedText.length && trimmedText.length < 120;
+            let isHeadingNode = !hasImg && strongText.length > 0 && strongText.length === trimmedText.length && trimmedText.length < 120;
+
+            if (isHeadingNode) {
+                if (startsWithDash || isQuoteAuthor || isImageCaption) {
+                    isHeadingNode = false;
+                }
+            }
 
             if (isHeadingNode) {
                 // If it starts with a number (like "1. ", "2. "), it's a sub-heading (h3)
@@ -64,6 +135,12 @@ const cleanContent = (html) => {
 
                 const text = node.textContent.trim();
 
+                // Skip if this is an image-caption paragraph
+                if (node.classList.contains("image-caption")) {
+                    currentParagraph = null;
+                    return;
+                }
+
                 // Skip if this paragraph contains an image, but first clean empty strong/span elements with zero-width spaces
                 if (node.querySelector("img")) {
                     const emptyElements = node.querySelectorAll("strong, b, span, em, i");
@@ -82,15 +159,15 @@ const cleanContent = (html) => {
                     currentParagraph.innerHTML += " " + node.innerHTML;
                     node.parentNode.removeChild(node);
 
-                    // Check if the merged paragraph now ends with punctuation
+                    // Check if the merged paragraph now ends with punctuation (including colons and semicolons)
                     const currentText = currentParagraph.textContent.trim();
                     const lastChar = currentText.slice(-1);
-                    if (/[.!?]/.test(lastChar)) {
+                    if (/[.!?:;]/.test(lastChar)) {
                         currentParagraph = null; // Stop merging
                     }
                 } else {
                     const lastChar = text.slice(-1);
-                    const isSentenceEnd = /[.!?]/.test(lastChar);
+                    const isSentenceEnd = /[.!?:;]/.test(lastChar);
 
                     if (!isSentenceEnd && text.length > 0) {
                         currentParagraph = node;
@@ -100,6 +177,33 @@ const cleanContent = (html) => {
                 }
             } else {
                 currentParagraph = null;
+            }
+        });
+
+        // 3. Format Principle items (paragraphs starting with "Principle 1:", etc.)
+        // to have a clean flex layout where the body is aligned to the right of the label
+        const mergedParagraphs = doc.querySelectorAll("p");
+        mergedParagraphs.forEach((p) => {
+            const firstChild = p.firstElementChild;
+            if (firstChild && (firstChild.tagName === "STRONG" || firstChild.tagName === "B")) {
+                const labelText = firstChild.textContent.trim();
+                if (/^Principle\s+\d+/i.test(labelText)) {
+                    p.classList.add("principle-item");
+                    
+                    const labelSpan = doc.createElement("span");
+                    labelSpan.className = "principle-label";
+                    
+                    p.replaceChild(labelSpan, firstChild);
+                    labelSpan.appendChild(firstChild);
+
+                    const bodySpan = doc.createElement("span");
+                    bodySpan.className = "principle-body";
+                    
+                    while (labelSpan.nextSibling) {
+                        bodySpan.appendChild(labelSpan.nextSibling);
+                    }
+                    p.appendChild(bodySpan);
+                }
             }
         });
 
@@ -488,8 +592,29 @@ const SingleContentPage = ({ basePath, contentName }) => {
                 .animate-scaleUp { animation: modalScaleUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
                 .animate-bounce-subtle { animation: bounceSubtle 3s ease-in-out infinite; }
 
+                /* Principle items flex list layout styling */
+                .prose .principle-item {
+                    display: flex !important;
+                    align-items: flex-start !important;
+                    margin-top: 1.25rem !important;
+                    margin-bottom: 1.25rem !important;
+                    text-align: left !important;
+                }
+                .prose .principle-label {
+                    flex-shrink: 0 !important;
+                    margin-right: 0.75rem !important;
+                    font-weight: 700 !important;
+                    color: #0f172a !important;
+                    white-space: nowrap !important;
+                }
+                .prose .principle-body {
+                    flex-grow: 1 !important;
+                    color: #334155 !important;
+                    line-height: 1.8 !important;
+                }
+
                 /* Common Heading starting bar styles */
-                .prose h2, .prose h2 strong, .prose h3, .prose h3 strong {
+                .prose h2, .prose h3 {
                     border-left: 4px solid #059669 !important; /* Restored starting bar */
                     padding-left: 0.75rem !important;
                     line-height: 1.35 !important;
@@ -506,7 +631,7 @@ const SingleContentPage = ({ basePath, contentName }) => {
 
                 /* Dual-heading hierarchy styling (when both h2 and h3 are present) */
                 .prose.has-subheadings h2, .prose.has-subheadings h2 strong {
-                    color: #0f172a !important; /* Main headings become bold black */
+                    color: #025b5f !important; /* Main headings stay theme green */
                 }
                 .prose.has-subheadings h3, .prose.has-subheadings h3 strong {
                     font-weight: 700 !important;
@@ -534,6 +659,9 @@ const SingleContentPage = ({ basePath, contentName }) => {
                     margin-bottom: 0.5rem !important;
                     line-height: 1.7 !important;
                     color: #334155 !important;
+                }
+                .prose li::marker {
+                    color: #025b5f !important;
                 }
                 .prose strong {
                     color: #0f172a !important;
@@ -563,7 +691,9 @@ const SingleContentPage = ({ basePath, contentName }) => {
 
                 /* Uniform style for inline images in the article body */
                 .prose img {
-                    width: 100% !important;
+                    max-width: 100% !important;
+                    max-height: 400px !important;
+                    width: auto !important;
                     height: auto !important;
                     border: 4px solid #025b5f !important;
                     border-radius: 16px !important;
@@ -572,7 +702,20 @@ const SingleContentPage = ({ basePath, contentName }) => {
                     margin-left: auto !important;
                     margin-right: auto !important;
                     display: block !important;
-                    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1) !important;
+                    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.08) !important;
+                }
+
+                /* Styling for image captions/attributions below images */
+                .prose .image-caption, 
+                .prose .image-caption strong, 
+                .prose .image-caption b {
+                    font-size: 0.85rem !important;
+                    font-weight: 400 !important;
+                    color: #64748b !important;
+                    text-align: center !important;
+                    margin-top: -1.25rem !important;
+                    margin-bottom: 2rem !important;
+                    display: block !important;
                 }
             `}</style>
 

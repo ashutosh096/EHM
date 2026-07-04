@@ -109,7 +109,11 @@ app.listen(PORT, () => {
 
   // Self-ping keep-alive to prevent sleeping on Render free tier
   if (process.env.RENDER === "true") {
-    const PING_URL = "https://ehm-backend.onrender.com/hello";
+    const rawExternalUrl = process.env.RENDER_EXTERNAL_URL || "https://ehm-backend.onrender.com";
+    const externalUrl = rawExternalUrl.endsWith("/") ? rawExternalUrl.slice(0, -1) : rawExternalUrl;
+    const PING_URL = `${externalUrl}/hello`;
+
+    console.log(`[Keep-Alive] Initializing self-ping keep-alive targeting: ${PING_URL}`);
     
     // Initial ping after 5 seconds to wake up/confirm active status
     setTimeout(() => {

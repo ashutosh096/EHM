@@ -8,6 +8,7 @@ import ScrollToHashElement from './Components/Animations/ScrollToHashElement.jsx
 import ScrollToTop from './Components/LandingPage/ScrollToTop.jsx';
 import AdminRoute from "../src/Components/Admin/AdminRoute.jsx";
 import InteractiveLoader from './Components/Common/InteractiveLoader.jsx';
+import API from './api/axios';
 
 // Lazy load pages
 const HomePage = lazy(() => import('./Pages/HomePage.jsx'));
@@ -39,6 +40,11 @@ function App() {
 
   useEffect(() => {
     AOS.init({ duration: 800, once: true });
+    
+    // Proactively wake up the backend on initial load to avoid delay when opening dynamic sections (e.g. blogs)
+    API.get("/hello").catch((err) => {
+      console.log("Initial backend wake-up ping status:", err.message);
+    });
   }, []);
 
   return (

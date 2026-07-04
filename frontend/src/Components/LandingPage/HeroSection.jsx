@@ -6,6 +6,15 @@ import { Link } from "react-router-dom";
 export default function Homepage() {
   const targetRef = useRef(null);
   const [showCard, setShowCard] = useState(true);
+  const [loadVideo, setLoadVideo] = useState(false);
+
+  useEffect(() => {
+    // Delay loading the heavy background video until logos/images have finished loading
+    const timer = setTimeout(() => {
+      setLoadVideo(true);
+    }, 1200);
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -63,16 +72,18 @@ export default function Homepage() {
 
       <div className="relative min-h-screen text-white overflow-hidden">
         {/* Background Video */}
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="absolute inset-0 w-full h-full object-cover z-0"
-        >
-          <source src={HeroVideo} type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
+        {loadVideo && (
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover z-0"
+          >
+            <source src={HeroVideo} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        )}
 
         {/* Optional Overlay for Tint (to blend with eco-theme) */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/50 to-black/70 z-5"></div>

@@ -25,37 +25,45 @@ const VideoG = () => {
   const videos = [
     {
       title: "CSJMU Sustainability Report 2024-25",
-      video: Video1,
+      // Set a youtubeId (e.g. "dQw4w9WgXcQ") or a videoUrl (Cloudinary link)
+      youtubeId: "", 
+      videoUrl: Video1, // Fallback to local until uploaded
       thumbnail: Thumb1,
     },
     {
       title: "CSJMU Water-Positive Campus",
-      video: Video2,
+      youtubeId: "",
+      videoUrl: Video2,
       thumbnail: Thumb2,
     },
     {
       title: "Centralised STPs vs DNTS",
-      video: Video3,
+      youtubeId: "",
+      videoUrl: Video3,
       thumbnail: Thumb3,
     },
     {
       title: "Decentralized Natural Treatment System (DNTS)",
-      video: Video4,
+      youtubeId: "",
+      videoUrl: Video4,
       thumbnail: Thumb4,
     },
     {
       title: "ESG Overview",
-      video: Video5,
+      youtubeId: "",
+      videoUrl: Video5,
       thumbnail: Thumb5,
     },
     {
       title: "Water Positive Campus",
-      video: Video6,
+      youtubeId: "",
+      videoUrl: Video6,
       thumbnail: Thumb6,
     },
     {
       title: "Water Positive",
-      video: Video7,
+      youtubeId: "",
+      videoUrl: Video7,
       thumbnail: Thumb7,
     },
   ];
@@ -139,11 +147,24 @@ const VideoG = () => {
             </button>
 
             {/* Video Player */}
-            <video preload="none" src={videos[playingIndex].video}
-              controls
-              autoPlay
-              className="w-full rounded-xl shadow-2xl"
-            />
+            {videos[playingIndex].youtubeId ? (
+              <div className="w-full aspect-video rounded-xl overflow-hidden shadow-2xl">
+                <iframe
+                  src={`https://www.youtube.com/embed/${videos[playingIndex].youtubeId}?autoplay=1`}
+                  title={videos[playingIndex].title}
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                  className="w-full h-full"
+                ></iframe>
+              </div>
+            ) : (
+              <video preload="none" src={videos[playingIndex].videoUrl}
+                controls
+                autoPlay
+                className="w-full rounded-xl shadow-2xl"
+              />
+            )}
 
             {/* Video Title */}
             <h3 className="mt-4 text-xl font-semibold text-white text-center">
