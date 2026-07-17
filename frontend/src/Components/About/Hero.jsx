@@ -53,18 +53,18 @@ export default function Hero() {
         }
       `}</style>
 
-      <div className="relative w-full h-[100dvh] min-h-[600px] overflow-hidden bg-black">
+      <div className="relative w-full aspect-video md:h-[100dvh] md:min-h-[600px] overflow-hidden bg-black mt-[60px] md:mt-0">
         {/* Text Content - Added from HeroSection2 */}
-        <div className="absolute inset-0 z-10 flex items-center">
-          <div className="container mx-auto px-6 md:px-12 lg:px-24">
+        <div className="absolute inset-0 z-10 flex items-end pb-12 md:pb-36 pl-5 pr-4 md:px-12 lg:px-24">
+          <div className="w-full text-left">
             <h1
-              className="font-semibold leading-tight mb-6 md:mb-10"
+              className="font-semibold leading-tight mb-1.5 md:mb-10"
               style={{ fontFamily: 'Inter' }}
             >
               <span
                 className="block font-extrabold"
                 style={{
-                  fontSize: 'clamp(2.2rem, 7vw, 3.5rem)',
+                  fontSize: 'clamp(0.9rem, 4.5vw, 3.5rem)',
                   background: 'linear-gradient(90deg,#d4f806,#79ffdc,#ffdd00,#3effb9)',
                   WebkitBackgroundClip: 'text',
                   color: 'transparent',
@@ -75,9 +75,9 @@ export default function Hero() {
               </span>
 
               <span
-                className="block font-semibold mt-2 md:mt-4"
+                className="block font-semibold mt-1 md:mt-4"
                 style={{
-                  fontSize: 'clamp(1.8rem, 6vw, 2.8rem)',
+                  fontSize: 'clamp(0.8rem, 3.5vw, 2.8rem)',
                   background: 'linear-gradient(90deg,#ffffff,#c39b17,#ffffff)',
                   WebkitBackgroundClip: 'text',
                   color: 'transparent',
@@ -89,11 +89,12 @@ export default function Hero() {
             </h1>
 
             <h2
-              className="font-medium leading-relaxed mb-8 md:mb-10 text-white/90"
+              className="font-medium leading-relaxed mb-1.5 md:mb-10 text-white"
               style={{
-                fontSize: 'clamp(1rem, 3vw, 1.25rem)',
+                fontSize: 'clamp(0.6rem, 2.5vw, 1.25rem)',
                 letterSpacing: '0.5px',
-                maxWidth: '700px'
+                maxWidth: '240px',
+                textShadow: '0 2px 4px rgba(0,0,0,0.8)'
               }}
             >
               Assisting industries, government organizations, and HEIs in enhancing ESG practices and managing climate risks.
@@ -146,12 +147,12 @@ export default function Hero() {
         </button>
 
         {/* Bottom Navigation */}
-        <div className="absolute bottom-6 md:bottom-12 left-0 sm:left-[8%] px-6 sm:px-0 flex flex-wrap justify-center sm:justify-start gap-3 md:gap-6 z-20 w-full sm:max-w-[85%]">
+        <div className="absolute bottom-2 md:bottom-12 left-0 sm:left-[8%] pl-5 pr-4 sm:px-0 flex flex-nowrap overflow-x-auto justify-start gap-1.5 md:gap-6 z-20 w-full sm:max-w-[85%] scrollbar-none">
           {navItems.map((item, index) => (
             <button
               key={index}
               onClick={() => goToSlide(index)}
-              className={`relative cursor-pointer transition-all duration-300 bg-white/10 backdrop-blur-md rounded-lg overflow-hidden border hover:-translate-y-1 hover:shadow-lg ${currentSlide === index
+              className={`relative cursor-pointer transition-all duration-300 bg-white/10 backdrop-blur-md rounded-lg overflow-hidden border flex-shrink-0 hover:-translate-y-1 hover:shadow-lg ${currentSlide === index
                 ? 'shadow-lg'
                 : 'border border-white/20'
                 }`}
@@ -161,8 +162,8 @@ export default function Hero() {
                 boxShadow: '0 10px 25px rgba(20, 184, 166, 0.4)'
               } : {}}
             >
-              <div className="p-2.5 md:p-3.5 flex flex-col gap-1.5 min-w-[99px] md:min-w-[154px]">
-                <div className="text-[12.9px] md:text-[14.2px] text-white font-semibold line-clamp-2" style={{ fontFamily: '"Jost", sans-serif', fontWeight: 600 }}>
+              <div className="p-1 md:p-3.5 flex flex-col gap-1 min-w-[85px] md:min-w-[154px]">
+                <div className="text-[8.5px] md:text-[14.2px] text-white font-semibold line-clamp-2" style={{ fontFamily: '"Jost", sans-serif', fontWeight: 600 }}>
                   {item.title}
                 </div>
               </div>

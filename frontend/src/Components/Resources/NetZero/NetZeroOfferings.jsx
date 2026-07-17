@@ -95,7 +95,7 @@ const NetZeroOfferings = () => {
   const handleRequestSubmit = (e) => {
     e.preventDefault();
     const cleanMobile = (formData.phone || "").replace(/\s+/g, "");
-    
+
     API.post("/contact", {
       name: formData.name,
       email: formData.email,
@@ -108,7 +108,7 @@ const NetZeroOfferings = () => {
       console.error("Error submitting lead to contact database:", err);
       alert("Submission failed. Please check your network and try again.");
     });
-    
+
     setShowModal(false);
     setFormData({ name: "", email: "", phone: "", role: "", org: "", message: "" });
   };
@@ -258,7 +258,7 @@ const NetZeroOfferings = () => {
             >
               <X size={20} />
             </button>
-            
+
             <h3 className="text-xl font-extrabold text-gray-900 mb-2">Request Net-Zero Transition Service</h3>
             <p className="text-sm text-gray-500 mb-6">
               Enter your details below to request a customized roadmap assessment and consultation for your campus.
@@ -292,7 +292,7 @@ const NetZeroOfferings = () => {
                   />
                 </div>
               </div>
-              
+
               <div>
                 <label className="block text-sm font-semibold text-slate-700 mb-1.5">
                   Email address <span className="text-red-500 font-bold">*</span>

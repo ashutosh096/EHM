@@ -8,15 +8,15 @@ const FeaturedProjects = () => {
     navigate('/projects#p2');
   };
   return (
-    <div style={styles.container}>
-      <div style={styles.featuredSection}>
+    <div className="w-full bg-[#f5f5f5] pb-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 min-h-[300px] md:min-h-[280px] overflow-hidden">
         {/* Content Side */}
-        <div style={styles.contentSide}>
-          <h2 style={styles.heading}>Featured Projects</h2>
+        <div className="bg-gradient-to-br from-[#0a4d3c] via-[#1a5f4e] to-[#2d7a65] px-6 py-12 md:px-16 md:py-14 flex flex-col justify-start text-white">
+          <h2 className="text-3xl md:text-[42px] font-bold tracking-tight text-white mb-0 leading-tight">Featured Projects</h2>
         </div>
 
         {/* Image/Visual Side */}
-        <div style={styles.imageSide}>
+        <div className="relative overflow-hidden h-[180px] md:h-auto bg-gradient-to-br from-[#0d6e8b]/95 via-[#1a5f4e]/90 to-[#8a2be2]/70">
           <div style={styles.overlay}>
             <div style={styles.glowCircle1}></div>
             <div style={styles.glowCircle2}></div>
@@ -65,13 +65,15 @@ const FeaturedProjects = () => {
       </div>
 
       {/* Project Card */}
-      <div style={styles.projectCard}>
-        <div style={styles.projectContent}>
-          <h3 style={styles.projectTitle}>
-            Annual Sustainability Report 2024–25
-          </h3>
-          <p style={styles.projectSubtitle}>CSJMU, Kanpur</p>
-          <button onClick={handleViewProject} style={styles.projectBtn}>
+      <div className="max-w-[1200px] mx-auto px-4 md:px-10 z-10 relative -mt-[140px] md:-mt-28">
+        <div className="bg-gradient-to-br from-white to-[#f8fffe] rounded-xl p-6 md:px-11 md:py-8 shadow-lg hover:shadow-xl border border-[#2d7a65]/10 transition-all duration-300 min-h-[170px] h-auto flex flex-col justify-between items-start">
+          <div className="w-full">
+            <h3 className="text-xl md:text-2xl lg:text-[28px] font-bold text-[#0a4d3c] mb-2 leading-tight">
+              Annual Sustainability Report 2024–25
+            </h3>
+            <p className="text-sm md:text-base text-[#1a5f4e] font-semibold mb-4 md:mb-5">CSJMU, Kanpur</p>
+          </div>
+          <button onClick={handleViewProject} className="px-6 py-2.5 bg-gradient-to-r from-[#0a4d3c] to-[#2d7a65] text-white rounded-full text-sm font-medium hover:shadow-lg transition-all duration-300 shadow-[0_4px_15px_rgba(10,77,60,0.3)] border-none cursor-pointer">
             View Project
           </button>
         </div>

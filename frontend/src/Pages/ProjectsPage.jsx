@@ -917,29 +917,13 @@ const ProjectsPage = () => {
 
       <main className="relative z-10 py-16">
         <section className="max-w-7xl mx-auto px-4 mb-12 mt-12">
-          {/* Filter Buttons at Top - Row 1: 4 tags */}
-          <div className="flex justify-center gap-3 mb-3">
-            {filterOptions.slice(0, 4).map((filter) => (
+          {/* Filter Buttons at Top */}
+          <div className="flex flex-wrap justify-center gap-2 md:gap-3 px-4 mb-10 max-w-5xl mx-auto">
+            {filterOptions.map((filter) => (
               <button
                 key={filter}
                 onClick={() => setActiveFilter(filter)}
-                className={`px-5 py-2.5 rounded-full font-semibold transition-all duration-300 hover:scale-105 shadow-lg backdrop-blur-sm text-sm ${
-                  activeFilter === filter
-                    ? "bg-teal-600 text-white hover:bg-teal-700"
-                    : "bg-white/90 text-gray-700 hover:bg-teal-50 hover:text-teal-700 border border-gray-200"
-                }`}
-              >
-                {filter}
-              </button>
-            ))}
-          </div>
-          {/* Filter Buttons - Row 2: remaining 2 tags */}
-          <div className="flex justify-center gap-3 mb-12">
-            {filterOptions.slice(4).map((filter) => (
-              <button
-                key={filter}
-                onClick={() => setActiveFilter(filter)}
-                className={`px-5 py-2.5 rounded-full font-semibold transition-all duration-300 hover:scale-105 shadow-lg backdrop-blur-sm text-sm ${
+                className={`px-4 py-2 md:px-5 md:py-2.5 rounded-full font-semibold transition-all duration-300 hover:scale-105 shadow-md backdrop-blur-sm text-xs sm:text-sm ${
                   activeFilter === filter
                     ? "bg-teal-600 text-white hover:bg-teal-700"
                     : "bg-white/90 text-gray-700 hover:bg-teal-50 hover:text-teal-700 border border-gray-200"

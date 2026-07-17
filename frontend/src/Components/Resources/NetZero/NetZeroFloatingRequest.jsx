@@ -40,10 +40,10 @@ export default function NetZeroFloatingRequest() {
 
   const handleRequestSubmit = (e) => {
     e.preventDefault();
-    
+
     // Clean mobile number before sending
     const cleanMobile = (formData.phone || "").replace(/\s+/g, "");
-    
+
     API.post("/contact", {
       name: formData.name,
       email: formData.email,
@@ -56,7 +56,7 @@ export default function NetZeroFloatingRequest() {
       console.error("Error submitting lead to contact database:", err);
       alert("Submission failed. Please check your network and try again.");
     });
-    
+
     setShowModal(false);
     setFormData({ name: "", email: "", phone: "", role: "", org: "", message: "" });
   };
@@ -65,11 +65,10 @@ export default function NetZeroFloatingRequest() {
     <>
       {/* Floating Request Service (Vertical Emerald Capsule Tab on Right Edge) */}
       <div
-        className={`fixed right-0 top-[50%] -translate-y-1/2 z-50 transition-all duration-500 transform origin-right ${
-          isVisible
+        className={`fixed right-0 top-[50%] -translate-y-1/2 z-50 transition-all duration-500 transform origin-right ${isVisible
             ? "opacity-100 translate-x-0 scale-100 pointer-events-auto"
             : "opacity-0 translate-x-4 scale-95 pointer-events-none"
-        }`}
+          }`}
       >
         <button
           onClick={() => setShowModal(true)}
@@ -92,7 +91,7 @@ export default function NetZeroFloatingRequest() {
             >
               <X size={20} />
             </button>
-            
+
             <h3 className="text-xl font-extrabold text-gray-900 mb-2">Request Net-Zero Transition Service</h3>
             <p className="text-sm text-gray-500 mb-6">
               Enter your details below to request a customized roadmap assessment and consultation for your campus.
@@ -126,7 +125,7 @@ export default function NetZeroFloatingRequest() {
                   />
                 </div>
               </div>
-              
+
               <div>
                 <label className="block text-sm font-semibold text-slate-700 mb-1.5">
                   Email address <span className="text-red-500 font-bold">*</span>

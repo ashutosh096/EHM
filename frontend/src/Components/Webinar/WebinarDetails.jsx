@@ -42,10 +42,11 @@ const WebinarDetails = () => {
 
         {/* RIGHT SIDE */}
         <div>
-          <img loading="lazy" src={webinar.thumbnail}
+          <img loading="eager" fetchpriority="high" src={webinar.thumbnail}
             alt={webinar.title}
             className="w-full h-48 md:h-80 object-cover rounded-lg shadow-md mb-6"
           />
+
           <div className="bg-white rounded-lg shadow-md p-6">
             <h2 className="text-2xl font-semibold text-gray-900 mb-4">
               Register

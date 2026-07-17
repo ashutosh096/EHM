@@ -101,11 +101,17 @@ const PartnersLogo = () => {
                 .marquee-wrap-partners {
                   display: flex;
                   width: 200%;
-                  animation: marquee 20s linear infinite;
+                  animation: marquee 10s linear infinite;
                   will-change: transform;
                   transform: translateZ(0);
                   backface-visibility: hidden;
                   overflow: hidden;
+                }
+
+                @media (min-width: 768px) {
+                  .marquee-wrap-partners {
+                    animation: marquee 20s linear infinite;
+                  }
                 }
 
                 html, body {

@@ -151,7 +151,7 @@ const Resource = () => {
             {resources.map((resource, idx) => (
               <motion.div
                 key={resource.id}
-                className="relative lg:absolute inset-0 w-full h-full flex flex-col lg:flex-row items-center justify-between gap-10 px-4"
+                className="relative lg:absolute inset-0 w-full h-full flex flex-col lg:flex-row items-center justify-between gap-6 lg:gap-10 px-4"
                 initial={false}
                 animate={{
                   opacity: window.innerWidth < 1024 ? 1 : (activeIndex === idx ? 1 : 0),
@@ -164,19 +164,10 @@ const Resource = () => {
                   display: (window.innerWidth >= 1024 && activeIndex !== idx) ? "none" : "flex"
                 }}
               >
-                <div className="w-full lg:w-1/2 text-center lg:text-left">
-                  <h3 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 lg:mb-6 leading-tight tracking-tight">
-                    {resource.title}
-                  </h3>
-                  <p className="text-gray-600 text-lg lg:text-xl mb-6 lg:mb-8 leading-relaxed font-light">
-                    {resource.description}
-                  </p>
-                  <Link to={resource.link}>
-                    <button className="bg-emerald-500 text-white px-8 py-3 rounded-md font-semibold shadow-md hover:bg-emerald-600 transition-all duration-300 text-base w-full sm:w-auto">
-                      {resource.buttonText}
-                    </button>
-                  </Link>
-                </div>
+                {/* Mobile-only Heading */}
+                <h3 className="lg:hidden text-3xl sm:text-4xl font-bold text-gray-900 text-center leading-tight tracking-tight mt-2">
+                  {resource.title}
+                </h3>
 
                 <div className="w-full lg:w-1/2 flex justify-center relative">
                   <img
@@ -208,6 +199,21 @@ const Resource = () => {
                       />
                     ))}
                   </div>
+                </div>
+
+                <div className="w-full lg:w-1/2 text-center lg:text-left flex flex-col items-center lg:items-start">
+                  {/* Desktop-only Heading */}
+                  <h3 className="hidden lg:block text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 lg:mb-6 leading-tight tracking-tight">
+                    {resource.title}
+                  </h3>
+                  <p className="text-gray-600 text-lg lg:text-xl mb-6 lg:mb-8 leading-relaxed font-light">
+                    {resource.description}
+                  </p>
+                  <Link to={resource.link} className="w-full sm:w-auto">
+                    <button className="bg-emerald-500 text-white px-8 py-3 rounded-md font-semibold shadow-md hover:bg-emerald-600 transition-all duration-300 text-base w-full">
+                      {resource.buttonText}
+                    </button>
+                  </Link>
                 </div>
               </motion.div>
             ))}

@@ -82,13 +82,13 @@ const cleanContent = (html) => {
                     if (endsWithQuote || prevSibling.tagName === "BLOCKQUOTE") {
                         isQuoteAuthor = true;
                     }
-                    
+
                     // It is an image caption ONLY if:
                     // (a) it already has the class 'image-caption' (assigned during split step 0b), OR
                     // (b) the previous sibling is an image container AND the paragraph text contains caption keywords (source/credit/photo/attribution)
                     const hasCaptionKeyword = /source:|credit:|photo:|attribution:/i.test(trimmedText);
                     const isPrevImage = prevSibling.tagName === "IMG" || (prevSibling.querySelector("img") && prevText === "");
-                    
+
                     if (p.classList.contains("image-caption") || (isPrevImage && hasCaptionKeyword)) {
                         isImageCaption = true;
                     }
@@ -112,7 +112,7 @@ const cleanContent = (html) => {
                 // If it starts with a number (like "1. ", "2. "), it's a sub-heading (h3)
                 const isSubHeading = /^\d+\.\s/.test(trimmedText);
                 const tag = isSubHeading ? "h3" : "h2";
-                
+
                 const heading = doc.createElement(tag);
                 heading.innerHTML = p.innerHTML;
                 p.parentNode.replaceChild(heading, p);
@@ -189,16 +189,16 @@ const cleanContent = (html) => {
                 const labelText = firstChild.textContent.trim();
                 if (/^Principle\s+\d+/i.test(labelText)) {
                     p.classList.add("principle-item");
-                    
+
                     const labelSpan = doc.createElement("span");
                     labelSpan.className = "principle-label";
-                    
+
                     p.replaceChild(labelSpan, firstChild);
                     labelSpan.appendChild(firstChild);
 
                     const bodySpan = doc.createElement("span");
                     bodySpan.className = "principle-body";
-                    
+
                     while (labelSpan.nextSibling) {
                         bodySpan.appendChild(labelSpan.nextSibling);
                     }
@@ -232,6 +232,7 @@ const SingleContentPage = ({ basePath, contentName }) => {
     const [showDownloadModal, setShowDownloadModal] = useState(false);
     const [formData, setFormData] = useState({ name: "", email: "", phone: "", role: "", org: "" });
     const [pdfUrl, setPdfUrl] = useState(null);
+    const [isRoleDropdownOpen, setIsRoleDropdownOpen] = useState(false);
 
     useEffect(() => {
         const checkPdf = async () => {
@@ -426,6 +427,7 @@ const SingleContentPage = ({ basePath, contentName }) => {
         }
 
         setShowDownloadModal(false);
+        setIsRoleDropdownOpen(false);
         setFormData({ name: "", email: "", phone: "", role: "", org: "" });
     };
 
@@ -463,7 +465,7 @@ const SingleContentPage = ({ basePath, contentName }) => {
                     </div>
                     <div className="w-full aspect-video rounded-2xl shadow-xl my-8 bg-gray-100 flex items-center justify-center overflow-hidden">
                         {imageUrl && !imageError ? (
-                            <img loading="lazy" src={imageUrl} alt={item.title} className="w-full h-full object-cover" onError={() => setImageError(true)} />
+                            <img loading="eager" fetchpriority="high" src={imageUrl} alt={item.title} className="w-full h-full object-cover" onError={() => setImageError(true)} />
                         ) : (
                             <div className="flex flex-col items-center text-gray-300">
                                 <ImageIcon size={64} />
@@ -723,7 +725,10 @@ const SingleContentPage = ({ basePath, contentName }) => {
                 <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/55 backdrop-blur-xs animate-fadeIn">
                     <div className="bg-white rounded-3xl max-w-lg w-full mx-4 p-6 sm:p-8 shadow-2xl relative border border-emerald-50 animate-scaleUp">
                         <button
-                            onClick={() => setShowDownloadModal(false)}
+                            onClick={() => {
+                                setShowDownloadModal(false);
+                                setIsRoleDropdownOpen(false);
+                            }}
                             className="absolute top-5 right-5 text-gray-400 hover:text-gray-600 transition-colors"
                         >
                             <X size={20} />
@@ -772,25 +777,52 @@ const SingleContentPage = ({ basePath, contentName }) => {
                                     className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-250 focus:outline-none transition-all text-sm"
                                 />
                             </div>
-                            <div>
+                            <div className="relative">
                                 <label className="block text-sm font-semibold text-slate-700 mb-1.5">
                                     I am a <span className="text-red-500 font-bold">*</span>
                                 </label>
-                                <select
+                                <button
+                                    type="button"
+                                    onClick={() => setIsRoleDropdownOpen(!isRoleDropdownOpen)}
+                                    className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-250 focus:outline-none bg-white transition-all text-sm flex justify-between items-center text-left"
+                                >
+                                    <span className={formData.role ? "text-gray-900" : "text-gray-400"}>
+                                        {formData.role || "Select an option"}
+                                    </span>
+                                    <span className="text-gray-400 text-xs">▼</span>
+                                </button>
+                                {/* Hidden input to preserve standard HTML5 validation if needed, but required is satisfied on handleDownloadSubmit by checking state */}
+                                <input
+                                    type="hidden"
                                     required
                                     value={formData.role}
-                                    onChange={(e) => setFormData({ ...formData, role: e.target.value })}
-                                    className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-250 focus:outline-none bg-white transition-all text-sm"
-                                >
-                                    <option value="" disabled>Select an option</option>
-                                    <option value="Sustainability Reporting / ESG Support">Sustainability Reporting / ESG Support</option>
-                                    <option value="Wastewater Treatment & Waterbody Restoration">Wastewater Treatment & Waterbody Restoration</option>
-                                    <option value="Geophysical / Subsurface Investigation">Geophysical / Subsurface Investigation</option>
-                                    <option value="Urban Planning & City Project Support">Urban Planning & City Project Support</option>
-                                    <option value="Climate Risk Assessment / Climate Data Advisory">Climate Risk Assessment / Climate Data Advisory</option>
-                                    <option value="Training, Workshops, or Capacity Building">Training, Workshops, or Capacity Building</option>
-                                    <option value="General Inquiry">General Inquiry</option>
-                                </select>
+                                />
+
+                                {isRoleDropdownOpen && (
+                                    <div className="absolute top-full left-0 w-full mt-1 bg-white border border-gray-200 rounded-xl shadow-xl z-50 max-h-60 overflow-y-auto py-1 overflow-x-hidden">
+                                        {[
+                                            "Sustainability & ESG Support",
+                                            "Water & Wastewater Treatment",
+                                            "Geophysical Subsurface Survey",
+                                            "Urban Planning & Project Support",
+                                            "Climate Risk & Data Advisory",
+                                            "Training & Capacity Building",
+                                            "General Inquiry"
+                                        ].map((option) => (
+                                            <button
+                                                key={option}
+                                                type="button"
+                                                onClick={() => {
+                                                    setFormData({ ...formData, role: option });
+                                                    setIsRoleDropdownOpen(false);
+                                                }}
+                                                className="w-full px-4 py-2.5 hover:bg-emerald-50 hover:text-emerald-950 text-left text-sm text-gray-700 transition-colors border-none whitespace-normal leading-tight"
+                                            >
+                                                {option}
+                                            </button>
+                                        ))}
+                                    </div>
+                                )}
                             </div>
                             <div>
                                 <label className="block text-sm font-semibold text-slate-700 mb-1.5">

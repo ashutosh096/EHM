@@ -9,11 +9,8 @@ export default function Homepage() {
   const [loadVideo, setLoadVideo] = useState(false);
 
   useEffect(() => {
-    // Delay loading the heavy background video until logos/images have finished loading
-    const timer = setTimeout(() => {
-      setLoadVideo(true);
-    }, 1200);
-    return () => clearTimeout(timer);
+    // Load video immediately — it is the hero background and above the fold
+    setLoadVideo(true);
   }, []);
 
   useEffect(() => {
@@ -68,9 +65,12 @@ export default function Homepage() {
         .animate-float {
           animation: float linear infinite;
         }
+        .text-shadow-hero {
+          text-shadow: 0 4px 12px rgba(0, 0, 0, 0.7), 0 2px 4px rgba(0, 0, 0, 0.9);
+        }
       `}</style>
 
-      <div className="relative min-h-screen text-white overflow-hidden">
+      <div className="relative aspect-video md:min-h-screen text-white overflow-hidden bg-emerald-950 mt-[60px] md:mt-0">
         {/* Background Video */}
         {loadVideo && (
           <video
@@ -128,21 +128,21 @@ export default function Homepage() {
         </div> */}
 
         {/* Main Content */}
-        <div className="relative z-10 flex flex-col min-h-screen px-6 pt-24 pb-12 md:px-20 lg:pl-10 lg:pr-24 max-w-[1600px] mx-auto justify-center lg:justify-end">
+        <div className="relative z-10 flex flex-col h-full md:min-h-screen pl-5 pr-4 md:px-20 lg:pl-10 lg:pr-24 max-w-[1600px] mx-auto justify-end py-4 md:py-12">
           {/* Hero Section */}
-          <div className="flex flex-col lg:flex-row items-center lg:items-end justify-between gap-12">
+          <div className="flex flex-col lg:flex-row items-start lg:items-end justify-between gap-12 w-full">
             {/* Left Side - Text Content */}
-            <div className="flex-1 max-w-3xl mb-12 lg:mb-32 text-center lg:text-left transition-all duration-700">
+            <div className="flex-1 max-w-3xl mb-2 md:mb-12 lg:mb-32 text-left transition-all duration-700">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8 }}
               >
-                <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-5xl font-black text-white mb-6 uppercase tracking-tighter leading-tight">
+                <h1 className="text-sm sm:text-xl md:text-3xl lg:text-5xl font-black text-white mb-2 md:mb-6 uppercase tracking-tighter leading-tight text-shadow-hero">
                   EHM<br className="hidden md:block" />
                   {/* <span className="text-emerald-400">Management</span> */}
                 </h1>
-                <p className="text-lg sm:text-xl text-white/80 mb-10 max-w-2xl mx-auto lg:mx-0 font-medium">
+                <p className="text-[10px] sm:text-sm md:text-lg lg:text-xl text-white mb-3 md:mb-10 max-w-xs md:max-w-2xl mr-auto lg:mx-0 font-bold text-shadow-hero leading-tight">
                   Deep-tech environmental solutions for climate risk intelligence,<br />
                   sustainable water management, and institutional ESG reporting.
                 </p>
@@ -151,11 +151,11 @@ export default function Homepage() {
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className="relative flex items-center justify-center mx-auto lg:mx-0 drop-shadow-2xl rounded-xl px-10 py-4 font-bold text-white shadow-xl transition-all duration-300 hover:scale-105 overflow-hidden group bg-emerald-600"
+                    className="relative flex items-center justify-center mr-auto lg:mx-0 drop-shadow-md rounded-lg px-4 py-1.5 md:px-10 md:py-4 text-[10px] md:text-base font-bold text-white shadow-md transition-all duration-300 hover:scale-105 overflow-hidden group bg-emerald-600"
                   >
                     Book a Call
                     <svg
-                      className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1"
+                      className="ml-1 md:ml-2 h-3.5 w-3.5 md:h-5 md:w-5 transition-transform group-hover:translate-x-1"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"

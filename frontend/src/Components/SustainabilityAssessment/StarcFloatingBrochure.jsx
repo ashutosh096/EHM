@@ -6,6 +6,7 @@ export default function StarcFloatingBrochure() {
   const [isVisible, setIsVisible] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [formData, setFormData] = useState({ name: "", email: "", phone: "", role: "", org: "" });
+  const [isRoleDropdownOpen, setIsRoleDropdownOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -40,7 +41,7 @@ export default function StarcFloatingBrochure() {
 
   const handleDownloadSubmit = (e) => {
     e.preventDefault();
-    
+
     // Clean mobile number before sending
     const cleanMobile = (formData.phone || "").replace(/\s+/g, "");
     API.post("/contact", {
@@ -63,8 +64,9 @@ export default function StarcFloatingBrochure() {
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
-    
+
     setShowModal(false);
+    setIsRoleDropdownOpen(false);
     setFormData({ name: "", email: "", phone: "", role: "", org: "" });
   };
 
@@ -72,11 +74,10 @@ export default function StarcFloatingBrochure() {
     <>
       {/* STARC Brochure (Vertical EHM Green Capsule Tab on Right Edge) */}
       <div
-        className={`fixed right-0 top-[50%] -translate-y-1/2 z-50 transition-all duration-500 transform origin-right ${
-          isVisible
+        className={`fixed right-0 top-[50%] -translate-y-1/2 z-50 transition-all duration-500 transform origin-right ${isVisible
             ? "opacity-100 translate-x-0 scale-100 pointer-events-auto"
             : "opacity-0 translate-x-4 scale-95 pointer-events-none"
-        }`}
+          }`}
       >
         <button
           onClick={() => setShowModal(true)}
@@ -93,13 +94,16 @@ export default function StarcFloatingBrochure() {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/55 backdrop-blur-xs animate-fadeIn">
           <div className="bg-white rounded-3xl max-w-lg w-full mx-4 p-6 sm:p-8 shadow-2xl relative border border-emerald-50 animate-scaleUp">
             <button
-              onClick={() => setShowModal(false)}
+              onClick={() => {
+                setShowModal(false);
+                setIsRoleDropdownOpen(false);
+              }}
               className="absolute top-5 right-5 text-gray-400 hover:text-gray-600 transition-colors"
               title="Close"
             >
               <X size={20} />
             </button>
-            
+
             <h3 className="text-xl font-extrabold text-gray-900 mb-2">Download STARC Brochure</h3>
             <p className="text-sm text-gray-500 mb-6">
               Enter your details to download the <strong>STARC Platform Brochure</strong>.
@@ -133,7 +137,7 @@ export default function StarcFloatingBrochure() {
                   />
                 </div>
               </div>
-              
+
               <div>
                 <label className="block text-sm font-semibold text-slate-700 mb-1.5">
                   Email address <span className="text-red-500 font-bold">*</span>
@@ -147,25 +151,51 @@ export default function StarcFloatingBrochure() {
                 />
               </div>
 
-              <div>
+              <div className="relative">
                 <label className="block text-sm font-semibold text-slate-700 mb-1.5">
                   I am a <span className="text-red-500 font-bold">*</span>
                 </label>
-                <select
+                <button
+                  type="button"
+                  onClick={() => setIsRoleDropdownOpen(!isRoleDropdownOpen)}
+                  className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-250 focus:outline-none bg-white transition-all text-sm flex justify-between items-center text-left"
+                >
+                  <span className={formData.role ? "text-gray-900" : "text-gray-400"}>
+                    {formData.role || "Select an option"}
+                  </span>
+                  <span className="text-gray-400 text-xs">▼</span>
+                </button>
+                <input
+                  type="hidden"
                   required
                   value={formData.role}
-                  onChange={(e) => setFormData({ ...formData, role: e.target.value })}
-                  className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-250 focus:outline-none bg-white transition-all text-sm"
-                >
-                  <option value="" disabled>Select an option</option>
-                  <option value="Sustainability Reporting / ESG Support">Sustainability Reporting / ESG Support</option>
-                  <option value="Wastewater Treatment & Waterbody Restoration">Wastewater Treatment & Waterbody Restoration</option>
-                  <option value="Geophysical / Subsurface Investigation">Geophysical / Subsurface Investigation</option>
-                  <option value="Urban Planning & City Project Support">Urban Planning & City Project Support</option>
-                  <option value="Climate Risk Assessment / Climate Data Advisory">Climate Risk Assessment / Climate Data Advisory</option>
-                  <option value="Training, Workshops, or Capacity Building">Training, Workshops, or Capacity Building</option>
-                  <option value="General Inquiry">General Inquiry</option>
-                </select>
+                />
+
+                {isRoleDropdownOpen && (
+                  <div className="absolute top-full left-0 w-full mt-1 bg-white border border-gray-200 rounded-xl shadow-xl z-50 max-h-60 overflow-y-auto py-1 overflow-x-hidden">
+                    {[
+                      "Sustainability & ESG Support",
+                      "Water & Wastewater Treatment",
+                      "Geophysical Subsurface Survey",
+                      "Urban Planning & Project Support",
+                      "Climate Risk & Data Advisory",
+                      "Training & Capacity Building",
+                      "General Inquiry"
+                    ].map((option) => (
+                      <button
+                        key={option}
+                        type="button"
+                        onClick={() => {
+                          setFormData({ ...formData, role: option });
+                          setIsRoleDropdownOpen(false);
+                        }}
+                        className="w-full px-4 py-2.5 hover:bg-emerald-50 hover:text-emerald-950 text-left text-sm text-gray-700 transition-colors border-none whitespace-normal leading-tight"
+                      >
+                        {option}
+                      </button>
+                    ))}
+                  </div>
+                )}
               </div>
 
               <div>

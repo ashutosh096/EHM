@@ -50,7 +50,7 @@ BlogAdminRouter.post(
     }
   }
 );
-
+  
 //update blog
 BlogAdminRouter.put(
   "/blogs/:id",

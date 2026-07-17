@@ -14,6 +14,11 @@ import {
   Recycle,
   CloudRain,
   Droplets,
+  Home,
+  Info,
+  Lightbulb,
+  Menu,
+  Briefcase,
 } from "lucide-react";
 
 // === RESOURCES MENU DATA ===
@@ -87,6 +92,55 @@ const NavBar = () => {
   const dropdownRef = useRef(null);
   const buttonRef = useRef(null);
 
+  const [prevScrollPos, setPrevScrollPos] = useState(0);
+  const [isTopNavVisible, setIsTopNavVisible] = useState(true);
+  const [isBottomNavVisible, setIsBottomNavVisible] = useState(false);
+  const [activeBottomTab, setActiveBottomTab] = useState(null); // 'offerings' | 'resources' | null
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (isMenuOpen || activeBottomTab) return; // Keep static when open
+
+      const currentScrollPos = window.pageYOffset || document.documentElement.scrollTop;
+
+      // Determine scroll direction
+      if (currentScrollPos > prevScrollPos) {
+        // Scrolling Down: Hide top header, show bottom bar
+        setIsTopNavVisible(false);
+        setIsBottomNavVisible(true);
+      } else {
+        // Scrolling Up: Show top header, hide bottom bar
+        setIsTopNavVisible(true);
+        setIsBottomNavVisible(false);
+      }
+
+      // Always show top nav at the very top of the page
+      if (currentScrollPos < 50) {
+        setIsTopNavVisible(true);
+        setIsBottomNavVisible(false);
+      }
+
+      setPrevScrollPos(currentScrollPos);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [prevScrollPos, isMenuOpen, activeBottomTab]);
+
+  useEffect(() => {
+    if (isMenuOpen) {
+      setIsTopNavVisible(true);
+      setIsBottomNavVisible(true);
+    }
+  }, [isMenuOpen]);
+
+  useEffect(() => {
+    if (activeBottomTab) {
+      setIsTopNavVisible(false);
+      setIsBottomNavVisible(true);
+    }
+  }, [activeBottomTab]);
+
   // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -97,6 +151,12 @@ const NavBar = () => {
         !buttonRef.current.contains(event.target)
       ) {
         setActiveDropdown(null);
+      }
+
+      // Close mobile bottom popover if clicked outside bottom bar area
+      const bottomBar = document.getElementById("bottom-mobile-nav");
+      if (bottomBar && !bottomBar.contains(event.target)) {
+        setActiveBottomTab(null);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
@@ -109,11 +169,14 @@ const NavBar = () => {
   };
 
   return (
-    <header className="fixed top-0 left-0 w-full z-50 bg-white shadow-md">
+    <>
+      <header className={`fixed top-0 left-0 w-full z-50 bg-white shadow-md transition-transform duration-300
+        ${isTopNavVisible ? "translate-y-0" : "-translate-y-full"}
+      `}>
       <nav className="max-w-6xl mx-auto relative flex items-center justify-between px-6 py-3">
         {/* Logo */}
         <Link to="/" onClick={handleNavClick}>
-          <img loading="lazy" src="/ehm_logo.webp"
+          <img loading="eager" fetchpriority="high" src="/ehm_logo.webp"
             alt="EHM Logo"
             className="h-12"
           />
@@ -340,7 +403,155 @@ const NavBar = () => {
           </Link>
         </div>
       )}
-    </header>
+      </header>
+
+      {/* Bottom Mobile Navigation Bar */}
+      <div
+        id="bottom-mobile-nav"
+        className={`fixed bottom-0 left-0 w-full z-50 bg-white/95 backdrop-blur-md text-green-900 shadow-[0_-4px_12px_-1px_rgba(0,0,0,0.08)] md:hidden transition-transform duration-300 border-t border-slate-200 pb-safe
+          ${isBottomNavVisible ? "translate-y-0" : "translate-y-full"}
+        `}
+      >
+        <div className="flex justify-around items-center py-2 text-[9px] sm:text-[10px] font-semibold relative">
+          {/* Home */}
+          <Link
+            to="/"
+            onClick={() => {
+              setActiveBottomTab(null);
+              handleNavClick();
+            }}
+            className="flex flex-col items-center gap-1 text-green-900 hover:text-yellow-500 transition"
+          >
+            <Home className="w-5 h-5" />
+            <span>Home</span>
+          </Link>
+
+          {/* About */}
+          <Link
+            to="/about"
+            onClick={() => {
+              setActiveBottomTab(null);
+              handleNavClick();
+            }}
+            className="flex flex-col items-center gap-1 text-green-900 hover:text-yellow-500 transition"
+          >
+            <Info className="w-5 h-5" />
+            <span>About</span>
+          </Link>
+
+          {/* Offerings */}
+          <div className="relative">
+            <button
+              onClick={() =>
+                setActiveBottomTab(
+                  activeBottomTab === "offerings" ? null : "offerings"
+                )
+              }
+              className={`flex flex-col items-center gap-1 transition bg-transparent border-none p-0 outline-none
+                ${activeBottomTab === "offerings" ? "text-yellow-500" : "text-green-900 hover:text-yellow-500"}
+              `}
+            >
+              <Lightbulb className="w-5 h-5" />
+              <span>Offerings</span>
+            </button>
+
+            {/* Offerings Popover */}
+            {activeBottomTab === "offerings" && (
+              <div className="absolute bottom-full mb-3 left-1/2 -translate-x-1/2 w-64 bg-emerald-950 text-white rounded-lg shadow-xl py-2 z-50 text-xs font-normal border border-emerald-900/50 animate-fadeIn">
+                <div className="flex flex-col max-h-[300px] overflow-y-auto">
+                  {offeringsMenu.map((section) =>
+                    section.items.map((item) => (
+                      <Link
+                        key={item.name}
+                        to={item.path}
+                        onClick={() => {
+                          setActiveBottomTab(null);
+                          handleNavClick();
+                        }}
+                        className="px-4 py-2.5 hover:bg-emerald-900 hover:text-yellow-400 text-left transition block border-b border-emerald-900/30 last:border-0"
+                      >
+                        {item.name}
+                      </Link>
+                    ))
+                  )}
+                </div>
+                {/* Triangle pointer */}
+                <div className="absolute top-full left-1/2 -translate-x-1/2 w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-t-[6px] border-t-emerald-950"></div>
+              </div>
+            )}
+          </div>
+
+          {/* Resources */}
+          <div className="relative">
+            <button
+              onClick={() =>
+                setActiveBottomTab(
+                  activeBottomTab === "resources" ? null : "resources"
+                )
+              }
+              className={`flex flex-col items-center gap-1 transition bg-transparent border-none p-0 outline-none
+                ${activeBottomTab === "resources" ? "text-yellow-500" : "text-green-900 hover:text-yellow-500"}
+              `}
+            >
+              <BookOpen className="w-5 h-5" />
+              <span>Resources</span>
+            </button>
+
+            {/* Resources Popover */}
+            {activeBottomTab === "resources" && (
+              <div className="absolute bottom-full mb-3 left-1/2 -translate-x-1/2 w-64 bg-emerald-950 text-white rounded-lg shadow-xl py-2 z-50 text-xs font-normal border border-emerald-900/50 animate-fadeIn">
+                <div className="flex flex-col max-h-[300px] overflow-y-auto">
+                  {resourcesMenu.map((section) =>
+                    section.items.map((item) => (
+                      <Link
+                        key={item.name}
+                        to={item.path}
+                        onClick={() => {
+                          setActiveBottomTab(null);
+                          handleNavClick();
+                        }}
+                        className="px-4 py-2.5 hover:bg-emerald-900 hover:text-yellow-400 text-left transition block border-b border-emerald-900/30 last:border-0"
+                      >
+                        {item.name}
+                      </Link>
+                    ))
+                  )}
+                </div>
+                {/* Triangle pointer */}
+                <div className="absolute top-full left-1/2 -translate-x-1/2 w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-t-[6px] border-t-emerald-950"></div>
+              </div>
+            )}
+          </div>
+
+          {/* Projects */}
+          <Link
+            to="/projects"
+            onClick={() => {
+              setActiveBottomTab(null);
+              handleNavClick();
+            }}
+            className="flex flex-col items-center gap-1 text-green-900 hover:text-yellow-500 transition"
+          >
+            <Briefcase className="w-5 h-5" />
+            <span>Projects</span>
+          </Link>
+
+          {/* Menu */}
+          <button
+            onClick={() => {
+              setActiveBottomTab(null);
+              setIsMenuOpen(!isMenuOpen);
+            }}
+            className={`flex flex-col items-center gap-1 transition bg-transparent border-none p-0 outline-none
+              ${isMenuOpen ? "text-yellow-500" : "text-green-900 hover:text-yellow-500"}
+            `}
+          >
+            <Menu className="w-5 h-5" />
+            <span>Menu</span>
+          </button>
+        </div>
+      </div>
+    </>
   );
 };
 

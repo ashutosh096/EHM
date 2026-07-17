@@ -1,5 +1,5 @@
-import React, { useEffect, useRef } from "react";
-import { Calendar } from "lucide-react";
+import React, { useEffect, useRef, useState } from "react";
+import { Calendar, Play, X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import Chart from "chart.js/auto";
 
@@ -26,6 +26,25 @@ const StarcHero = () => {
   const barRef = useRef(null);
   const pieChart = useRef(null);
   const barChart = useRef(null);
+  const [showVideo, setShowVideo] = useState(false);
+
+  useEffect(() => {
+    const handleEscape = (e) => {
+      if (e.key === "Escape") {
+        setShowVideo(false);
+      }
+    };
+    if (showVideo) {
+      document.addEventListener("keydown", handleEscape);
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.removeEventListener("keydown", handleEscape);
+      document.body.style.overflow = "unset";
+    };
+  }, [showVideo]);
 
   useEffect(() => {
     if (pieRef.current) {
@@ -142,7 +161,7 @@ const StarcHero = () => {
 
             {/* ESG badge */}
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border"
-              style={{ backgroundColor: "rgba(0,255,157,0.1)", borderColor: "rgba(0,255,157,0.3)" }}>
+             style={{ backgroundColor: "rgba(0,255,157,0.1)", borderColor: "rgba(0,255,157,0.3)" }}>
               <span className="text-xs font-semibold tracking-wide uppercase text-[#00ff9d]">
                 🌱 ESG Insight and Sustainability Intelligence
               </span>
@@ -187,21 +206,30 @@ const StarcHero = () => {
             </div>
 
             {/* CTAs */}
-            <div className="flex flex-wrap gap-3 pt-2">
+            <div className="flex flex-wrap sm:flex-nowrap items-center gap-3 pt-2">
               <button
                 onClick={() => window.location.href = "/contact/starc"}
-                className="group relative inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-[#00ff9d] to-[#00d084] text-[#0a1628] font-bold text-lg rounded-xl shadow-[0_10px_40px_rgba(0,255,157,0.3)] hover:shadow-[0_15px_50px_rgba(0,255,157,0.5)] hover:-translate-y-1 transition-all duration-300 overflow-hidden"
+                className="group relative inline-flex items-center gap-2 px-6 py-3.5 bg-gradient-to-r from-[#00ff9d] to-[#00d084] text-[#0a1628] font-bold text-base rounded-xl shadow-[0_8px_30px_rgba(0,255,157,0.25)] hover:shadow-[0_12px_40px_rgba(0,255,157,0.45)] hover:-translate-y-1 transition-all duration-300 overflow-hidden whitespace-nowrap"
               >
-                <Calendar className="w-5 h-5 relative z-10" />
+                <Calendar className="w-4 h-4 relative z-10" />
                 <span className="relative z-10">Book a Demo</span>
               </button>
 
               <button
                 onClick={() => navigate("/casestudies/6a1583515e65c37505ce64be")}
-                className="inline-flex items-center gap-3 px-8 py-4 font-semibold text-lg rounded-xl border text-white transition-all duration-300 hover:-translate-y-1"
+                className="inline-flex items-center gap-2 px-6 py-3.5 font-semibold text-base rounded-xl border text-white transition-all duration-300 hover:-translate-y-1 whitespace-nowrap"
                 style={{ backgroundColor: "rgba(255,255,255,0.08)", borderColor: "rgba(255,255,255,0.15)" }}
               >
-                📊 View Case Study
+                <span>📊 Case Study</span>
+              </button>
+
+              <button
+                onClick={() => setShowVideo(true)}
+                className="inline-flex items-center gap-2 px-6 py-3.5 font-semibold text-base rounded-xl border text-white/80 transition-all duration-300 hover:-translate-y-1 whitespace-nowrap"
+                style={{ backgroundColor: "rgba(255,255,255,0.08)", borderColor: "rgba(255,255,255,0.15)" }}
+              >
+                <Play className="w-4 h-4 text-[#00ff9d]" fill="#00ff9d" />
+                <span>Watch Overview</span>
               </button>
             </div>
           </div>
@@ -318,6 +346,51 @@ const StarcHero = () => {
         </div>
       </div>
 
+      {/* Video Modal */}
+      {showVideo && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm p-4 animate-fadeIn"
+          onClick={() => setShowVideo(false)}
+        >
+          <div
+            className="relative w-full max-w-4xl bg-[#0d1e36] rounded-2xl border border-white/10 p-2 shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close Button */}
+            <button
+              onClick={() => setShowVideo(false)}
+              className="absolute -top-12 right-0 text-white/70 hover:text-[#00ff9d] transition-colors duration-200"
+              aria-label="Close video modal"
+            >
+              <X className="w-8 h-8" />
+            </button>
+
+            {/* Video Player */}
+            <div className="w-full aspect-video rounded-xl overflow-hidden bg-black">
+              <iframe
+                src="https://www.youtube.com/embed/d0yhhVGUulc"
+                title="Introducing STARC Video"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+                className="w-full h-full"
+              ></iframe>
+            </div>
+
+            {/* Video Title/Details */}
+            <div className="p-4 flex items-center justify-between">
+              <div>
+                <h3 className="text-lg font-bold text-white">Introducing STARC</h3>
+                <p className="text-xs text-white/50">Sustainability Tracking, Assessment & Reporting for Campus</p>
+              </div>
+              <span className="text-[10px] uppercase font-semibold px-2 py-1 rounded bg-[#ff0000]/10 text-[#ff0000] border border-[#ff0000]/20">
+                YouTube Overview
+              </span>
+            </div>
+          </div>
+        </div>
+      )}
+
       <style>{`
         @keyframes fadeInLeft {
           from { opacity: 0; transform: translateX(-40px); }
@@ -332,6 +405,11 @@ const StarcHero = () => {
           33% { transform: translate(30px, -30px) scale(1.1); }
           66% { transform: translate(-20px, 20px) scale(0.9); }
         }
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to   { opacity: 1; }
+        }
+        .animate-fadeIn { animation: fadeIn 0.3s ease-out; }
         .animate-fadeInLeft  { animation: fadeInLeft  0.8s ease-out; }
         .animate-fadeInRight { animation: fadeInRight 0.8s ease-out; }
         .animate-float { animation: float 20s infinite ease-in-out; }
